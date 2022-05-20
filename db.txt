@@ -1,0 +1,37 @@
+create table meta(
+Run varchar(20),
+AssayType varchar(50),
+BioProject varchar(20),
+BioSample varchar(20),
+AvgSpotLen integer,
+Bases bigint,
+BioSampleModel varchar(50),
+Bytes bigint,
+CenterName varchar(100),
+Experiment varchar(50),
+geo_loc_name_country varchar(50),
+geo_loc_name_country_continent varchar(50),
+Host varchar(50),
+Age varchar(100),
+Sex varchar(100),
+LibrarySource varchar(50),
+Instrument varchar(50),
+IsolationSource_EnvMedium varchar(50),
+LibraryName varchar(100),
+LibraryLayout varchar(50),
+LibrarySelection varchar(20),
+ReleaseDate varchar(50),
+SampleName varchar(50),
+SRAStudy varchar(50),
+Organism varchar(100),
+HostDisease varchar(100),
+Description varchar(5000),
+PMID varchar(20)
+);
+
+SET GLOBAL local_infile=1;
+quit
+
+mysql --local-infile=1 -u root -p
+
+load data local infile '/home/sudipto/data/projects/mdpd/input/input.csv' into table meta;
