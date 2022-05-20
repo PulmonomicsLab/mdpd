@@ -1,0 +1,150 @@
+body{
+    background-color : #fafafa;
+}
+.section_header{
+    width: 100%;
+/*     background-color: #ffe6cc; */
+/*     border-style: solid; */
+/*     border-width: 2px 4px 0px 4px; */
+}
+.title{
+/*     background-color: #ffe6cc; */
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 0;
+    padding: 5px;
+/*     margin-color: #ffe6cc; */
+}
+.section_menu{
+    width : 100%;
+    background-color : #1a1a1a;
+    border-style : solid;
+    border-width : 2px 4px 2px 4px;
+}
+.section_left{
+    padding : 20px 0px 0px 0px;
+    width : 14%;
+    float : left;
+}
+.section_middle{
+    width : 90%;
+    margin: 0% 5% 0% 5%;
+/*     float : right; */
+    padding-top : 10px;
+    /*                 background-color : lightyellow */
+}
+.section_right{
+    width : 85%;
+/*     margin: 0% 5% 0% 5%; */
+    float : right;
+    padding-top : 10px;
+    /*                 background-color : lightyellow */
+}
+div.side_nav{
+    border-style : solid;
+    border-width : 0px 0px 1px 0px;
+    background-color : #e6ffcc;
+}
+a.side_nav{
+    display : block;
+    padding : 5px 15px 5px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration : none;
+    color : white;
+}
+a.side_nav:hover{
+    background-color : #404040;
+}
+a.active {
+    background-color: #e2e2e2;
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    display : block;
+    padding : 5px 15px 5px 15px;
+    text-decoration : none;
+/*     border : 4px #808080 solid; */
+    border-style : solid;
+    border-color : #808080;
+    border-width : 0px 6px 0px 6px;
+}
+table.form{
+    border-collapse : collapse;
+    border-width : 0px;
+    width : 80%;
+    margin-left : 10%;
+    margin-right : 10%;
+}
+table.form tr:nth-child(odd){
+    background-color : #d9d9d9;
+}
+table.form tr:nth-child(even){
+    background-color : #b3b3b3;
+}
+table.form td{
+    text-align:center;
+}
+table.summary{
+    border-collapse : collapse;
+    border : 2px black solid;
+    width : 100%;
+    /*margin-left : 10%;
+    margin-right : 10%;*/
+}
+table.summary tr:nth-child(odd){
+    background-color : #d9d9d9;
+}
+table.summary tr:nth-child(even){
+    background-color : #b3b3b3;
+}
+table.summary td{
+    text-align : center;
+    border : 2px black solid;
+}
+table.details{
+    border-collapse : collapse;
+    border : 2px black solid;
+    width : 80%;
+    margin-left : 10%;
+    margin-right : 10%;
+}
+table.details tr:nth-child(odd){
+    background-color : #d9d9d9;
+}
+table.details tr:nth-child(even){
+    background-color : #b3b3b3;
+}
+table.details td{
+    text-align : center;
+    border : 2px black solid;
+}
+th{
+    background-color : #1a1a1a;
+    color : #ffffff;
+    padding : 5px;
+    border : 1px solid black;
+}
+button{
+    background-color : black;
+    color : white;
+    padding : 5px 10px 5px 10px;
+    font-weight : bold;
+}
+button:hover{
+    background-color : #404040;
+}
+input[type=submit]{
+    background-color : black;
+    color : white;
+    padding : 5px 10px 5px 10px;
+    font-weight : bold;
+}
+input[type=submit]:hover{
+    background-color : #404040;
+}
+input.full, select.full{
+    width : 90%;
+    margin-top : 5px;
+    margin-bottom : 5px;
+}
