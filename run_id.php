@@ -3,8 +3,9 @@
     
     $runID = $_GET['key'];
     
-    $query = "select ".implode(",", $allAttributes)." from meta where Run=?";
-//     echo $query."<br/>";
+//     $query = "select ".implode(",", array_keys($allRunAttributes))." from (run inner join disease on run.SubGroup=disease.SubGroup) where Run=?;";
+    $query = "select * from (run inner join disease on run.SubGroup=disease.SubGroup) where Run=?;";
+//     echo $query."<br/>".$runID."<br/>";
 
     $conn = connect();
     $stmt = $conn->prepare($query);
@@ -33,9 +34,9 @@
             <center>
             <table cellpadding="3px">
                 <tr class="nav">
-                    <td class="nav"><a href="#" class="active">Home</a></td>
-                    <td class="nav"><a href="about.html" class="side_nav">About</a></td>
-                    <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
+                    <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
+                    <td class="nav"><a href="advance_search.html" class="side_nav">Search</a></td>
+                    <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
@@ -53,14 +54,14 @@
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
                     while ($row = $result->fetch_assoc()){
-                        foreach ($attributeFriendlyNames as $name=>$fname) {
+                        foreach ($allRunAttributes as $name=>$fname) {
                             if ($name !== "Run") {
                                 echo "<tr>";
-                                echo "<td style=\"width:40%\">".$fname."</td>";
+                                echo "<td style=\"width:40%;\">".$fname."</td>";
                                 if ($name === "BioProject")
-                                    echo "<td style=\"width:60%\"><a target=\"_blank\" href=\"bioproject_id.php?key=".$row[$name]."\">".$row[$name]."</a></td>";
+                                    echo "<td style=\"width:60%;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"bioproject_id.php?key=".$row[$name]."\">".$row[$name]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";
                                 else
-                                    echo "<td style=\"width:60%\">".$row[$name]."</td>";
+                                    echo "<td style=\"width:60%;\">".$row[$name]."</td>";
                                 echo "</tr>";
                             }
                         }
