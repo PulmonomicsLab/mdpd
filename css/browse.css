@@ -1,0 +1,122 @@
+.browse-heading{
+    width: 100%;
+    font-size:1.3em;
+    font-weight:bold;
+    margin: 20px 0 10px 0;
+}
+
+.browse-result{
+    width: 100%;
+    margin: 10px 0 0 0;
+    padding: 10px 0 10px 0;
+    border: 3px dashed black;
+    display: none;
+    background-color: #ecf8ec;
+    overflow: auto;
+}
+
+.browse-result-heading{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0 10px 5%;
+    padding-left: 20px;
+}
+
+table.browse-summary{
+    border-collapse : collapse;
+    border : 2px white solid; /*#392d37*/
+    width : 100%;
+}
+
+td.odd{
+    background-color: #d2ccc6;
+    text-align : center;
+    padding: 2px 0 2px 0;
+    border : 3px white solid; /*#392d37*/
+}
+
+td.even{
+    background-color: #bbaab9;
+    text-align : center;
+    padding: 2px 0 2px 0;
+    border : 3px white solid; /*#392d37*/
+}
+
+td.row_heading{
+    background-color: #8e718b;
+    text-align : center;
+    font-weight: bold;
+    padding: 2px 0 2px 0;
+    border : 3px white solid; /*#392d37*/
+}
+
+
+table.browse-result-summary{
+    border-collapse : collapse;
+    border : 2px white solid; /*#392d37*/
+    width : 98%;
+    margin: 0 1% 0 1%;
+}
+
+table.browse-result-summary tr:nth-child(odd){
+/*     background-color: #b1cde7;  */
+    background-color : #d2ccc6;
+}
+
+table.browse-result-summary tr:nth-child(even){
+/*     background-color: #d8e6f3; */
+    background-color : #bbaab9;
+}
+
+table.browse-result-summary td{
+    text-align : center;
+    padding: 2px 0 2px 0;
+    border : 2px white solid; /*#392d37*/
+}
+
+a.browse_side_nav{
+    display : block;
+    padding : 15px 5px 15px 10px;
+    margin: 10px 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration : none;
+    color : white;
+    background-color: #51414f;
+    border: 2px solid black;
+    box-shadow: 0px 0px 10px grey;
+}
+a.browse_side_nav:hover{
+    background-color : #9a7e95;
+}
+
+.button-group{
+    text-align: center;
+/*     margin: 10px 0 0 0; */
+}
+
+.button-group:after{
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.button-group button{
+    background-color : #524a42;
+    border: 3px solid black;
+    color : white;
+    padding : 5px 10px 5px 10px;
+    font-size: 14px;
+    font-weight : bold;
+/*     float: left; */
+    display: inline-block;
+    padding: 10px 0 10px 0;
+    margin: 3px 0px 3px 0px;
+    width: 150px;
+    max-width: 100%;
+    box-shadow: 0px 0px 5px grey;
+}
+
+.button-group button:hover{
+    background-color : #424652; /*#404040;*/
+}
