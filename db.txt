@@ -29,9 +29,59 @@ Description varchar(5000),
 PMID varchar(20)
 );
 
+create table bioproject(
+BioProject varchar(20),
+SRA varchar(20),
+Grp varchar(1000),
+SubGroup varchar(5000),
+IsolationSource varchar(100),
+Biome varchar(60),
+AssayType varchar(60),
+ReleaseYear varchar(20),
+RunCount integer,
+PMID varchar(20),
+DiseaseStudied varchar(100),
+primary key (BioProject)
+);
+
+create table run(
+Run varchar(20),
+Experiment varchar(20),
+BioSample varchar(20),
+BioProject varchar(20),
+AvgSpotLen integer,
+Bases bigint,
+Bytes bigint,
+CenterName varchar(1000),
+Country varchar(60),
+Biome varchar(30),
+IsolationSource varchar(100),
+AssayType varchar(20),
+Grp varchar(100),
+SubGroup varchar(100),
+Instrument varchar(100),
+ReleaseDate varchar(30),
+ReleaseYear integer,
+Therapeutics varchar(1000),
+primary key (Run),
+constraint fk_bioproject foreign key (BioProject) references bioproject(BioProject),
+constraint fk_subgroup foreign key (SubGroup) references disease(SubGroup)
+);
+
+create table disease(
+SubGroup varchar(100),
+Grp varchar(100),
+primary key (SubGroup)
+);
+
 SET GLOBAL local_infile=1;
 quit
 
-mysql --local-infile=1 -u root -p
+sudo mysql --local-infile=1
 
-load data local infile '/home/sudipto/data/projects/mdpd/input/input.csv' into table meta;
+use mdpd;
+
+load data local infile '/home/sudipto/data/projects/mdpd/input/input.csv' into table meta ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_disease.csv' into table disease ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_bioproject.csv' into table bioproject ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_run.csv' into table run ignore 1 lines;
