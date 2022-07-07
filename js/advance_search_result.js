@@ -14,16 +14,20 @@ function display(divId, pageNo) {
     else
         var rowEnd = rows.length;
     
-    var s = '<table class="summary" style="//width:100%;" border="1"><tr><th>Run ID</th><th>Assay Type</th><th>BioProject ID</th><th>Country</th><th>Continent</th><th>Host Disease</th></tr>';
+    var s = '<table class="summary" style="//width:100%;" border="1"><tr><th>Run ID</th><th>BioProject ID</th><th>SRA Study ID</th><th>Disease</th><th>Disease Sub-group</th><th>Isolation Source</th><th>Instrument</th><th>Assay Type</th><th>Country</th><th>Year</th></tr>';
     
     for(var i=rowStart; i<rowEnd; ++i) {
         s += '<tr>';
-        s += '<td><a target="_blank" href="run_id.php?key=' + rows[i].Run + '">' + rows[i].Run + '</a></td>';
+        s += '<td><a style="color:#003325;" target="_blank" href="run_id.php?key=' + rows[i].Run + '">' + rows[i].Run + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
+        s += '<td><a style="color:#003325;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">'+rows[i].BioProject+' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
+        s += '<td>' + rows[i].SRA + '</td>';
+        s += '<td>' + rows[i].Grp + '</td>';
+        s += '<td>' + rows[i].SubGroup + '</td>';
+        s += '<td>' + rows[i].IsolationSource + '</td>';
+        s += '<td>' + rows[i].Instrument + '</td>';
         s += '<td>' + rows[i].AssayType + '</td>';
-        s += '<td><a target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">' + rows[i].BioProject + '</td>';
-        s += '<td>' + rows[i].geo_loc_name_country + '</td>';
-        s += '<td>' + rows[i].geo_loc_name_country_continent + '</td>';
-        s += '<td>' + rows[i].HostDisease + '</td>';
+        s += '<td>' + rows[i].Country + '</td>';
+        s += '<td>' + rows[i].ReleaseYear + '</td>';
         s += '</tr>';
     }
     

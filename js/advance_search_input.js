@@ -1,13 +1,32 @@
 var keyToTypeMap = {
-    'HostDisease': 'S',
+    'Disease': 'C',
     'AssayType': 'C',
     'Country': 'C',
-    'Continent': 'C'
+    'Instrument': 'C',
+    'Year': 'Y',
+    'IsolationSource': 'C'
 };
 var keyToValueMap = {
     'AssayType': [['0', 'Amplicon'], ['1', 'WGS']],
-    'Country': [['0', 'Australia'], ['1', 'Canada'], ['2', 'China'], ['3', 'Denmark'], ['4', 'France'], ['5', 'Germany'], ['6', 'Hong Kong'], ['7', 'Hungary'], ['8', 'India'], ['9', 'Italy'], ['10', 'Japan'], ['11', 'Korea'], ['12', 'Mali'], ['13', 'Morocco'], ['14', 'Netherlands'], ['15', 'Taiwan'], ['16', 'UK'], ['17', 'USA']],
-    'Continent': [['0', 'Africa'], ['1', 'Asia'], ['2', 'Europe'], ['3', 'North America'], ['4', 'Oceania']]
+    
+    'Country': [['0', 'Australia'], ['1', 'Bangladesh'], ['2', 'Belgium'], ['3', 'Brazil'],  
+                ['4', 'China'], ['5', 'Czech Republic'], ['6', 'Germany'], ['7', 'Hungary'], 
+                ['8', 'India'], ['9', 'Italy'], ['10', 'Japan'], ['11', 'Mali'], ['12', 'Morocco'], 
+                ['13', 'Nepal'], ['14', 'Netherlands'], ['15', 'Peru'], ['16', 'Poland'], 
+                ['17', 'Russia'], ['18', 'South Africa'], ['19', 'South Korea'], ['20', 'Spain'], 
+                ['21', 'Srilanka'], ['22', 'Switzerland'], ['23', 'Taiwan'], ['24', 'United Kingdom'], 
+                ['25', 'USA']],
+    
+    'Instrument': [['0', 'HiSeq 2000'], ['1', 'HiSeq 2500'], ['2', 'HiSeq 4000'],
+                    ['3', 'MiSeq'], ['4', 'NovaSeq 6000'], ['5', 'NextSeq 500'], 
+                    ['6', 'NextSeq 550']],
+    
+    'IsolationSource': [['0', 'BAL'], ['1', 'Bronchial Brush'], ['2', 'Bronchial Mucosa'], ['3', 'Colon Mucus'], 
+                        ['4', 'Endotracheal Aspirate'], ['5', 'Lung Biopsy'], ['6', 'Lung Tissue'],
+                        ['7', 'Lung Tumour Tissue'], ['8', 'Sputum'], ['9', 'Stool'], ['10', 'Supraglottic Swab']],
+    
+    'Disease': [['0', 'Asthma'], ['1', 'COPD'], ['2', 'COVID-19'], ['3', 'Cystic Fibrosis'], ['4', 'Lung cancer'], 
+                ['5', 'Pneumonia'], ['6', 'Tuberculosis']]
 };
 
 function getOperatorHTML(keyType) {
@@ -16,7 +35,7 @@ function getOperatorHTML(keyType) {
         operatorHTML = operatorHTML + '</select>';
     else if (keyType == 'C')
         operatorHTML = operatorHTML + '</select>';
-    else if (keyType == 'N') {
+    else if (keyType == 'N' || keyType == 'Y') {
         operatorHTML = operatorHTML +
             '<option value="lt">&lt;</option>' +
             '<option value="lte">&lt;=</option>' +
@@ -32,6 +51,8 @@ function getValueHTML(keyType, keyValue) {
         valueHTML = '<input type="text" class="full" placeholder="Enter text">';
     else if (keyType == 'N')
         valueHTML = '<input type="number" step="0.01" class="full" placeholder="Enter number">';
+    else if (keyType == 'Y')
+        valueHTML = '<input type="number" min="1900", max="'+ (new Date()).getFullYear() +'" step="1" class="full" placeholder="YYYY">';
     else if (keyType == 'C') {
         valueHTML = '<select class="full">';
         possibleValues = keyToValueMap[keyValue];
@@ -54,15 +75,17 @@ function getHTML() {
     var keyHTML =
         '<td style="width:30%;">' +
             '<select class="full"  onchange="updateKeyChoice(this)">' +
-                '<option value="HostDisease" selected>Host Disease</option>' +
-                '<option value="AssayType">Assay Type</option>' +
-                '<option value="Country">Country</option>' +
-                '<option value="Continent">Continent</option>' +
+                '<option value="Disease" selected>Disease</option>' + 
+                '<option value="AssayType">Assay Type</option>' + 
+                '<option value="Country">Country</option>' + 
+                '<option value="Instrument">Instrument</option>' + 
+                '<option value="Year">Year</option>' + 
+                '<option value="IsolationSource">Isolation source</option>' + 
             '</select>' +
         '</td>';
     var operatorHTML =
-        '<td style="width:10%;">' + getOperatorHTML('N') + '</td>';
-    var valueHTML = '<td style="width:10%;">' + getValueHTML('N', 'Age') + '</td>';
+        '<td style="width:10%;">' + getOperatorHTML('C') + '</td>';
+    var valueHTML = '<td style="width:10%;">' + getValueHTML('C', 'Disease') + '</td>';
 	return checkboxHTML + logicalOperatorHTML + keyHTML + operatorHTML + valueHTML;
 }
 

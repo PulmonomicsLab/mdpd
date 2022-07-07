@@ -2,12 +2,39 @@
     include('db.php');
 
     $operatorMap = array("eq"=>"=", "ne"=>"<>", "lt"=>"<", "lte"=>"<=", "gt"=>">", "gte"=>">=");
-    $keyTypes = array("HostDisease"=>"S", "AssayType"=>"C", "Country"=>"C", "Continent"=>"C");
-    $dbAttributeNameMap = array("HostDisease"=>"HostDisease", "AssayType"=>"AssayType", "Country"=>"geo_loc_name_country", "Continent"=>"geo_loc_name_country_continent");
+    $keyTypes = array("AssayType"=>"C","Country"=>"C","Instrument"=>"C","Year"=>"Y","IsolationSource"=>"C","Disease"=>"C");
+    $dbAttributeNameMap = array(
+        "AssayType"=>"run.AssayType","Country"=>"run.Country","Instrument"=>"run.Instrument",
+        "Year"=>"run.ReleaseYear","IsolationSource"=>"run.IsolationSource","Disease"=>"disease.Grp"
+    );
     $possibleValues = array(
-        "AssayType"=> array("0"=>"Amplicon","1"=>"WGS"),
-        "Country"=> array("0"=>"Australia","1"=>"Canada","2"=>"China","3"=>"Denmark","4"=>"France","5"=>"Germany","6"=>"Hong Kong","7"=>"Hungary","8"=>"India","9"=>"Italy","10"=>"Japan","11"=>"Korea","12"=>"Mali","13"=>"Morocco","14"=>"Netherlands","15"=>"Taiwan","16"=>"UK","17"=>"USA"),
-        "Continent"=> array("0"=>"Africa","1"=>"Asia","2"=>"Europe","3"=>"North America","4"=>"Oceania")
+        "AssayType"=> array("0"=>"Amplicon", "1"=>"WGS"),
+        
+        "Country"=> array(
+            '0'=> 'Australia', '1'=> 'Bangladesh', '2'=> 'Belgium', '3'=> 'Brazil',  
+            '4'=> 'China', '5'=> 'Czech Republic', '6'=> 'Germany', '7'=> 'Hungary', 
+            '8'=> 'India', '9'=> 'Italy', '10'=> 'Japan', '11'=> 'Mali', '12'=> 'Morocco', 
+            '13'=> 'Nepal', '14'=> 'Netherlands', '15'=> 'Peru', '16'=> 'Poland', 
+            '17'=> 'Russia', '18'=> 'South Africa', '19'=> 'South Korea', '20'=> 'Spain', 
+            '21'=> 'Srilanka', '22'=> 'Switzerland', '23'=> 'Taiwan', '24'=> 'United Kingdom', 
+            '25'=> 'USA'
+        ),
+        
+        "Instrument"=> array(
+            "0"=>"HiSeq 2000", "1"=>"HiSeq 2500", "2"=>"HiSeq 4000", "3"=>"MiSeq", 
+            "4"=>"NovaSeq 6000", "5"=>"NextSeq 500","6"=>"NextSeq 550"
+        ),
+        
+        "IsolationSource"=> array(
+            '0'=> 'BAL', '1'=> 'Bronchial Brush', '2'=> 'Bronchial Mucosa', '3'=> 'Colon Mucus', 
+            '4'=> 'Endotracheal Aspirate', '5'=> 'Lung Biopsy', '6'=> 'Lung Tissue',
+            '7'=> 'Lung Tumour Tissue', '8'=> 'Sputum', '9'=> 'Stool', '10'=> 'Supraglottic Swab'
+        ),
+        
+        "Disease"=> array(
+            "0"=>"Asthma", "1"=>"COPD", "2"=>"COVID-19", "3"=>"Cystic Fibrosis", "4"=>"Lung cancer", 
+            "5"=>"Pneumonia", "6"=>"Tuberculosis"
+        )
     );
 
     function assertLogicalOperator($lop) {
@@ -25,7 +52,7 @@
             return ($op === "eq" || $op === "ne") ? true : false;
         if($keyTypes[$key] === "S")
             return ($op === "eq" || $op === "ne") ? true : false;
-        if($keyTypes[$key] === "N")
+        if($keyTypes[$key] === "N" || $keyTypes[$key] === "Y")
             return ($op === "eq" || $op === "ne" || $op === "lt" || $op === "lte" || $op === "gt" || $op === "gte") ? true : false;
     }
 
@@ -34,6 +61,8 @@
         global $keyTypes;
         if($keyTypes[$key] === "N")
             return is_numeric($val);
+        if($keyTypes[$key] === "Y")
+            return is_numeric($val) && (intval($val) >= 1900) && (intval($val) <= date("Y"));
         if($keyTypes[$key] === "C")
             return array_key_exists($val, $possibleValues[$key]);
         if($keyTypes[$key] === "S")
@@ -57,7 +86,7 @@
                 array_push($operators, $op);
                 if ($keyTypes[$k] === "C")
                     array_push($values, $possibleValues[$k][$val]);
-                elseif ($keyTypes[$k] === "N")
+                elseif ($keyTypes[$k] === "N" || $keyTypes[$k] === "Y")
                     array_push($values, intval($val));
                 else
                     array_push($values, $val);
@@ -95,7 +124,7 @@
                 $typeString = $typeString."s";
             elseif($keyTypes[$k] === "C")
                 $typeString = $typeString."s";
-            elseif($keyTypes[$k] === "N")
+            elseif($keyTypes[$k] === "N" || $keyTypes[$k] === "Y")
                 $typeString = $typeString."i";
 //             elseif($keyTypes[$k] === "D")
 //                 $typeString = $typeString."s";
@@ -120,7 +149,8 @@
     
     $pred = createPredicateString($keys, $operators, $logicalOperators);
     $paramString = createParamString($keys);
-    $query = "select ".implode(",", $viewAttributes)." from meta where ".$pred.";";
+//     $query = "select ".implode(",", $viewAttributes)." from run,bioproject where (run.BioProject=bioproject.BioProject)AND".$pred.";";
+    $query = "select ".implode(",", $viewAttributes)." from ((run inner join bioproject on run.BioProject=bioproject.BioProject) inner join disease on run.SubGroup=disease.SubGroup) where ".$pred." order by run.Run;";
 //     echo $pred."<br/>";
 //     echo $paramString."<br/>";
 //     echo $query."<br/>";
@@ -159,9 +189,9 @@
             <center>
             <table cellpadding="3px">
                 <tr class="nav">
-                    <td class="nav"><a href="#" class="active">Home</a></td>
-                    <td class="nav"><a href="about.html" class="side_nav">About</a></td>
-                    <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
+                    <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
+                    <td class="nav"><a href="advance_search.html" class="active">Search</a></td>
+                    <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
@@ -172,23 +202,23 @@
         
         <div class = "section_middle">
             <p>Total number of entries found in the database = <?php echo count($rows);?></p>
-            <table border="1" style="width:100%;">
+            <table border="0" style="width:100%; border:4px solid #392d37;">
                 <tr>
                     <td style="width:25%;">
                         Go to Page:&nbsp;
-                        <input id="page_no_top" type="number" size="2" min="1" />&nbsp;
-                        <button type="button" onclick="goto_page('result_display', 'page_no_top')" />Go</button>
+                        <input id="page_no_top" type="number" size="2" min="1" style="width:50px;" />&nbsp;
+                        <button type="button" class="round" onclick="goto_page('result_display', 'page_no_top')" />Go</button>
                     </td>
                     <td style="width:15%;text-align:right;">
-                        <button type="button" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
-                        <button type="button" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
+                        <button type="button" class="round" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
+                        <button type="button" class="round" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
                     </td>
                     <td style="width:20%;">
                         <p id="pages_top" style="text-align:center;"></p>
                     </td>
                     <td style="width:15%;">
-                        &nbsp;&nbsp;<button type="button" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
-                        <button type="button" onclick="displayLastPage('result_display')">Last</button>
+                        &nbsp;&nbsp;<button type="button" class="round" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
+                        <button type="button" class="round" onclick="displayLastPage('result_display')">Last</button>
                     </td>
                     <td style="width:25%;"></td>
                 </tr>
@@ -196,23 +226,23 @@
             <div id="result_display">
             
             </div>
-            <table border="1" style="width:100%;">
+            <table border="0" style="width:100%; border:4px solid #392d37;">
                 <tr>
                     <td style="width:25%;">
                         Go to Page:&nbsp;
-                        <input id="page_no_bottom" type="number" size="2" min="1" />&nbsp;
-                        <button type="button" onclick="goto_page('result_display', 'page_no_bottom')" />Go</button>
+                        <input id="page_no_bottom" type="number" size="2" min="1" style="width:50px;" />&nbsp;
+                        <button type="button" class="round" onclick="goto_page('result_display', 'page_no_bottom')" />Go</button>
                     </td>
                     <td style="width:15%;text-align:right;">
-                        <button type="button" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
-                        <button type="button" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
+                        <button type="button" class="round" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
+                        <button type="button" class="round" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
                     </td>
                     <td style="width:20%;">
                         <p id="pages_bottom" style="text-align:center;"></p>
                     </td>
                     <td style="width:15%;">
-                        &nbsp;&nbsp;<button type="button" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
-                        <button type="button" onclick="displayLastPage('result_display')">Last</button>
+                        &nbsp;&nbsp;<button type="button" class="round" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
+                        <button type="button" class="round" onclick="displayLastPage('result_display')">Last</button>
                     </td>
                     <td style="width:25%;"></td>
                 </tr>
