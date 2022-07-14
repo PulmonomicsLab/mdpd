@@ -14,17 +14,19 @@
     
     $bioprojectStmt = $conn->prepare($bioprojectQuery);
     $bioprojectStmt->bind_param("s", $bioprojectID);
-    $bioprojectStmt->execute();
-    $bioprojectResult = $bioprojectStmt->get_result();
+//     $bioprojectStmt->execute();
+//     $bioprojectResult = $bioprojectStmt->get_result();
 //     echo $bioprojectResult->num_rows." ".$bioprojectResult->field_count."<br/><br/>";
+    $bioprojectRows = execute_and_fetch_assoc($bioprojectStmt);
     $bioprojectStmt->close();
     
     $runStmt = $conn->prepare($runQuery);
     $runStmt->bind_param("s", $bioprojectID);
-    $runStmt->execute();
-    $runResult = $runStmt->get_result();
+//     $runStmt->execute();
+//     $runResult = $runStmt->get_result();
 //     echo $runResult->num_rows." ".$runResult->field_count."<br/><br/>";
-    $runRows = $runResult->fetch_all(MYSQLI_ASSOC);
+//     $runRows = $runResult->fetch_all(MYSQLI_ASSOC);
+    $runRows = execute_and_fetch_assoc($runStmt);
     $runRowsJSON = json_encode($runRows);
     $runStmt->close();
     
@@ -65,13 +67,13 @@
         
         <div class = "section_middle">
             <?php
-                if ($bioprojectResult->num_rows < 1) {
+                if (count($bioprojectRows) < 1) {
                     echo "<center><p>Error !!! BioProject ID: ".$bioprojectID." does not exist in the database.</p></center>";
                 } else {
                     echo "<center><h3>BioProject ID: ".$bioprojectID."</h3></center>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
-                    while ($row = $bioprojectResult->fetch_assoc()){
+                    foreach($bioprojectRows as $row){
                         foreach ($allBioProjectAttributes as $name=>$fname) {
                             if ($name !== "BioProject") {
                                 echo "<tr>";
@@ -86,8 +88,9 @@
                                     echo "<td style=\"width:60%\">";
                                     foreach($subgroups as $sg) {
                                         $diseaseStmt->bind_param("s", $sg);
-                                        $diseaseStmt->execute();
-                                        $disease = $diseaseStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+//                                         $diseaseStmt->execute();
+//                                         $disease = $diseaseStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                                        $disease = execute_and_fetch_assoc($diseaseStmt);
                                         echo $disease[0]["Grp"]." &rarr; ".$sg."<br/>";
                                     }
                                     echo "</td>";

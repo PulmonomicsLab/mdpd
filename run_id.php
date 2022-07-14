@@ -10,10 +10,11 @@
     $conn = connect();
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $runID);
-    $stmt->execute();
-    $result = $stmt->get_result();
+//     $stmt->execute();
+//     $result = $stmt->get_result();
 //     echo $result->num_rows." ".$result->field_count."<br/>";
 //     $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $rows = execute_and_fetch_assoc($stmt);
     $stmt->close();
     closeConnection($conn);
 ?>
@@ -47,13 +48,13 @@
         
         <div class = "section_middle">
             <?php
-                if ($result->num_rows < 1) {
+                if (count($rows) < 1) {
                     echo "<center><p>Error !!! Run ID: ".$runID." does not exist in the database.</p></center>";
                 } else {
                     echo "<center><h3>Run ID: ".$runID."</h3></center><hr/><br/>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
-                    while ($row = $result->fetch_assoc()){
+                    foreach($rows as $row){
                         foreach ($allRunAttributes as $name=>$fname) {
                             if ($name !== "Run") {
                                 echo "<tr>";
@@ -70,6 +71,6 @@
                 }
             ?>
             
-        </div>
+        <br/>
     </body>
 </html>

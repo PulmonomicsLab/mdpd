@@ -79,4 +79,44 @@
     function closeConnection($conn) {
         $conn->close();
     }
+    
+    function execute_and_fetch_assoc($stmt, $types = false, $params = false) {
+        if (!$stmt->execute()) {
+            return false;
+        }
+        $stmt->store_result();
+       
+        // get column names
+        $metadata = $stmt->result_metadata();
+        $fields = $metadata->fetch_fields();
+
+        $results = [];
+        $ref_results = [];
+        foreach($fields as $field){
+            $results[$field->name]=null;
+            $ref_results[]=&$results[$field->name];
+        }
+
+        call_user_func_array(array($stmt, 'bind_result'), $ref_results);
+
+        $data = array();
+        $i=0;
+        while ($stmt->fetch()) {
+            $c = 0;
+            $new_res = array();
+            foreach($results as $f => $v) {
+                $new_res[$f] = $v;
+                $c++;
+            }
+//             echo implode(",", $new_res);
+            array_push($data, $new_res);
+        }
+
+//         echo count($data);
+//         foreach($data as $d)
+//             echo implode(",", $d)."<br/>";
+
+        $stmt->free_result();
+        return  $data;
+    }
 ?>

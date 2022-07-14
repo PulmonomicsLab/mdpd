@@ -7,10 +7,11 @@
     $conn = connect();
     
     $choroplethStmt = $conn->prepare($choroplethQuery);
-    $choroplethStmt->execute();
-    $choroplethResult = $choroplethStmt->get_result();
+//     $choroplethStmt->execute();
+//     $choroplethResult = $choroplethStmt->get_result();
 //     echo $bioprojectResult->num_rows." ".$bioprojectResult->field_count."<br/><br/>";
-    $rows = $choroplethResult->fetch_all(MYSQLI_ASSOC);
+//     $rows = $choroplethResult->fetch_all(MYSQLI_ASSOC);
+    $rows = execute_and_fetch_assoc($choroplethStmt);
     $rowsJSON = json_encode($rows);
     $choroplethStmt->close();
     closeConnection($conn);

@@ -133,6 +133,13 @@
         }
         return $typeString;
     }
+    
+    function refValues($arr){
+        $refs = array();
+        for($i=0; $i<count($arr); ++$i)
+            $refs[$i] = &$arr[$i];
+        return $refs;
+    }
 
     $predicateCount = $_POST["total_count"];
     $logicalOperators = array();
@@ -157,10 +164,22 @@
 
     $conn = connect();
     $stmt = $conn->prepare($query);
-    $stmt->bind_param($paramString, ...$values);
+    
+    array_unshift($values, $paramString);
+    call_user_func_array(
+        array($stmt, "bind_param"),
+        refValues($values)
+    );
     $stmt->execute();
-    $result = $stmt->get_result();
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+//     $stmt->bind_param($paramString, ...$values);
+//     $stmt->execute();
+//     $result = $stmt->get_result();
+//     $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $rows = execute_and_fetch_assoc($stmt);
+//     foreach($rows as $row) {
+//         echo implode(",", $row)."<br/>";
+//     }
     $rowsJSON = json_encode($rows);
     //     echo $result->num_rows." ".$result->field_count."<br/>";
     
