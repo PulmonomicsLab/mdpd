@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@900&display=swap');
+ 
 body{
     background-color : #fffafa;
-/*     font-family: sans-serif; */
+    font-size: 1.05em;
+    font-family: 'Nunito Sans', sans-serif;
 }
 .sticky{
 /*     width: 100%; */
@@ -124,14 +127,14 @@ table.details{
     margin-right : 10%;
 }
 table.details tr:nth-child(odd){
-    background-color : #d9d9d9;
+    background-color : #d2ccc6;
 }
 table.details tr:nth-child(even){
-    background-color : #b3b3b3;
+    background-color : #bbaab9;
 }
 table.details td{
     text-align : center;
-    border : 2px black solid;
+    border : 2px white solid;
 }
 th{
 /*     background-color: #31669b; */
@@ -148,7 +151,9 @@ button{
     padding : 5px 10px 5px 10px;
     border-radius: 10px;
     font-weight : bold;
+    font-family: 'Nunito', sans-serif;
     box-shadow: 0px 0px 5px grey;
+    cursor: pointer;
 }
 button.round{
     border-radius:50%;
