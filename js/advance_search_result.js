@@ -18,8 +18,8 @@ function display(divId, pageNo) {
     
     for(var i=rowStart; i<rowEnd; ++i) {
         s += '<tr>';
-        s += '<td><a style="color:#003325;" target="_blank" href="run_id.php?key=' + rows[i].Run + '">' + rows[i].Run + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
-        s += '<td><a style="color:#003325;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">'+rows[i].BioProject+' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
+        s += '<td><a style="color:#003325; font-weight:bold;" target="_blank" href="run_id.php?key=' + rows[i].Run + '">' + rows[i].Run + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
+        s += '<td><a style="color:#003325; font-weight:bold;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">'+rows[i].BioProject+' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
         s += '<td>' + rows[i].SRA + '</td>';
         s += '<td>' + rows[i].Grp + '</td>';
         s += '<td>' + rows[i].SubGroup + '</td>';
