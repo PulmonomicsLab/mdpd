@@ -73,19 +73,19 @@
                     <td class="odd">Amplicon</td>
                     <td class="odd">BAL (22), Bronchial brush (44), Bronchial mucosa (24), Sputum (118), Stool (470)</td>
                     <td class="odd">
-                        <button type="button" style="margin:2px;" onclick="">BAL</button>
-                        <button type="button" style="margin:2px;" onclick="">Bronchial brush</button>
-                        <button type="button" style="margin:2px;" onclick="">Bronchial mucosa</button>
-                        <button type="button" style="margin:2px;" onclick="">Sputum</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">BAL</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Bronchial Brush");?>"><button type="button" style="margin:2px;">Bronchial brush</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Bronchial Mucosa");?>"><button type="button" style="margin:2px;">Bronchial mucosa</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
                     <td class="odd">WGS</td>
                     <td class="odd">Sputum (5), Stool (25)</td>
                     <td class="odd">
-                        <button type="button" style="margin:2px;" onclick="">Sputum</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("Asthma")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("Asthma")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
@@ -93,18 +93,18 @@
                     <td class="even">Amplicon</td>
                     <td class="even">BAL (4), Lung tissue (18), Sputum (1077), Stool (28)</td>
                     <td class="even">
-                        <button type="button" style="margin:2px;" onclick="">BAL</button>
-                        <button type="button" style="margin:2px;" onclick="">Lung tissue</button>
-                        <button type="button" style="margin:2px;" onclick="">Sputum</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COPD")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">BAL</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COPD")."&is=".urlencode("Lung Tissue");?>"><button type="button" style="margin:2px;">Lung tissue</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COPD")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COPD")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
                     <td class="even">WGS</td>
                     <td class="even">Sputum (15), Stool (44)</td>
                     <td class="even">
-                        <button type="button" style="margin:2px;" onclick="">Sputum</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("COPD")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("COPD")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
@@ -112,32 +112,34 @@
                     <td class="odd">Amplicon</td>
                     <td class="odd">BAL (57), Stool (202)</td>
                     <td class="odd">
-                        <button type="button" style="margin:2px;" onclick="">BAL</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COVID-19")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">BAL</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COVID-19")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
                     <td class="odd">WGS</td>
                     <td class="odd">Stool (58)</td>
-                    <td class="odd"><button type="button" style="margin:2px;" onclick="">Stool</button></td>
+                    <td class="odd">
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("COVID-19")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
+                    </td>
                 </tr>
                 <tr>
                     <td rowspan="2" class="row_heading">Cystic Fibrosis</td>
                     <td class="even">Amplicon</td>
                     <td class="even">BAL (96), Colon mucus (13), Sputum (188), Stool (309)</td>
                     <td class="even">
-                        <button type="button" style="margin:2px;" onclick="">BAL</button>
-                        <button type="button" style="margin:2px;" onclick="">Colon mucus</button>
-                        <button type="button" style="margin:2px;" onclick="">Sputum</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">BAL</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("Colon Mucus");?>"><button type="button" style="margin:2px;">Colon mucus</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
                     <td class="even">WGS</td>
                     <td class="even">Sputum (125), Stool (19)</td>
                     <td class="even">
-                        <button type="button" style="margin:2px;" onclick="">Sputum</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
@@ -145,9 +147,9 @@
                     <td class="odd">Amplicon</td>
                     <td class="odd">BAL (42), Endotracheal Aspirate (150), Stool (413)</td>
                     <td class="odd">
-                        <button type="button" style="margin:2px;" onclick="">BAL</button>
-                        <button type="button" style="margin:2px;" onclick="">Endotracheal Aspirate</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Pneumonia")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">BAL</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Pneumonia")."&is=".urlencode("Endotracheal Aspirate");?>"><button type="button" style="margin:2px;">Endotracheal Aspirate</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Pneumonia")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
@@ -155,14 +157,16 @@
                     <td class="even">Amplicon</td>
                     <td class="even">Sputum (58), Stool (149)</td>
                     <td class="even">
-                        <button type="button" style="margin:2px;" onclick="">Sputum</button>
-                        <button type="button" style="margin:2px;" onclick="">Stool</button>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Tuberculosis")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Tuberculosis")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
                     </td>
                 </tr>
                 <tr>
                     <td class="even">WGS</td>
                     <td class="even">Stool (48)</td>
-                    <td class="even"><button type="button" style="margin:2px;" onclick="">Stool</button></td>
+                    <td class="even">
+                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("Tuberculosis")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
+                    </td>
                 </tr>
             </table>
             

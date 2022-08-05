@@ -3,6 +3,10 @@
     
     $bioprojectID = $_GET['key'];
     
+    $kronaMappings = json_decode(file_get_contents("input/Krona/bioproject_metadata.json"), true);
+//     echo implode($kronaMappings, "<br/>");
+    
+    
     $bioprojectQuery = "select ".implode(",", array_keys($allBioProjectAttributes))." from bioproject where BioProject=?";
 //     echo $bioprojectQuery."<br/>".$bioprojectID."<br/><br/>";
     
@@ -86,13 +90,16 @@
                                     $diseaseQuery = "select Grp from disease where SubGroup=?";
                                     $diseaseStmt = $conn->prepare($diseaseQuery);
                                     echo "<td style=\"width:60%\">";
+                                    $groups = array();
                                     foreach($subgroups as $sg) {
                                         $diseaseStmt->bind_param("s", $sg);
 //                                         $diseaseStmt->execute();
 //                                         $disease = $diseaseStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-                                        $disease = execute_and_fetch_assoc($diseaseStmt);
-                                        echo $disease[0]["Grp"]." &rarr; ".$sg."<br/>";
+                                        $disease = execute_and_fetch_assoc($diseaseStmt)[0]["Grp"];
+                                        array_push($groups, $disease);
+                                        echo $disease." &rarr; ".$sg."<br/>";
                                     }
+                                    $groups = array_unique($groups);
                                     echo "</td>";
                                     $diseaseStmt->close();
                                     closeConnection($conn);
@@ -108,17 +115,17 @@
                         }
                     }
                     echo "<tr><td>Linear Discriminant Analysis (LDA)</td>";
-                    echo "<td><a target=\"_blank\" href=\"lda.php?key=".$bioprojectID."\"><button type=\"button\">Get LDA plot</button></a></td></tr>";
+                    echo "<td><a target=\"_blank\" href=\"lda.php?key=".$bioprojectID."\"><button type=\"button\" style=\"margin:3px;\">Get LDA plot</button></a></td></tr>";
                     echo "<tr><td>Taxonomic profile (Krona Plot)</td>";
                     echo "<td>";
-                    foreach($subgroups as $sg) {
-                        echo "<a target=\"_blank\" href=\"krona.php?key=".urlencode($bioprojectID)."&sg=".urlencode($sg)."\"><button type=\"button\">".$sg."</button></a><br/>";
+                    foreach($groups as $sg) {
+                        $assayTypes = $kronaMappings[$bioprojectID][$sg];
+                        foreach($assayTypes as $at)
+                            echo "<a target=\"_blank\" href=\"krona.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&ds=".urlencode($sg)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$sg."-".$at."</button></a>";
                     }
                     echo "</td></tr>";
                     echo "</table>";
             ?>
-                    <!--<br/><center><a target="_blank" href="<?php //echo "krona.php?key=".$bioprojectID; ?>"><button type="button">Expand Krona</button></a></center><br/>
-                    <iframe src="<?php //echo "input/Krona/".$bioprojectID.".html"; ?>" style="width:100%; height:800px;float:left;"></iframe>-->
                     <p><br/>Total number of runs found in the database for this BioProject ID = <?php echo count($runRows);?></p>
                     <table border="0" style="width:100%; border: 4px solid #392d37;">
                         <tr>
