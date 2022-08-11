@@ -346,22 +346,22 @@
                     <tr>
                         <td rowspan="4" class="row_heading">Asthma - COPD</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COPD")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma COPD")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="2" class="even">WGS</td><td class="even">Lung</td><td class="even">Sputum</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COPD")."&at=WGS&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COPD")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -373,17 +373,17 @@
                     <tr>
                         <td rowspan="3" class="row_heading">Asthma - COVID-19</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COVID-19")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COVID-19")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="1" class="even">WGS</td><td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COVID-19")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -395,22 +395,22 @@
                     <tr>
                         <td rowspan="4" class="row_heading">Asthma - Cystic Fibrosis</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="2" class="even">WGS</td><td class="even">Lung</td><td class="even">Sputum</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Cystic Fibrosis")."&at=WGS&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Cystic Fibrosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -422,12 +422,12 @@
                     <tr>
                         <td rowspan="2" class="row_heading">Asthma - Pneumonia</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Pneumonia")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Pneumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -439,17 +439,17 @@
                     <tr>
                         <td rowspan="3" class="row_heading">Asthma - Tuberculosis</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Tuberculosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Tuberculosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="1" class="even">WGS</td><td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -461,17 +461,17 @@
                     <tr>
                         <td rowspan="3" class="row_heading">COPD - COVID-19</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_COVID-19")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_COVID-19")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="1" class="even">WGS</td><td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_COVID-19")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -483,22 +483,22 @@
                     <tr>
                         <td rowspan="4" class="row_heading">COPD - Cystic Fibrosis</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="2" class="even">WGS</td><td class="even">Lung</td><td class="even">Sputum</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Cystic Fibrosis")."&at=WGS&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Cystic Fibrosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -510,12 +510,12 @@
                     <tr>
                         <td rowspan="2" class="row_heading">COPD - Pneumonia</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Pneumonia")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Pneumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -527,17 +527,17 @@
                     <tr>
                         <td rowspan="3" class="row_heading">COPD - Tuberculosis</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Tuberculosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Tuberculosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="1" class="even">WGS</td><td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -549,17 +549,17 @@
                     <tr>
                         <td rowspan="3" class="row_heading">COVID-19 - Cystic Fibrosis</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COVID-19_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COVID-19_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="1" class="even">WGS</td><td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COVID-19_Cystic Fibrosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -571,12 +571,12 @@
                     <tr>
                         <td rowspan="2" class="row_heading">COVID-19 - Pneumonia</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COVID-19_Pneumonia")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COVID-19_Pneumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -588,12 +588,12 @@
                     <tr>
                         <td rowspan="2" class="row_heading">COVID-19 - Tuberculosis</td>
                         <td rowspan="1" class="odd">Amplicon</td><td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COVID-19_Tuberculosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="1" class="even">WGS</td><td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COVID-19_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -605,12 +605,12 @@
                     <tr>
                         <td rowspan="2" class="row_heading">Cystic Fibrosis - Pneumonia</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Cystic Fibrosis_Pnumonia")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Cystic Fibrosis_Pnumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -622,12 +622,12 @@
                     <tr>
                         <td rowspan="2" class="row_heading">Cystic Fibrosis - Tuberculosis</td>
                         <td rowspan="1" class="odd">Amplicon</td><td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Cystic Fibrosis_Tuberculosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td rowspan="2" class="even">WGS</td><td class="even">Gut</td><td class="even">Stool</td>
-                        <td class="even"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Cystic Fibrosis_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="even"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>
@@ -639,7 +639,7 @@
                     <tr>
                         <td rowspan="1" class="row_heading">Pneumonia - Tuberculosis</td>
                         <td rowspan="1" class="odd">Amplicon</td><td class="odd">Gut</td><td class="odd">Stool</td>
-                        <td class="odd"><button type="button" style="margin:2px;" onclick="">Get LDA plot</button></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Pneumonia_Tuberculosis")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><button type="button" style="margin:2px;" onclick="">Get heatmap</button></td>
                     </tr>
                 </table>

@@ -1,5 +1,11 @@
 <?php
-    $bioProjectID = $_GET["key"];
+    $type = urldecode($_GET["type"]);
+    $bioproject = urldecode($_GET["bioproject"]);
+    $dp = urldecode($_GET["dp"]);
+    $at = urldecode($_GET["at"]);
+    $biome = urldecode($_GET["biome"]);
+    $is = urldecode($_GET["is"]);
+//     echo $type."<br/>".$bioproject."<br/>".$dp."<br/>".$at."<br/>".$is."<br/>".$biome."<br/>";
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +40,41 @@
         <!--<div class = "section_left"></div>-->
         
         <div class = "section_middle">
+            <center><p id="display_text"></p></center>
+            <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <div style="width:100%" id="plot_container">
             
             </div>
-            <?php echo "<script>getLDAData('plot_container','".$bioProjectID."',0)</script>"; ?>
+            
+            <script>
+                function getLDAData(queryType, bioproject, diseasePair, assayType, biome, isolationSource, score) {
+                    var prefix = 'input/LDA/';
+                    if(queryType == 'DISEASE') {
+                        var folder = prefix + assayType + '/';
+                        var file = folder + 'LDA_' + diseasePair.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '.csv';
+                        var display = diseasePair.replace(/_/g," - ") + ' | ' + assayType + ' | ' + biome + ' | ' + isolationSource;
+                    } else if(queryType == 'BIOPROJECT') {
+                        var folder = prefix + 'Bioproject/' ;
+                        var file = folder + 'LDA_' + bioproject + '_' + isolationSource.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '.csv';
+                        var display = 'BioProject ID: ' + bioproject + ' | ' + assayType + ' | ' + isolationSource;
+                    }                
+//                     alert(queryType+'<br/>'+bioproject+'<br/>'+diseasePair+'<br/>'+assayType+'<br/>'+isolationSource+'<br/>'+'\n'+file);
+                    
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById('display_text').innerHTML = '<h3>' + display + '</h3>';
+                            document.getElementById('download_div').innerHTML = '<a href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>';
+                            plotLDA('plot_container', this.responseText, score);
+                        }
+                    };
+                    xmlhttp.open('GET', file, true);
+                    xmlhttp.setRequestHeader("Content-type", "text/csv");
+                    xmlhttp.send();
+                }
+                
+                <?php echo "getLDAData('".$type."','".$bioproject."','".$dp."','".$at."','".$biome."','".$is."',0)" ?>
+            </script>
         </div>
     </body>
 </html>

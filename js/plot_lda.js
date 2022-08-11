@@ -1,15 +1,3 @@
-function getLDAData(div_id, bioProjectID, score) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            plotLDA(div_id, this.responseText, score);
-        }
-    };
-    xmlhttp.open('GET', 'input/LDA/'+ bioProjectID +'.csv', true);
-    xmlhttp.setRequestHeader("Content-type", "text/csv");
-    xmlhttp.send();
-}
-
 function getDataMap(csv) {
     var dataMap = new Map();
     for(var i=1; i<csv.length; ++i) {

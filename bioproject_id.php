@@ -5,6 +5,8 @@
     
     $kronaMappings = json_decode(file_get_contents("input/Krona/bioproject_metadata.json"), true);
 //     echo implode($kronaMappings, "<br/>");
+    $ldaMappings = json_decode(file_get_contents("input/LDA/bioproject_metadata.json"), true);
+//     echo implode($ldaMappings, "<br/>");
     
     
     $bioprojectQuery = "select ".implode(",", array_keys($allBioProjectAttributes))." from bioproject where BioProject=?";
@@ -115,7 +117,15 @@
                         }
                     }
                     echo "<tr><td>Linear Discriminant Analysis (LDA)</td>";
-                    echo "<td><a target=\"_blank\" href=\"lda.php?key=".$bioprojectID."\"><button type=\"button\" style=\"margin:3px;\">Get LDA plot</button></a></td></tr>";
+                    echo "<td>";
+                    $isolationSources = array_keys($ldaMappings[$bioprojectID]);
+                    foreach($isolationSources as $is) {
+                        $assayTypes = $ldaMappings[$bioprojectID][$is];
+                        foreach($assayTypes as $at) {
+                            echo "<a target=\"_blank\" href=\"lda.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$at."-".$is."</button></a>";
+                        }
+                    }
+                    echo "</td></tr>";
                     echo "<tr><td>Taxonomic profile (Krona Plot)</td>";
                     echo "<td>";
                     foreach($groups as $sg) {
