@@ -77,11 +77,11 @@
                 if(queryType == 'DISEASE') {
                     var folder = prefix + assayType + '/' + disease + '/' ;
                     var file = folder + 'Krona_' + disease.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + kronaType.replace(/ /g,"_") + '.html';
-                    var display = disease + ' | ' + assayType + ' | ' + isolationSource + ' (' + kronaType + ')'
+                    var display = disease + ' | ' + assayType + ' | ' + isolationSource + ' (' + kronaType + ')';
                 } else if(queryType == 'BIOPROJECT') {
                     var folder = prefix + assayType.split('_')[0] + '/' + queryType + '/' ;
                     var file = folder + 'Krona_' + bioproject.replace(/ /g,"_") + '_' + disease.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + kronaType.replace(/ /g,"_") + '.html';
-                    var display = 'BioProject ID: ' + bioproject + ' - ' + disease + ' | ' + assayType.replace(/_/g, ' | ') + ' (' + kronaType + ')'
+                    var display = 'BioProject ID: ' + bioproject + ' - ' + disease + ' | ' + assayType.replace(/_/g, ' | ') + ' (' + kronaType + ')';
                 }                
 //                 alert(queryType+'<br/>'+bioproject+'<br/>'+disease+'<br/>'+assayType+'<br/>'+isolationSource+'<br/>'+kronaType+'\n'+file);
 
