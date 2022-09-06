@@ -33,7 +33,10 @@ function makePlot(div_id, dataMap) {
         plot_bgcolor: '#ffe6cc',//'#e6e6e6',
         paper_bgcolor: '#ffe6cc',//'#e6e6e6',
         height: 800,
-        bargap: 0.3,
+        bargap: 0.2,
+        hoverlabel: {
+            font: {size: 16}
+        },
         margin: {
             t: 10
         },
