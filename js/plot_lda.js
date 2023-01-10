@@ -18,24 +18,32 @@ function makePlot(div_id, dataMap) {
     var graphDiv = document.getElementById(div_id);
     
     var data = [];
+    var colors = ['#e9967a', '#b0c4de'];
+    var i = 0;
     for(var x of dataMap.keys()){
         var barChart = {
             type: 'bar',
             name: x,
             x: dataMap.get(x).scores,
             y: dataMap.get(x).names,
-            orientation: 'h'
+            orientation: 'h',
+            marker: {color: colors[i]}
         };
+        i++;
         data.push(barChart);
     }
 
     var layout = {
-        plot_bgcolor: '#ffe6cc',//'#e6e6e6',
-        paper_bgcolor: '#ffe6cc',//'#e6e6e6',
+        plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+        paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
         height: 800,
         bargap: 0.2,
         hoverlabel: {
-            font: {size: 16}
+            bgcolor: 'white',
+            font: {size: 18, color: 'black'}
+        },
+        hovertext: {
+            font: {color: 'black'}
         },
         margin: {
             t: 10

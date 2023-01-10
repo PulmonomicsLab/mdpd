@@ -2,12 +2,12 @@ function extractDataFromCSV(csv) {
     var x = [];
     var y = [];
     var z = [];
-    for(var i=3; i<csv[0].length; ++i)
+    for(var i=1; i<csv[0].length; ++i)
         x.push(csv[0][i]);
     for(var i=1; i<csv.length; ++i) {
-        y.push(csv[i][2]);
+        y.push(csv[i][0]);
         row = [];
-        for(var j=3; j<csv[i].length; ++j)
+        for(var j=1; j<csv[i].length; ++j)
             row.push(parseFloat(csv[i][j]));
         z.push(row);
     }
@@ -23,7 +23,7 @@ function makePlot(div_id, heatmapData) {
             z: heatmapData[2],
             xgap: 0,
             ygap: 0,
-            colorscale: 'YlGnBu',
+            colorscale: 'Greys',
             reversescale: true,
             colorbar: {
                 len: 0.5,
@@ -37,9 +37,9 @@ function makePlot(div_id, heatmapData) {
         }];
 
     var layout = {
-        plot_bgcolor: '#ffe6cc',//'#e6e6e6',
-        paper_bgcolor: '#ffe6cc',//'#e6e6e6',
-        height: (15*heatmapData[1].length),
+        plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+        paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+        height: (20*heatmapData[1].length),
         bargap: 10,
         margin: {
             t: 10,
@@ -56,7 +56,7 @@ function makePlot(div_id, heatmapData) {
             ticks: 'outside',
             ticklen: 10,
             tickwidth: 2,
-            tickfont: {size: 12},
+            tickfont: {size: 14},
             title : {
                 text : 'BioProjects',
                 font: {size: 22}
