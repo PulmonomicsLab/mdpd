@@ -52,7 +52,7 @@
             </ul>
             <div><img class="intro" style="margin-top:30px; //margin-bottom:30px;" src="resource/MDPD_Graphical_Abstract.svg" /></div>
             
-            <center><h3>Search MDPD</h3></center>
+            <center><br/><h3>Search MDPD</h3></center>
             <form method="post" action="advance_search_result.php">
                 <!--<br/><center><button type="button" onclick="update_label()">Show Current Logical Query</button></center><br/>-->
                 <table class="form" id="form_input_table" border="0" align="center">
@@ -84,17 +84,16 @@
                     </tr>
                     <script>updateKeyChoice(document.getElementById('k0'));</script>
                 </table>
-                <br/>
                 <input type="hidden" id="total_count" name="total_count" value="1" />
                 <script>document.getElementById('total_count').value = 1;</script>
-                <table border="0" align="center">
+                <table border="0" align="center" style="margin-top:10px;">
                     <tr>
-                        <td><center><button type="button" onclick="addRow()">Add</button></center></td>
-                        <td><center><button type="button" onclick="deleteRow()">Delete</button></center></td>
+                        <td style="text-align:right;"><button type="button" style="width:180px;margin:5px;" onclick="addRow()">Add search predicate</button></td>
+                        <td style="text-align:left;"><button type="button" style="width:180px;margin:5px;" onclick="deleteRow()">Delete search predicate</button></td>
                     </tr>
                     <tr>
-                        <td><center><input type="submit" name="Submit" value="Submit" style="border-radius:10px;" /></center></td>
-                        <td><center><button type="reset" value="Reset">Reset</button></center></td>
+                        <td style="text-align:right;//padding-right:100px;"><input type="submit" style="width:100px;margin:15px;border-radius:10px;" name="Submit" value="Submit" /></td>
+                        <td style="text-align:left;//padding-left:100px;"><button type="reset" style="width:100px;margin:15px;" value="Reset">Reset</button></td>
                     </tr>
                 </table>
             </form>
