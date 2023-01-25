@@ -8,7 +8,7 @@ function extractDataFromCSV(csv) {
         y.push(csv[i][0]);
         row = [];
         for(var j=1; j<csv[i].length; ++j)
-            row.push(parseFloat(csv[i][j]));
+            row.push(parseFloat(csv[i][j]).toFixed(3));
         z.push(row);
     }
     return [x, y, z];
