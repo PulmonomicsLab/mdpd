@@ -16,6 +16,8 @@ function extractDataFromCSV(csv) {
 
 function makePlot(div_id, heatmapData) {
     var graphDiv = document.getElementById(div_id);
+    var minHeight = 400;
+    var computedHeight = (30*heatmapData[1].length + 100);
     
     var data = [{
             x: heatmapData[0],
@@ -39,7 +41,7 @@ function makePlot(div_id, heatmapData) {
     var layout = {
         plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
         paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
-        height: (20*heatmapData[1].length),
+        height: ((computedHeight < minHeight) ? minHeight : computedHeight),
         bargap: 10,
         margin: {
             t: 10,
