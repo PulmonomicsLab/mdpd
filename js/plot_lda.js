@@ -14,12 +14,14 @@ function getDataMap(csv) {
     return dataMap;
 }
 
-function makePlot(div_id, dataMap) {
+function makePlot(div_id, dataMap, assayType) {
     var graphDiv = document.getElementById(div_id);
     
     var data = [];
     var colors = ['#e9967a', '#b0c4de'];
     var i = 0;
+    var yTitle = (assayType == 'Amplicon') ? 'Differentially abundant genus' : 'Differentially abundant species';
+
     for(var x of dataMap.keys()){
         var barChart = {
             type: 'bar',
@@ -72,7 +74,7 @@ function makePlot(div_id, dataMap) {
             tickwidth: 2,
             tickfont: {size: 10},
             title : {
-                text : 'Differentially abundant species',
+                text : yTitle,
                 font: {size: 22}
             }
         },
@@ -90,7 +92,7 @@ function makePlot(div_id, dataMap) {
     Plotly.plot(graphDiv, data, layout, {showSendToCloud:true});
 }
 
-function plotLDA(div_id, response, score) {
+function plotLDA(div_id, response, assayType, score) {
     var csv = $.csv.toArrays(response);
     var dataMap = getDataMap(csv);
     
@@ -99,6 +101,6 @@ function plotLDA(div_id, response, score) {
 //         msg += x + ' => ' + JSON.stringify(dataMap.get(x)) + '<br/>';
 //     document.getElementById(div_id).innerHTML = msg;
     
-    makePlot(div_id, dataMap);
+    makePlot(div_id, dataMap, assayType);
 }
 
