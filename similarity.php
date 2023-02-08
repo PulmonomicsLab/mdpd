@@ -32,6 +32,7 @@
             <table cellpadding="3px">
                 <tr class="nav">
                     <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
+                    <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
@@ -69,7 +70,7 @@
                     xmlhttp.send();
                 }
 
-                <?php echo "getSimilarityData('".$ds."','".$at."','".$is."');" ?>
+                <?php echo "getSimilarityData('".$ds."','".$at."','".$is."');"; ?>
             </script>
         </div>
 <!--         <center><div style="width:100%; background-color: #fff0f5; height:600px;" id="foo"></div></center> -->

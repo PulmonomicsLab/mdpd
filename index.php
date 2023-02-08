@@ -5,10 +5,6 @@
         <title>Home - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/advance_search_input.js"></script>
-<!--         <script type = "text/javascript" src = "js/index_plots.js"></script> -->
-<!--         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
-<!--         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script> -->
-<!--         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script> -->
         <style>
             .intro{
                 width:80%;
@@ -27,7 +23,7 @@
             <table cellpadding="3px">
                 <tr class="nav">
                     <td class="nav"><a href="#" class="active">Home</a></td>
-<!--                     <td class="nav"><a href="advance_search.html" class="side_nav">Search</a></td> -->
+                    <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
@@ -98,8 +94,6 @@
                 </table>
             </form>
             
-<!--             <div id="map-plot-container" class="intro"></div> -->
         </div>
     </body>
-<!--     <script>getChoroplethData('map-plot-container')</script> -->
 </html> 
