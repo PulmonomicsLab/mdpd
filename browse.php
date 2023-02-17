@@ -71,10 +71,11 @@
                 <tr>
                     <td rowspan="2" class="row_heading">Asthma</td>
                     <td class="odd">Amplicon</td>
-                    <td class="odd">BAL (22), Bronchial brush (44), Bronchial mucosa (24), Sputum (118), Stool (470)</td>
+                    <td class="odd">BAL (22), Bronchial mucosa (24), Sputum (118), Stool (174)</td>
+<!--                     <td class="odd">BAL (22), Bronchial brush (44), Bronchial mucosa (24), Sputum (118), Stool (174)</td> -->
                     <td class="odd">
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">BAL</button></a>
-                        <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Bronchial Brush");?>"><button type="button" style="margin:2px;">Bronchial brush</button></a>
+<!--                         <a target="_blank" href="<?php //echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Bronchial Brush");?>"><button type="button" style="margin:2px;">Bronchial brush</button></a> -->
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Bronchial Mucosa");?>"><button type="button" style="margin:2px;">Bronchial mucosa</button></a>
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("Asthma")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
@@ -136,7 +137,7 @@
                 </tr>
                 <tr>
                     <td class="even">WGS</td>
-                    <td class="even">Sputum (125), Stool (19)</td>
+                    <td class="even">Sputum (124), Stool (19)</td>
                     <td class="even">
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Sputum</button></a>
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=WGS&ds=".urlencode("Cystic Fibrosis")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Stool</button></a>
@@ -245,7 +246,7 @@
                     <td rowspan="2" class="row_heading">Asthma</td>
                     <td class="odd">Amplicon</td>
                     <td class="odd">Sputum (118)</td>
-                    <td class="odd">Stool (470)</td>
+                    <td class="odd">Stool (172)</td>
                     <td class="odd"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Asthma")."&at=Amplicon&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
                 <tr>
@@ -277,13 +278,13 @@
                 <tr>
                     <td rowspan="2" class="row_heading">Cystic Fibrosis</td>
                     <td class="even">Amplicon</td>
-                    <td class="even">Sputum (188)</td>
+                    <td class="even">Sputum (187)</td>
                     <td class="even">Stool (309)</td>
                     <td class="even"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Cystic Fibrosis")."&at=Amplicon&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
                 <tr>
                     <td class="even">WGS</td>
-                    <td class="even">Sputum (125)</td>
+                    <td class="even">Sputum (124)</td>
                     <td class="even">Stool (19)</td>
                     <td class="even"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Cystic Fibrosis")."&at=WGS&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
