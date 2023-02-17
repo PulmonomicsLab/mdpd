@@ -45,7 +45,8 @@
         <div class = "section_middle">
             <center><p id="display_text"></p></center>
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
-            <center><div style="width:100%; background-color: #fff0f5; overflow: auto;" id="upset_plot_container"></div></center><br/><br/>
+            <center><div style="width:100%; background-color: #fff0f5; overflow: auto;" id="upset_plot_container"></div></center>
+            <div id="plot-footer1" style="margin:5px 0 0 5px;"></div><br/>
             <center><div style="width:100%; background-color: #fff0f5; height:400px;" id="likert_plot_container"></div></center>
 
             <script>
@@ -63,6 +64,8 @@
                             document.getElementById('download_div').innerHTML = '<a href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>';
                             plotCharts('upset_plot_container', 'likert_plot_container', this.responseText);
 //                             document.getElementById('download_div').innerHTML = is1 + is2;
+                            if (is1 == 'Endotracheal Aspirate' || is2 == 'Endotracheal Aspirate')
+                                document.getElementById('plot-footer1').innerHTML = '<i>EA</i> = Endotracheal Aspirate';
                         }
                     };
                     xmlhttp.open('GET', file, true);

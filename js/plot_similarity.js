@@ -29,10 +29,15 @@ function makeUpsetPlot(div_id, dataMap) {
     var graphDiv = document.getElementById(div_id);
     var isolationSources = Array.from(dataMap.keys());
     const colors = ['#e9967a', '#b0c4de'];
+    var names = [isolationSources[0], isolationSources[1]];
+    if (names[0] == 'Endotracheal Aspirate')
+        names[0] = 'EA'
+    else if (names[1] == 'Endotracheal Aspirate')
+        names[1] = 'EA'
 
     const data = [
-        { name: isolationSources[0], elems: Array.from(dataMap.get(isolationSources[0]).keys()) },
-        { name: isolationSources[1], elems: Array.from(dataMap.get(isolationSources[1]).keys()) }
+        { name: names[0], elems: Array.from(dataMap.get(isolationSources[0]).keys()) },
+        { name: names[1], elems: Array.from(dataMap.get(isolationSources[1]).keys()) }
     ];
 
     const sets = UpSetJS.asSets(data);
