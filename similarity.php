@@ -53,7 +53,7 @@
                     var is1 = isolationSource.split('_')[0];
                     var is2 = isolationSource.split('_')[1];
                     var prefix = 'input/Similarity/';
-                    var file = prefix + assayType + '/' + disease + '/' + disease + '_' + isolationSource.replace(/ /g,"_") + '.csv';
+                    var file = prefix + assayType + '/' + disease + '/' + disease.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '.csv';
                     var display = disease + ' | ' + assayType + ' | ' + 'Lung (' + is1 + ') - Gut (' + is2 + ')';
 
                     var xmlhttp = new XMLHttpRequest();
