@@ -2,13 +2,18 @@ function extractDataFromCSV(csv) {
     var x = [];
     var y = [];
     var z = [];
+    var labels = new Map();
     for(var i=1; i<csv[0].length; ++i)
-        x.push(csv[0][i]);
+        labels.set(csv[0][i], i-1);
+    labels = new Map([...labels.entries()].sort());
+    var order = Array.from(labels.values());
+    for(var i=1; i<csv[0].length; ++i)
+        x.push(csv[0][order[i-1]+1]);
     for(var i=1; i<csv.length; ++i) {
         y.push(csv[i][0]);
         row = [];
         for(var j=1; j<csv[i].length; ++j)
-            row.push(parseFloat(csv[i][j]).toFixed(3));
+            row.push(parseFloat(csv[i][order[j-1]+1]).toFixed(3));
         z.push(row);
     }
     return [x, y, z];
