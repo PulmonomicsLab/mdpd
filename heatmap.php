@@ -65,7 +65,7 @@
                         if (this.readyState == 4 && this.status == 200) {
                             document.getElementById('display_text').innerHTML = '<h3>' + display + '</h3>';
                             document.getElementById('download_div').innerHTML = '<a href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>';
-                            plotHeatmap('plot_container', this.responseText, score);
+                            plotHeatmap('plot_container', this.responseText, assayType, score);
                         }
                     };
                     xmlhttp.open('GET', file, true);

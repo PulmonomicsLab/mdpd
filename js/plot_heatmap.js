@@ -19,10 +19,11 @@ function extractDataFromCSV(csv) {
     return [x, y, z];
 }
 
-function makePlot(div_id, heatmapData) {
+function makePlot(div_id, assayType, heatmapData) {
     var graphDiv = document.getElementById(div_id);
     var minHeight = 400;
     var computedHeight = (30*heatmapData[1].length + 100);
+    var yTitle = (assayType == 'Amplicon') ? 'Genus' : 'Species';
     
     var data = [{
             x: heatmapData[0],
@@ -78,7 +79,7 @@ function makePlot(div_id, heatmapData) {
             tickwidth: 2,
             tickfont: {size: 10},
             title : {
-                text : 'Taxa',
+                text : yTitle,
                 font: {size: 22}
             }
         }
@@ -87,10 +88,10 @@ function makePlot(div_id, heatmapData) {
     Plotly.plot(graphDiv, data, layout, {showSendToCloud:true});
 }
 
-function plotHeatmap(div_id, response, score) {
+function plotHeatmap(div_id, response, assayType, score) {
     var csv = $.csv.toArrays(response);
     var data = extractDataFromCSV(csv);
     
-    makePlot(div_id, data);
+    makePlot(div_id, assayType, data);
 }
 
