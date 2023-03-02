@@ -128,7 +128,8 @@
                     echo "</td></tr>";
                     echo "<tr><td>Taxonomic profile (Krona Plot)</td>";
                     echo "<td>";
-                    foreach($groups as $sg) {
+                    $diseaseGroups = array_keys($kronaMappings[$bioprojectID]);
+                    foreach($diseaseGroups as $sg) {
                         $assayTypes = $kronaMappings[$bioprojectID][$sg];
                         foreach($assayTypes as $at)
                             echo "<a target=\"_blank\" href=\"krona.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&ds=".urlencode($sg)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$sg."-".$at."</button></a>";
