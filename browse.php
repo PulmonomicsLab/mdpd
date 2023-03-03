@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Home - MDPD</title>
+        <title>Browse - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <link rel = "stylesheet" type = "text/css" href = "css/browse.css" />
         <script type = "text/javascript" src = "js/browse.js"></script>

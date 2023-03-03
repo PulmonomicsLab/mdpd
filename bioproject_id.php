@@ -43,7 +43,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Home - MDPD</title>
+        <title>BioProject - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/advance_search_result.js"></script>
         <script>

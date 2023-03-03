@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Home - MDPD</title>
+        <title>Similarity - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_similarity.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>

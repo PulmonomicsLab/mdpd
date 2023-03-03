@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Home - MDPD</title>
+        <title>Krona - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <style>
             .side_nav_div{
