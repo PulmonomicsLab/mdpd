@@ -21,6 +21,11 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            .caption{
+                text-align: center;
+                font-size: 1.2em;
+                margin-top: 10px;
+            }
             #bar-plot-wrapper_1 {
                 width : 48%;
             }
@@ -61,37 +66,42 @@
         <div class = "section_middle">
             <br/>
             <div class="intro">
+                <hr/><h2>1. Data distribution on the basis of biome, assay type and group</h2><hr/>
+                <div id="sunburst-plot-container" class="plot"></div>
+                <div class="plot caption">Fig. 1A - Interactive sunburst plot showing the total distibution of runs on the basis of group, biome and assay type.</div>
                 <div id="stat-plot-wrapper_1" class="plot" style="margin:10px 1% 10px 0; float:left;">
                     <div id="stat-plot-container_1" style="width:100%;"></div>
-                    <div>1A.</div>
+                    <div class="caption">Fig. 1B - Distribution of runs among gut and lung biome.</div>
                 </div>
                 <div id="stat-plot-wrapper_2" class="plot" style="margin:10px 1% 10px 1%; float:left;">
                     <div id="stat-plot-container_2" style="width:100%;"></div>
-                    <div>1B.</div>
+                    <div class="caption">Fig. 1C - Distribution of runs on the basis of assay types.</div>
                 </div>
                 <div id="stat-plot-wrapper_3" class="plot" style="margin:10px 0 10px 1%; float:left;">
                     <div id="stat-plot-container_3" style="width:100%;"></div>
-                    <div>1C.</div>
+                    <div class="caption">Fig. 1D - Group-wise distribution of the runs.</div>
                 </div>
                 <div style="clear:both;"></div>
             </div>
-            <div id="sunburst-plot-container" class="intro plot"></div>
-            <div class="intro plot">1D.</div>
+            <br/>
             <div class="intro">
+                <hr/><h2>2. Year-wise data distribution</h2><hr/>
+                <div id="bar-plot-container_3" class="plot" style="margin:10px 0% 0 0%;"></div>
+                <div class="caption">Fig. 2A - Year-wise distribution of the data for each group.</div>
                 <div id="bar-plot-wrapper_1" class="plot" style="margin:10px 2% 10px 0; float:left;">
                     <div id="bar-plot-container_1" style="width:100%;"></div>
-                    <div>2A.</div>
+                    <div class="caption">Fig. 2B - Year-wise distribution of amplicon and WGS data.</div>
                 </div>
                 <div id="bar-plot-wrapper_2" class="plot" style="margin:10px 0 10px 2%; float:left;">
                     <div id="bar-plot-container_2" style="width:100%;"></div>
-                    <div>2B.</div>
+                    <div class="caption">Fig. 2C - Year-wise distribution of lung and gut microbiome data.</div>
                 </div>
                 <div style="clear:both;"></div>
-                <div id="bar-plot-container_3" class="plot" style="margin:10px 0% 0 0%;"></div>
-                <div>2C.</div>
             </div>
+            <br/>
+            <div class="intro"><hr/><h2>3. Country-wise data distribution</h2><hr/></div>
             <div id="map-plot-container" class="intro plot"></div>
-            <div class="intro plot">3.</div>
+            <div class="intro plot caption">Fig. 3 - Interactive plot showing country-wise distribution of the data.</div>
             <br/><br/>
         </div>
     </body>
