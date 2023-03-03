@@ -209,8 +209,8 @@
             <table cellpadding="3px">
                 <tr class="nav">
                     <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
-                    <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
+                    <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
