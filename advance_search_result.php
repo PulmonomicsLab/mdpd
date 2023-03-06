@@ -220,55 +220,63 @@
         <!--<div class = "section_left"></div>-->
         
         <div class = "section_middle">
-            <p>Total number of entries found in the database = <?php echo count($rows);?></p>
-            <table border="0" style="width:100%; border:4px solid #392d37;">
-                <tr>
-                    <td style="width:25%;">
-                        Go to Page:&nbsp;
-                        <input id="page_no_top" type="number" size="2" min="1" style="width:50px;" />&nbsp;
-                        <button type="button" class="round" onclick="goto_page('result_display', 'page_no_top')" />Go</button>
-                    </td>
-                    <td style="width:15%;text-align:right;">
-                        <button type="button" class="round" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
-                        <button type="button" class="round" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
-                    </td>
-                    <td style="width:20%;">
-                        <p id="pages_top" style="text-align:center;"></p>
-                    </td>
-                    <td style="width:15%;">
-                        &nbsp;&nbsp;<button type="button" class="round" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
-                        <button type="button" class="round" onclick="displayLastPage('result_display')">Last</button>
-                    </td>
-                    <td style="width:25%;"></td>
-                </tr>
-            </table>
-            <div id="result_display">
-            
-            </div>
-            <table border="0" style="width:100%; border:4px solid #392d37;">
-                <tr>
-                    <td style="width:25%;">
-                        Go to Page:&nbsp;
-                        <input id="page_no_bottom" type="number" size="2" min="1" style="width:50px;" />&nbsp;
-                        <button type="button" class="round" onclick="goto_page('result_display', 'page_no_bottom')" />Go</button>
-                    </td>
-                    <td style="width:15%;text-align:right;">
-                        <button type="button" class="round" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
-                        <button type="button" class="round" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
-                    </td>
-                    <td style="width:20%;">
-                        <p id="pages_bottom" style="text-align:center;"></p>
-                    </td>
-                    <td style="width:15%;">
-                        &nbsp;&nbsp;<button type="button" class="round" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
-                        <button type="button" class="round" onclick="displayLastPage('result_display')">Last</button>
-                    </td>
-                    <td style="width:25%;"></td>
-                </tr>
-            </table>
+            <?php
+                if (count($rows) < 1)
+                    echo "<br/><center>No entries found in the database for the given query.</center>";
+                else {
+            ?>
+                    <p>Total number of entries found in the database = <?php echo count($rows);?></p>
+                    <table border="0" style="width:100%; border:4px solid #392d37;">
+                        <tr>
+                            <td style="width:25%;">
+                                Go to Page:&nbsp;
+                                <input id="page_no_top" type="number" size="2" min="1" style="width:50px;" />&nbsp;
+                                <button type="button" class="round" onclick="goto_page('result_display', 'page_no_top')" />Go</button>
+                            </td>
+                            <td style="width:15%;text-align:right;">
+                                <button type="button" class="round" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
+                                <button type="button" class="round" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
+                            </td>
+                            <td style="width:20%;">
+                                <p id="pages_top" style="text-align:center;"></p>
+                            </td>
+                            <td style="width:15%;">
+                                &nbsp;&nbsp;<button type="button" class="round" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
+                                <button type="button" class="round" onclick="displayLastPage('result_display')">Last</button>
+                            </td>
+                            <td style="width:25%;"></td>
+                        </tr>
+                    </table>
+                    <div id="result_display">
+
+                    </div>
+                    <table border="0" style="width:100%; border:4px solid #392d37;">
+                        <tr>
+                            <td style="width:25%;">
+                                Go to Page:&nbsp;
+                                <input id="page_no_bottom" type="number" size="2" min="1" style="width:50px;" />&nbsp;
+                                <button type="button" class="round" onclick="goto_page('result_display', 'page_no_bottom')" />Go</button>
+                            </td>
+                            <td style="width:15%;text-align:right;">
+                                <button type="button" class="round" onclick="displayFirstPage('result_display')">First</button>&nbsp;&nbsp;
+                                <button type="button" class="round" onclick="displayPrevPage('result_display')">Prev</button>&nbsp;&nbsp;
+                            </td>
+                            <td style="width:20%;">
+                                <p id="pages_bottom" style="text-align:center;"></p>
+                            </td>
+                            <td style="width:15%;">
+                                &nbsp;&nbsp;<button type="button" class="round" onclick="displayNextPage('result_display')">Next</button>&nbsp;&nbsp;
+                                <button type="button" class="round" onclick="displayLastPage('result_display')">Last</button>
+                            </td>
+                            <td style="width:25%;"></td>
+                        </tr>
+                    </table>
+                    <script>
+                        displayFirstPage('result_display');
+                    </script>
+            <?php
+                }
+            ?>
         </div>
     </body>
-    <script>
-        displayFirstPage('result_display');
-    </script>
 </html>
