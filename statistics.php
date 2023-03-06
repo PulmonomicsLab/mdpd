@@ -88,13 +88,13 @@
                 <hr/><h2>2. Year-wise data distribution</h2><hr/>
                 <div id="bar-plot-container_3" class="plot" style="margin:10px 0% 0 0%;"></div>
                 <div class="caption">Fig. 2A - Year-wise distribution of the data for each group.</div>
-                <div id="bar-plot-wrapper_1" class="plot" style="margin:10px 2% 10px 0; float:left;">
-                    <div id="bar-plot-container_1" style="width:100%;"></div>
-                    <div class="caption">Fig. 2B - Year-wise distribution of amplicon and WGS data.</div>
-                </div>
-                <div id="bar-plot-wrapper_2" class="plot" style="margin:10px 0 10px 2%; float:left;">
+                <div id="bar-plot-wrapper_2" class="plot" style="margin:10px 2% 10px 0; float:left;">
                     <div id="bar-plot-container_2" style="width:100%;"></div>
-                    <div class="caption">Fig. 2C - Year-wise distribution of lung and gut microbiome data.</div>
+                    <div class="caption">Fig. 2B - Year-wise distribution of lung and gut microbiome data.</div>
+                </div>
+                <div id="bar-plot-wrapper_1" class="plot" style="margin:10px 0 10px 2%; float:left;">
+                    <div id="bar-plot-container_1" style="width:100%;"></div>
+                    <div class="caption">Fig. 2C - Year-wise distribution of amplicon and WGS data.</div>
                 </div>
                 <div style="clear:both;"></div>
             </div>
