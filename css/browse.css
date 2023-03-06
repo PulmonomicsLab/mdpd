@@ -90,6 +90,10 @@ a.browse_side_nav:hover{
     background-color : #9a7e95;
 }
 
+.section-footnote{
+    margin:0 2% 0 2%;
+}
+
 .button-group{
     text-align: center;
 /*     margin: 10px 0 0 0; */
