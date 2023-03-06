@@ -302,6 +302,19 @@
                     <td class="even">Stool (149)</td>
                     <td class="even"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Tuberculosis")."&at=Amplicon&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
+                <tr>
+                    <td rowspan="2" class="row_heading">Healthy</td>
+                    <td class="odd">Amplicon</td>
+                    <td class="odd">BAL (19)</td>
+                    <td class="odd">Stool (392)</td>
+                    <td class="odd"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Healthy")."&at=Amplicon&is=".urlencode("BAL_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
+                </tr>
+                <tr>
+                    <td class="odd">WGS</td>
+                    <td class="odd">Sputum (4)</td>
+                    <td class="odd">Stool (119)</td>
+                    <td class="odd"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Cystic Fibrosis")."&at=WGS&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
+                </tr>
             </table>
 
             <div class="browse-heading" id="sec-4">
