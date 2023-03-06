@@ -43,7 +43,12 @@
             <center><p id="display_text"></p></center>
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <div style="width:100%" id="plot_container">
-            
+            <p>
+                N.B. - <br/>
+                1. To view all the differential markers, please hover on the bars of the plot or download the data
+                using the "Download data" button.<br/>
+                2. A cutoff of <i>log<sub>10</sub>(LDA score) > 2</i> was used to determine the differential markers.
+            </p>
             </div>
             
             <script>

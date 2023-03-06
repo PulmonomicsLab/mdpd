@@ -189,6 +189,7 @@
                     </td>
                 </tr>
             </table>
+            <p class="section-footnote">N.B. - Large Krona files. May take longer time to load.</p>
 
             <!--<div class="browse-heading">
                 3. Disease-wise differential analysis (LDA plot) of amplicon data
@@ -436,7 +437,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_COVID-19")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for Asthma-COVID-19 pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for COVID-19.</p>
             </div>
             <div class="browse-result" id="asthma-cystic_fibrosis-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> Asthma - Cystic Fibrosis</p>
@@ -481,7 +482,7 @@
                         <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_Pneumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No WGS data available for Asthma-Pneumonia pair.</p>
+                <p class="section-footnote">N.B. - No WGS data available for Pneumonia.</p>
             </div>
             <div class="browse-result" id="asthma-tuberculosis-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> Asthma - Tuberculosis</p>
@@ -504,7 +505,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for Asthma-Tuberculosis pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for Tuberculosis.</p>
             </div>
             <div class="browse-result" id="asthma-healthy-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> Asthma - Healthy</p>
@@ -560,7 +561,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COPD_COVID-19")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for COPD-COVID-19 pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for COVID-19.</p>
             </div>
             <div class="browse-result" id="COPD-cystic_fibrosis-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> COPD - Cystic Fibrosis</p>
@@ -605,7 +606,7 @@
                         <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COPD_Pneumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No WGS data available for COPD-Pneumonia pair.</p>
+                <p class="section-footnote">N.B. - No WGS data available for Pneumonia.</p>
             </div>
             <div class="browse-result" id="COPD-tuberculosis-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> COPD - Tuberculosis</p>
@@ -628,7 +629,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COPD_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for COPD-Tuberculosis pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for Tuberculosis.</p>
             </div>
             <div class="browse-result" id="COPD-healthy-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> COPD - Healthy</p>
@@ -684,7 +685,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COVID-19_Cystic Fibrosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for COVID-19-Cystic Fibrosis pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for COVID-19.</p>
             </div>
             <div class="browse-result" id="COVID-pneumonia-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> COVID-19 - Pneumonia</p>
@@ -702,7 +703,11 @@
                         <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COVID-19_Pneumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No WGS data available for COVID-19-Pneumonia pair.</p>
+                <p class="section-footnote">
+                    N.B. - <br/>
+                    1. No WGS data available for Pneumonia.<br/>
+                    2. No Lung WGS data available for COVID-19.
+                </p>
             </div>
             <div class="browse-result" id="COVID-tuberculosis-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> COVID-19 - Tuberculosis</p>
@@ -720,7 +725,11 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COVID-19_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung data available for COVID-19-Tuberculosis pair.</p>
+                <p class="section-footnote">
+                    N.B. - <br/>
+                    1. No Lung Amplicon data available of same isolation sources for COVID-19 and Tuberculosis.<br/>
+                    2. No Lung WGS data available for both COVID-19 and Tuberculosis.
+                </p>
             </div>
             <div class="browse-result" id="COVID-healthy-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> COVID-19 - Healthy</p>
@@ -744,7 +753,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COVID-19_Healthy")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for COVID-19-Healthy pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for COVID-19.</p>
             </div>
             <div class="browse-result" id="cystic_fibrosis-pneumonia-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> Cystic Fibrosis - Pneumonia</p>
@@ -762,7 +771,7 @@
                         <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Cystic Fibrosis_Pneumonia")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No WGS data available for Cystic Fibrosis-Pneumonia pair.</p>
+                <p class="section-footnote">N.B. - No WGS data available for Pneumonia.</p>
             </div>
             <div class="browse-result" id="cystic_fibrosis-tuberculosis-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> Cystic Fibrosis - Tuberculosis</p>
@@ -785,7 +794,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Cystic Fibrosis_Tuberculosis")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for Cystic Fibrosis-Tuberculosis pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for Tuberculosis.</p>
             </div>
             <div class="browse-result" id="cystic_fibrosis-healthy-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> Cystic Fibrosis - Healthy</p>
@@ -838,8 +847,9 @@
                 </table>
                 <p class="section-footnote">
                     N.B. -<br/>
-                    1. No WGS data available for Pneumonia-Tuberculosis pair.<br/>
-                    2. No Lung Amplicon data available for Pneumonia-Tuberculosis pair.
+                    1. No WGS data available for both Pneumonia<br/>
+                    2. No Lung WGS data available for Tuberculosis.<br/>
+                    3. No Lung Amplicon data available of same isolation sources for Pneumonia and Tuberculosis.
                 </p>
             </div>
             <div class="browse-result" id="pneumonia-healthy-pair">
@@ -859,6 +869,7 @@
                         <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Pneumonia_Healthy")."&at=Amplicon&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
+                <p class="section-footnote">N.B. - No WGS data available for Pneumonia.</p>
             </div>
             <div class="browse-result" id="tuberculosis-healthy-pair">
                 <p class="browse-result-heading"><i>Disease pair:</i> Tuberculosis - Healthy</p>
@@ -882,7 +893,7 @@
                         <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Tuberculosis_Healthy")."&at=WGS&biome=".urlencode("Gut")."&is=".urlencode("Stool");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                 </table>
-                <p class="section-footnote">N.B. - No Lung WGS data available for Tuberculosis-Healthy pair.</p>
+                <p class="section-footnote">N.B. - No Lung WGS data available for Tuberculosis.</p>
             </div>
 
         </div>
