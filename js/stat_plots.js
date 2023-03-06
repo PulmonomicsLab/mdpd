@@ -115,6 +115,7 @@ var barlayout = {
 };
 
 var colors = ['#e9967a', '#b0c4de'];
+var colors2 = ['#74a45b', '#ebbb60'];
 
 
 
@@ -161,7 +162,7 @@ function plotAssayTypeHistogramData(divId, histogramDataJSON) {
             x: years,
             y: ampliconCounts,
             marker: {
-                color: colors[1],
+                color: colors[0],
                 size: 10
             },
             line: {width: 3}
@@ -172,7 +173,7 @@ function plotAssayTypeHistogramData(divId, histogramDataJSON) {
             x: years,
             y: wgsCounts,
             marker: {
-                color: colors[0],
+                color: colors[1],
                 size: 10
             },
             line: {width: 3}
@@ -200,7 +201,7 @@ function plotBiomeHistogramData(divId, histogramDataJSON) {
             x: years,
             y: lungCounts,
             marker: {
-                color: colors[1],
+                color: colors2[0],
                 size: 10
             },
             line: {width: 3}
@@ -211,7 +212,7 @@ function plotBiomeHistogramData(divId, histogramDataJSON) {
             x: years,
             y: gutCounts,
             marker: {
-                color: colors[0],
+                color: colors2[1],
                 size: 10
             },
             line: {width: 3}
@@ -278,7 +279,7 @@ function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDat
         hole: .4,
         labels: ['Lung', 'Gut'],
         values: [data.lungCount, data.gutCount],
-        marker: {colors: colors},
+        marker: {colors: colors2},
         hoverinfo: 'label+percent+value',
         textinfo: 'label+percent+value'
     };
