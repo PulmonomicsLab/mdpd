@@ -51,7 +51,9 @@
                 if (count($rows) < 1) {
                     echo "<center><p>Error !!! Run ID: ".$runID." does not exist in the database.</p></center>";
                 } else {
-                    echo "<center><h3>Run ID: ".$runID."</h3></center><hr/><br/>";
+                    echo "<center><h3 style=\"margin-bottom:0;\">Run ID: ".$runID."</h3></center>";
+                    echo "<center><h4 style=\"margin-top:0;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/sra/?term=".$runID."\">https://www.ncbi.nlm.nih.gov/sra/?term=".$runID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
+//                     echo "<hr/><br/>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
                     foreach($rows as $row){
