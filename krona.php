@@ -76,6 +76,14 @@
                     echo "<p>N.B. - For better view, please view the plot at <i>\"Max depth\" = 6</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
             ?>
         </div>
+        <div style="clear:both;">
+            <br/><hr/>
+            <p style="font-size:0.9em;text-align:center;">
+                &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
+                (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,
+                <a style="color:#003325;" href="mailto:ssaha4@gmail.com">ssaha4@gmail.com</a>).
+            </p>
+        </div>
         
         <script>
             function getKronaData(queryType, bioproject, disease, assayType, isolationSource, kronaType) {
