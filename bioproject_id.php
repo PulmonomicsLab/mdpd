@@ -76,7 +76,8 @@
                 if (count($bioprojectRows) < 1) {
                     echo "<center><p>Error !!! BioProject ID: ".$bioprojectID." does not exist in the database.</p></center>";
                 } else {
-                    echo "<center><h3>BioProject ID: ".$bioprojectID."</h3></center>";
+                    echo "<center><h3 style=\"margin-bottom:0;\">BioProject ID: ".$bioprojectID."</h3></center>";
+                    echo "<center><h4 style=\"margin-top:0;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID."\">https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
                     foreach($bioprojectRows as $row){
@@ -84,8 +85,12 @@
                             if ($name !== "BioProject") {
                                 echo "<tr>";
                                 echo "<td style=\"width:40%\">".$fname."</td>";
-                                if ($name === "BioProject")
-                                    echo "<td style=\"width:60%\"><a target=\"_blank\" href=\"bioproject_id.php?key=".$row[$name]."\">".$row[$name]."</a></td>";
+                                if ($name === "PMID") {
+                                    if ($row[$name] === null)
+                                        echo "<td style=\"width:60%\"></td>";
+                                    else
+                                        echo "<td style=\"width:60%\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/".$row[$name]."\">".$row[$name]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";
+                                }
                                 elseif ($name === "SubGroup") {
                                     $subgroups = explode(";", $row[$name]);
                                     $conn = connect();
