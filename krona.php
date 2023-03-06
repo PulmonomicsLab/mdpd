@@ -69,6 +69,12 @@
         <div class = "section_middle" style="width:72%;">
             <center><p id="display_text"></p></center>
             <iframe id="krona_frame" style="width:100%; height:600px;"></iframe>
+            <?php
+                if ($at === "WGS")
+                    echo "<p>N.B. - For better view, please view the plot at <i>\"Max depth\" = 7</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
+                else
+                    echo "<p>N.B. - For better view, please view the plot at <i>\"Max depth\" = 6</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
+            ?>
         </div>
         
         <script>
