@@ -18,7 +18,7 @@ function makePlot(div_id, dataMap, assayType) {
     var graphDiv = document.getElementById(div_id);
     
     var data = [];
-    var colors = ['#e9967a', '#b0c4de'];
+    var colors = ['#e9967a', '#b0c4de', '#f1ce8e', '#9ec08c'];
     var i = 0;
     var yTitle = (assayType == 'Amplicon') ? 'Differentially abundant genus' : 'Differentially abundant species';
 
