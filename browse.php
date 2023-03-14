@@ -394,10 +394,14 @@
                 <table class="browse-result-summary">
                     <tr><th>Disease-pair</th><th>Assay type</th><th>Biome</th><th>Isolation source</th><th>LDA plot</th><th>Heatmap</th></tr>
                     <tr>
-                        <td rowspan="4" class="row_heading">Asthma - COPD</td>
-                        <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
+                        <td rowspan="5" class="row_heading">Asthma - COPD</td>
+                        <td rowspan="3" class="odd">Amplicon</td><td rowspan="2" class="odd">Lung</td><td class="odd">Sputum</td>
                         <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COPD")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_COPD")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
+                    </tr>
+                    <tr>
+                        <td class="odd">BAL</td>
+                        <td colspan="2" class="odd">No plot !! SVD error.</td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
@@ -444,10 +448,15 @@
                 <table class="browse-result-summary">
                     <tr><th>Disease-pair</th><th>Assay type</th><th>Biome</th><th>Isolation source</th><th>LDA plot</th><th>Heatmap</th></tr>
                     <tr>
-                        <td rowspan="4" class="row_heading">Asthma - Cystic Fibrosis</td>
-                        <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
+                        <td rowspan="5" class="row_heading">Asthma - Cystic Fibrosis</td>
+                        <td rowspan="3" class="odd">Amplicon</td><td class="odd" rowspan="2">Lung</td><td class="odd">Sputum</td>
                         <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
                         <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
+                    </tr>
+                    <tr>
+                        <td class="odd">BAL</td>
+                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
+                        <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_Cystic Fibrosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
@@ -547,8 +556,7 @@
                     <tr>
                         <td rowspan="3" class="row_heading">COPD - COVID-19</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_COVID-19")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
-                        <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COPD_COVID-19")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
+                        <td class="odd" colspan="2">No plot !! SVD error.</td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
@@ -597,8 +605,7 @@
                     <tr>
                         <td rowspan="2" class="row_heading">COPD - Pneumonia</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">BAL</td>
-                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("COPD_Pneumonia")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
-                        <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("COPD_Pneumonia")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
+                        <td class="odd" colspan="2">No plot !! SVD error.</td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
@@ -780,8 +787,7 @@
                     <tr>
                         <td rowspan="3" class="row_heading">Cystic Fibrosis - Tuberculosis</td>
                         <td rowspan="2" class="odd">Amplicon</td><td class="odd">Lung</td><td class="odd">Sputum</td>
-                        <td class="odd"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Cystic Fibrosis_Tuberculosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
-                        <td class="odd"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Cystic Fibrosis_Tuberculosis")."&at=Amplicon&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
+                        <td class="odd" colspan="2">No plot !! SVD error.</td>
                     </tr>
                     <tr>
                         <td class="odd">Gut</td><td class="odd">Stool</td>
