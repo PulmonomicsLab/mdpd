@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Browse - MDPD</title>
+        <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
+        <link rel = "stylesheet" type = "text/css" href = "css/browse.css" />
+        <script type = "text/javascript" src = "js/browse.js"></script>
+
+        <style>
+            body{
+                background-color: #ffffff;
+            }
+            p{
+                font-size: 1.2em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "section_header">
+            <center><p class="title">MDPD - Microbiome Database of Pulmonary Diseases</p></center>
+        </div>
+
+        <div class = "section_menu">
+            <center>
+            <table cellpadding="3px">
+                <tr class="nav">
+                    <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
+                    <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
+                    <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
+                    <td class="nav"><a href="#" class="active">Help</a></td>
+                    <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
+                </tr>
+            </table>
+            </center>
+        </div>
+
+        <div class = "section_middle">
+            <ol type="1">
+                <li>
+                    <p>The <b>Search Option</b> on the home page allows users to query the database with specific
+                    keywords for Disease, Assay type, Country, Isolation source, Instrument, Year.</p>
+                    <center><img src="resource/search.jpg" height="300px" /></center>
+                    <ol type="A">
+                        <li>
+                            <p>The <b>search result page</b> provides the information of the Run ID, BioProject ID, SRA
+                            Study ID, Disease, Disease Sub-group, Isolation Source, Instrument, Assay Type,
+                            Country and Year.</p>
+                            <center><img src="resource/search_result.jpg" height="500px" /></center>
+                        </li>
+                        <li>
+                            <p>The <b>Run page</b> gives the information of the Experiment ID, BioSample ID, Average
+                            Spot Length, Number of Bases, Center Name, Biome, and Therapeutics. The link beneath
+                            the title leads to NCBI SRA page and BioProject ID links to <b>BioProject page</b> in MDPD.</p>
+                            <center><img src="resource/run_page.jpg" height="400px" /></center>
+                        </li>
+                        <li>
+                            <p>The <b>BioProject page</b> shows the information related to the study and the total number of
+                            runs of the BioProject. If subgroups are present for the study, then a plot of differential
+                            taxa can be accessed by LDA plot. Taxonomic profile can be visualized with Krona plots for
+                            group or subgroup. The Run ID (s) link to the <b>Run page</b> and the link just beneath the title
+                            leads to the NCBI BioProject page.</p>
+                            <center><img src="resource/bioproject_page.jpg" height="500px" /></center>
+                        </li>
+                        <li>
+                            <p>The <b>LDA (Linear Discriminant Analysis) plot</b> provides information about the
+                            differential biomarkers (genus for amplicon and species for WGS). While the bars denote the
+                            marker genus/species, the length depicts the log<sub>10</sub> (LDA score) (log<sub>10</sub> LDA &ge; 2).</p>
+                            <center><img src="resource/lda.jpg" height="500px" /></center>
+                        </li>
+                        <li>
+                            <p>The taxonomic profile of microbiome data of different isolation sources such as sputum,
+                            BAL, Stool can be visualized by Krona plots. Two types of krona plots were made, (i) by
+                            merging all the runs and (ii) by keeping individual runs. The taxonomic level changes from
+                            lower (genus/species) to higher level (domain) as we move from the outer ring to the inner
+                            ring of the plot.<br/>
+                            For a better view, see the plot at <i>"max depth = 6"</i> for amplicon (amplicon) and
+                            <i>"max depth = 7"</i> for WGS (species).</p>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width:48%; margin:0 1% 0 1%;">(a)</td>
+                                    <td style="width:48%; margin:0 1% 0 1%;">(b)</td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:48%; margin:0 1% 0 1%;"><center><img src="resource/krona_merged.jpg" width="100%" /></center></td>
+                                    <td style="width:48%; margin:0 1% 0 1%;"><center><img src="resource/krona_runwise.jpg" width="100%" /></center></td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ol>
+                </li>
+
+                <li>
+                    <p>The browse page of MDPD is divided into four parts.</p>
+                    <ol type="A">
+                        <li>
+                            <p><b>Disease-wise BioProjects</b> provide the information about the studies associated with the
+                            disease. </p>
+                            <center><img src="resource/disease_wise_bioprojects.jpg" height="200px" /></center>
+                            <p>Click any one of the diseases to view the list of BioProjects associated with the study.
+                            Click one BioProject to go to the <b>BioProject page</b>.</p>
+                            <center><img src="resource/disease_wise_bioprojects_1.jpg" height="300px" /></center>
+                        </li>
+                        <li>
+                            <p><b>Disease-wise taxonomic profile (Krona plot) across isolation sources</b> help users to
+                            view the taxonomic profile of microbiome across different isolation sources of the lung
+                            diseases and healthy group using krona plot.</p>
+                            <center><img src="resource/krona_table.jpg" height="400px" /></center>
+                        </li>
+                        <li>
+                            <p><b>Disease-wise similarity analysis across Gut-Lung biomes</b> enables the users to fetch
+                            the list of shared prevalent microbes between lung and gut microbiome of each lung disease
+                            and healthy group. Isolation sources with the highest number of runs were taken for the
+                            analysis such as "sputum" and "stool" for "Asthma". Click <i>"get result"</i> to view the shared
+                            prevalent microbes.</p>
+                            <center><img src="resource/similarity_table.jpg" height="350px" /></center>
+                            <p>The prevalent taxa that are unique to lung, unique to gut biome
+                            and shared by both biome can be visualized with <b>UpSet plot</b>. The
+                            shared prevalent taxa list can be seen by <b>diverging bar plot (Likert)</b>.
+                            A cut-off of minimum prevalence of 50% at detection
+                            level &ge; 0.0001 was taken to obtain the prevalent taxa.</p>
+                            <center><img src="resource/similarity_figure.jpg" height="500px" /></center>
+                        </li>
+                        <li>
+                            <p><b>Differential analyses of disease pairs (LDA plot and heatmap)</b> provides the facility
+                            to obtain the set of differentially abundant taxa between a pair of lung disease or disease-
+                            healthy group. The analysis was done on the isolation sources that are available for both
+                            conditions. Click any button <i>"Show"</i> to view the associated pair.</p>
+                            <center><img src="resource/lda_disease_pair_table.jpg" height="400px" /></center>
+                            <p>Users can obtain the LDA plot (horizontal bar plot) by clicking the <i>"Get LDA plot"</i> to
+                            see the differentially abundant taxa for the pair of lung conditions/group (cut-off log<sub>10</sub>
+                            LDA &ge; 2). With the <i>"Get heatmap"</i> option users can view the relative abundances of
+                            differentially abundant taxa (cut-off log<sub>10</sub> LDA &ge; 3) for the disease pair and the
+                            BioProjects as the source of marker taxa.</p>
+                            <center><img src="resource/heatmap.jpg" height="600px" /></center>
+                            <p>There are few buttons to modify the plot.</p>
+                            <center><img src="resource/symbols.jpg" height="300px" /></center>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+    </body>
+</html>
