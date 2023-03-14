@@ -55,6 +55,7 @@
                     <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
                     <td class="nav"><a href="#" class="active">Statistics</a></td>
+                    <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
