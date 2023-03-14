@@ -1,12 +1,23 @@
 <?php
+    $ldaAdHocMessages = array("PRJNA434133" => "No markers found for Amplicon-Stool.");
     include('db.php');
     
     $bioprojectID = $_GET['key'];
     
     $kronaMappings = json_decode(file_get_contents("input/Krona/bioproject_metadata.json"), true);
-//     echo implode($kronaMappings, "<br/>");
+//     echo implode("<br/>", $kronaMappings);
     $ldaMappings = json_decode(file_get_contents("input/LDA/bioproject_metadata.json"), true);
-//     echo implode($ldaMappings, "<br/>");
+//     echo implode("<br/>", $ldaMappings);
+    $analysisErrorTexts = json_decode(file_get_contents("input/bioproject_plot_error.json"), true);
+//     echo implode("<br/>", array_keys($analysisErrorTexts));
+    $kronaErrorText = "";
+    $ldaErrorText = "";
+    if (array_key_exists($bioprojectID, $analysisErrorTexts)){
+        if (array_key_exists("Krona", $analysisErrorTexts[$bioprojectID]))
+            $kronaErrorText = $analysisErrorTexts[$bioprojectID]["Krona"];
+        if (array_key_exists("LDA", $analysisErrorTexts[$bioprojectID]))
+            $ldaErrorText = $analysisErrorTexts[$bioprojectID]["LDA"];
+    }
     
     
     $bioprojectQuery = "select ".implode(",", array_keys($allBioProjectAttributes))." from bioproject where BioProject=?";
@@ -124,21 +135,31 @@
                     }
                     echo "<tr><td>Linear Discriminant Analysis (LDA)</td>";
                     echo "<td>";
-                    $isolationSources = array_keys($ldaMappings[$bioprojectID]);
-                    foreach($isolationSources as $is) {
-                        $assayTypes = $ldaMappings[$bioprojectID][$is];
-                        foreach($assayTypes as $at) {
-                            echo "<a target=\"_blank\" href=\"lda.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$at."-".$is."</button></a>";
+                    if (count($ldaMappings[$bioprojectID]) === 0) {
+                        echo $ldaErrorText;
+                    } else {
+                        $isolationSources = array_keys($ldaMappings[$bioprojectID]);
+                        foreach($isolationSources as $is) {
+                            $assayTypes = $ldaMappings[$bioprojectID][$is];
+                            foreach($assayTypes as $at) {
+                                echo "<a target=\"_blank\" href=\"lda.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$at."-".$is."</button></a>";
+                            }
                         }
+                        if (array_key_exists($bioprojectID, $ldaAdHocMessages))
+                            echo "&nbsp;".$ldaAdHocMessages[$bioprojectID];
                     }
                     echo "</td></tr>";
                     echo "<tr><td>Taxonomic profile (Krona Plot)</td>";
                     echo "<td>";
-                    $diseaseGroups = array_keys($kronaMappings[$bioprojectID]);
-                    foreach($diseaseGroups as $sg) {
-                        $assayTypes = $kronaMappings[$bioprojectID][$sg];
-                        foreach($assayTypes as $at)
-                            echo "<a target=\"_blank\" href=\"krona.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&ds=".urlencode($sg)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$sg."-".$at."</button></a>";
+                    if (count($kronaMappings[$bioprojectID]) === 0) {
+                        echo $kronaErrorText;
+                    } else {
+                        $diseaseGroups = array_keys($kronaMappings[$bioprojectID]);
+                        foreach($diseaseGroups as $sg) {
+                            $assayTypes = $kronaMappings[$bioprojectID][$sg];
+                            foreach($assayTypes as $at)
+                                echo "<a target=\"_blank\" href=\"krona.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&ds=".urlencode($sg)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$sg."-".$at."</button></a>";
+                        }
                     }
                     echo "</td></tr>";
                     echo "</table>";
