@@ -48,7 +48,7 @@
                 N.B. - <br/>
                 1. To view all the differential markers, please hover on the bars of the plot or download the data
                 using the "Download data" button.<br/>
-                2. A cutoff of <i>log<sub>10</sub>(LDA score) > 2</i> was used to determine the differential markers.
+                2. A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 2</i> was used to determine the differential markers.
             </p>
             </div>
             
