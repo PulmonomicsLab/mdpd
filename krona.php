@@ -5,6 +5,12 @@
     $at = urldecode($_GET["at"]);
     $is = urldecode($_GET["is"]);
 //     echo $type."<br/>".$bioproject."<br/>".$ds."<br/>".$at."<br/>".$is;
+
+    $noRunWiseBioProjects = array("BIOPROJECT_PRJEB9033_COPD_WGS", "BIOPROJECT_PRJEB9033_Asthma_WGS", "BIOPROJECT_PRJNA322414_COPD_Amplicon");
+    $runWiseRequired = (array_search($type."_".$bioproject."_".$ds."_".$at, $noRunWiseBioProjects) === FALSE);
+    $runwiseMessage = "";
+    if (!$runWiseRequired)
+        $runwiseMessage = "<p>Only one run present for ".$bioproject." - ".$ds." - ".$at.". No run-wise krona possible.</p>";
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +55,15 @@
         </div>
         
         <div class = "section_left" id="section_left">
-            
             <div class="side_nav_div" id="merged_div" style="width:100%;" onclick="<?php echo "getKronaData('".$type."','".$bioproject."','".$ds."','".$at."','".$is."','Merged')" ?>">Merged</div>
-            <div class="side_nav_div" id="runwise_div" style="width:100%;" onclick="<?php echo "getKronaData('".$type."','".$bioproject."','".$ds."','".$at."','".$is."','Runwise')" ?>">Run-wise</div>
+            <?php
+                if(!$runWiseRequired)
+                    echo "<div class=\"side_nav_div\" id=\"runwise_div\" style=\"width:100%;\">Run-wise</div>";
+                else
+                    echo "<div class=\"side_nav_div\" id=\"runwise_div\" style=\"width:100%;\" onclick=\"getKronaData('".$type."','".$bioproject."','".$ds."','".$at."','".$is."','Runwise')\">Run-wise</div>";
+                if($runwiseMessage !== "")
+                    echo $runwiseMessage;
+            ?>
         </div>
         
         <script>
