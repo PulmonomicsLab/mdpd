@@ -412,7 +412,7 @@
                     <tr>
                         <td rowspan="2" class="even">WGS</td><td class="even">Lung</td><td class="even">Sputum</td>
                         <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_COPD")."&at=WGS&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
-                        <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_COPD")."&at=WGS&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
+                        <td class="even">No plot !! SVD error.</td>
                     </tr>
                     <tr>
                         <td class="even">Gut</td><td class="even">Stool</td>
@@ -540,8 +540,7 @@
                     </tr>
                     <tr>
                         <td rowspan="2" class="even">WGS</td><td class="even">Lung</td><td class="even">Sputum</td>
-                        <td class="even"><a target="_blank" href="<?php echo "lda.php?type=DISEASE&dp=".urlencode("Asthma_Healthy")."&at=WGS&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get LDA plot</button></a></td>
-                        <td class="even"><a target="_blank" href="<?php echo "heatmap.php?dp=".urlencode("Asthma_Healthy")."&at=WGS&biome=".urlencode("Lung")."&is=".urlencode("Sputum");?>"><button type="button" style="margin:2px;">Get heatmap</button></td>
+                        <td colspan="2" class="even">No markers found.</td>
                     </tr>
                     <tr>
                         <td class="even">Gut</td><td class="even">Stool</td>
