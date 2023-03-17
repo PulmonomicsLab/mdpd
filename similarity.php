@@ -21,6 +21,14 @@
         <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+        <style>
+            .caption{
+                text-align: center;
+                font-size: 1.2em;
+                margin: 5px 0 5px 0;
+            }
+        </style>
     </head>
     <body>
         <div class = "section_header">
@@ -47,8 +55,14 @@
             <center><p id="display_text"></p></center>
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <center><div style="width:100%; background-color: #fff0f5; overflow: auto;" id="upset_plot_container"></div></center>
+            <div class="caption">
+                UpSet plot showing the number of prevalent taxa in lung microbiome, gut microbiome and shared in both microbiomes.
+            </div>
             <div id="plot-footer1" style="margin:5px 0 0 5px;"></div><br/>
             <center><div style="width:100%; background-color: #fff0f5; height:400px;" id="likert_plot_container"></div></center>
+            <div class="caption">
+                Likert plot showing prevalence values of the shared taxa between lung and gut microbiomes.
+            </div>
 
             <script>
                 function getSimilarityData(disease, assayType, isolationSource) {
