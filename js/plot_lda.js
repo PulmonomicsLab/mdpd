@@ -78,6 +78,7 @@ function makePlot(div_id, dataMap, assayType) {
                 font: {size: 22}
             }
         },
+        showlegend: true,
         legend: {
             font: {
                 size: 16,
