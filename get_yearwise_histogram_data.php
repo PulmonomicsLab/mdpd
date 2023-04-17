@@ -4,7 +4,7 @@
     $type = $_GET["type"];
 
     if ($type == "AssayType")
-        $histogramQuery = "select ReleaseYear, count(case when AssayType = 'Amplicon' then 1 end) as AmpliconRunCount, count(case when AssayType = 'WGS' then 1 end) as WGSRunCount from run group by ReleaseYear order by ReleaseYear;";
+        $histogramQuery = "select ReleaseYear, count(case when AssayType = 'Amplicon' then 1 end) as AmpliconRunCount, count(case when AssayType = 'WMS' then 1 end) as WMSRunCount from run group by ReleaseYear order by ReleaseYear;";
     elseif ($type ==  "Biome")
         $histogramQuery = "select ReleaseYear, count(case when Biome = 'Lung' then 1 end) as LungRunCount, count(case when Biome = 'Gut' then 1 end) as GutRunCount from run group by ReleaseYear order by ReleaseYear;";
     elseif ($type == "Disease")

@@ -149,11 +149,11 @@ function plotAssayTypeHistogramData(divId, histogramDataJSON) {
     var histogramData = JSON.parse(histogramDataJSON);
     var years = [];
     var ampliconCounts = [];
-    var wgsCounts = [];
+    var wmsCounts = [];
     for(var i=0; i<histogramData.length; ++i) {
         years[i] = histogramData[i].ReleaseYear;
         ampliconCounts[i] = histogramData[i].AmpliconRunCount;
-        wgsCounts[i] = histogramData[i].WGSRunCount;
+        wmsCounts[i] = histogramData[i].WMSRunCount;
     }
 
     var ampliconTrace = {
@@ -167,19 +167,19 @@ function plotAssayTypeHistogramData(divId, histogramDataJSON) {
             },
             line: {width: 3}
         };
-    var wgsTrace = {
+    var wmsTrace = {
             type: 'lines+markers',
-            name: 'WGS',
+            name: 'WMS',
             x: years,
-            y: wgsCounts,
+            y: wmsCounts,
             marker: {
                 color: colors[1],
                 size: 10
             },
             line: {width: 3}
         };
-//     plotDiv.innerHTML = histogramDataJSON + '<br/><br/>' + years + '<br/><br/>' + ampliconCounts + '<br/><br/>' + wgsCounts;
-    Plotly.plot(plotDiv, [ampliconTrace, wgsTrace], histogramLayout, {showSendToCloud:false});
+//     plotDiv.innerHTML = histogramDataJSON + '<br/><br/>' + years + '<br/><br/>' + ampliconCounts + '<br/><br/>' + wmsCounts;
+    Plotly.plot(plotDiv, [ampliconTrace, wmsTrace], histogramLayout, {showSendToCloud:false});
 }
 
 function plotBiomeHistogramData(divId, histogramDataJSON) {
@@ -261,7 +261,7 @@ function plotDiseaseHistogramData(divId, histogramDataJSON) {
         data.push(trace);
     }
 
-//     plotDiv.innerHTML = histogramDataJSON + '<br/><br/>' + years + '<br/><br/>' + ampliconCounts + '<br/><br/>' + wgsCounts;
+//     plotDiv.innerHTML = histogramDataJSON + '<br/><br/>' + years + '<br/><br/>' + ampliconCounts + '<br/><br/>' + wmsCounts;
     Plotly.plot(plotDiv, data, histogramLayout, {showSendToCloud:false});
 }
 
@@ -286,8 +286,8 @@ function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDat
     var assayTypePieTrace = {
         type: 'pie',
         hole: .4,
-        labels: ['Amplicon', 'WGS'],
-        values: [data.ampCount, data.wgsCount],
+        labels: ['Amplicon', 'WMS'],
+        values: [data.ampCount, data.wmsCount],
         marker: {colors: colors},
         hoverinfo: 'label+percent+value',
         textinfo: 'label+percent+value'
@@ -306,28 +306,28 @@ function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDat
                 'Total', 'Asthma', 'COPD', 'COVID', 'CF', 'LC', 'Pneumonia', 'TB', 'Control', 'Healthy',
                 'Asthma_Lung', 'Asthma_Gut', 'COPD_Lung', 'COPD_Gut', 'COVID_Lung', 'COVID_Gut', 'CF_Lung', 'CF_Gut', 'LC_Lung', 'LC_Gut',
                 'Pneumonia_Lung', 'Pneumonia_Gut', 'TB_Lung', 'TB_Gut', 'Control_Lung', 'Control_Gut', 'Healthy_Lung', 'Healthy_Gut',
-                'Asthma_Lung_Amplicon', 'Asthma_Lung_WGS', 'Asthma_Gut_Amplicon', 'Asthma_Gut_WGS',
-                'COPD_Lung_Amplicon', 'COPD_Lung_WGS', 'COPD_Gut_Amplicon', 'COPD_Gut_WGS',
-                'COVID_Lung_Amplicon', 'COVID_Lung_WGS', 'COVID_Gut_Amplicon', 'COVID_Gut_WGS',
-                'CF_Lung_Amplicon', 'CF_Lung_WGS', 'CF_Gut_Amplicon', 'CF_Gut_WGS',
-                'LC_Lung_Amplicon', 'LC_Lung_WGS', 'LC_Gut_Amplicon', 'LC_Gut_WGS',
-                'Pneumonia_Lung_Amplicon', 'Pneumonia_Lung_WGS', 'Pneumonia_Gut_Amplicon', 'Pneumonia_Gut_WGS',
-                'TB_Lung_Amplicon', 'TB_Lung_WGS', 'TB_Gut_Amplicon', 'TB_Gut_WGS',
-                'Control_Lung_Amplicon', 'Control_Lung_WGS', 'Control_Gut_Amplicon', 'Control_Gut_WGS',
-                'Healthy_Lung_Amplicon', 'Healthy_Lung_WGS', 'Healthy_Gut_Amplicon', 'Healthy_Gut_WGS'
+                'Asthma_Lung_Amplicon', 'Asthma_Lung_WMS', 'Asthma_Gut_Amplicon', 'Asthma_Gut_WMS',
+                'COPD_Lung_Amplicon', 'COPD_Lung_WMS', 'COPD_Gut_Amplicon', 'COPD_Gut_WMS',
+                'COVID_Lung_Amplicon', 'COVID_Lung_WMS', 'COVID_Gut_Amplicon', 'COVID_Gut_WMS',
+                'CF_Lung_Amplicon', 'CF_Lung_WMS', 'CF_Gut_Amplicon', 'CF_Gut_WMS',
+                'LC_Lung_Amplicon', 'LC_Lung_WMS', 'LC_Gut_Amplicon', 'LC_Gut_WMS',
+                'Pneumonia_Lung_Amplicon', 'Pneumonia_Lung_WMS', 'Pneumonia_Gut_Amplicon', 'Pneumonia_Gut_WMS',
+                'TB_Lung_Amplicon', 'TB_Lung_WMS', 'TB_Gut_Amplicon', 'TB_Gut_WMS',
+                'Control_Lung_Amplicon', 'Control_Lung_WMS', 'Control_Gut_Amplicon', 'Control_Gut_WMS',
+                'Healthy_Lung_Amplicon', 'Healthy_Lung_WMS', 'Healthy_Gut_Amplicon', 'Healthy_Gut_WMS'
             ],
             labels: ['Total number of runs', 'Asthma', 'COPD', 'COVID-19', 'Cystic Fibrosis', 'Lung Cancer', 'Pneumonia', 'TB', 'Control', 'Healthy',
                 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut',
                 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS',
-                'Amplicon', 'WGS', 'Amplicon', 'WGS'],
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS',
+                'Amplicon', 'WMS', 'Amplicon', 'WMS'],
             parents: ['', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total',
                 'Asthma', 'Asthma', 'COPD', 'COPD', 'COVID', 'COVID', 'CF', 'CF', 'LC', 'LC',
                 'Pneumonia', 'Pneumonia', 'TB', 'TB', 'Control', 'Control', 'Healthy', 'Healthy',
@@ -344,30 +344,30 @@ function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDat
                 data.totalCount, data.asthmaCount, data.copdCount, data.covidCount, data.cfCount, data.lcCount, data.pneumoniaCount, data.tbCount, data.controlCount, data.healthyCount,
                 data.asthmaLungCount, data.asthmaGutCount, data.copdLungCount, data.copdGutCount, data.covidLungCount, data.covidGutCount, data.cfLungCount, data.cfGutCount, data.lcLungCount, data.lcGutCount,
                 data.pneumoniaLungCount, data.pneumoniaGutCount, data.tbLungCount, data.tbGutCount, data.controlLungCount, data.controlGutCount, data.healthyLungCount, data.healthyGutCount,
-                data.asthmaLungAmpCount, data.asthmaLungWGSCount, data.asthmaGutAmpCount, data.asthmaGutWGSCount,
-                data.copdLungAmpCount, data.copdLungWGSCount, data.copdGutAmpCount, data.copdGutWGSCount,
-                data.covidLungAmpCount, data.covidLungWGSCount, data.covidGutAmpCount, data.covidGutWGSCount,
-                data.cfLungAmpCount, data.cfLungWGSCount, data.cfGutAmpCount, data.cfGutWGSCount,
-                data.lcLungAmpCount, data.lcLungWGSCount, data.lcGutAmpCount, data.lcGutWGSCount,
-                data.pneumoniaLungAmpCount, data.pneumoniaLungWGSCount, data.pneumoniaGutAmpCount, data.pneumoniaGutWGSCount,
-                data.tbLungAmpCount, data.tbLungWGSCount, data.tbGutAmpCount, data.tbGutWGSCount,
-                data.controlLungAmpCount, data.controlLungWGSCount, data.controlGutAmpCount, data.controlGutWGSCount,
-                data.healthyLungAmpCount, data.healthyLungWGSCount, data.healthyGutAmpCount, data.healthyGutWGSCount
+                data.asthmaLungAmpCount, data.asthmaLungWMSCount, data.asthmaGutAmpCount, data.asthmaGutWMSCount,
+                data.copdLungAmpCount, data.copdLungWMSCount, data.copdGutAmpCount, data.copdGutWMSCount,
+                data.covidLungAmpCount, data.covidLungWMSCount, data.covidGutAmpCount, data.covidGutWMSCount,
+                data.cfLungAmpCount, data.cfLungWMSCount, data.cfGutAmpCount, data.cfGutWMSCount,
+                data.lcLungAmpCount, data.lcLungWMSCount, data.lcGutAmpCount, data.lcGutWMSCount,
+                data.pneumoniaLungAmpCount, data.pneumoniaLungWMSCount, data.pneumoniaGutAmpCount, data.pneumoniaGutWMSCount,
+                data.tbLungAmpCount, data.tbLungWMSCount, data.tbGutAmpCount, data.tbGutWMSCount,
+                data.controlLungAmpCount, data.controlLungWMSCount, data.controlGutAmpCount, data.controlGutWMSCount,
+                data.healthyLungAmpCount, data.healthyLungWMSCount, data.healthyGutAmpCount, data.healthyGutWMSCount
             ]
     }
 //     var sunburstValues = [
 //         data.totalCount, data.asthmaCount, data.copdCount, data.covidCount, data.cfCount, data.lcCount, data.pneumoniaCount, data.tbCount, data.controlCount, data.healthyCount,
 //         data.asthmaLungCount, data.asthmaGutCount, data.copdLungCount, data.copdGutCount, data.covidLungCount, data.covidGutCount, data.cfLungCount, data.cfGutCount, data.lcLungCount, data.lcGutCount,
 //         data.pneumoniaLungCount, data.pneumoniaGutCount, data.tbLungCount, data.tbGutCount, data.controlLungCount, data.controlGutCount, data.healthyLungCount, data.healthyGutCount,
-//         data.asthmaLungAmpCount, data.asthmaLungWGSCount, data.asthmaGutAmpCount, data.asthmaGutWGSCount,
-//         data.copdLungAmpCount, data.copdLungWGSCount, data.copdGutAmpCount, data.copdGutWGSCount,
-//         data.covidLungAmpCount, data.covidLungWGSCount, data.covidGutAmpCount, data.covidGutWGSCount,
-//         data.cfLungAmpCount, data.cfLungWGSCount, data.cfGutAmpCount, data.cfGutWGSCount,
-//         data.lcLungAmpCount, data.lcLungWGSCount, data.lcGutAmpCount, data.lcGutWGSCount,
-//         data.pneumoniaLungAmpCount, data.pneumoniaLungWGSCount, data.pneumoniaGutAmpCount, data.pneumoniaGutWGSCount,
-//         data.tbLungAmpCount, data.tbLungWGSCount, data.tbGutAmpCount, data.tbGutWGSCount,
-//         data.controlLungAmpCount, data.controlLungWGSCount, data.controlGutAmpCount, data.controlGutWGSCount,
-//         data.healthyLungAmpCount, data.healthyLungWGSCount, data.healthyGutAmpCount, data.healthyGutWGSCount
+//         data.asthmaLungAmpCount, data.asthmaLungWMSCount, data.asthmaGutAmpCount, data.asthmaGutWMSCount,
+//         data.copdLungAmpCount, data.copdLungWMSCount, data.copdGutAmpCount, data.copdGutWMSCount,
+//         data.covidLungAmpCount, data.covidLungWMSCount, data.covidGutAmpCount, data.covidGutWMSCount,
+//         data.cfLungAmpCount, data.cfLungWMSCount, data.cfGutAmpCount, data.cfGutWMSCount,
+//         data.lcLungAmpCount, data.lcLungWMSCount, data.lcGutAmpCount, data.lcGutWMSCount,
+//         data.pneumoniaLungAmpCount, data.pneumoniaLungWMSCount, data.pneumoniaGutAmpCount, data.pneumoniaGutWMSCount,
+//         data.tbLungAmpCount, data.tbLungWMSCount, data.tbGutAmpCount, data.tbGutWMSCount,
+//         data.controlLungAmpCount, data.controlLungWMSCount, data.controlGutAmpCount, data.controlGutWMSCount,
+//         data.healthyLungAmpCount, data.healthyLungWMSCount, data.healthyGutAmpCount, data.healthyGutWMSCount
 //     ];
 //     for (var i=0; i<sunburstTrace.labels.length; ++i)
 //         sunburstTrace.labels[i] = sunburstTrace.labels[i] + " (" + sunburstValues[i] + ")";

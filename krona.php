@@ -6,7 +6,7 @@
     $is = urldecode($_GET["is"]);
 //     echo $type."<br/>".$bioproject."<br/>".$ds."<br/>".$at."<br/>".$is;
 
-    $noRunWiseBioProjects = array("BIOPROJECT_PRJEB9033_COPD_WGS", "BIOPROJECT_PRJEB9033_Asthma_WGS", "BIOPROJECT_PRJNA322414_COPD_Amplicon");
+    $noRunWiseBioProjects = array("BIOPROJECT_PRJEB9033_COPD_WMS", "BIOPROJECT_PRJEB9033_Asthma_WMS", "BIOPROJECT_PRJNA322414_COPD_Amplicon");
     $runWiseRequired = (array_search($type."_".$bioproject."_".$ds."_".$at, $noRunWiseBioProjects) === FALSE);
     $runwiseMessage = "";
     if (!$runWiseRequired)
@@ -83,7 +83,7 @@
             <center><p id="display_text"></p></center>
             <iframe id="krona_frame" style="width:100%; height:600px;"></iframe>
             <?php
-                if ($at === "WGS")
+                if ($at === "WMS")
                     echo "<p>N.B. - For better view, please view the plot at <i>\"Max depth\" = 7</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
                 else
                     echo "<p>N.B. - For better view, please view the plot at <i>\"Max depth\" = 6</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";

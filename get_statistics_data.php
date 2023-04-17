@@ -33,46 +33,46 @@
     $healthyGutQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Healthy' and Biome='Gut';";
 
     $asthmaLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Asthma' and Biome='Lung' and AssayType='Amplicon';";
-    $asthmaLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Asthma' and Biome='Lung' and AssayType='WGS';";
+    $asthmaLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Asthma' and Biome='Lung' and AssayType='WMS';";
     $asthmaGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Asthma' and Biome='Gut' and AssayType='Amplicon';";
-    $asthmaGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Asthma' and Biome='Gut' and AssayType='WGS';";
+    $asthmaGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Asthma' and Biome='Gut' and AssayType='WMS';";
     $copdLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COPD' and Biome='Lung' and AssayType='Amplicon';";
-    $copdLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COPD' and Biome='Lung' and AssayType='WGS';";
+    $copdLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COPD' and Biome='Lung' and AssayType='WMS';";
     $copdGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COPD' and Biome='Gut' and AssayType='Amplicon';";
-    $copdGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COPD' and Biome='Gut' and AssayType='WGS';";
+    $copdGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COPD' and Biome='Gut' and AssayType='WMS';";
     $covidLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COVID-19' and Biome='Lung' and AssayType='Amplicon';";
-    $covidLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COVID-19' and Biome='Lung' and AssayType='WGS';";
+    $covidLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COVID-19' and Biome='Lung' and AssayType='WMS';";
     $covidGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COVID-19' and Biome='Gut' and AssayType='Amplicon';";
-    $covidGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COVID-19' and Biome='Gut' and AssayType='WGS';";
+    $covidGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='COVID-19' and Biome='Gut' and AssayType='WMS';";
     $cfLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Cystic Fibrosis' and Biome='Lung' and AssayType='Amplicon';";
-    $cfLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Cystic Fibrosis' and Biome='Lung' and AssayType='WGS';";
+    $cfLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Cystic Fibrosis' and Biome='Lung' and AssayType='WMS';";
     $cfGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Cystic Fibrosis' and Biome='Gut' and AssayType='Amplicon';";
-    $cfGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Cystic Fibrosis' and Biome='Gut' and AssayType='WGS';";
+    $cfGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Cystic Fibrosis' and Biome='Gut' and AssayType='WMS';";
     $lcLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Lung Cancer' and Biome='Lung' and AssayType='Amplicon';";
-    $lcLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Lung Cancer' and Biome='Lung' and AssayType='WGS';";
+    $lcLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Lung Cancer' and Biome='Lung' and AssayType='WMS';";
     $lcGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Lung Cancer' and Biome='Gut' and AssayType='Amplicon';";
-    $lcGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Lung Cancer' and Biome='Gut' and AssayType='WGS';";
+    $lcGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Lung Cancer' and Biome='Gut' and AssayType='WMS';";
     $pneumoniaLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Pneumonia' and Biome='Lung' and AssayType='Amplicon';";
-    $pneumoniaLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Pneumonia' and Biome='Lung' and AssayType='WGS';";
+    $pneumoniaLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Pneumonia' and Biome='Lung' and AssayType='WMS';";
     $pneumoniaGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Pneumonia' and Biome='Gut' and AssayType='Amplicon';";
-    $pneumoniaGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Pneumonia' and Biome='Gut' and AssayType='WGS';";
+    $pneumoniaGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Pneumonia' and Biome='Gut' and AssayType='WMS';";
     $tbLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Tuberculosis' and Biome='Lung' and AssayType='Amplicon';";
-    $tbLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Tuberculosis' and Biome='Lung' and AssayType='WGS';";
+    $tbLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Tuberculosis' and Biome='Lung' and AssayType='WMS';";
     $tbGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Tuberculosis' and Biome='Gut' and AssayType='Amplicon';";
-    $tbGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Tuberculosis' and Biome='Gut' and AssayType='WGS';";
+    $tbGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Tuberculosis' and Biome='Gut' and AssayType='WMS';";
     $controlLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Control' and Biome='Lung' and AssayType='Amplicon';";
-    $controlLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Control' and Biome='Lung' and AssayType='WGS';";
+    $controlLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Control' and Biome='Lung' and AssayType='WMS';";
     $controlGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Control' and Biome='Gut' and AssayType='Amplicon';";
-    $controlGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Control' and Biome='Gut' and AssayType='WGS';";
+    $controlGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Control' and Biome='Gut' and AssayType='WMS';";
     $healthyLungAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Healthy' and Biome='Lung' and AssayType='Amplicon';";
-    $healthyLungWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Healthy' and Biome='Lung' and AssayType='WGS';";
+    $healthyLungWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Healthy' and Biome='Lung' and AssayType='WMS';";
     $healthyGutAmpQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Healthy' and Biome='Gut' and AssayType='Amplicon';";
-    $healthyGutWGSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Healthy' and Biome='Gut' and AssayType='WGS';";
+    $healthyGutWMSQuery = "select count(Run) as C from run inner join disease on run.SubGroup=disease.SubGroup where Grp='Healthy' and Biome='Gut' and AssayType='WMS';";
     
     $lungQuery = "select count(Run) as C from run where Biome='Lung';";
     $gutQuery = "select count(Run) as C from run where Biome='Gut';";
     $ampQuery = "select count(Run) as C from run where AssayType='Amplicon';";
-    $wgsQuery = "select count(Run) as C from run where AssayType='WGS';";
+    $wmsQuery = "select count(Run) as C from run where AssayType='WMS';";
 
     $querries = array(
         $totalQuery, $asthmaQuery, $copdQuery, $covidQuery, $cfQuery, $lcQuery, $pneumoniaQuery, $tbQuery, $controlQuery, $healthyQuery,
@@ -82,10 +82,10 @@
 
         $asthmaLungAmpQuery, $asthmaGutAmpQuery, $copdLungAmpQuery, $copdGutAmpQuery, $covidLungAmpQuery, $covidGutAmpQuery, $cfLungAmpQuery, $cfGutAmpQuery, $lcLungAmpQuery, $lcGutAmpQuery,
         $pneumoniaLungAmpQuery, $pneumoniaGutAmpQuery, $tbLungAmpQuery, $tbGutAmpQuery, $controlLungAmpQuery, $controlGutAmpQuery, $healthyLungAmpQuery, $healthyGutAmpQuery,
-        $asthmaLungWGSQuery, $asthmaGutWGSQuery, $copdLungWGSQuery, $copdGutWGSQuery, $covidLungWGSQuery, $covidGutWGSQuery, $cfLungWGSQuery, $cfGutWGSQuery, $lcLungWGSQuery, $lcGutWGSQuery,
-        $pneumoniaLungWGSQuery, $pneumoniaGutWGSQuery, $tbLungWGSQuery, $tbGutWGSQuery, $controlLungWGSQuery, $controlGutWGSQuery, $healthyLungWGSQuery, $healthyGutWGSQuery,
+        $asthmaLungWMSQuery, $asthmaGutWMSQuery, $copdLungWMSQuery, $copdGutWMSQuery, $covidLungWMSQuery, $covidGutWMSQuery, $cfLungWMSQuery, $cfGutWMSQuery, $lcLungWMSQuery, $lcGutWMSQuery,
+        $pneumoniaLungWMSQuery, $pneumoniaGutWMSQuery, $tbLungWMSQuery, $tbGutWMSQuery, $controlLungWMSQuery, $controlGutWMSQuery, $healthyLungWMSQuery, $healthyGutWMSQuery,
         
-        $lungQuery, $gutQuery, $ampQuery, $wgsQuery,
+        $lungQuery, $gutQuery, $ampQuery, $wmsQuery,
     );
     
     $labels = array(
@@ -95,10 +95,10 @@
 
         'asthmaLungAmpCount', 'asthmaGutAmpCount', 'copdLungAmpCount', 'copdGutAmpCount', 'covidLungAmpCount', 'covidGutAmpCount', 'cfLungAmpCount', 'cfGutAmpCount', 'lcLungAmpCount', 'lcGutAmpCount',
         'pneumoniaLungAmpCount', 'pneumoniaGutAmpCount', 'tbLungAmpCount', 'tbGutAmpCount', 'controlLungAmpCount', 'controlGutAmpCount', 'healthyLungAmpCount', 'healthyGutAmpCount',
-        'asthmaLungWGSCount', 'asthmaGutWGSCount', 'copdLungWGSCount', 'copdGutWGSCount', 'covidLungWGSCount', 'covidGutWGSCount', 'cfLungWGSCount', 'cfGutWGSCount', 'lcLungWGSCount', 'lcGutWGSCount',
-        'pneumoniaLungWGSCount', 'pneumoniaGutWGSCount', 'tbLungWGSCount', 'tbGutWGSCount', 'controlLungWGSCount', 'controlGutWGSCount', 'healthyLungWGSCount', 'healthyGutWGSCount',
+        'asthmaLungWMSCount', 'asthmaGutWMSCount', 'copdLungWMSCount', 'copdGutWMSCount', 'covidLungWMSCount', 'covidGutWMSCount', 'cfLungWMSCount', 'cfGutWMSCount', 'lcLungWMSCount', 'lcGutWMSCount',
+        'pneumoniaLungWMSCount', 'pneumoniaGutWMSCount', 'tbLungWMSCount', 'tbGutWMSCount', 'controlLungWMSCount', 'controlGutWMSCount', 'healthyLungWMSCount', 'healthyGutWMSCount',
         
-        'lungCount', 'gutCount', 'ampCount', 'wgsCount',
+        'lungCount', 'gutCount', 'ampCount', 'wmsCount',
     );
     
     $output = array();

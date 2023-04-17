@@ -8,7 +8,7 @@
         "Year"=>"run.ReleaseYear","IsolationSource"=>"run.IsolationSource","Disease"=>"disease.Grp"
     );
     $possibleValues = array(
-        "AssayType"=> array("0"=>"Amplicon", "1"=>"WGS"),
+        "AssayType"=> array("0"=>"Amplicon", "1"=>"WMS"),
         
         "Country"=> array(
             '0'=> 'Australia', '1'=> 'Bangladesh', '2'=> 'Belgium', '3'=> 'Brazil',  

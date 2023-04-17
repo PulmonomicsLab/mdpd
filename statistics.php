@@ -95,7 +95,7 @@
                 </div>
                 <div id="bar-plot-wrapper_1" class="plot" style="margin:10px 0 10px 2%; float:left;">
                     <div id="bar-plot-container_1" style="width:100%;"></div>
-                    <div class="caption">Fig. 2C - Year-wise distribution of amplicon and WGS data.</div>
+                    <div class="caption">Fig. 2C - Year-wise distribution of amplicon and WMS data.</div>
                 </div>
                 <div style="clear:both;"></div>
             </div>

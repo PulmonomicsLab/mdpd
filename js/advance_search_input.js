@@ -7,7 +7,7 @@ var keyToTypeMap = {
     'IsolationSource': 'C'
 };
 var keyToValueMap = {
-    'AssayType': [['0', 'Amplicon'], ['1', 'WGS']],
+    'AssayType': [['0', 'Amplicon'], ['1', 'WMS']],
     
     'Country': [['0', 'Australia'], ['1', 'Bangladesh'], ['2', 'Belgium'], ['3', 'Brazil'],  
                 ['4', 'China'], ['5', 'Czech Republic'], ['6', 'Germany'], ['7', 'Hungary'], 
