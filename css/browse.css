@@ -126,3 +126,7 @@ a.browse_side_nav:hover{
 .button-group button:hover{
     background-color : #424652; /*#404040;*/
 }
+
+sup.link{
+    cursor: pointer;
+}

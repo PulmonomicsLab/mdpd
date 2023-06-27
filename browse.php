@@ -93,7 +93,7 @@
                 <tr>
                     <td rowspan="2" class="row_heading">COPD</td>
                     <td class="even">Amplicon</td>
-                    <td class="even">BAL (4), Lung tissue (18), Sputum (1077), Stool (28)</td>
+                    <td class="even">BAL (4), Lung tissue (18), Sputum (1077)<sup class="link" id="footnote_link_1"><b>**</b></sup>, Stool (28)</td>
                     <td class="even">
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COPD")."&is=".urlencode("BAL");?>"><button type="button" style="margin:2px;">BAL</button></a>
                         <a target="_blank" href="<?php echo "krona.php?type=DISEASE&at=Amplicon&ds=".urlencode("COPD")."&is=".urlencode("Lung Tissue");?>"><button type="button" style="margin:2px;">Lung tissue</button></a>
@@ -190,7 +190,15 @@
                     </td>
                 </tr>
             </table>
-            <p class="section-footnote">N.B. - Large Krona files. May take longer time to load.</p>
+            <p id="footnote1" class="section-footnote"><sup class="link"><b>**</b></sup> - Large Krona files. May take longer time to load.</p>
+            <script>
+                document.getElementById("footnote_link_1").addEventListener("click", () => {
+                    document.getElementById("footnote1").scrollIntoView();
+                });
+                document.getElementById("footnote1").addEventListener("click", () => {
+                    document.getElementById("footnote_link_1").scrollIntoView();
+                });
+            </script>
 
             <!--<div class="browse-heading">
                 3. Disease-wise differential analysis (LDA plot) of amplicon data
@@ -271,7 +279,7 @@
                     <td class="even"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("COPD")."&at=WMS&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
                 <tr>
-                    <td rowspan="1" class="row_heading">COVID-19 <sup>*</sup></td>
+                    <td rowspan="1" class="row_heading">COVID-19 <sup class="link" id="footnote_link_2">*</sup></td>
                     <td class="odd">Amplicon</td>
                     <td class="odd">BAL (57)</td>
                     <td class="odd">Stool (202)</td>
@@ -291,14 +299,14 @@
                     <td class="even"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Cystic Fibrosis")."&at=WMS&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
                 <tr>
-                    <td rowspan="1" class="row_heading">Pneumonia <sup>*</sup></td>
+                    <td rowspan="1" class="row_heading">Pneumonia <sup class="link" id="footnote_link_3">*</sup></td>
                     <td class="odd">Amplicon</td>
                     <td class="odd">Endotracheal Aspirate (150)</td>
                     <td class="odd">Stool (413)</td>
                     <td class="odd"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Pneumonia")."&at=Amplicon&is=".urlencode("Endotracheal Aspirate_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
                 <tr>
-                    <td rowspan="1" class="row_heading">Tuberculosis <sup>*</sup></td>
+                    <td rowspan="1" class="row_heading">Tuberculosis <sup class="link" id="footnote_link_4">*</sup></td>
                     <td class="even">Amplicon</td>
                     <td class="even">Sputum (58)</td>
                     <td class="even">Stool (149)</td>
@@ -318,7 +326,21 @@
                     <td class="odd"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Cystic Fibrosis")."&at=WMS&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
             </table>
-            <p class="section-footnote"><sup>*</sup> No WMS data available for COVID-19, Pneumonia and Tuberculosis lung microbiome.</p>
+            <p id="footnote2" class="section-footnote"><sup class="link">*</sup> No WMS data available for COVID-19, Pneumonia and Tuberculosis lung microbiome.</p>
+            <script>
+                document.getElementById("footnote_link_2").addEventListener("click", () => {
+                    document.getElementById("footnote2").scrollIntoView();
+                });
+                document.getElementById("footnote_link_3").addEventListener("click", () => {
+                    document.getElementById("footnote2").scrollIntoView();
+                });
+                document.getElementById("footnote_link_4").addEventListener("click", () => {
+                    document.getElementById("footnote2").scrollIntoView();
+                });
+                document.getElementById("footnote2").addEventListener("click", () => {
+                    document.getElementById("footnote_link_2").scrollIntoView();
+                });
+            </script>
 
             <div class="browse-heading" id="sec-4">
                 4. Differential analysis of disease pairs (LDA plot and heatmap)
