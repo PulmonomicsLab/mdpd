@@ -48,7 +48,14 @@
                 N.B. - <br/>
                 1. To view all the differential markers, please hover on the bars of the plot or download the data
                 using the "Download data" button.<br/>
-                2. A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 2</i> was used to determine the differential markers.
+                2. A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 2</i> was used to determine the differential
+                markers.<br/>
+                3. All differential markers in the LDA plot were found to be statistically significant.<br/>
+                4. The statistical significance cutoff used were: <i>p-value &lt; 0.05</i> (Wilcoxon test) and
+                <i>p-value &lt; 0.01</i> (Kruskal-Wallis test).<br/>
+                5. To check the p-values for each differential marker, please download the data using the "Download
+                data" button.<br/>
+                6. The downloaded data shows Kruskal-Wallis p-value.
             </p>
             </div>
             
