@@ -59,7 +59,7 @@ function getFilteredDiseaseWiseResultHTML(divId) {
 }
 
 function filter_diseases(resultDivId) {
-    var hideButton = '<center><button type="button" class="round" onclick="hideDiv(\'disease-wise-results\')">&#10005;</button></center>';
+    var hideButton = '<center><button type="button" class="round" onclick="hideDiv(\'' + resultDivId + '\')">&#10005;</button></center>';
     var resultElement = document.getElementById(resultDivId);
     resultElement.style.display = 'block';
     if(document.getElementById('filter_cb') != null && document.getElementById('filter_cb').checked == true) {
@@ -92,6 +92,27 @@ function getBioProjects(dis, resultDivId){
         }
     };
     httpReq.open('GET', 'disease_wise_bioprojects.php?key='+ encodeURIComponent(dis), true);
+    httpReq.setRequestHeader("Content-type", "text/json");
+    httpReq.send();
+}
+
+function getSubgroupBioProjects(subGroup, resultDivId){
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            initializeData(this.responseText, subGroup);
+            var resultElement = document.getElementById(resultDivId);
+            resultElement.style.display = 'block';
+            var hideButton = '<center><button type="button" class="round" onclick="hideDiv(\'' + resultDivId + '\')">&#10005;</button></center>';
+            var resultCountString = '<p style="margin:2px;text-align:center;">Total number of BioProjects found in the database for SubGroup = "' + subGroup + '" : ' + rows.length + '</p>';
+            var subgroupResultHTML = getAllDiseasewiseResultHTML('result_display');
+            if(rows.length <= 0)
+                resultElement.innerHTML = hideButton + resultCountString;
+            else
+                resultElement.innerHTML = hideButton + resultCountString + subgroupResultHTML;
+        }
+    };
+    httpReq.open('GET', 'subgroup_wise_bioprojects.php?key='+ encodeURIComponent(subGroup), true);
     httpReq.setRequestHeader("Content-type", "text/json");
     httpReq.send();
 }

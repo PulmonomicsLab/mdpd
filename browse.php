@@ -28,9 +28,10 @@
 
         <div class = "section_left" id="section_left">
             <div style="width:100%;"><a href="#sec-1" class="browse_side_nav">1. Disease-wise BioProjects</a></div>
-            <div style="width:100%;"><a href="#sec-2" class="browse_side_nav">2. Disease-wise taxonomic profile</a></div>
-            <div style="width:100%;"><a href="#sec-3" class="browse_side_nav">3. Disease-wise similarity analysis</a></div>
-            <div style="width:100%;"><a href="#sec-4" class="browse_side_nav">4. Differential analysis of disease pairs</a></div>
+            <div style="width:100%;"><a href="#sec-2" class="browse_side_nav">2. Disease subgroup-wise BioProjects</a></div>
+            <div style="width:100%;"><a href="#sec-3" class="browse_side_nav">3. Disease-wise taxonomic profile</a></div>
+            <div style="width:100%;"><a href="#sec-4" class="browse_side_nav">4. Disease-wise similarity analysis</a></div>
+            <div style="width:100%;"><a href="#sec-5" class="browse_side_nav">5. Differential analysis of disease pairs</a></div>
         </div>
 
         <script>
@@ -59,8 +60,87 @@
             </div>
             <div class="browse-result" id="disease-wise-results">foo</div>
 
-            <div class="browse-heading" id="sec-2">
-                2. Disease-wise taxonomic profile (Krona plot) across isolation sources
+            <div class="browse-heading" id="sec-2">2. Disease subgroup-wise BioProjects</div>
+            <table class="browse-summary">
+                <tr>
+                    <td class="row_heading">COPD</td>
+                    <td class="odd">
+                        <div class="button-group">
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('COPD Stable', 'subgroup-wise-results')">COPD Stable</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('COPD Exacerbation', 'subgroup-wise-results')">COPD Exacerbation</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('COPD Start of Exacerbation', 'subgroup-wise-results')">COPD Start of Exacerbation</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('COPD End of Exacerbation', 'subgroup-wise-results')">COPD End of Exacerbation</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row_heading">Asthma</td>
+                    <td class="even">
+                        <div class="button-group">
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Asthma Exacerbation', 'subgroup-wise-results')">Asthma Exacerbation</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Atopic Asthma', 'subgroup-wise-results')">Atopic Asthma</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row_heading">Cystic Fibrosis</td>
+                    <td class="odd">
+                        <div class="button-group">
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Cystic Fibrosis Exacerbation', 'subgroup-wise-results')">Cystic Fibrosis Exacerbation</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Cystic Fibrosis Normal Exacerbation', 'subgroup-wise-results')">Cystic Fibrosis Normal Exacerbation</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Cystic Fibrosis Post Exacerbation', 'subgroup-wise-results')">Cystic Fibrosis Post Exacerbation</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Cystic Fibrosis No Exacerbation', 'subgroup-wise-results')">Cystic Fibrosis No Exacerbation</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row_heading">Lung Cancer</td>
+                    <td class="even">
+                        <div class="button-group">
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Adeno Squamous Carcinoma', 'subgroup-wise-results')">Adeno Squamous Carcinoma</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Adenocarcinoma', 'subgroup-wise-results')">Adenocarcinoma</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Adenocarcinoma BAC Features', 'subgroup-wise-results')">Adenocarcinoma BAC Features</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Adenocarcinoma Mixed Features', 'subgroup-wise-results')">Adenocarcinoma Mixed Features</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Bronchioalveolar Carcinoma', 'subgroup-wise-results')">Bronchioalveolar Carcinoma</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Large Cell Lung Carcinoma', 'subgroup-wise-results')">Large Cell Lung Carcinoma</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Non Small Cell Lung Cancer', 'subgroup-wise-results')">Non Small Cell Lung Cancer</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Poorly Differentiated Carcinoma', 'subgroup-wise-results')">Poorly Differentiated Carcinoma</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Small Cell Lung Cancer', 'subgroup-wise-results')">Small Cell Lung Cancer</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Squamous Cell Carcinoma', 'subgroup-wise-results')">Squamous Cell Carcinoma</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row_heading">Pneumonia</td>
+                    <td class="odd">
+                        <div class="button-group">
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Streptococcus pneumoniae Pneumonia', 'subgroup-wise-results')">Streptococcus pneumoniae Pneumonia</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Mycoplasma pneumoniae Pneumonia', 'subgroup-wise-results')">Mycoplasma pneumoniae Pneumonia</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Adenovirus Pneumonia', 'subgroup-wise-results')">Adenovirus Pneumonia</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Culture Negative Pneumonia', 'subgroup-wise-results')">Culture Negative Pneumonia</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Culture Positive Pneumonia', 'subgroup-wise-results')">Culture Positive Pneumonia</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Post Treatment Pneumonia', 'subgroup-wise-results')">Post Treatment Pneumonia</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Pre Treatment Pneumonia', 'subgroup-wise-results')">Pre Treatment Pneumonia</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row_heading">Tuberculosis</td>
+                    <td class="even">
+                        <div class="button-group">
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('TB Mycobacterium africanum', 'subgroup-wise-results')">TB Mycobacterium africanum</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('TB Mycobacterium tuberculosis', 'subgroup-wise-results')">TB Mycobacterium tuberculosis</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Month Treatment Tuberculosis', 'subgroup-wise-results')">Month Treatment Tuberculosis</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Week Treatment Tuberculosis', 'subgroup-wise-results')">Week Treatment Tuberculosis</button>
+                            <button type="button" style="width:auto;float:left;" onclick="getSubgroupBioProjects('Zero Day Tuberculosis', 'subgroup-wise-results')">Zero Day Tuberculosis</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="browse-result" id="subgroup-wise-results">foo</div>
+
+            <div class="browse-heading" id="sec-3">
+                3. Disease-wise taxonomic profile (Krona plot) across isolation sources
             </div>
             <table class="browse-summary">
                 <tr>
@@ -241,8 +321,8 @@
                 </tr>
             </table>-->
 
-            <div class="browse-heading" id="sec-3">
-                3. Disease-wise similarity analysis across Gut-Lung biome
+            <div class="browse-heading" id="sec-4">
+                4. Disease-wise similarity analysis across Gut-Lung biome
             </div>
             <table class="browse-summary">
                 <tr>
@@ -342,8 +422,8 @@
                 });
             </script>
 
-            <div class="browse-heading" id="sec-4">
-                4. Differential analysis of disease pairs (LDA plot and heatmap)
+            <div class="browse-heading" id="sec-5">
+                5. Differential analysis of disease pairs (LDA plot and heatmap)
             </div>
             <table class="browse-summary">
                 <tr>

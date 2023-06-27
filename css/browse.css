@@ -107,16 +107,13 @@ a.browse_side_nav:hover{
 
 .button-group button{
     background-color : #524a42;
-    border: 3px solid black;
+    border: 2px solid black;
     color : white;
-    padding : 5px 10px 5px 10px;
+    padding : 5px 5px 5px 5px;
     font-size: 14px;
-    font-weight : bold;
     font-family: 'Nunito', sans-serif;
-/*     float: left; */
     display: inline-block;
-    padding: 10px 0 10px 0;
-    margin: 3px 0px 3px 0px;
+    margin: 5px 8px 5px 8px;
     width: 150px;
     max-width: 100%;
     box-shadow: 0px 0px 5px grey;
