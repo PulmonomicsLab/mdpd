@@ -42,9 +42,10 @@
             <p class="intro">
                 Microbiome Database of Pulmonary Diseases (MDPD) is a manually curated human gut-lung 
                 microbiome database of seven lung diseases namely <i>Asthma</i>, <i>COPD</i>, <i>COVID-19</i>, 
-                <i>Cystic Fibrosis</i>, <i>Lung Cancer</i> and <i>Pneumonia</i>. This database provides: (i)
-                Taxonomic profile visualization (Krona Plot) of specific diseases, (ii) Similarity between gut
-                and lung microbiome of seven lung diseases, and (iii) Dissimilarity between any two microbiome study.
+                <i>Cystic Fibrosis</i>, <i>Lung Cancer</i>, <i>Pneumonia</i> and <i>Tuberculosis</i>. This
+                database provides: (i) Taxonomic profile visualization (Krona Plot) of specific diseases,
+                (ii) Similarity between gut and lung microbiome of seven lung diseases, and (iii) Dissimilarity
+                between any two microbiome study.
             </p>
 
             <div><center><img class="intro" style="margin-top:30px; width:800px; //margin-bottom:30px;" src="resource/MDPD_Graphical_Abstract.jpg" /></center></div>
