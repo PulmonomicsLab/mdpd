@@ -56,17 +56,17 @@
         <div class = "section_middle">
             <br/>
             <p class="intro">
-                Microbiome Database of Pulmonary Diseases (MDPD) contains a total
-                of 5970 runs compiled from 64 BioProjects. The <b><i>R script</i></b> for
+                Microbiome Database of Pulmonary Diseases (MDPD) contains a total of
+                5970 runs compiled from 64 BioProjects. The <b><i>R script</i></b> for
                 performing the <b><i>computational analysis pipeline</i></b> is available
-                <a style="color:#003325;" target="_blank" href="http://dibresources.jcbose.ac.in/ssaha4/mdpd/R/computational_analysis_pipeline.R"><b>here</b></a>.
-                A brief summary of these BioProjects along with their external
-                <b><i>links to the NCBI BioProject</i></b> is given as follows:
+                <a style="color:#003325;" target="_blank" href="R/computational_analysis_pipeline.R"><b>here</b></a>.
+                A brief summary of the BioProjects along with their external
+                <b><i>hyperlinks to the NCBI BioProject</i></b> is given as follows:
             </p><br/>
 
             <?php
                 echo "<table class=\"details\" border=\"1\">";
-                echo "<tr><th>BioProject ID</th><th>Run Count</th><th>Group</th><th>Isolation Source</th><th>Biome</th><th>Assay Type</th><th>NCBI BioProject Links</th></tr>";
+                echo "<tr><th>BioProject ID</th><th>Run Count</th><th>Group</th><th>Isolation Source</th><th>Biome</th><th>Assay Type</th><th>NCBI BioProject hyperlinks</th></tr>";
                 foreach($rows as $row){
                     echo "<tr>";
                     echo "<td><a style=\"color:#003325;\" target=\"_blank\" href=\"bioproject_id.php?key=".$row["BioProject"]."\">".$row["BioProject"]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";
@@ -80,10 +80,6 @@
                 }
                 echo "</table>";
             ?>
-            <br/>
-            <p class="intro">
-
-            </p>
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
                 &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
