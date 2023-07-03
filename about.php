@@ -27,6 +27,7 @@
                 width:80%;
                 height:auto;
                 margin:0 10% 0 10%;
+                font-size: 1.2em;
             }
         </style>
     </head>
@@ -55,10 +56,12 @@
         <div class = "section_middle">
             <br/>
             <p class="intro">
-                Microbiome Database of Pulmonary Diseases (MDPD) contains a
-                total of 5970 runs compiled from 64 BioProjects. A brief
-                summary of these BioProjects along with their external links
-                to the NCBI BioProject is given as follows:
+                Microbiome Database of Pulmonary Diseases (MDPD) contains a total
+                of 5970 runs compiled from 64 BioProjects. The <b><i>R script</i></b> for
+                performing the <b><i>computational analysis pipeline</i></b> is available
+                <a style="color:#003325;" target="_blank" href="http://dibresources.jcbose.ac.in/ssaha4/mdpd/R/computational_analysis_pipeline.R"><b>here</b></a>.
+                A brief summary of these BioProjects along with their external
+                <b><i>links to the NCBI BioProject</i></b> is given as follows:
             </p><br/>
 
             <?php
@@ -77,6 +80,10 @@
                 }
                 echo "</table>";
             ?>
+            <br/>
+            <p class="intro">
+
+            </p>
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
                 &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
