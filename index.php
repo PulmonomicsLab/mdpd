@@ -28,6 +28,7 @@
                     <td class="nav"><a href="#" class="active">Home</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
+                    <td class="nav"><a href="about.php" class="side_nav">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
