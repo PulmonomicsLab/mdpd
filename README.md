@@ -15,7 +15,7 @@ page. Please refer to the [Help](http://bicresources.jcbose.ac.in/ssaha4/mdpd/he
 understanding how to use the database. The list of BioProjects along with their external links to the
 NCBI BioProject is given in the [About](http://bicresources.jcbose.ac.in/ssaha4/mdpd/about.php) page.
 The R script for performing the computational analysis pipeline is available
-[here](http://bicresources.jcbose.ac.in/ssaha4/mdpd/R/computational_analysis_pipeline.R).
+[here](http://bicresources.jcbose.ac.in/ssaha4/mdpd/about.php#sec-2).
 
 ## Analyses performed in MDPD
 * **Hierarchical taxonomic composition** of specific metagenome was visualized as Krona plots.

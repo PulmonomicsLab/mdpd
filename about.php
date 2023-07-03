@@ -22,6 +22,7 @@
         <meta charset="UTF-8">
         <title>About - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
+        <link rel = "stylesheet" type = "text/css" href = "css/browse.css" />
         <style>
             .intro{
                 width:80%;
@@ -55,13 +56,14 @@
 
         <div class = "section_middle">
             <br/>
+            <div class="intro" style="font-size:1.5em;" id="sec-1"><b>1. Data</b></div><br/>
             <p class="intro">
                 Microbiome Database of Pulmonary Diseases (MDPD) contains a total of
                 5970 runs compiled from 64 BioProjects. The <b><i>R script</i></b> for
                 performing the <b><i>computational analysis pipeline</i></b> is available
-                <a style="color:#003325;" target="_blank" href="R/computational_analysis_pipeline.R"><b>here</b></a>.
-                A brief summary of the BioProjects along with their external
-                <b><i>hyperlinks to the NCBI BioProject</i></b> is given as follows:
+                <a style="color:#003325;" href="#sec-2"><b>here</b></a>. A brief summary
+                of the BioProjects along with their external <b><i>hyperlinks to the NCBI
+                BioProject</i></b> is given as follows:
             </p><br/>
 
             <?php
@@ -80,6 +82,21 @@
                 }
                 echo "</table>";
             ?>
+            <br/>
+            <div class="intro" style="font-size:1.5em;" id="sec-2"><b>2. R codes of computational analysis pipeline</b></div><br/>
+            <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;">
+                <a href="R/computational_analysis_pipeline.R"><button type="button" style="margin:2px;">Download R script</button></a>
+            </div>
+            <div class="intro" style="overflow:auto;border:3px dashed black;background-color:#ecf8ec;padding:10px;">
+                <pre>
+                    <?php
+                        $fname = "R/computational_analysis_pipeline.R";
+                        $f = fopen($fname, "r");
+                        echo fread($f, filesize($fname));
+                        fclose($f);
+                    ?>
+                </pre>
+            </div>
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
                 &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
