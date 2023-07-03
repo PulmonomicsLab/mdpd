@@ -46,16 +46,12 @@
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <div style="width:100%" id="plot_container">
             <p>
-                N.B. - <br/>
-                1. To view all the differential markers, please hover on the bars of the plot or download the data
-                using the "Download data" button.<br/>
-                2. A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 2</i> was used to determine the differential
-                markers.<br/>
-                3. All differential markers in the LDA plot were found to be statistically significant.<br/>
-                4. The statistical significance cutoff used was: <i>p-value &lt; 0.01</i> (Kruskal-Wallis test).<br/>
-                5. To check the p-values for each differential marker, please download the data using the "Download
-                data" button.<br/>
-                6. The downloaded data shows Kruskal-Wallis <i>p</i>-value.
+                <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot or download the data
+                using the "Download data" button. <b>2)</b> A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 2</i> was used
+                to determine the differential markers. <b>3)</b> All differential markers in the LDA plot were found to be
+                statistically significant. <b>4)</b> The statistical significance cutoff used was: <i>p-value &lt; 0.01</i>
+                (Kruskal-Wallis test). <b>5)</b> To check the p-values for each differential marker, please download the
+                data using the "Download data" button. <b>6)</b> The downloaded data shows Kruskal-Wallis <i>p</i>-value.
             </p>
             </div>
             

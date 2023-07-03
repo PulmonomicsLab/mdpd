@@ -85,9 +85,9 @@
             <iframe id="krona_frame" style="width:100%; height:600px;"></iframe>
             <?php
                 if ($at === "WMS")
-                    echo "<p>N.B. - For better view, please view the plot at <i>\"Max depth\" = 7</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
+                    echo "<p>N.B. - <b>1)</b> For Amplicon data, Krona aloows visualization upto genus level. <b>2)</b> For WMS data, Krona allows visualization upto species level. <b>3)</b> The depth can be modified using the \"Max depth\" button on the upper left corner. <b>4)</b> For better view, please view the plot at <i>\"Max depth\" = 7</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
                 else
-                    echo "<p>N.B. - For better view, please view the plot at <i>\"Max depth\" = 6</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
+                    echo "<p>N.B. - <b>1)</b> For Amplicon data, Krona aloows visualization upto genus level. <b>2)</b> For WMS data, Krona allows visualization upto species level. <b>3)</b> The depth can be modified using the \"Max depth\" button on the upper left corner. <b>4)</b> For better view, please view the plot at <i>\"Max depth\" = 6</i>. The \"Max depth\" can be changed from the upper-left menu in the Krona plot.</p>";
             ?>
         </div>
         <div style="clear:both;">

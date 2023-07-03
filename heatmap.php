@@ -46,9 +46,9 @@
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <div style="width:100%;" id="plot_container">
             <p>
-                N.B. - <br/>
-                1. A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 3</i> was used to determine the differential markers.<br/>
-                2. The normalized abundance values in the heatmap are rounded off to 3 digits after the decimal point.
+                <b><i>N.B. -</i></b> <b>1)</b> A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 3</i>
+                was used to determine the differential markers. <b>2)</b> The normalized abundance
+                values in the heatmap are rounded off to 3 digits after the decimal point.
             </p>
             </div><br/>
             
