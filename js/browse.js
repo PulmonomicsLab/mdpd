@@ -63,7 +63,7 @@ function filter_diseases(resultDivId) {
     var resultElement = document.getElementById(resultDivId);
     resultElement.style.display = 'block';
     if(document.getElementById('filter_cb') != null && document.getElementById('filter_cb').checked == true) {
-        var filterCheckbox = '<div style="margin:10px 0 0 10px;"><input type="checkbox" id="filter_cb" onclick="filter_diseases(\'' + resultDivId + '\')" checked /><label>&nbsp;<b><u>Show BioProjects with Healthy/Control</u></b></label></div>';
+        var filterCheckbox = '<div style="margin:10px 0 0 10px;"><input type="checkbox" id="filter_cb" onclick="filter_diseases(\'' + resultDivId + '\')" checked /><label>&nbsp;<b><u>Show only BioProjects with Healthy/Control</u></b></label></div>';
         var resultCountString = '<p style="margin:2px;text-align:center;">Total number of BioProjects found in the database for Disease = "' + disease + '" with Healthy/Control groups : ' + healthyControlRows.size + '</p>';
         var diseaseResultHTML = getFilteredDiseaseWiseResultHTML('result_display');
         if(healthyControlRows.size <= 0)
@@ -71,7 +71,7 @@ function filter_diseases(resultDivId) {
         else
             resultElement.innerHTML = hideButton + filterCheckbox + resultCountString + diseaseResultHTML;
     } else {
-        var filterCheckbox = '<div style="margin:10px 0 0 10px;"><input type="checkbox" id="filter_cb" onclick="filter_diseases(\'' + resultDivId + '\')" /><label>&nbsp;<b><u>Show BioProjects with Healthy/Control</u></b></label></div>';
+        var filterCheckbox = '<div style="margin:10px 0 0 10px;"><input type="checkbox" id="filter_cb" onclick="filter_diseases(\'' + resultDivId + '\')" /><label>&nbsp;<b><u>Show only BioProjects with Healthy/Control</u></b></label></div>';
         var resultCountString = '<p style="margin:2px;text-align:center;">Total number of BioProjects found in the database for Disease = "' + disease + '" : ' + rows.length + '</p>';
         var diseaseResultHTML = getAllDiseasewiseResultHTML('result_display');
         if(rows.length <= 0)
