@@ -90,7 +90,7 @@ function makePlot(div_id, dataMap, assayType) {
         }
     };
 
-    Plotly.plot(graphDiv, data, layout, {showSendToCloud:true});
+    Plotly.plot(graphDiv, data, layout, {showSendToCloud:false});
 }
 
 function plotLDA(div_id, response, assayType, score) {

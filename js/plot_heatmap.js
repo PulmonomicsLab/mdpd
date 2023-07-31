@@ -85,7 +85,7 @@ function makePlot(div_id, assayType, heatmapData) {
         }
     };
 
-    Plotly.plot(graphDiv, data, layout, {showSendToCloud:true});
+    Plotly.plot(graphDiv, data, layout, {showSendToCloud:false});
 }
 
 function plotHeatmap(div_id, response, assayType, score) {
