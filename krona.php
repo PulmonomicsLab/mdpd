@@ -85,9 +85,21 @@
             <iframe id="krona_frame" style="width:100%; height:600px;"></iframe>
             <?php
                 if ($at === "WMS")
-                    echo "<p>N.B. - <b>1)</b> For Amplicon data, Krona allows visualization upto genus level. <b>2)</b> For WMS data, Krona allows visualization upto species level. <b>3)</b> The depth can be modified using the \"Max depth\" button on the upper left corner. <b>4)</b> For better view, please view the plot at <i>\"Max depth\" = 7</i>.</p>";
+                    echo "<p>N.B. - <b>1)</b> For Amplicon data, Krona allows visualization upto genus
+                    level. <b>2)</b> For WMS data, Krona allows visualization upto species level.
+                    <b>3)</b> The depth can be modified using the \"Max depth\" button on the upper
+                    left corner. <b>4)</b> For better view, please view the plot at <i>\"Max depth\"
+                    = 7</i>. <b>5)</b> The current view of the Krona plot can be downloaded as a SVG
+                    image by clicking on the <i>\"Snapshot\"</i> button located at the upper left corner
+                    of the plot.</p>";
                 else
-                    echo "<p>N.B. - <b>1)</b> For Amplicon data, Krona allows visualization upto genus level. <b>2)</b> For WMS data, Krona allows visualization upto species level. <b>3)</b> The depth can be modified using the \"Max depth\" button on the upper left corner. <b>4)</b> For better view, please view the plot at <i>\"Max depth\" = 6</i>.</p>";
+                    echo "<p>N.B. - <b>1)</b> For Amplicon data, Krona allows visualization upto genus
+                    level. <b>2)</b> For WMS data, Krona allows visualization upto species level.
+                    <b>3)</b> The depth can be modified using the \"Max depth\" button on the upper
+                    left corner. <b>4)</b> For better view, please view the plot at <i>\"Max depth\"
+                    = 6</i>. <b>5)</b> The current view of the Krona plot can be downloaded as a SVG
+                    image by clicking on the <i>\"Snapshot\"</i> button located at the upper left corner
+                    of the plot.</p>";
             ?>
         </div>
         <div style="clear:both;">
