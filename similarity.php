@@ -64,20 +64,41 @@
             <div class="caption">
                 Likert plot showing prevalence values of the shared taxa between lung and gut microbiomes.
             </div>
+            <p>
+                <b><i>N.B. -</i></b> <b>1)</b> The UpSet plot can be downloaded as a SVG image
+                by clicking on the <i>"Download UpSet plot"</i> button located at the top of
+                the page. <b>2)</b> The Likert plot can be downloaded as a SVG image by clicking
+                on the <i>"Download Likert plot"</i> button located at the top of the page.
+            </p>
 
             <script>
+                function createDownloadLink(plotType) {
+                    if(plotType == 'upset')
+                        var svg = document.getElementById(plotType + '_plot_container').firstElementChild;
+                    else
+                        var svg = document.getElementById(plotType + '_plot_container').firstElementChild.firstElementChild;
+                    var svgCode = new XMLSerializer().serializeToString(svg);
+                    var blob = new Blob([svgCode], {type: 'image/svg+xml'});
+                    var link = document.getElementById(plotType + '_download');
+                    link.href = URL.createObjectURL(blob);
+                }
+
                 function getSimilarityData(disease, assayType, isolationSource) {
                     var is1 = isolationSource.split('_')[0];
                     var is2 = isolationSource.split('_')[1];
                     var prefix = 'input/Similarity/';
                     var file = prefix + assayType + '/' + disease + '/' + disease.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '.csv';
                     var display = disease + ' | ' + assayType + ' | ' + 'Lung (' + is1 + ') - Gut (' + is2 + ')';
+                    var upset_export_filename = 'upset_plot_' + assayType + '_' + disease.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '.svg';
+                    var likert_export_filename = 'likert_plot_' + assayType + '_' + disease.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '.svg';
 
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                             document.getElementById('display_text').innerHTML = '<h3>' + display + '</h3>';
-                            document.getElementById('download_div').innerHTML = '<a href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>';
+                            document.getElementById('download_div').innerHTML = '<a style="margin:10px;" href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>' +
+                                                                                '<a style="margin:10px;" id="upset_download" onclick="createDownloadLink(\'upset\')" download="' + upset_export_filename + '"><button type="button" style="margin:2px;">Download UpSet plot</button></a>' +
+                                                                                '<a style="margin:10px;" id="likert_download" onclick="createDownloadLink(\'likert\')" download="' + likert_export_filename + '"><button type="button" style="margin:2px;">Download Likert plot</button></a>';
                             plotCharts('upset_plot_container', 'likert_plot_container', this.responseText);
 //                             document.getElementById('download_div').innerHTML = is1 + is2;
                             if (is1 == 'Endotracheal Aspirate' || is2 == 'Endotracheal Aspirate')
@@ -90,6 +111,7 @@
                 }
 
                 <?php echo "getSimilarityData('".$ds."','".$at."','".$is."');"; ?>
+
             </script>
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
@@ -98,7 +120,6 @@
                 <a style="color:#003325;" href="mailto:ssaha4@gmail.com">ssaha4@gmail.com</a>).
             </p>
         </div>
-<!--         <center><div style="width:100%; background-color: #fff0f5; height:600px;" id="foo"></div></center> -->
     </body>
 </html>
 
