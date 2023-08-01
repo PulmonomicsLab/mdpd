@@ -6,6 +6,33 @@ function initializeData(dataJSON) {
     rows = JSON.parse(dataJSON);
 }
 
+function createDownloadLink() {
+    if(rows.length < 1)
+        return;
+    var totalPages = Math.ceil(rows.length / numPrintRows);
+    var rowStart = numPrintRows * (currentPageNo - 1);
+    if(rowStart + numPrintRows < rows.length)
+        var rowEnd = rowStart + numPrintRows;
+    else
+        var rowEnd = rows.length;
+    var s = 'Run ID\tBioProject ID\tSRA Study ID\tDisease\tDisease Sub-group\tIsolation Source\tInstrument\tAssay Type\tCountry\tYear\n';
+    for(var i=rowStart; i<rowEnd; ++i) {
+        s += rows[i].Run + '\t';
+        s += rows[i].BioProject + '\t';
+        s += rows[i].SRA + '\t';
+        s += rows[i].Grp + '\t';
+        s += rows[i].SubGroup + '\t';
+        s += rows[i].IsolationSource + '\t';
+        s += rows[i].Instrument + '\t';
+        s += rows[i].AssayType + '\t';
+        s += rows[i].Country + '\t';
+        s += rows[i].ReleaseYear + '\n';
+    }
+    var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
+    var link = document.getElementById('download_button');
+    link.href = URL.createObjectURL(blob);
+}
+
 function display(divId, pageNo) {
     var totalPages = Math.ceil(rows.length / numPrintRows);
     var rowStart = numPrintRows * (pageNo - 1);

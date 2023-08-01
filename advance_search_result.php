@@ -227,6 +227,11 @@
                     echo "<br/><center>No entries found in the database for the given query.</center>";
                 else {
             ?>
+                    <div id="download_div" style="width:100%; text-align:center; margin-top:20px;">
+                        <a id="download_button" onclick="createDownloadLink()" download="search_result.csv">
+                            <button type="button" style="margin:2px;">Download table</button>
+                        </a>
+                    </div>
                     <p>Total number of entries found in the database = <?php echo count($rows);?></p>
                     <table border="0" style="width:100%; border:4px solid #392d37;">
                         <tr>
