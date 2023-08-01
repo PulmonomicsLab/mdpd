@@ -48,7 +48,15 @@
             <p>
                 <b><i>N.B. -</i></b> <b>1)</b> A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 3</i>
                 was used to determine the differential markers. <b>2)</b> The normalized abundance
-                values in the heatmap are rounded off to 3 digits after the decimal point.
+                values in the heatmap are rounded off to 3 digits after the decimal point. <b>3)</b>
+                The data can be downloaded by clicking on the <i>"Download data"</i> button located
+                at the top of the page. <b>4)</b> The heatmap can be downloaded as a SVG image by
+                clicking on the <i>"Export as SVG"</i>
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                    <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                </svg>
+                button in the menubar located at the top
+                right corner of the plot.
             </p>
             </div><br/>
             
@@ -71,7 +79,7 @@
                         if (this.readyState == 4 && this.status == 200) {
                             document.getElementById('display_text').innerHTML = '<h3>' + display + '</h3>';
                             document.getElementById('download_div').innerHTML = '<a href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>';
-                            plotHeatmap('plot_container', this.responseText, assayType, score);
+                            plotHeatmap('plot_container', this.responseText, diseasePair.replace(/_/g,"-"), assayType, biome, isolationSource.replace(/ /g,"_"), score);
                         }
                     };
                     xmlhttp.open('GET', file, true);

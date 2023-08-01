@@ -46,12 +46,18 @@
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <div style="width:100%" id="plot_container">
             <p>
-                <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot or download the data
-                using the "Download data" button. <b>2)</b> A cutoff of <i>log<sub>10</sub>(LDA score) &ge; 2</i> was used
-                to determine the differential markers. <b>3)</b> All differential markers in the LDA plot were found to be
-                statistically significant. <b>4)</b> The statistical significance cutoff used was: <i>p-value &lt; 0.01</i>
-                (Kruskal-Wallis test). <b>5)</b> To check the p-values for each differential marker, please download the
-                data using the "Download data" button. <b>6)</b> The downloaded data shows Kruskal-Wallis <i>p</i>-value.
+                <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot
+                or download the data using the <i>"Download data"</i> button. located at the top of the page <b>2)</b> A
+                cutoff of <i>log<sub>10</sub> (LDA score) &ge; 2</i> was used to determine the differential markers.
+                <b>3)</b> All differential markers in the LDA plot were found to be statistically significant. <b>4)</b>
+                The statistical significance cutoff used was: <i>p-value &lt; 0.01</i> (Kruskal-Wallis test). <b>5)</b>
+                To check the p-values for each differential marker, please download the data using the "Download data"
+                button. <b>6)</b> The downloaded data shows Kruskal-Wallis <i>p</i>-value. <b>7)</b> The LDA plot can be
+                downloaded as a SVG image by clicking on the <i>"Export as SVG"</i>
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                    <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                </svg>
+                button in the menubar located at the top right corner of the plot.
             </p>
             </div>
             
@@ -74,7 +80,7 @@
                         if (this.readyState == 4 && this.status == 200) {
                             document.getElementById('display_text').innerHTML = '<h3>' + display + '</h3>';
                             document.getElementById('download_div').innerHTML = '<a href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>';
-                            plotLDA('plot_container', this.responseText, assayType, score);
+                            plotLDA('plot_container', this.responseText, diseasePair.replace(/_/g,"-"), assayType, biome, isolationSource.replace(/ /g,"_"), score);
                         }
                     };
                     xmlhttp.open('GET', file, true);
