@@ -55,16 +55,17 @@
         <div class = "section_middle">
             <center><p id="display_text"></p></center>
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
-            <center><div style="width:100%; background-color: #fff0f5; overflow: auto;" id="upset_plot_container"></div></center>
+            <center><div style="width:100%; background-color: #ffffff; overflow: auto;" id="upset_plot_container"></div></center>
             <div class="caption">
                 UpSet plot showing the number of prevalent taxa in lung microbiome, gut microbiome and shared in both microbiomes.
             </div>
             <div id="plot-footer1" style="margin:5px 0 0 5px;"></div><br/>
-            <center><div style="width:100%; background-color: #fff0f5; height:400px;" id="likert_plot_container"></div></center>
+            <center><div style="width:100%; background-color: #ffffff; height:400px;" id="likert_plot_container"></div></center>
             <div class="caption">
                 Likert plot showing prevalence values of the shared taxa between lung and gut microbiomes.
             </div>
             <p>
+                <br/>
                 <b><i>N.B. -</i></b> <b>1)</b> The UpSet plot can be downloaded as a SVG image
                 by clicking on the <i>"Download UpSet plot"</i> button located at the top of
                 the page. <b>2)</b> The Likert plot can be downloaded as a SVG image by clicking

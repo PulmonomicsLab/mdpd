@@ -1,6 +1,6 @@
 var histogramLayout = {
-    plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
-    paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+    plot_bgcolor: 'ffffff', //'#fff0f5',
+    paper_bgcolor: 'ffffff', //'#fff0f5',
     height: 400,
     barmode: 'stack',
     hoverlabel: {
@@ -41,7 +41,7 @@ var histogramLayout = {
 };
 
 var choroplethLayout = {
-    paper_bgcolor: '#fff0f5',
+    paper_bgcolor: '#ffffff', //'#fff0f5',
     height: 400,
     autocolorscale: true,
     margin: {t:0, b:0, l:0, r:0},
@@ -50,7 +50,7 @@ var choroplethLayout = {
         font: {size: 16, color: 'black'}
     },
     geo: {
-        bgcolor: '#fff0f5',
+        bgcolor: '#ffffff', //'#fff0f5',
         oceancolor: 'skyblue',
         showocean: true,
         coastlinewidth: 1,
@@ -60,8 +60,8 @@ var choroplethLayout = {
 };
 
 var sunburstLayout = {
-    plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
-    paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+    plot_bgcolor: '#ffffff', //'#fff0f5',
+    paper_bgcolor: '#ffffff', //'#fff0f5',
     height: 600,
     hoverlabel: {
         bgcolor: 'white',
@@ -71,16 +71,16 @@ var sunburstLayout = {
 };
 
 var pieLayout = {
-    plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
-    paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+    plot_bgcolor: '#ffffff', //'#fff0f5',
+    paper_bgcolor: '#ffffff', //'#fff0f5',
     height: 300,
     margin: {l: 0, r: 0, b: 0, t: 0},
     showlegend: false
 };
 
 var barlayout = {
-    plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
-    paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+    plot_bgcolor: '#ffffff', //'#fff0f5',
+    paper_bgcolor: '#ffffff', //'#fff0f5',
     height: 300,
     margin: {l: 0, r: 0, b: 0, t: 0},
     hoverlabel: {

@@ -36,8 +36,8 @@ function makePlot(div_id, dataMap, disease_pair, assayType, biome, isolation_sco
     }
 
     var layout = {
-        plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
-        paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+        plot_bgcolor: '#ffffff', //'#fff0f5',
+        paper_bgcolor: '#ffffff', //'#fff0f5',
         height: 800,
         bargap: 0.2,
         modebar: {

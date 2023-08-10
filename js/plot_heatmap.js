@@ -45,8 +45,8 @@ function makePlot(div_id, disease_pair, assayType, biome, isolation_scource, hea
         }];
 
     var layout = {
-        plot_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
-        paper_bgcolor: '#fff0f5',//'#ffe6cc',//'#e6e6e6',
+        plot_bgcolor: '#ffffff', //'#fff0f5',
+        paper_bgcolor: '#ffffff', //'#fff0f5',
         height: ((computedHeight < minHeight) ? minHeight : computedHeight),
         bargap: 10,
         margin: {
@@ -65,6 +65,7 @@ function makePlot(div_id, disease_pair, assayType, biome, isolation_scource, hea
             visible : true,
             color: 'black',
             linewidth: 2,
+            mirror: true,
             ticks: 'outside',
             ticklen: 10,
             tickwidth: 2,
@@ -78,6 +79,7 @@ function makePlot(div_id, disease_pair, assayType, biome, isolation_scource, hea
             visible : true,
             color: 'black',
             linewidth: 2,
+            mirror: true,
             ticks: 'outside',
             ticklen: 10,
             tickwidth: 2,
