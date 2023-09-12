@@ -51,7 +51,9 @@
                         <li>
                             <p>The <b>search result page</b> provides information about the Run ID, BioProject ID,
                             SRA Study ID, Disease, Disease Sub-group, Isolation Source, Instrument, Assay Type,
-                            Country, and Year.</p>
+                            Country, and Year. The table displayed in the search result can be downloaded in CSV
+                            format by clicking on the <i>"Download table"</i> button located at the top of the
+                            page.</p>
                             <center><img src="resource/search_result.jpg" height="400px" /></center>
                         </li>
                         <li>
@@ -74,8 +76,13 @@
                             bars represent the genus/species and the length of the bar denotes the LDA score
                             (log<sub>10</sub>). LDA score signifies the effect size of each differentially
                             abundant microbe. A cut-off of <i>log<sub>10</sub> LDA &ge; 2</i> was chosen for
-                            making the plot. The Kruskal-Wallis cutoff <i>p-value &lt; 0.01</i> was chosen.
-                            <center><img src="resource/lda.jpg" height="600px" /></center>
+                            making the plot. The Kruskal-Wallis cutoff <i>p-value &lt; 0.01</i> was chosen. The
+                            LDA plot can be downloaded as a SVG image by clicking on the <i>"Export as SVG"</i>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                            </svg>
+                            button in the menubar located at the top right corner of the plot.
+                            <center><img src="resource/lda.jpg" height="650px" /></center>
                         </li>
                         <li>
                             <p>The taxonomic composition of microbiome data of different isolation sources of lung
@@ -137,7 +144,10 @@
                             <p>The <b>UpSet plot</b> shows the number of organisms that are found in the lungs, gut,
                             and microbiomes. The <b>Likert plot</b> (diverging bar plot) depicts the prevalence of
                             the organisms that are found in both lung and gut microbiomes. A <i>prevalence cut-off</i>
-                            of 50% at a <i>detection level &ge; 0.0001</i> was taken to get the prevalent taxa.</p>
+                            of 50% at a <i>detection level &ge; 0.0001</i> was taken to get the prevalent taxa. The
+                            UpSet plot can be downloaded as a SVG image by clicking on the <i>"Download UpSet plot"</i>
+                            button located at the top of the page. The Likert plot can be downloaded as a SVG image by
+                            clicking on the <i>"Download Likert plot"</i> button located at the top of the page.</p>
                             <center><img src="resource/similarity_figure.jpg" height="500px" /></center>
                         </li>
                         <li>
@@ -151,7 +161,7 @@
                             <i>log<sub>10</sub> LDA &ge; 2</i>). With the <b>"Get heatmap"</b> option users can get the
                             most abundant taxa (cut-off <i>log<sub>10</sub> LDA &ge; 3</i>) for the disease pair and the
                             BioProjects as the source of marker taxa.</p>
-                            <center><img src="resource/heatmap.jpg" height="600px" /></center>
+                            <center><img src="resource/heatmap.jpg" height="450px" /></center>
                             <p>There are few buttons to modify the plot.</p>
                             <center><img src="resource/symbols.jpg" height="250px" /></center>
                         </li>
