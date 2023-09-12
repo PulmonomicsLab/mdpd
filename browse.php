@@ -404,7 +404,7 @@
                     <td class="odd">WMS</td>
                     <td class="odd">Sputum (4)</td>
                     <td class="odd">Stool (119)</td>
-                    <td class="odd"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Cystic Fibrosis")."&at=WMS&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
+                    <td class="odd"><a target="_blank" href="<?php echo "similarity.php?ds=".urlencode("Healthy")."&at=WMS&is=".urlencode("Sputum_Stool"); ?>"><button type="button" style="margin:2px;">Get result</button></a></td>
                 </tr>
             </table>
             <p id="footnote2" class="section-footnote"><sup class="link">*</sup> No WMS data available for COVID-19, Pneumonia and Tuberculosis lung microbiome.</p>
