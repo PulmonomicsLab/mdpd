@@ -76,7 +76,7 @@ function makeLikertPlot(div_id, yAxisHeadings, dataMap) {
 
     chart.data = []
     for(var x of intersection.entries()) {
-        chart.data.push({'category': x[0], 'is1': -x[1][0], 'is2': x[1][1]});
+        chart.data.push({'category': '[font-style: italic]' + x[0] + '[/]', 'is1': -x[1][0], 'is2': x[1][1]});
     }
 //     document.getElementById('foo').innerHTML = JSON.stringify(chart.data);
 

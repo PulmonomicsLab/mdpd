@@ -2,7 +2,7 @@ function getDataMap(csv) {
     var dataMap = new Map();
     for(var i=1; i<csv.length; ++i) {
         var group = csv[i][2];
-        var name = csv[i][1];
+        var name = '<i>' + csv[i][1] + '</i>';
         var score = parseFloat(csv[i][3]);
         if(dataMap.has(group)) {
             dataMap.get(group).names.push(name);

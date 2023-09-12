@@ -10,7 +10,7 @@ function extractDataFromCSV(csv) {
     for(var i=1; i<csv[0].length; ++i)
         x.push(csv[0][order[i-1]+1]);
     for(var i=1; i<csv.length; ++i) {
-        y.push(csv[i][0]);
+        y.push('<i>' + csv[i][0] + '</i>');
         row = [];
         for(var j=1; j<csv[i].length; ++j)
             row.push(parseFloat(csv[i][order[j-1]+1]).toFixed(3));
