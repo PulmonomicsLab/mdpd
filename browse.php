@@ -329,8 +329,8 @@
                 <tr>
                     <th>Disease</th>
                     <th>Assay Type</th>
-                    <th>Lung sample type</th>
-                    <th>Gut sample type</th>
+                    <th>Lung isolation source</th>
+                    <th>Gut isolation source</th>
                     <th>Similarity Analysis</th>
                 </tr>
                 <tr>
