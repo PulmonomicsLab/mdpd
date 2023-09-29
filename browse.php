@@ -323,7 +323,7 @@
             </table>-->
 
             <div class="browse-heading" id="sec-4">
-                4. Disease-wise similarity analysis across Gut-Lung biome
+                4. Disease-wise similarity analysis across Gut-Lung biome (UpSet plot and Likert plot)
             </div>
             <table class="browse-summary">
                 <tr>
