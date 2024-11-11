@@ -37,3 +37,14 @@ function getKronaData(queryType, bioproject, disease, assayType, isolationSource
     xmlhttp.setRequestHeader('Content-type', 'text/html');
     xmlhttp.send();
 }
+
+// Function to select a single Run ID for single-Run-ID Krona plot
+function selectRun(run) {
+    var frame = document.getElementById('krona_frame');
+    // Select the appropriate Run ID from the selector dropdown
+    frame.contentWindow.document.getElementById('datasets').value = run;
+    // Trigger an event to change the plot to the selected Run ID
+    frame.contentWindow.document.getElementById('datasets').dispatchEvent(new Event('change'));
+    // Hide the Run ID selector dropdown
+    frame.contentWindow.document.getElementById('datasets').style.display = 'none';
+}
