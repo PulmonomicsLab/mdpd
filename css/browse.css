@@ -11,7 +11,7 @@
     padding: 10px 0 10px 0;
     border: 3px dashed black;
     display: none;
-    background-color: #ecf8ec;
+    background-color: #fff9e6;
     overflow: auto;
 }
 
@@ -29,21 +29,22 @@ table.browse-summary{
 }
 
 td.odd{
-    background-color: #d2ccc6;
+    background-color: #e6f2ff;
     text-align : center;
     padding: 2px 0 2px 0;
     border : 3px white solid; /*#392d37*/
 }
 
 td.even{
-    background-color: #bbaab9;
+    background-color: #b3d7ff;
     text-align : center;
     padding: 2px 0 2px 0;
     border : 3px white solid; /*#392d37*/
 }
 
 td.row_heading{
-    background-color: #8e718b;
+    background-color: #004d99;
+    color: #ffffff;
     text-align : center;
     font-weight: bold;
     padding: 2px 0 2px 0;
@@ -60,12 +61,12 @@ table.browse-result-summary{
 
 table.browse-result-summary tr:nth-child(odd){
 /*     background-color: #b1cde7;  */
-    background-color : #d2ccc6;
+    background-color : #e6f2ff;
 }
 
 table.browse-result-summary tr:nth-child(even){
 /*     background-color: #d8e6f3; */
-    background-color : #bbaab9;
+    background-color : #b3d7ff;
 }
 
 table.browse-result-summary td{
@@ -82,12 +83,13 @@ a.browse_side_nav{
     font-weight: bold;
     text-decoration : none;
     color : white;
-    background-color: #51414f;
+    background-color: #004d99;
     border: 2px solid black;
     box-shadow: 0px 0px 10px grey;
 }
 a.browse_side_nav:hover{
-    background-color : #9a7e95;
+    background-color : #b3b3ff;
+    color: #000000;
 }
 
 .section-footnote{
@@ -106,22 +108,23 @@ a.browse_side_nav:hover{
 }
 
 .button-group button{
-    background-color : #524a42;
-    border: 2px solid black;
-    color : white;
-    padding : 5px 5px 5px 5px;
+    background-color : #e6e6ff;
+    border: 1px solid black;
+    color : black;
+    padding : 8px 5px 8px 5px;
     font-size: 14px;
     font-family: 'Nunito', sans-serif;
     display: inline-block;
     margin: 5px 8px 5px 8px;
-    width: 150px;
+    float: left;
+/*     width: 150px; */
     max-width: 100%;
-    box-shadow: 0px 0px 5px grey;
+/*     box-shadow: 0px 0px 5px grey; */
     cursor: pointer;
 }
 
 .button-group button:hover{
-    background-color : #424652; /*#404040;*/
+    background-color : #b3b3ff  ; /*#404040;*/
 }
 
 sup.link{
