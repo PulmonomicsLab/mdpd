@@ -15,18 +15,19 @@ function createDownloadLink() {
         var rowEnd = rowStart + numPrintRows;
     else
         var rowEnd = rows.length;
-    var s = 'Run ID\tBioProject ID\tSRA Study ID\tDisease\tDisease Sub-group\tIsolation Source\tInstrument\tAssay Type\tCountry\tYear\n';
+    var s = 'Run ID\tBioProject ID\tDisease\tDisease Sub-group\tBiome\tInstrument\tAssay Type\tLibrary Layout\tProcessed Reads\tCountry\tYear\n';
     for(var i=rowStart; i<rowEnd; ++i) {
         s += rows[i].Run + '\t';
         s += rows[i].BioProject + '\t';
-        s += rows[i].SRA + '\t';
         s += rows[i].Grp + '\t';
         s += rows[i].SubGroup + '\t';
-        s += rows[i].IsolationSource + '\t';
+        s += rows[i].Biome + '\t';
         s += rows[i].Instrument + '\t';
         s += rows[i].AssayType + '\t';
+        s += rows[i].LibraryLayout + '\t';
+        s += rows[i].ProcessedRuns + '\t';
         s += rows[i].Country + '\t';
-        s += rows[i].ReleaseYear + '\n';
+        s += rows[i].Year + '\n';
     }
     var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
     var link = document.getElementById('download_button');
@@ -41,20 +42,21 @@ function display(divId, pageNo) {
     else
         var rowEnd = rows.length;
     
-    var s = '<table class="summary" style="//width:100%;" border="1"><tr><th>Run ID</th><th>BioProject ID</th><th>SRA Study ID</th><th>Disease</th><th>Disease Sub-group</th><th>Isolation Source</th><th>Instrument</th><th>Assay Type</th><th>Country</th><th>Year</th></tr>';
+    var s = '<table class="summary" border="1"><tr><th>Run ID</th><th>BioProject ID</th><th>Disease</th><th>Disease Sub-group</th><th>Biome</th><th>Instrument</th><th>Assay Type</th><th>Library Layout</th><th>Processed Reads</th><th>Country</th><th>Year</th></tr>';
     
     for(var i=rowStart; i<rowEnd; ++i) {
         s += '<tr>';
         s += '<td><a style="color:#003325; font-weight:bold;" target="_blank" href="run_id.php?key=' + rows[i].Run + '">' + rows[i].Run + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
         s += '<td><a style="color:#003325; font-weight:bold;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">'+rows[i].BioProject+' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
-        s += '<td>' + rows[i].SRA + '</td>';
         s += '<td>' + rows[i].Grp + '</td>';
         s += '<td>' + rows[i].SubGroup + '</td>';
-        s += '<td>' + rows[i].IsolationSource + '</td>';
+        s += '<td>' + rows[i].Biome + '</td>';
         s += '<td>' + rows[i].Instrument + '</td>';
         s += '<td>' + rows[i].AssayType + '</td>';
+        s += '<td>' + rows[i].LibraryLayout + '</td>';
+        s += '<td>' + rows[i].ProcessedRuns + '</td>';
         s += '<td>' + rows[i].Country + '</td>';
-        s += '<td>' + rows[i].ReleaseYear + '</td>';
+        s += '<td>' + rows[i].Year + '</td>';
         s += '</tr>';
     }
     

@@ -62,10 +62,10 @@
                             <select class="full" id="k0" name="k0" onchange="updateKeyChoice(this)">
                                 <option value="Disease" selected>Disease</option>
                                 <option value="AssayType">Assay Type</option>
+                                <option value="Biome">Biome</option>
+                                <option value="LibraryLayout">Library Layout</option>
                                 <option value="Country">Country</option>
-                                <option value="Instrument">Instrument</option>
                                 <option value="Year">Year</option>
-                                <option value="IsolationSource">Isolation source</option>
                             </select>
                         </td>
                         <td style="width:10%;">

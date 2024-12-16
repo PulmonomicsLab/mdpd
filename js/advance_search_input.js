@@ -1,32 +1,35 @@
 var keyToTypeMap = {
     'Disease': 'C',
     'AssayType': 'C',
+    'Biome': 'C',
+    'LibraryLayout': 'C',
     'Country': 'C',
-    'Instrument': 'C',
-    'Year': 'Y',
-    'IsolationSource': 'C'
+    'Year': 'Y'
 };
 var keyToValueMap = {
-    'AssayType': [['0', 'Amplicon'], ['1', 'WMS']],
+    'Disease': [['0', 'Acute Respiratory Distress Syndrome (ARDS)'], ['1', 'Asthma'], ['2', 'Asthma-COPD Overlap (ACO)'],
+                ['3', 'Bronchiectasis'], ['4', 'Bronchiolitis'], ['5', 'Bronchitis'], ['6', 'Chronic Obstructive Pulmonary Disease (COPD)'],
+                ['7', 'COPD-Bronchiectasis Association (CBA)'], ['8', 'COVID-19'], ['9', 'Cystic Fibrosis'], ['10', 'Healthy'],
+                ['11', 'Idiopathic Pulmonary Fibrosis (IPF)'], ['12', 'Interstitial Lung Disease (ILD)'], ['13', 'Lung Cancer'],
+                ['14', 'Other Pulmonary Infections'], ['15', 'Pneumonia'], ['16', 'Pneumonitis'], ['17', 'Pulmonary Hypertension'],
+                ['18', 'Sarcoidosis'], ['19', 'Tuberculosis']],
+
+    'AssayType': [['0', 'Amplicon-16S'], ['1', 'Amplicon-ITS'], ['2', 'WMS']],
+
+    'Biome': [['0', 'Anus'], ['1', 'Gut'], ['2', 'Large Intestine'], ['3', 'Lower Respiratory Tract'], ['4', 'Lung'],
+                ['5', 'Nasal'], ['6', 'Oral'], ['7', 'Rectum'], ['8', 'Stomach'], ['9', 'Upper Respiratory Tract']],
+
+    'LibraryLayout': [['0', 'PAIRED'], ['1', 'SINGLE']],
     
-    'Country': [['0', 'Australia'], ['1', 'Bangladesh'], ['2', 'Belgium'], ['3', 'Brazil'],  
-                ['4', 'China'], ['5', 'Czech Republic'], ['6', 'Germany'], ['7', 'Hungary'], 
-                ['8', 'India'], ['9', 'Italy'], ['10', 'Japan'], ['11', 'Mali'], ['12', 'Morocco'], 
-                ['13', 'Nepal'], ['14', 'Netherlands'], ['15', 'Peru'], ['16', 'Poland'], 
-                ['17', 'Russia'], ['18', 'South Africa'], ['19', 'South Korea'], ['20', 'Spain'], 
-                ['21', 'Srilanka'], ['22', 'Switzerland'], ['23', 'Taiwan'], ['24', 'United Kingdom'], 
-                ['25', 'USA']],
-    
-    'Instrument': [['0', 'HiSeq 2000'], ['1', 'HiSeq 2500'], ['2', 'HiSeq 4000'],
-                    ['3', 'MiSeq'], ['4', 'NovaSeq 6000'], ['5', 'NextSeq 500'], 
-                    ['6', 'NextSeq 550']],
-    
-    'IsolationSource': [['0', 'BAL'], ['1', 'Bronchial Brush'], ['2', 'Bronchial Mucosa'], ['3', 'Colon Mucus'], 
-                        ['4', 'Endotracheal Aspirate'], ['5', 'Lung Biopsy'], ['6', 'Lung Tissue'],
-                        ['7', 'Lung Tumour Tissue'], ['8', 'Sputum'], ['9', 'Stool'], ['10', 'Supraglottic Swab']],
-    
-    'Disease': [['0', 'Asthma'], ['1', 'COPD'], ['2', 'COVID-19'], ['3', 'Cystic Fibrosis'], ['4', 'Lung cancer'], 
-                ['5', 'Pneumonia'], ['6', 'Tuberculosis']]
+    'Country': [['0', 'Argentina'], ['1', 'Australia'], ['2', 'Austria'], ['3', 'Bangladesh'], ['4', 'Belgium'], ['5', 'Brazil'],
+                ['6', 'Canada'], ['7', 'Chile'], ['8', 'China'], ['9', 'Colombia'], ['10', 'Czechia'], ['11', 'Denmark'], ['12', 'Egypt'],
+                ['13', 'Ethiopia'], ['14', 'France'], ['15', 'Gambia'], ['16', 'Germany'], ['17', 'Ghana'], ['18', 'Greece'], ['19', 'Hong Kong'],
+                ['20', 'Hungary'], ['21', 'India'], ['22', 'Ireland'], ['23', 'Israel'], ['24', 'Italy'], ['25', 'Japan'], ['26', 'Jordan'],
+                ['27', 'Kuwait'], ['28', 'Kyrgyzstan'], ['29', 'Luxembourg'], ['30', 'Malaysia'], ['31', 'Mali'], ['32', 'Mexico'],
+                ['33', 'Morocco'], ['34', 'Nepal'], ['35', 'Netherlands'], ['36', 'New Zealand'], ['37', 'Norway'], ['38', 'Panama'],
+                ['39', 'Peru'], ['40', 'Poland'], ['41', 'Portugal'], ['42', 'Russia'], ['43', 'Singapore'], ['44', 'South Africa'],
+                ['45', 'South Korea'], ['46', 'Spain'], ['47', 'Sri Lanka'], ['48', 'Sweden'], ['49', 'Switzerland'], ['50', 'Taiwan'],
+                ['51', 'Turkey'], ['52', 'Uganda'], ['53', 'United Kingdom'], ['54', 'USA']]
 };
 
 function getOperatorHTML(keyType) {
@@ -51,9 +54,12 @@ function getValueHTML(keyType, keyValue) {
         valueHTML = '<input type="text" class="full" placeholder="Enter text">';
     else if (keyType == 'N')
         valueHTML = '<input type="number" step="0.01" class="full" placeholder="Enter number">';
-    else if (keyType == 'Y')
-        valueHTML = '<input type="number" min="1900", max="'+ (new Date()).getFullYear() +'" step="1" class="full" placeholder="YYYY">';
-    else if (keyType == 'C') {
+    else if (keyType == 'Y') {
+        valueHTML = '<select class="full">';
+        for (var i = 2012; i <= 2024; ++i)
+            valueHTML = valueHTML + '<option value="' + i + '">' + i + '</option>';
+        valueHTML = valueHTML + '</select>';
+    } else if (keyType == 'C') {
         valueHTML = '<select class="full">';
         possibleValues = keyToValueMap[keyValue];
         for (v of possibleValues)
@@ -77,10 +83,10 @@ function getHTML() {
             '<select class="full"  onchange="updateKeyChoice(this)">' +
                 '<option value="Disease" selected>Disease</option>' + 
                 '<option value="AssayType">Assay Type</option>' + 
+                '<option value="Biome">Biome</option>' +
+                '<option value="LibraryLayout">Library Layout</option>' +
                 '<option value="Country">Country</option>' + 
-                '<option value="Instrument">Instrument</option>' + 
                 '<option value="Year">Year</option>' + 
-                '<option value="IsolationSource">Isolation source</option>' + 
             '</select>' +
         '</td>';
     var operatorHTML =
