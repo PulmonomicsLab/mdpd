@@ -1,6 +1,7 @@
 args <- commandArgs(trailingOnly=TRUE)
 runID <- args[1]
 bioprojectID <- args[2]
+assayType <- args[3]
 
 inputPath <- "input/biom/"
 libraryPath <- "Rlibs/"
@@ -11,11 +12,11 @@ library(microeco, quietly=TRUE)
 library(file2meco, quietly=TRUE)
 
 # Read biom RDS
-ps <- readRDS(paste0(inputPath, bioprojectID, "_ps_object.rds"))
+ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
 # print(ps)
 
 # Create phyloseq object to meco object
-meco_object <- phyloseq2meco(ps)
+suppressMessages(meco_object <- phyloseq2meco(ps))
 meco_object$tidy_dataset()
 
 # Filter pollution
@@ -26,12 +27,14 @@ meco_object$tidy_dataset()
 suppressMessages(meco_object$filter_taxa(rel_abund = 0.0001, freq = 0.05))
 meco_object$tidy_dataset()
 
-meco_object$sample_table <- subset(meco_object$sample_table, Sample == runID)
+meco_object$sample_table[, 23] <- row.names(meco_object$sample_table)
+colnames(meco_object$sample_table)[23] <- "Run"
+suppressMessages(meco_object$sample_table <- subset(meco_object$sample_table, Run == runID))
 meco_object$tidy_dataset()
 
 # Bar plot Genus
 suppressMessages(t3 <- trans_abund$new(dataset = meco_object, taxrank = "Genus", ntaxa = 50))
-trim_taxa <- t3$data_abund[, c("Taxonomy", "Sample", "Abundance")]
+trim_taxa <- t3$data_abund[, c("Taxonomy", "Abundance")]
 ordered_taxa <- trim_taxa[order(trim_taxa$Abundance, decreasing=TRUE),]
 # print(ordered_taxa)
 
