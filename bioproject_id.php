@@ -1,23 +1,27 @@
 <?php
-    $ldaAdHocMessages = array("PRJNA434133" => "No markers found for Amplicon-Stool.");
     include('db.php');
     
     $bioprojectID = $_GET['key'];
-    
-    $kronaMappings = json_decode(file_get_contents("input/Krona/bioproject_metadata.json"), true);
+
+    $confounder_json = json_decode(file_get_contents("input/bioproject_confounder_list.json"), true);
+    $covariate_possible = array_key_exists($bioprojectID, $confounder_json["confounders"]);
+
+//     $kronaMappings = json_decode(file_get_contents("input/Krona/bioproject_metadata.json"), true);
 //     echo implode("<br/>", $kronaMappings);
-    $ldaMappings = json_decode(file_get_contents("input/LDA/bioproject_metadata.json"), true);
+
+//     $ldaAdHocMessages = array("PRJNA434133" => "No markers found for Amplicon-Stool.");
+//     $ldaMappings = json_decode(file_get_contents("input/LDA/bioproject_metadata.json"), true);
 //     echo implode("<br/>", $ldaMappings);
-    $analysisErrorTexts = json_decode(file_get_contents("input/bioproject_plot_error.json"), true);
+//     $analysisErrorTexts = json_decode(file_get_contents("input/bioproject_plot_error.json"), true);
 //     echo implode("<br/>", array_keys($analysisErrorTexts));
-    $kronaErrorText = "";
-    $ldaErrorText = "";
-    if (array_key_exists($bioprojectID, $analysisErrorTexts)){
-        if (array_key_exists("Krona", $analysisErrorTexts[$bioprojectID]))
-            $kronaErrorText = $analysisErrorTexts[$bioprojectID]["Krona"];
-        if (array_key_exists("LDA", $analysisErrorTexts[$bioprojectID]))
-            $ldaErrorText = $analysisErrorTexts[$bioprojectID]["LDA"];
-    }
+//     $kronaErrorText = "";
+//     $ldaErrorText = "";
+//     if (array_key_exists($bioprojectID, $analysisErrorTexts)){
+//         if (array_key_exists("Krona", $analysisErrorTexts[$bioprojectID]))
+//             $kronaErrorText = $analysisErrorTexts[$bioprojectID]["Krona"];
+//         if (array_key_exists("LDA", $analysisErrorTexts[$bioprojectID]))
+//             $ldaErrorText = $analysisErrorTexts[$bioprojectID]["LDA"];
+//     }
     
     
     $bioprojectQuery = "select ".implode(",", array_keys($allBioProjectAttributes))." from bioproject where BioProject=?";
@@ -90,7 +94,7 @@
                     echo "<center><p>Error !!! BioProject ID: ".$bioprojectID." does not exist in the database.</p></center>";
                 } else {
                     echo "<center><h3 style=\"margin-bottom:0;\">BioProject ID: ".$bioprojectID."</h3></center>";
-                    echo "<center><h4 style=\"margin-top:0;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID."\">https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
+                    echo "<center><h4 style=\"margin-top:0;margin-bottom:5px;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID."\">https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
                     foreach($bioprojectRows as $row){
@@ -126,46 +130,73 @@
 //                                     echo "<td style=\"width:60%\">".implode("<br/>", $subgroups)."</td>";
                                 }
                                 else
-                                    echo "<td style=\"width:60%\">".$row[$name]."</td>";
-                                
-//                                 if ($name === "SubGroup")
-//                                     $subgroups = explode(";", $row[$name]);
+                                    echo "<td style=\"width:60%\">".str_replace(";", "; ", $row[$name])."</td>";
                                 echo "</tr>";
                             }
                         }
                     }
-                    echo "<tr><td>Linear Discriminant Analysis (LDA)</td>";
+                    echo "</table>";
+
+                    echo "<center><h3 style=\"margin-bottom:5px;\">Analyses</h3></center>";
+                    echo "<table class=\"details\" border=\"1\">";
+
+                    echo "<tr><th style=\"width:30%;\">Taxonomic profile</th>";
                     echo "<td>";
-                    if (count($ldaMappings[$bioprojectID]) === 0) {
-                        echo $ldaErrorText;
-                    } else {
-                        $isolationSources = array_keys($ldaMappings[$bioprojectID]);
-                        foreach($isolationSources as $is) {
-                            $assayTypes = $ldaMappings[$bioprojectID][$is];
-                            foreach($assayTypes as $at) {
-                                echo "<a target=\"_blank\" href=\"lda.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$at."-".$is."</button></a>";
-                            }
-                        }
-                        if (array_key_exists($bioprojectID, $ldaAdHocMessages))
-                            echo "&nbsp;".$ldaAdHocMessages[$bioprojectID];
+//                     if (count($kronaMappings[$bioprojectID]) === 0) {
+//                         echo $kronaErrorText;
+//                     } else {
+//                         $diseaseGroups = array_keys($kronaMappings[$bioprojectID]);
+//                         foreach($diseaseGroups as $sg) {
+//                             $assayTypes = $kronaMappings[$bioprojectID][$sg];
+//                             foreach($assayTypes as $at)
+//                                 echo "<a target=\"_blank\" href=\"krona.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&ds=".urlencode($sg)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$sg."-".$at."</button></a>";
+//                         }
+//                     }
+                    $isolationSources = explode(";", $row["IsolationSource"]);
+                    foreach($isolationSources as $is) {
+                        $assayTypes = explode(";", $row["AssayType"]);
+                        foreach($assayTypes as $at)
+                            echo "<a target=\"_blank\" href=\"bioproject_taxonomic_profile.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
                     }
                     echo "</td></tr>";
-                    echo "<tr><td>Taxonomic profile (Krona Plot)</td>";
+
+                    echo "<tr><th style=\"width:30%;\">Discriminant analysis</th>";
                     echo "<td>";
-                    if (count($kronaMappings[$bioprojectID]) === 0) {
-                        echo $kronaErrorText;
-                    } else {
-                        $diseaseGroups = array_keys($kronaMappings[$bioprojectID]);
-                        foreach($diseaseGroups as $sg) {
-                            $assayTypes = $kronaMappings[$bioprojectID][$sg];
-                            foreach($assayTypes as $at)
-                                echo "<a target=\"_blank\" href=\"krona.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&ds=".urlencode($sg)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$sg."-".$at."</button></a>";
+//                     if (count($ldaMappings[$bioprojectID]) === 0) {
+//                         echo $ldaErrorText;
+//                     } else {
+//                         $isolationSources = array_keys($ldaMappings[$bioprojectID]);
+//                         foreach($isolationSources as $is) {
+//                             $assayTypes = $ldaMappings[$bioprojectID][$is];
+//                             foreach($assayTypes as $at) {
+//                                 echo "<a target=\"_blank\" href=\"lda.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$at."-".$is."</button></a>";
+//                             }
+//                         }
+//                         if (array_key_exists($bioprojectID, $ldaAdHocMessages))
+//                             echo "&nbsp;".$ldaAdHocMessages[$bioprojectID];
+//                     }
+                    $isolationSources = explode(";", $row["IsolationSource"]);
+                    foreach($isolationSources as $is) {
+                        $assayTypes = explode(";", $row["AssayType"]);
+                        foreach($assayTypes as $at) {
+                            echo "<a target=\"_blank\" href=\"lda.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
                         }
                     }
                     echo "</td></tr>";
+
+                    if($covariate_possible) {
+                        echo "<tr><th style=\"width:30%;\">Multivariate association analysis</th>";
+                        echo "<td>";
+                        $assayTypes = explode(";", $row["AssayType"]);
+                        foreach($assayTypes as $at) {
+                            echo "<a target=\"_blank\" href=\"bioproject_covariate_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$at."</button></a>";
+                        }
+                        echo "</td></tr>";
+                    }
                     echo "</table>";
             ?>
-                    <p><br/>Total number of runs found in the database for this BioProject ID = <?php echo count($runRows);?></p>
+                    <center><h3 style="margin-bottom:0px;">Summary of runs</h3></center>
+                    <p style="margin-top:2px;margin-bottom:5px;">Total number of runs found in the database for this BioProject ID = <?php echo count($runRows);?></p>
                     <table border="0" style="width:100%; border: 4px solid #392d37;">
                         <tr>
                             <td style="width:25%;">
