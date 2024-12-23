@@ -12,11 +12,11 @@ library(microeco, quietly=TRUE)
 library(file2meco, quietly=TRUE)
 
 # Read biom RDS
-ps <- readRDS(paste0(inputPath, bioprojectID, "_ps_object.rds"))
+ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
 # print(ps)
 
 # Create phyloseq object to meco object
-meco_object <- phyloseq2meco(ps)
+meco_object <- suppressMessages(phyloseq2meco(ps))
 meco_object$tidy_dataset()
 
 # Filter pollution
@@ -27,7 +27,8 @@ meco_object$tidy_dataset()
 suppressMessages(meco_object$filter_taxa(rel_abund = 0.0001, freq = 0.05))
 meco_object$tidy_dataset()
 
-meco_object$sample_table <- subset(meco_object$sample_table, (Assay.Type == assayType) & (Isolation.source == isolationSource))
+# meco_object$sample_table <- subset(meco_object$sample_table, (Assay.Type == assayType) & (Isolation.source == isolationSource))
+meco_object$sample_table <- subset(meco_object$sample_table, (IsolationSource == isolationSource))
 meco_object$tidy_dataset()
 
 # Box plot Genus
