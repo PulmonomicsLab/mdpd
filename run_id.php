@@ -18,7 +18,7 @@
     $stmt->close();
     closeConnection($conn);
 
-    $command = "Rscript R/runwise_top_taxa.R \"".$runID."\" \"".$rows[0]["BioProject"]."\" 2>&1";
+    $command = "Rscript R/runwise_top_taxa.R \"".$runID."\" \"".$rows[0]["BioProject"]."\" \"".$rows[0]["AssayType"]."\" 2>&1";
 //     echo "<pre>".$command."</pre>\n";
 
     exec($command, $out, $status);
@@ -102,7 +102,7 @@
         </div>
     </body>
     <script>
-        <?php echo "getKronaData('BIOPROJECT','".$row['BioProject']."','".$row['Grp']."','".$row['AssayType']."','".$row['IsolationSource']."','Runwise');"; ?>
+        <?php echo "getKronaData('".$row['BioProject']."','".$row['AssayType']."','".$row['IsolationSource']."','runwise');"; ?>
         <?php echo "plotBar('bar_plot_div', '".$out[0]."');"; ?>
     </script>
 </html>
