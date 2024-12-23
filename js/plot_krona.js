@@ -1,13 +1,11 @@
-function getKronaData(queryType, bioproject, disease, assayType, isolationSource, kronaType) {
-    var prefix = 'input/Krona/';
-    if(queryType == 'DISEASE') {
-        var folder = prefix + assayType + '/' + disease + '/' ;
-        var file = folder + 'Krona_' + disease.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + kronaType.replace(/ /g,"_") + '.html';
-        var display = disease + ' | ' + assayType + ' | ' + isolationSource + ' (' + kronaType + ')';
-    } else if(queryType == 'BIOPROJECT') {
-        var folder = prefix + assayType.split('_')[0] + '/' + queryType + '/' ;
-        var file = folder + 'Krona_' + bioproject.replace(/ /g,"_") + '_' + disease.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + kronaType.replace(/ /g,"_") + '.html';
-        var display = 'BioProject ID: ' + bioproject + ' - ' + disease + ' | ' + assayType.replace(/_/g, ' | ') + ' (' + kronaType + ')';
+function getKronaData(bioproject, assayType, isolationSource, kronaType) {
+    var prefix = 'input/krona/';
+    if(kronaType == 'runwise') {
+        var file = prefix + bioproject.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_krona_' + kronaType.replace(/ /g,"_") + '.html';
+//         var display = disease + ' | ' + assayType + ' | ' + isolationSource + ' (' + kronaType + ')';
+    } else if(kronaType == 'subgroup') {
+        var file = prefix + bioproject.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '_krona_' + kronaType.replace(/ /g,"_") + '.html';
+//         var display = 'BioProject ID: ' + bioproject + ' - ' + ' | ' + assayType + ' | ' + isolationSource;
     }
 //     alert(queryType+'<br/>'+bioproject+'<br/>'+disease+'<br/>'+assayType+'<br/>'+isolationSource+'<br/>'+kronaType+'\n'+file);
 
