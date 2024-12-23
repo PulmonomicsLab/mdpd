@@ -18,6 +18,7 @@
         <title>Taxonomic - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_box.js"></script>
+        <script type = "text/javascript" src = "js/plot_krona.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -45,7 +46,8 @@
         <!--<div class = "section_left"></div>-->
 
         <div class = "section_middle">
-            <div style="width:100%;" id="box_plot_div"></div>
+            <iframe id="krona_frame" style="width:100%; height:600px;"></iframe>
+            <div id="box_plot_div" style="width:100%;"></div>
 
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
@@ -56,6 +58,7 @@
         </div>
     </body>
     <script>
+        <?php echo "getKronaData('".$bioproject."','".$at."','".$is."','subgroup');"; ?>
         <?php echo "plotBox('box_plot_div', '".$out[0]."');"; ?>
     </script>
 </html>
