@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Taxonomic - MDPD</title>
+        <title>Taxonomic profile - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_box.js"></script>
         <script type = "text/javascript" src = "js/plot_krona.js"></script>
@@ -46,7 +46,10 @@
         <!--<div class = "section_left"></div>-->
 
         <div class = "section_middle">
+            <p style="margin-top:0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo "Taxonomic profile - ".$bioproject." | ".$at." | ".$is; ?></p>
+            <p style="margin-bottom:0; font-weight:bold;">A. Taxonomic composition (Krona plot)</p>
             <iframe id="krona_frame" style="width:100%; height:600px;"></iframe>
+            <p style="margin-bottom:0; font-weight:bold;">B. Top 10 taxa distribution across runs (Box plot)</p>
             <div id="box_plot_div" style="width:100%;"></div>
 
             <br/><hr/>
