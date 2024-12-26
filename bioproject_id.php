@@ -91,10 +91,10 @@
         <div class = "section_middle">
             <?php
                 if (count($bioprojectRows) < 1) {
-                    echo "<center><p>Error !!! BioProject ID: ".$bioprojectID." does not exist in the database.</p></center>";
+                    echo "<p style=\"text-align:center;\">Error !!! BioProject ID: ".$bioprojectID." does not exist in the database.</p>";
                 } else {
-                    echo "<center><h3 style=\"margin-bottom:0;\">BioProject ID: ".$bioprojectID."</h3></center>";
-                    echo "<center><h4 style=\"margin-top:0;margin-bottom:5px;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID."\">https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
+                    echo "<h3 style=\"margin:0; text-align:center;\">BioProject ID: ".$bioprojectID."</h3>";
+                    echo "<h4 style=\"margin:0 0 5px 0; text-align:center;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID."\">https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
                     foreach($bioprojectRows as $row){
@@ -137,7 +137,7 @@
                     }
                     echo "</table>";
 
-                    echo "<center><h3 style=\"margin-bottom:5px;\">Analyses</h3></center>";
+                    echo "<h3 style=\"margin-bottom:5px; text-align:center;\">Analyses</h3>";
                     echo "<table class=\"details\" border=\"1\">";
 
                     echo "<tr><th style=\"width:30%;\">Taxonomic profile</th>";
@@ -194,8 +194,17 @@
                         echo "</td></tr>";
                     }
                     echo "</table>";
+
+                    echo "<h3 style=\"margin-bottom:5px; text-align:center;\">Download</h3>";
+                    echo "<table class=\"details\" border=\"1\">";
+                    echo "<tr><th style=\"width:30%;\">Biom file</th><td>";
+                    $assayTypes = explode(";", $bioprojectRows[0]["AssayType"]);
+                    foreach($assayTypes as $at)
+                        echo "<a target=\"_blank\" href=\"resource/public/biom/".$bioprojectID."_".$at."_ps_object.rds\"><button type=\"button\" style=\"margin:3px;\">Download - ".$at."</button></a>";
+                    echo "</td></tr>";
+                    echo "</table>";
             ?>
-                    <center><h3 style="margin-bottom:0px;">Summary of runs</h3></center>
+                    <h3 style="margin-bottom:0px; text-align:center;">Summary of runs</h3>
                     <p style="margin-top:2px;margin-bottom:5px;">Total number of runs found in the database for this BioProject ID = <?php echo count($runRows);?></p>
                     <table border="0" style="width:100%; border: 4px solid #392d37;">
                         <tr>
