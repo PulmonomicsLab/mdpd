@@ -53,6 +53,7 @@
         <!--<div class = "section_left"></div>-->
         
         <div class = "section_middle">
+            <p style="margin-top:0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo "Discriminant analysis - ".$bioproject." | ".$at." | ".$is; ?></p>
             <div style="width:100%;" id="lda_form_div">
                 <form method="get" action="lda.php">
                     <input type="hidden" name="key" value="<?php echo $bioproject; ?>" />
@@ -116,7 +117,16 @@
                     </table>
                 </form>
             </div>
-            <center><p id="display_text"></p></center>
+            <p style="margin-bottom:0; font-weight:bold;">
+                <?php
+                    if ($method_joined == "edgeR_fdr")
+                        echo "Analysis parameters: Method = \"edgeR (with FDR p-value adjustment)\" | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    else if ($method_joined == "lefse_none")
+                        echo "Analysis parameters: Method = \"LEfSe (without FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    else if ($method_joined == "lefse_fdr")
+                        echo "Analysis parameters: Method = \"LEfSe (with FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                ?>
+            </p>
             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <div style="width:100%;" id="lda_plot_div">
             <p>

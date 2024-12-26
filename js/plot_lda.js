@@ -125,7 +125,7 @@ function makePlot(div_id, dataMap, method) {
     Plotly.plot(graphDiv, {data: data, layout: layout, config: config})
 }
 
-function plotLDA(div_id, response, method, disease_pair, assayType, biome, isolation_scource) {
+function plotLDA(div_id, response, method) {
     var data = JSON.parse(response);
     if(data.taxa.length > 0) {
         var dataMap = getDataMap(data.taxa, data.subgroup, data.value);
