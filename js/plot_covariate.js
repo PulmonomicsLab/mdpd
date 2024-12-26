@@ -129,7 +129,7 @@ function makePlot(div_id, heatmapData) {
         paper_bgcolor: '#ffffff', //'#fff0f5',
         height: ((computedHeight < minHeight) ? minHeight : computedHeight),
         margin: {
-            t: 60,
+            t: 30,
 //             l: 250,
 //             b: 140
         },

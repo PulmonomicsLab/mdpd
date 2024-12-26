@@ -35,6 +35,7 @@
         mkdir($tmp_path, 0700);
 
         $confounders = $confounder_json["confounders"][$bioproject];
+        $display_text = "Multivariate association analysis - ".$bioproject." | ".$at." | Confounders = [".$confounders."]";
         $command = "Rscript R/bioproject_covariate_analysis.R \"".$bioproject."\" \"".$at."\" \"".$confounders."\" \"".$tmp_path."\" 2>&1";
 //         echo "<pre>".$command."</pre>\n";
         exec($command, $out, $status);
@@ -54,7 +55,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Covariate - MDPD</title>
+        <title>Multivariate association analysis - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_covariate.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -84,6 +85,8 @@
         <!--<div class = "section_left"></div>-->
 
         <div class = "section_middle">
+            <p style="margin-top:0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo $display_text; ?></p>
+            <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
             <div id="covariate_plot_div" style="width:70%; margin:0 15% 0 15%;"></div>
 
             <br/><hr/>
