@@ -65,8 +65,8 @@
                 if (count($rows) < 1) {
                     echo "<center><p>Error !!! Run ID: ".$runID." does not exist in the database.</p></center>";
                 } else {
-                    echo "<center><h3 style=\"margin-bottom:0;\">Run ID: ".$runID."</h3></center>";
-                    echo "<center><h4 style=\"margin-top:0;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/sra/?term=".$runID."\">https://www.ncbi.nlm.nih.gov/sra/?term=".$runID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
+                    echo "<h3 style=\"margin:0; text-align:center;\">Run ID: ".$runID."</h3>";
+                    echo "<h4 style=\"margin:0 0 5px 0; text-align:center;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/sra/?term=".$runID."\">https://www.ncbi.nlm.nih.gov/sra/?term=".$runID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
 //                     echo "<hr/><br/>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";
@@ -88,9 +88,13 @@
             ?>
 
             <div style="width:45%; margin:10px 2% 10px 2%; float:left;">
+                <p style="margin-top:0; font-weight:bold;">A. Taxonomic composition of the run (Krona plot)</p>
                 <?php echo "<iframe id=\"krona_frame\" style=\"width:100%; height:600px; border:1px;\" onload=\"selectRun('".$runID."')\"></iframe>"; ?>
             </div>
-            <div style="width:45%; margin:10px 2% 10px 2%; float:right;" id="bar_plot_div"></div>
+            <div style="width:45%; margin:10px 2% 10px 2%; float:right;">
+                <p style="margin-top:0; font-weight:bold;">B. Top 10 abundant taxa (Bar plot)</p>
+                <div id="bar_plot_div" style="width:100%;"></div>
+            </div>
             <div style="clear:both"></div>
             
             <br/><hr/>

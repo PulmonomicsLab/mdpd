@@ -30,8 +30,8 @@ function makePlot(div_id, taxa, abundances) {
             font: {color: 'black'}
         },
         margin: {
-            t: 40,
-            l: 200
+            t: 20,
+//             l: 200
         },
         xaxis: {
             visible : true,
