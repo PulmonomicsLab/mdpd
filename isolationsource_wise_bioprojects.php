@@ -1,15 +1,15 @@
 <?php
     include('db.php');
 
-    $subgroup = urldecode($_GET['key']);
+    $is = urldecode($_GET['key']);
 
-    $bioprojectQuery = "select ".implode(",", $viewBioProjectAttributes)." from bioproject where BioProject in (select distinct(BioProject) from run where SubGroup = ?);";
-//     echo $bioprojectQuery." ".$subgroup;
+    $bioprojectQuery = "select ".implode(",", $viewBioProjectAttributes)." from bioproject where BioProject in (select distinct(BioProject) from run where IsolationSource = ?);";
+//     echo $bioprojectQuery." ".$disease;
 
     $conn = connect();
 
     $bioprojectStmt = $conn->prepare($bioprojectQuery);
-    $bioprojectStmt->bind_param("s", $subgroup);
+    $bioprojectStmt->bind_param("s", $is);
 //     $bioprojectStmt->execute();
 //     $bioprojectResult = $bioprojectStmt->get_result();
 //     echo $bioprojectResult->num_rows." ".$bioprojectResult->field_count."<br/><br/>";
