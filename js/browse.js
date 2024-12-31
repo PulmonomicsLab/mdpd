@@ -143,7 +143,7 @@ function getBioProjects(dis, resultDivId){
             filter_diseases(resultDivId);
         }
     };
-    httpReq.open('GET', 'disease_wise_bioprojects.php?key='+ encodeURIComponent(dis), true);
+    httpReq.open('GET', 'get_bioprojects.php?key=' + encodeURIComponent(dis) + '&keyType=ds', true);
     httpReq.setRequestHeader("Content-type", "text/json");
     httpReq.send();
 }
@@ -164,7 +164,7 @@ function getSubgroupBioProjects(sg, resultDivId){
                 resultElement.innerHTML = hideButton + resultCountString + subgroupResultHTML;
         }
     };
-    httpReq.open('GET', 'subgroup_wise_bioprojects.php?key='+ encodeURIComponent(sg), true);
+    httpReq.open('GET', 'get_bioprojects.php?key=' + encodeURIComponent(sg) + '&keyType=sg', true);
     httpReq.setRequestHeader("Content-type", "text/json");
     httpReq.send();
 }
@@ -185,7 +185,7 @@ function getIsolationSourceBioProjects(is, resultDivId){
                 resultElement.innerHTML = hideButton + resultCountString + isolationSourceResultHTML;
         }
     };
-    httpReq.open('GET', 'isolationsource_wise_bioprojects.php?key='+ encodeURIComponent(is), true);
+    httpReq.open('GET', 'get_bioprojects.php?key=' + encodeURIComponent(is) + '&keyType=is', true);
     httpReq.setRequestHeader("Content-type", "text/json");
     httpReq.send();
 }
