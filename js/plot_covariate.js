@@ -95,8 +95,8 @@ function getDataMap(taxa, name, value, significance) {
 
 function makePlot(div_id, heatmapData) {
     var graphDiv = document.getElementById(div_id);
-    var minHeight = 400;
-    var computedHeight = (20*heatmapData.taxa.length + 50);
+    var minHeight = 500;
+    var computedHeight = (20*heatmapData.taxa.length + 100);
     var yTitle = 'Taxa';
     
     var data = [{

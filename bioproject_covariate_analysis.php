@@ -26,6 +26,7 @@
 
     $bioproject = urldecode($_GET["key"]);
     $at = urldecode($_GET["at"]);
+    $is = urldecode($_GET["is"]);
 
     $confounder_json = json_decode(file_get_contents("input/bioproject_confounder_list.json"), true);
 //     echo implode(", ", $confounder_json["bioprojects"]);
@@ -35,8 +36,8 @@
         mkdir($tmp_path, 0700);
 
         $confounders = $confounder_json["confounders"][$bioproject];
-        $display_text = "Multivariate association analysis - ".$bioproject." | ".$at." | Confounders = [".$confounders."]";
-        $command = "Rscript R/bioproject_covariate_analysis.R \"".$bioproject."\" \"".$at."\" \"".$confounders."\" \"".$tmp_path."\" 2>&1";
+        $display_text = "Multivariate association analysis - ".$bioproject." | ".$at." | ".$is." | Confounders = [".$confounders."]";
+        $command = "Rscript R/bioproject_covariate_analysis.R \"".$bioproject."\" \"".$at."\" \"".$is."\" \"".$confounders."\" \"".$tmp_path."\" 2>&1";
 //         echo "<pre>".$command."</pre>\n";
         exec($command, $out, $status);
         $heatmap = $out[count($out)-1];

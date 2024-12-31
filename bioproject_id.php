@@ -187,9 +187,12 @@
                     if($covariate_possible) {
                         echo "<tr><th style=\"width:30%;\">Multivariate association analysis</th>";
                         echo "<td>";
-                        $assayTypes = explode(";", $row["AssayType"]);
-                        foreach($assayTypes as $at) {
-                            echo "<a target=\"_blank\" href=\"bioproject_covariate_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$at."</button></a>";
+                        $isolationSources = explode(";", $row["IsolationSource"]);
+                        foreach($isolationSources as $is) {
+                            $assayTypes = explode(";", $row["AssayType"]);
+                            foreach($assayTypes as $at) {
+                                echo "<a target=\"_blank\" href=\"bioproject_covariate_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
+                            }
                         }
                         echo "</td></tr>";
                     }
