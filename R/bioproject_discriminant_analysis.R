@@ -19,20 +19,45 @@ library(phyloseq, quietly=TRUE)
 library(microeco, quietly=TRUE)
 library(file2meco, quietly=TRUE)
 
-# Read biom RDS
-ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
+# Initialize params
+if (assayType == "WMS") {
+    rel_abund <- 0.005
+    freq <- 0.05
+    pollution_filters = "Chordata"
+} else {
+    rel_abund <- 0.0001
+    freq <- 0.05
+    pollution_filters = c("mitochondria", "chloroplast")
+}
+
+# Read biom
+if (assayType == "WMS") {
+    # Read biom file
+    ps <- import_biom(paste0(inputPath, bioprojectID, "_", assayType, ".biom1"), parseFunction=parse_taxonomy_greengenes)
+    tax_table(ps) <- cbind(ps@tax_table, paste(ps@tax_table[, "Genus"], ps@tax_table[, "Species"], sep="_"))
+    colnames(ps@tax_table)[7] <- "Old_Species"
+    colnames(ps@tax_table)[8] <- "Species"
+
+    # Create phyloseq object to meco object
+    suppressMessages(meco_object <- phyloseq2meco(ps))
+    meco_object$tidy_dataset()
+    meco_object$tax_table <- meco_object$tax_table[, -7] # Remove Old_Species column
+} else {
+    # Read biom RDS
+    ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
+
+    # Create phyloseq object to meco object
+    suppressMessages(meco_object <- phyloseq2meco(ps))
+    meco_object$tidy_dataset()
+}
 # print(ps)
 
-# Create phyloseq object to meco object
-meco_object <- suppressMessages(phyloseq2meco(ps))
-meco_object$tidy_dataset()
-
 # Filter pollution
-suppressMessages(meco_object$filter_pollution(taxa = c("mitochondria", "chloroplast")))
+suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
 meco_object$tidy_dataset()
 
 # Filter based on abundance and detection
-suppressMessages(meco_object$filter_taxa(rel_abund = 0.0001, freq = 0.05))
+suppressMessages(meco_object$filter_taxa(rel_abund = rel_abund, freq = freq))
 meco_object$tidy_dataset()
 
 meco_object$sample_table <- subset(meco_object$sample_table, (IsolationSource == isolationSource))
@@ -49,7 +74,7 @@ tryCatch(
 			suppressWarnings(suppressMessages(p <- t1$plot_diff_bar(use_number = 1:200)))
 			trim_lda <- p$data[, c("Taxa", "Group", "logFC")]
 			colnames(trim_lda) <- c("Taxa", "Group", "Value")
-			trim_lda <- trim_lda[abs(trim_lda$Value) > threshold & (trim_lda$Taxa) != "g__" & (trim_lda$Taxa) != "f__" & (trim_lda$Taxa) != "o__", ]
+			trim_lda <- trim_lda[abs(trim_lda$Value) > threshold & (trim_lda$Taxa) != "s__" & (trim_lda$Taxa) != "g__" & (trim_lda$Taxa) != "f__" & (trim_lda$Taxa) != "o__", ]
 		}
 
 		taxa_json <- "\"taxa\":["

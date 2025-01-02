@@ -16,20 +16,48 @@ library(microeco, quietly=TRUE)
 library(file2meco, quietly=TRUE)
 suppressMessages(library(dplyr, quietly=TRUE))
 
-# Read biom RDS
-ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
+# Initialize params
+if (assayType == "WMS") {
+    use_data <- "Species"
+    rel_abund <- 0.005
+    freq <- 0.05
+    pollution_filters = "Chordata"
+} else {
+    use_data <- "Genus"
+    rel_abund <- 0.0001
+    freq <- 0.05
+    pollution_filters = c("mitochondria", "chloroplast")
+}
+
+# Read biom
+if (assayType == "WMS") {
+    # Read biom file
+    ps <- import_biom(paste0(inputPath, bioprojectID, "_", assayType, ".biom1"), parseFunction=parse_taxonomy_greengenes)
+    tax_table(ps) <- cbind(ps@tax_table, paste(ps@tax_table[, "Genus"], ps@tax_table[, "Species"], sep="_"))
+    colnames(ps@tax_table)[7] <- "Old_Species"
+    colnames(ps@tax_table)[8] <- "Species"
+
+    # Create phyloseq object to meco object
+    suppressMessages(meco_object <- phyloseq2meco(ps))
+    meco_object$tidy_dataset()
+    meco_object$tax_table <- meco_object$tax_table[, -7] # Remove Old_Species column
+} else {
+    # Read biom RDS
+    ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
+
+    # Create phyloseq object to meco object
+    suppressMessages(meco_object <- phyloseq2meco(ps))
+    meco_object$tidy_dataset()
+}
 # print(ps)
 
-# Create phyloseq object to meco object
-suppressMessages(meco_object <- phyloseq2meco(ps))
-meco_object$tidy_dataset()
 
 # Filter pollution
-suppressMessages(meco_object$filter_pollution(taxa = c("mitochondria", "chloroplast")))
+suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
 meco_object$tidy_dataset()
 
 # Filter based on abundance and detection
-suppressMessages(meco_object$filter_taxa(rel_abund = 0.0001, freq = 0.05))
+suppressMessages(meco_object$filter_taxa(rel_abund = rel_abund, freq = freq))
 
 meco_object$sample_table <- subset(meco_object$sample_table, (IsolationSource == isolationSource))
 meco_object$tidy_dataset()
@@ -64,6 +92,7 @@ if ("Gender" %in% confounders) {
 }
 
 if ("AgeGroup" %in% confounders) {
+    meco_object$sample_table$Age <- as.numeric(meco_object$sample_table$Age)
     meco_object$sample_table <- meco_object$sample_table %>% mutate(AgeGroup = cut(Age, breaks=c(0,1,11,21,31,41,51,61,71,81,91,101,111)))
     for(sg in subgroups) {
         agegroups <- unique(meco_object$sample_table[meco_object$sample_table$SubGroup == sg, "AgeGroup"])
@@ -128,7 +157,7 @@ t4 <- trans_env$new(dataset = meco_object, env_cols = 1:ncol(meco_object$sample_
 # Perform covariate analysis
 suppressWarnings(suppressMessages(
     t4$cal_cor(
-        use_data = "Genus",
+        use_data = use_data,
         use_taxa_num = nrow(meco_object$otu_table),
         cor_method = "maaslin2",
         standardize = FALSE,

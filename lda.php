@@ -5,7 +5,10 @@
     $method_joined = array_key_exists("method", $_GET) ? urldecode($_GET["method"]) : "edgeR_fdr";
     $alpha = array_key_exists("alpha", $_GET) ? urldecode($_GET["alpha"]) : "0.1";
     $filter_thres = array_key_exists("filter_thres", $_GET) ? urldecode($_GET["filter_thres"]) : "0.0001";
-    $taxa_level = array_key_exists("taxa_level", $_GET) ? urldecode($_GET["taxa_level"]) : "Genus";
+    if ($at == "WMS")
+        $taxa_level = array_key_exists("taxa_level", $_GET) ? urldecode($_GET["taxa_level"]) : "Species";
+    else
+        $taxa_level = array_key_exists("taxa_level", $_GET) ? urldecode($_GET["taxa_level"]) : "Genus";
     $threshold = array_key_exists("threshold", $_GET) ? urldecode($_GET["threshold"]) : "2";
 
     $p_adjust_method = explode("_", $method_joined)[1];
@@ -88,6 +91,7 @@
                             <td style="width:15%;">
                                 <label>Taxa level</label>
                                 <select class="full" id="taxa_level" name="taxa_level" required>
+                                    <?php if($at == "WMS") echo "<option value=\"Species\"".(($taxa_level == "Species") ? "selected>" : ">")."Species</option>"; ?>
                                     <option value="Genus" <?php echo ($taxa_level == "Genus") ? "selected" : ""; ?>>Genus</option>
                                     <option value="Family" <?php echo ($taxa_level == "Family") ? "selected" : ""; ?>>Family</option>
                                     <option value="Order" <?php echo ($taxa_level == "Order") ? "selected" : ""; ?>>Order</option>
