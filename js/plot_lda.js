@@ -11,6 +11,21 @@ function getDataMap(taxa, subgroup, value) {
     return dataMap;
 }
 
+function createDownloadLink(method, p_adjust_method, taxa, subgroup, value, pval, significance) {
+    var scoreLabel = (method == 'edgeR') ? 'Log2FC' : 'LDA score (log10)';
+    var pvalLabel = (p_adjust_method == 'none') ? 'P-value' : 'FDR-adjusted p-value';
+    var s = 'Taxa\tSubGroup\t' + scoreLabel + '\t' + pvalLabel + '\tSignificance\n';
+    for(var i=0; i<taxa.length; ++i) {
+        s += taxa[i] + '\t';
+        s += subgroup[i] + '\t';
+        s += value[i] + '\t';
+        s += pval[i] + '\t';
+        s += significance[i] + '\n';
+    }
+    var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
+    document.getElementById('download_button').href = URL.createObjectURL(blob);
+}
+
 function createPlotData(dataMap) {
 //     var colors = ['#e9967a', '#b0c4de', '#f1ce8e', '#9ec08c'];
     var data = [];
@@ -130,6 +145,11 @@ function plotLDA(div_id, response, method) {
     if(data.taxa.length > 0) {
         var dataMap = getDataMap(data.taxa, data.subgroup, data.value);
         makePlot(div_id, dataMap, method);
+        if (data.p_adjust == 'none')
+            createDownloadLink(method, data.p_adjust, data.taxa, data.subgroup, data.value, data.pval, data.significance);
+        else
+            createDownloadLink(method, data.p_adjust, data.taxa, data.subgroup, data.value, data.padj, data.significance);
+        document.getElementById('download_div').style.display = 'block';
     } else {
         document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
     }

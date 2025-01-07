@@ -69,39 +69,52 @@ tryCatch(
 		suppressWarnings(suppressMessages(t1 <- trans_diff$new(dataset = meco_object, method = method, alpha = alpha, lefse_subgroup = NULL, group = "SubGroup", filter_thres = filter_thres, taxa_level = taxa_level, p_adjust_method = p_adjust_method)))
 		if (method == "lefse") {
 			p <- t1$plot_diff_bar(threshold = threshold, use_number = 1:200)
-			trim_lda <- p$data[, c("Taxa", "Group", "Value")]
+			trim_lda <- p$data[, c("Taxa", "Group", "Value", "P.unadj", "P.adj", "Significance")]
 		} else {
 			suppressWarnings(suppressMessages(p <- t1$plot_diff_bar(use_number = 1:200)))
-			trim_lda <- p$data[, c("Taxa", "Group", "logFC")]
-			colnames(trim_lda) <- c("Taxa", "Group", "Value")
+			trim_lda <- p$data[, c("Taxa", "Group", "logFC", "P.unadj", "P.adj", "Significance")]
+			colnames(trim_lda) <- c("Taxa", "Group", "Value", "P.unadj", "P.adj", "Significance")
 			trim_lda <- trim_lda[abs(trim_lda$Value) > threshold & (trim_lda$Taxa) != "s__" & (trim_lda$Taxa) != "g__" & (trim_lda$Taxa) != "f__" & (trim_lda$Taxa) != "o__", ]
 		}
 
+		p_adjust_json <- paste0("\"p_adjust\":\"", p_adjust_method, "\"")
 		taxa_json <- "\"taxa\":["
 		subgroup_json <- "\"subgroup\":["
 		abundance_json <- "\"value\":["
+		pval_json <- "\"pval\":["
+		padj_json <- "\"padj\":["
+		significance_json <- "\"significance\":["
 		i <- 1
 		while (i <= nrow(trim_lda)) {
 			if (i == nrow(trim_lda)) {
 				taxa_json <- paste0(taxa_json, "\"", trim_lda[i, "Taxa"], "\"")
 				subgroup_json <- paste0(subgroup_json, "\"", trim_lda[i, "Group"], "\"")
 				abundance_json <- paste0(abundance_json, trim_lda[i, "Value"])
+				pval_json <- paste0(pval_json, trim_lda[i, "P.unadj"])
+				padj_json <- paste0(padj_json, trim_lda[i, "P.adj"])
+				significance_json <- paste0(significance_json, "\"", trim_lda[i, "Significance"], "\"")
 			} else {
 				taxa_json <- paste0(taxa_json, "\"", trim_lda[i, "Taxa"], "\",")
 				subgroup_json <- paste0(subgroup_json, "\"", trim_lda[i, "Group"], "\",")
 				abundance_json <- paste0(abundance_json, trim_lda[i, "Value"], ",")
+				pval_json <- paste0(pval_json, trim_lda[i, "P.unadj"], ",")
+				padj_json <- paste0(padj_json, trim_lda[i, "P.adj"], ",")
+				significance_json <- paste0(significance_json, "\"", trim_lda[i, "Significance"], "\",")
 			}
 			i <- i + 1
 		}
 		taxa_json <- paste0(taxa_json, "]")
 		subgroup_json <- paste0(subgroup_json, "]")
 		abundance_json <- paste0(abundance_json, "]")
+		pval_json <- paste0(pval_json, "]")
+		padj_json <- paste0(padj_json, "]")
+		significance_json <- paste0(significance_json, "]")
 
-		out_json <- paste0("{", taxa_json, ",", subgroup_json, ",", abundance_json, "}")
+		out_json <- paste0("{", p_adjust_json, ",", taxa_json, ",", subgroup_json, ",", abundance_json, ",", pval_json, ",", padj_json, ",", significance_json, "}")
 		cat(out_json)
 	},
 	error = function(condition) {
-		out_json <- "{\"taxa\":[],\"subgroup\":[],\"value\":[]}"
+		out_json <- "{\"p_adjust\":\"\",\"taxa\":[],\"subgroup\":[],\"value\":[],\"pval\":[],\"padj\":[],\"significance\":[]}"
 		cat(out_json)
 	}
 )

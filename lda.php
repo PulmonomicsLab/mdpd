@@ -56,7 +56,7 @@
         <!--<div class = "section_left"></div>-->
         
         <div class = "section_middle">
-            <p style="margin-top:0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo "Discriminant analysis - ".$bioproject." | ".$at." | ".$is; ?></p>
+            <p style="margin:0 0 10px 0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo "Discriminant analysis - ".$bioproject." | ".$at." | ".$is; ?></p>
             <div style="width:100%;" id="lda_form_div">
                 <form method="get" action="lda.php">
                     <input type="hidden" name="key" value="<?php echo $bioproject; ?>" />
@@ -121,7 +121,7 @@
                     </table>
                 </form>
             </div>
-            <p style="margin-bottom:0; font-weight:bold;">
+            <p style="margin-top:5px; font-weight:bold;">
                 <?php
                     if ($method_joined == "edgeR_fdr")
                         echo "Analysis parameters: Method = \"edgeR (with FDR p-value adjustment)\" | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
@@ -131,8 +131,12 @@
                         echo "Analysis parameters: Method = \"LEfSe (with FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
                 ?>
             </p>
-            <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
-            <div style="width:100%;" id="lda_plot_div">
+            <div id="download_div" style="width:100%; text-align:center; display:none;">
+                <a id="download_button" download="discriminant_figure_data.csv">
+                    <button type="button" style="margin:2px;">Download figure data</button>
+                </a>
+            </div>
+            <div style="width:100%;" id="lda_plot_div"></div>
             <p>
                 <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot
                 or download the data using the <i>"Download data"</i> button. located at the top of the page <b>2)</b> A
@@ -147,8 +151,7 @@
                 </svg>
                 button in the menubar located at the top right corner of the plot.
             </p>
-            </div>
-            <br/><hr/>
+            <hr/>
             <p style="font-size:0.9em;text-align:center;">
                 &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
                 (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,
