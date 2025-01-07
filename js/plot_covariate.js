@@ -77,18 +77,24 @@ function getColorScale(colorScaleName) {
 // }
 
 function getDataMap(taxa, name, value, significance) {
-    var dataMap = {taxa: [], name: [], values: []};
+    var dataMap = {taxa: [], name: [], values: [], significances: []};
     dataMap.taxa = [...new Set(taxa)].sort();
     dataMap.name = [...new Set(name)].sort();
     var valueMap = new Map();
+    var significanceMap = new Map();
     for(var i=0; i<taxa.length; ++i) {
         valueMap.set(name[i] + taxa[i], value[i]);
+        significanceMap.set(name[i] + taxa[i], significance[i])
     }
     for(var i=0; i < dataMap.taxa.length; ++i) {
-        row = [];
-        for(var j=0; j < dataMap.name.length; ++j)
-            row.push(valueMap.get(dataMap.name[j] + dataMap.taxa[i]));
-        dataMap.values.push(row);
+        var valueRow = [];
+        var significanceRow = [];
+        for(var j=0; j < dataMap.name.length; ++j) {
+            valueRow.push(valueMap.get(dataMap.name[j] + dataMap.taxa[i]));
+            significanceRow.push(significanceMap.get(dataMap.name[j] + dataMap.taxa[i]));
+        }
+        dataMap.values.push(valueRow);
+        dataMap.significances.push(significanceRow);
     }
     return dataMap;
 }
@@ -115,31 +121,46 @@ function makePlot(div_id, heatmapData) {
     var yTitle = 'Taxa';
     
     var data = [{
-            x: heatmapData.name,
-            y: heatmapData.taxa,
-            z: heatmapData.values,
-            xgap: 2,
-            ygap: 2,
-            colorscale: getColorScale('RdYlBu_truncated'),
-            reversescale: true,
-            colorbar: {
-                len: 0.5,
-                outlinewidth: 0,
-                tickfont: {color: '#000000'},
-                ticks: 'inside',
-                title: {
-                    text: 'Maaslin2 coefficient',
-                    side: 'right',
-                    font: {
-                        size: 18,
-                        color: '#000000'
-                    }
+        x: heatmapData.name,
+        y: heatmapData.taxa,
+        z: heatmapData.values,
+        xgap: 2,
+        ygap: 2,
+        colorscale: getColorScale('RdYlBu_truncated'),
+        reversescale: true,
+        colorbar: {
+            len: 0.5,
+            outlinewidth: 0,
+            tickfont: {color: '#000000'},
+            ticks: 'inside',
+            title: {
+                text: 'Maaslin2 coefficient',
+                side: 'right',
+                font: {
+                    size: 18,
+                    color: '#000000'
                 }
-            },
-            type: 'heatmap'
-        }];
+            }
+        },
+        type: 'heatmap'
+    }];
+
+    var annotations = [];
+    for(var i=0; i<heatmapData.taxa.length; ++i)
+        for(var j=0; j<heatmapData.name.length; ++j)
+            annotations.push({
+                xref: 'x1',
+                yref: 'y1',
+                x: heatmapData.name[j],
+                y: heatmapData.taxa[i],
+                text: heatmapData.significances[i][j],
+                font: {color: '#000000'},
+                valign: 'middle',
+                showarrow: false
+            });
 
     var layout = {
+        annotations: annotations,
         plot_bgcolor: '#ffffff', //'#fff0f5',
         paper_bgcolor: '#ffffff', //'#fff0f5',
         height: ((computedHeight < minHeight) ? minHeight : computedHeight),
