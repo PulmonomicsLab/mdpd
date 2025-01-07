@@ -86,8 +86,12 @@
         <!--<div class = "section_left"></div>-->
 
         <div class = "section_middle">
-            <p style="margin-top:0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo $display_text; ?></p>
-            <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
+            <p style="margin:0 0 10px 0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo $display_text; ?></p>
+            <div id="download_div" style="width:100%; text-align:center; display:none;">
+                <a id="download_button" download="multivariate_figure_data.csv">
+                    <button type="button" style="margin:2px;">Download figure data</button>
+                </a>
+            </div>
             <div id="covariate_plot_div" style="width:70%; margin:0 15% 0 15%;"></div>
 
             <br/><hr/>

@@ -93,6 +93,21 @@ function getDataMap(taxa, name, value, significance) {
     return dataMap;
 }
 
+function createDownloadLink(heatmapData) {
+    var s = '';
+    for(var i=0; i<heatmapData.name.length; ++i)
+        s += '\t' + heatmapData.name[i];
+    s += '\n';
+    for(var i=0; i<heatmapData.taxa.length; ++i) {
+        s += heatmapData.taxa[i];
+        for(var j=0; j<heatmapData.name.length; ++j)
+            s += '\t' + heatmapData.values[i][j];
+        s += '\n';
+    }
+    var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
+    document.getElementById('download_button').href = URL.createObjectURL(blob);
+}
+
 function makePlot(div_id, heatmapData) {
     var graphDiv = document.getElementById(div_id);
     var minHeight = 500;
@@ -199,6 +214,8 @@ function plotCovariateHeatmap(div_id, response) {
     if(data.taxa.length > 0) {
         var dataMap = getDataMap(data.taxa, data.name, data.value, data.significance);
         makePlot(div_id, dataMap);
+        createDownloadLink(dataMap);
+        document.getElementById('download_div').style.display = 'block';
     } else {
         document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
     }
