@@ -196,6 +196,18 @@
                         }
                         echo "</td></tr>";
                     }
+
+                    echo "<tr><th style=\"width:30%;\">Microbial co-occurence analysis</th>";
+                    echo "<td>";
+                    $isolationSources = explode(";", $row["IsolationSource"]);
+                    foreach($isolationSources as $is) {
+                        $assayTypes = explode(";", $row["AssayType"]);
+                        foreach($assayTypes as $at) {
+                            echo "<a target=\"_blank\" href=\"bioproject_network_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
+                        }
+                    }
+                    echo "</td></tr>";
+
                     echo "</table>";
 
                     echo "<h3 style=\"margin-bottom:5px; text-align:center;\">Download</h3>";
