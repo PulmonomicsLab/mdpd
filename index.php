@@ -91,7 +91,7 @@
                         <td style="text-align:left;"><button type="button" style="width:180px;margin:5px;" onclick="deleteRow()">Delete search predicate</button></td>
                     </tr>
                     <tr>
-                        <td style="text-align:right;//padding-right:100px;"><input type="submit" style="width:100px;margin:15px;border-radius:10px;" name="Submit" value="Submit" /></td>
+                        <td style="text-align:right;//padding-right:100px;"><input type="submit" style="width:100px;margin:15px;" name="Submit" value="Submit" /></td>
                         <td style="text-align:left;//padding-left:100px;"><button type="reset" style="width:100px;margin:15px;" value="Reset">Reset</button></td>
                     </tr>
                 </table>
