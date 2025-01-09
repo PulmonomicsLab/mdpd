@@ -11,6 +11,19 @@ function getDataMap(taxa, subgroup, abundances) {
     return dataMap;
 }
 
+function createDownloadLink(sample, taxa, subgroup, abundances) {
+    var s = 'Sample\tTaxa\tSubGroup\tAbundance\n';
+    for(var i=0; i<taxa.length; ++i) {
+        s += sample[i] + '\t';
+        s += taxa[i] + '\t';
+        s += subgroup[i] + '\t';
+        s += abundances[i] + '\n';
+    }
+    var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
+    document.getElementById('download_div_taxa_distribution').style.display = 'block';
+    document.getElementById('download_button_taxa_distribution').href = URL.createObjectURL(blob);
+}
+
 function makePlot(div_id, dataMap) {
     var graphDiv = document.getElementById(div_id);
 
@@ -48,8 +61,8 @@ function makePlot(div_id, dataMap) {
             font: {color: 'black'}
         },
         margin: {
-            t: 80,
-            l: 100
+            t: 20
+//             l: 100
         },
         xaxis: {
             visible : true,
@@ -124,7 +137,9 @@ function makePlot(div_id, dataMap) {
 
 function plotBox(div_id, response) {
     var data = JSON.parse(response);
-    var dataMap = getDataMap(data.taxa, data.subgroup, data.abundances);
-
-    makePlot(div_id, dataMap);
+    if (data.taxa.length > 0) {
+        var dataMap = getDataMap(data.taxa, data.subgroup, data.abundances);
+        makePlot(div_id, dataMap);
+        createDownloadLink(data.sample, data.taxa, data.subgroup, data.abundances);
+    }
 }

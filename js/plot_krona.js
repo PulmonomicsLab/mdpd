@@ -1,9 +1,9 @@
 function getKronaData(bioproject, assayType, isolationSource, kronaType) {
     var prefix = 'input/krona/';
     if(kronaType == 'runwise') {
-        var file = prefix + bioproject.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_krona_' + kronaType.replace(/ /g,"_") + '.html';
+        var file = bioproject.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_krona_' + kronaType.replace(/ /g,"_") + '.html';
     } else if(kronaType == 'subgroup') {
-        var file = prefix + bioproject.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '_krona_' + kronaType.replace(/ /g,"_") + '.html';
+        var file = bioproject.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '_krona_' + kronaType.replace(/ /g,"_") + '.html';
     }
 //     alert(queryType+'<br/>'+bioproject+'<br/>'+disease+'<br/>'+assayType+'<br/>'+isolationSource+'<br/>'+kronaType+'\n'+file);
 
@@ -15,9 +15,13 @@ function getKronaData(bioproject, assayType, isolationSource, kronaType) {
             frame.contentWindow.document.open();
             frame.contentWindow.document.write(this.responseText);
             frame.contentWindow.document.close();
+
+            document.getElementById('download_div_krona').style.display = 'block';
+            document.getElementById('download_button_krona').href = 'resource/public/krona/' + file;
+            document.getElementById('download_button_krona').download = file;
         }
     };
-    xmlhttp.open('GET', file, true);
+    xmlhttp.open('GET', (prefix + file), true);
     xmlhttp.setRequestHeader('Content-type', 'text/html');
     xmlhttp.send();
 }

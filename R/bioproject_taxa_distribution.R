@@ -18,12 +18,14 @@ if (assayType == "WMS") {
     rel_abund <- 0.005
     freq <- 0.05
     pollution_filters = "Chordata"
+    plot_columns <- c("Taxonomy", "Run", "SubGroup", "Abundance")
 } else {
     tax_rank <- "Genus"
     tax_prefix <- "g__"
     rel_abund <- 0.0001
     freq <- 0.05
     pollution_filters = c("mitochondria", "chloroplast")
+    plot_columns <- c("Taxonomy", "Sample", "SubGroup", "Abundance")
 }
 
 # Read biom
@@ -63,26 +65,31 @@ meco_object$tidy_dataset()
 # Box plot Genus
 suppressMessages(t1 <- trans_abund$new(dataset = meco_object, taxrank = tax_rank, ntaxa = 10))
 p <- t1$plot_box(group = "SubGroup")
-trim_taxa <- p$data[, c("Taxonomy", "Sample", "SubGroup", "Abundance")]
+trim_taxa <- p$data[, plot_columns]
+colnames(trim_taxa) <- c("Taxonomy", "Sample", "SubGroup", "Abundance")
 trim_taxa <- trim_taxa[with(trim_taxa, order(-ave(trim_taxa$Abundance, trim_taxa$Taxonomy, FUN=median))),]
 
+sample_json <- "\"sample\":["
 taxa_json <- "\"taxa\":["
 subgroup_json <- "\"subgroup\":["
 abundance_json <- "\"abundances\":["
 for (i in (1:nrow(trim_taxa))) {
 	if (i == nrow(trim_taxa)) {
+        sample_json <- paste0(sample_json, "\"", trim_taxa[i, "Sample"], "\"")
 		taxa_json <- paste0(taxa_json, "\"", tax_prefix, trim_taxa[i, "Taxonomy"], "\"")
 		subgroup_json <- paste0(subgroup_json, "\"", trim_taxa[i, "SubGroup"], "\"")
 		abundance_json <- paste0(abundance_json, trim_taxa[i, "Abundance"])
 	} else {
+        sample_json <- paste0(sample_json, "\"", trim_taxa[i, "Sample"], "\",")
 		taxa_json <- paste0(taxa_json, "\"", tax_prefix, trim_taxa[i, "Taxonomy"], "\",")
 		subgroup_json <- paste0(subgroup_json, "\"", trim_taxa[i, "SubGroup"], "\",")
 		abundance_json <- paste0(abundance_json, trim_taxa[i, "Abundance"], ",")
 	}
 }
+sample_json <- paste0(sample_json, "]")
 taxa_json <- paste0(taxa_json, "]")
 subgroup_json <- paste0(subgroup_json, "]")
 abundance_json <- paste0(abundance_json, "]")
 
-out_json <- paste0("{", taxa_json, ",", subgroup_json, ",", abundance_json, "}")
+out_json <- paste0("{", sample_json, ",", taxa_json, ",", subgroup_json, ",", abundance_json, "}")
 cat(out_json)

@@ -48,8 +48,18 @@
         <div class = "section_middle">
             <p style="margin-top:0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo "Taxonomic profile - ".$bioproject." | ".$at." | ".$is; ?></p>
             <p style="margin-bottom:0; font-weight:bold;">A. Taxonomic composition (Krona plot)</p>
-            <iframe id="krona_frame" style="width:100%; height:600px;"></iframe>
+            <div id="download_div_krona" style="width:100%; text-align:center; display:none;">
+                <a id="download_button_krona">
+                    <button type="button" style="margin:2px;">Download Krona data</button>
+                </a>
+            </div>
+            <iframe id="krona_frame" style="width:100%; height:600px; margin-top:5px;"></iframe>
             <p style="margin-bottom:0; font-weight:bold;">B. Top 10 taxa distribution across runs (Box plot)</p>
+            <div id="download_div_taxa_distribution" style="width:100%; text-align:center; display:none;">
+                <a id="download_button_taxa_distribution" download="top_taxa_across_runs_figure_data.csv">
+                    <button type="button" style="margin:2px;">Download figure data</button>
+                </a>
+            </div>
             <div id="box_plot_div" style="width:100%;"></div>
 
             <br/><hr/>
