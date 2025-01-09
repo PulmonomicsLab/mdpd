@@ -1,5 +1,7 @@
 var rows = null;
-var healthyControlRows = null;
+var healthyControlFilterRows = null;
+var assayTypeFilterRows = null;
+var libLayoutFilterRows = null;
 var subGroupRows = null;
 var isolationSourceRows = null;
 var disease = null;
@@ -13,15 +15,32 @@ function hideDiv(divId){
 function initializeDiseaseWiseData(dataJSON, dis) {
     rows = JSON.parse(dataJSON);
     disease = dis;
-    healthyControlRows = new Set();
+
+    healthyControlFilterRows = new Set();
+
+    assayTypeFilterRows = new Map();
+    assayTypeFilterRows.set('Amplicon-16S', new Set());
+    assayTypeFilterRows.set('Amplicon-ITS', new Set());
+    assayTypeFilterRows.set('WMS', new Set());
+
+    libLayoutFilterRows = new Map();
+    libLayoutFilterRows.set('PAIRED', new Set());
+    libLayoutFilterRows.set('SINGLE', new Set());
+
     for(var i=0; i<rows.length; ++i) {
         var groups = rows[i].Grp.split(';');
-        for(var j=0; j<groups.length; ++j) {
+        for(var j=0; j<groups.length; ++j)
             if(groups[j] == 'Healthy' || groups[j] == 'Control')
-                healthyControlRows.add(i);
-        }
+                healthyControlFilterRows.add(i);
+
+        var assayTypes = rows[i].AssayType.split(';');
+        for(var j=0; j<assayTypes.length; ++j)
+            assayTypeFilterRows.get(assayTypes[j]).add(i);
+
+        var libLayouts = rows[i].LibraryLayout.split(';');
+        for(var j=0; j<libLayouts.length; ++j)
+            libLayoutFilterRows.get(libLayouts[j]).add(i);
     }
-//     alert(Array.from(healthyControlRows));
 }
 
 function initializeSubGroupWiseData(dataJSON, sg) {
@@ -34,28 +53,9 @@ function initializeIsolationSourceWiseData(dataJSON, is) {
     isolationSource = is;
 }
 
-function getAllDiseasewiseResultHTML(divId) {
+function getDiseaseWiseResultHTML(filterRows) {
     var s = '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Total Runs</th><th>Processed Runs</th><th>Biome</th><th>Assay Type</th><th>Library Layout</th></tr>';
-    for(var i=0; i<rows.length; ++i) {
-        s += '<tr>';
-        s += '<td><a style="color:#003325;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">' + rows[i].BioProject + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
-        s += '<td>' + rows[i].Grp.replace(/;/g, '; ') + '</td>';
-        s += '<td>' + rows[i].SubGroup.replace(/;/g, '; ') + '</td>';
-        s += '<td>' + rows[i].TotalRuns + '</td>';
-        s += '<td>' + rows[i].ProcessedRuns + '</td>';
-        s += '<td>' + rows[i].Biome.replace(/;/g, '; ') + '</td>';
-        s += '<td>' + rows[i].AssayType.replace(/;/g, '; ') + '</td>';
-        s += '<td>' + rows[i].LibraryLayout.replace(/;/g, '; ') + '</td>';
-        s += '</tr>';
-    }
-    s += '</table>';
-    
-    return s;
-}
-
-function getFilteredDiseaseWiseResultHTML(divId) {
-    var s = '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Total Runs</th><th>Processed Runs</th><th>Biome</th><th>Assay Type</th><th>Library Layout</th></tr>';
-    for(i of healthyControlRows.values()) {
+    for(i of filterRows.values()) {
         s += '<tr>';
         s += '<td><a style="color:#003325;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">' + rows[i].BioProject + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
         s += '<td>' + rows[i].Grp.replace(/;/g, '; ') + '</td>';
@@ -110,27 +110,63 @@ function getAllIsolationSourceWiseResultHTML(divId) {
     return s;
 }
 
+function getFilterRows(healthyFilter, assayTypeFilter, libLayoutFilter) {
+    var filterRows = new Set([...Array(rows.length).keys()]);
+    if(healthyFilter)
+        for(var i=0; i<rows.length; ++i)
+            if(!healthyControlFilterRows.has(i))
+                filterRows.delete(i);
+    if(assayTypeFilter != 'Any')
+        for(var i=0; i<rows.length; ++i)
+            if (!assayTypeFilterRows.get(assayTypeFilter).has(i))
+                filterRows.delete(i);
+    if(libLayoutFilter != 'Any')
+        for(var i=0; i<rows.length; ++i)
+            if(!libLayoutFilterRows.get(libLayoutFilter).has(i))
+                filterRows.delete(i);
+    return filterRows;
+}
+
 function filter_diseases(resultDivId) {
     var hideButton = '<center><button type="button" class="round" style="margin:5px;" onclick="hideDiv(\'' + resultDivId + '\')">&#10005;</button></center>';
     var resultElement = document.getElementById(resultDivId);
     resultElement.style.display = 'block';
-    if(document.getElementById('filter_cb') != null && document.getElementById('filter_cb').checked == true) {
-        var filterCheckbox = '<div style="margin:10px 0 0 10px;"><input type="checkbox" id="filter_cb" onclick="filter_diseases(\'' + resultDivId + '\')" checked /><label>&nbsp;<b><u>Show only BioProjects with Healthy/Control</u></b></label></div>';
-        var resultCountString = '<p style="margin:2px;text-align:center;">Total number of BioProjects found in the database for Disease = "' + disease + '" with Healthy/Control groups : ' + healthyControlRows.size + '</p>';
-        var diseaseResultHTML = getFilteredDiseaseWiseResultHTML('result_display');
-        if(healthyControlRows.size <= 0)
-            resultElement.innerHTML = hideButton + filterCheckbox + resultCountString + hideButton;
-        else
-            resultElement.innerHTML = hideButton + filterCheckbox + resultCountString + diseaseResultHTML + hideButton;
-    } else {
-        var filterCheckbox = '<div style="margin:10px 0 0 10px;"><input type="checkbox" id="filter_cb" onclick="filter_diseases(\'' + resultDivId + '\')" /><label>&nbsp;<b><u>Show only BioProjects with Healthy/Control</u></b></label></div>';
-        var resultCountString = '<p style="margin:2px;text-align:center;">Total number of BioProjects found in the database for Disease = "' + disease + '" : ' + rows.length + '</p>';
-        var diseaseResultHTML = getAllDiseasewiseResultHTML('result_display');
-        if(rows.length <= 0)
-            resultElement.innerHTML = hideButton + filterCheckbox + resultCountString + hideButton;
-        else
-            resultElement.innerHTML = hideButton + filterCheckbox + resultCountString + diseaseResultHTML + hideButton;
-    }
+    var healthyFilter = (document.getElementById('filter_cb') != null && document.getElementById('filter_cb').checked == true);
+    var assayTypeFilter = (document.getElementById('filter_at_Any') != null) ? document.querySelector('input[name="filter_at"]:checked').value : 'Any';
+    var libLayoutFilter = (document.getElementById('filter_ll_Any') != null) ? document.querySelector('input[name="filter_ll"]:checked').value : 'Any';
+
+    var filterRows = getFilterRows(healthyFilter, assayTypeFilter, libLayoutFilter);
+    var diseaseResultHTML = getDiseaseWiseResultHTML(filterRows);
+
+    var healthyCheckbox = '<input type="checkbox" id="filter_cb" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_cb">&nbsp;<b>BioProjects with Healthy/Control</b></label>';
+    var assayTypeButtons =
+        '<input type="radio" style="margin-left:5px;" id="filter_at_Any" name="filter_at" value="Any" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_at_Any"><b>Any</b></label>' +
+        '<input type="radio" style="margin-left:5px;" id="filter_at_Amplicon-16S" name="filter_at" value="Amplicon-16S" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_at_Amplicon-16S"><b>Amplicon-16S</b></label>' +
+        '<input type="radio" style="margin-left:5px;" id="filter_at_Amplicon-ITS" name="filter_at" value="Amplicon-ITS" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_at_Amplicon-ITS"><b>Amplicon-ITS</b></label>' +
+        '<input type="radio" style="margin-left:5px;" id="filter_at_WMS" name="filter_at" value="WMS" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_at_WMS"><b>WMS</b></label>';
+    var libLayoutButtons =
+        '<input type="radio" style="margin-left:5px;" id="filter_ll_Any" name="filter_ll" value="Any" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_ll_Any"><b>Any</b></label>' +
+        '<input type="radio" style="margin-left:5px;" id="filter_ll_PAIRED" name="filter_ll" value="PAIRED" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_ll_PAIRED"><b>PAIRED</b></label>' +
+        '<input type="radio" style="margin-left:5px;" id="filter_ll_SINGLE" name="filter_ll" value="SINGLE" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_ll_SINGLE"><b>SINGLE</b></label>';
+    var filterHTML =
+        '<table style="width:98%; margin:10px 1% 10px 1%; background-color:#ffe799;">' +
+            '<tr>' +
+                '<td>' + healthyCheckbox + '</td>' +
+                '<td>Assay Types: ' + assayTypeButtons + '</td>' +
+                '<td>Library Layouts: ' + libLayoutButtons + '</td>' +
+            '</tr>' +
+        '</table>';
+
+    var resultCountString = '<p style="margin:2px;text-align:center;">Total number of BioProjects found in the database for Disease = "' + disease + '" with provided filters : ' + filterRows.size + '</p>';
+
+    if(filterRows.size <= 0)
+        resultElement.innerHTML = hideButton + filterHTML + resultCountString + hideButton;
+    else
+        resultElement.innerHTML = hideButton + filterHTML + resultCountString + diseaseResultHTML + hideButton;
+
+    document.getElementById('filter_cb').checked = (healthyFilter) ? true : false;
+    document.getElementById('filter_at_'+assayTypeFilter).checked = true;
+    document.getElementById('filter_ll_'+libLayoutFilter).checked = true;
 }
 
 function getBioProjects(dis, resultDivId){
