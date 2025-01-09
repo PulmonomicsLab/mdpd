@@ -162,6 +162,7 @@ function getSubgroupBioProjects(sg, resultDivId){
                 resultElement.innerHTML = hideButton + resultCountString;
             else
                 resultElement.innerHTML = hideButton + resultCountString + subgroupResultHTML;
+            resultElement.scrollIntoView({behavior: 'smooth'});
         }
     };
     httpReq.open('GET', 'get_bioprojects.php?key=' + encodeURIComponent(sg) + '&keyType=sg', true);
@@ -183,6 +184,7 @@ function getIsolationSourceBioProjects(is, resultDivId){
                 resultElement.innerHTML = hideButton + resultCountString;
             else
                 resultElement.innerHTML = hideButton + resultCountString + isolationSourceResultHTML;
+            resultElement.scrollIntoView({behavior: 'smooth'});
         }
     };
     httpReq.open('GET', 'get_bioprojects.php?key=' + encodeURIComponent(is) + '&keyType=is', true);
