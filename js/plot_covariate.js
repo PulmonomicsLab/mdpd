@@ -124,6 +124,7 @@ function makePlot(div_id, heatmapData) {
         x: heatmapData.name,
         y: heatmapData.taxa,
         z: heatmapData.values,
+        zmid: 0,
         xgap: 2,
         ygap: 2,
         colorscale: getColorScale('RdYlBu_truncated'),
