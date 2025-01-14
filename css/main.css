@@ -163,6 +163,15 @@ button:hover{
     background-color : #b3b3ff; /*#404040;*/
     color: #000000;
 }
+select{
+    background-color : #e6e6ff;
+    border: 1px solid black;
+    border-radius: 5px;
+    color : #000000;
+    padding : 5px 10px 5px 10px;
+    font-weight : bold;
+    box-shadow: 0px 0px 2px grey;
+}
 input[type=submit]{
     background-color : #e6e6ff;
     border: 1px solid black;
@@ -172,7 +181,24 @@ input[type=submit]{
     font-weight : bold;
     box-shadow: 0px 0px 2px grey;
 }
+input[type=number]{
+    background-color : #e6e6ff;
+    border: 1px solid black;
+    border-radius: 5px;
+    color : #000000;
+    padding : 5px 10px 5px 10px;
+    font-weight : bold;
+    box-shadow: 0px 0px 2px grey;
+}
+select:hover{
+    background-color : #b3b3ff; /*#404040;*/
+    color: #000000;
+}
 input[type=submit]:hover{
+    background-color : #b3b3ff; /*#404040;*/
+    color: #000000;
+}
+input[type=number]:hover{
     background-color : #b3b3ff; /*#404040;*/
     color: #000000;
 }
