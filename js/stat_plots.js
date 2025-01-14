@@ -1,4 +1,4 @@
-function getHistogramLayout(height, xLabel) {
+function getHistogramLayout(height, xLabel, legendTitle) {
     var histogramLayout = {
         plot_bgcolor: 'ffffff', //'#fff0f5',
         paper_bgcolor: 'ffffff', //'#fff0f5',
@@ -38,7 +38,18 @@ function getHistogramLayout(height, xLabel) {
                 font: {size: 14}
             }
         },
-        legend: {font: {size: 12, color: 'black'}, y: 0.5}
+        legend: {
+            title: {
+                text: legendTitle,
+                size: 14,
+                color: '#000000'
+            },
+            font: {
+                size: 12,
+                color: 'black'
+            },
+            y: 0.5
+        }
     };
     return histogramLayout;
 }
@@ -97,6 +108,13 @@ function plotChoropleth(divId, choroplethDataJSON) {
     var data = [{
         type: 'choropleth',
         colorscale: 'YlOrRd',
+        colorbar: {
+            title: {
+                text: 'Number of runs',
+                size: 14,
+                color: '#000000',
+            }
+        },
         reversescale: true,
         locationmode: 'country names',
         locations: countries,
@@ -147,7 +165,7 @@ function plotAssayTypeHistogramData(divId, histogramDataJSON) {
         marker: {size: 10},
         line: {width: 3}
     };
-    Plotly.plot(plotDiv, [amplicon16STrace, ampliconITSTrace, wmsTrace], getHistogramLayout(300, 'Year'), {showSendToCloud:false});
+    Plotly.plot(plotDiv, [amplicon16STrace, ampliconITSTrace, wmsTrace], getHistogramLayout(350, 'Year', 'Assay type'), {showSendToCloud:false});
 }
 
 function plotBiomeHistogramData(divId, histogramDataJSON) {
@@ -184,7 +202,7 @@ function plotBiomeHistogramData(divId, histogramDataJSON) {
         data.push(trace);
     }
 
-    Plotly.plot(plotDiv, data, getHistogramLayout(300, 'Year'), {showSendToCloud:false});
+    Plotly.plot(plotDiv, data, getHistogramLayout(350, 'Year', 'Biome'), {showSendToCloud:false});
 }
 
 function plotDiseaseHistogramData(divId, histogramDataJSON) {
@@ -225,7 +243,7 @@ function plotDiseaseHistogramData(divId, histogramDataJSON) {
         data.push(trace);
     }
 
-    Plotly.plot(plotDiv, data, getHistogramLayout(500, 'Year'), {showSendToCloud:false});
+    Plotly.plot(plotDiv, data, getHistogramLayout(550, 'Year', 'Group'), {showSendToCloud:false});
 }
 
 function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDataJSON) {
@@ -368,7 +386,7 @@ function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDat
 
     Plotly.plot(stat1Div, [biomePieTrace], pieLayout, {showSendToCloud:false});
     Plotly.plot(stat2Div, [assayTypePieTrace], pieLayout, {showSendToCloud:false});
-    Plotly.plot(stat3Div, diseaseBarTrace, getHistogramLayout(600, 'Group'), {showSendToCloud:false});
+    Plotly.plot(stat3Div, diseaseBarTrace, getHistogramLayout(600, 'Group', 'Biome'), {showSendToCloud:false});
     Plotly.plot(sunburstDiv, [sunburstTrace], sunburstLayout, {showSendToCloud:false});
 }
 
