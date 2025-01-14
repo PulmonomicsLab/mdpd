@@ -7,20 +7,72 @@ nodeMetrices = new Map();
 function getControlPanelHTML(subgroup) {
     var controlPanelHTML =
 //         '<p style="margin-top:5px; font-weight:bold; font-size:1.05em; text-align:center;"></p>' +
-        '<center><table>' +
-            '<tr><td></td><td><button title="Pan up" onclick="panUp(\''+subgroup+'\')">&uarr;</button></td><td></td></tr>' +
-            '<tr><td><button title="Pan left" onclick="panLeft(\''+subgroup+'\')">&larr;</button></td><td><button  title="Reset axes" onclick="resetAxes(\''+subgroup+'\')"><i class="fa fa-solid fa-home"></i></button></td><td><button title="Pan right" onclick="panRight(\''+subgroup+'\')">&rarr;</button></td></tr>' +
-            '<tr><td></td><td><button title="Pan down" onclick="panDown(\''+subgroup+'\')">&darr;</button></td><td></td></tr>' +
-            '<tr><td colspan="3"><p style="margin:10px 0 0 0; font-weight:bold; text-align:center;">Zoom</p></td></tr>' +
-            '<tr><td colspan="3"><button style="width:100%;" title="Zoom in" onclick="zoomIn(\''+subgroup+'\')">Zoom in</button></td></tr>' +
-            '<tr><td colspan="3"><button style="width:100%;" title="Zoom out" onclick="zoomOut(\''+subgroup+'\')">Zoom out</button></td></tr>' +
-            '<tr><td colspan="3"><p style="margin:10px 0 0 0; font-weight:bold; text-align:center;">Layout</p></td></tr>' +
-            '<tr><td colspan="3"><select title="Change layout" style="width:100%;" id="layout_' + subgroup.replace(/ /g,"_") + '" name="layout" onchange="changeLayout(\''+subgroup+'\')"><option value="cose">CoSE</option><option value="circle">Circle</option><option value="random">Random</option><select></td></tr>' +
-            '<tr><td colspan="3"><p style="margin:10px 0 0 0; font-weight:bold; text-align:center;">Download</p></td></tr>' +
-            '<tr><td colspan="3"><a target="_blank" title="Download JPEG" id="jpeg_download_' + subgroup.replace(/ /g,"_") + '" download="plot.jpg"><button style="width:100%;" onclick="downloadJPEG(\''+subgroup+'\')">JPEG</button></a></td></tr>' +
-            '<tr><td colspan="3"><a target="_blank" title="Download PNG" id="png_download_' + subgroup.replace(/ /g,"_") + '" download="plot.png"><button style="width:100%;" onclick="downloadPNG(\''+subgroup+'\')">PNG</button></a></td></tr>' +
-            '<tr><td colspan="3"><a target="_blank" title="Download SVG" id="svg_download_' + subgroup.replace(/ /g,"_") + '" download="plot.svg"><button style="width:100%;" onclick="downloadSVG(\''+subgroup+'\')">SVG</button></a></td></tr>' +
-        '</table></center><p id="node_info_' + subgroup.replace(/ /g,"_") + '" style="width:100%; padding:5px;"></p>';
+        '<div style="float:left; margin:5px 20px;">' +
+            '<table>' +
+                '<tr><td colspan="3"><p style="margin:0; font-weight:bold; text-align:center;">Pan</p></td></tr>' +
+                '<tr>' +
+                    '<td></td>' +
+                    '<td><button class="round" title="Pan up" onclick="panUp(\''+subgroup+'\')">&uarr;</button></td>' +
+                    '<td></td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td><button class="round" title="Pan left" onclick="panLeft(\''+subgroup+'\')">&larr;</button></td>' +
+                    '<td><button class="round" title="Pan down" onclick="panDown(\''+subgroup+'\')">&darr;</button></td>' +
+                    '<td><button class="round" title="Pan right" onclick="panRight(\''+subgroup+'\')">&rarr;</button></td>' +
+                '</tr>' +
+            '</table>' +
+        '</div>' +
+        '<div style="float:left; margin:5px 20px;">' +
+            '<table>' +
+                '<tr><td colspan="3"><p style="margin:0; font-weight:bold; text-align:center;">Zoom &amp; Layout</p></td></tr>' +
+                '<tr>' +
+                    '<td style="width:34%;"><button style="width:100%;" title="Zoom in" onclick="zoomIn(\''+subgroup+'\')"><i class="fa fa-solid fa-magnifying-glass-plus"></i></button></td>' +
+                    '<td style="width:32%;"><button  title="Reset axes" onclick="resetAxes(\''+subgroup+'\')"><i class="fa fa-solid fa-home"></i></button></td>' +
+                    '<td style="width:34%;"><button style="width:100%;" title="Zoom out" onclick="zoomOut(\''+subgroup+'\')"><i class="fa fa-solid fa-magnifying-glass-minus"></i></button></td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td colspan="3">' +
+                        '<select title="Change layout" style="width:100%; background-color:#e6e6ff;" id="layout_' + subgroup.replace(/ /g,"_") + '" name="layout" onchange="changeLayout(\''+subgroup+'\')">' +
+                            '<option value="cose">CoSE</option><option value="circle">Circle</option>' +
+                            '<option value="random">Random</option>' +
+                        '<select>' +
+                    '</td>' +
+                '</tr>' +
+            '</table>' +
+        '</div>' +
+        '<div style="float:left; margin:5px 20px;">' +
+            '<table>' +
+                '<tr><td colspan="3"><p style="margin:0; font-weight:bold; text-align:center;">Download</p></td></tr>' +
+                '<tr>' +
+                    '<td>' +
+                        '<a target="_blank" title="Download JPEG" id="jpeg_download_' + subgroup.replace(/ /g,"_") + '" download="plot.jpg">' +
+                            '<button style="width:100%;" onclick="downloadJPEG(\''+subgroup+'\')">JPEG</button>' +
+                        '</a>' +
+                    '</td>' +
+                    '<td>' +
+                        '<a target="_blank" title="Download PNG" id="png_download_' + subgroup.replace(/ /g,"_") + '" download="plot.png">' +
+                            '<button style="width:100%;" onclick="downloadPNG(\''+subgroup+'\')">PNG</button>' +
+                        '</a>' +
+                    '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td>' +
+                        '<a target="_blank" title="Download SVG" id="svg_download_' + subgroup.replace(/ /g,"_") + '" download="plot.svg">' +
+                            '<button style="width:100%;" onclick="downloadSVG(\''+subgroup+'\')">SVG</button>' +
+                        '</a>' +
+                    '</td>' +
+                    '<td>' +
+                        '<a target="_blank" title="Download JSON" id="json_download_' + subgroup.replace(/ /g,"_") + '" download="plot.json">' +
+                            '<button style="width:100%;" onclick="downloadJSON(\''+subgroup+'\')">JSON</button>' +
+                        '</a>' +
+                    '</td>' +
+                '</tr>' +
+            '</table>' +
+        '</div>' +
+        '<div style="float:left; margin:5px 20px;">' +
+            '<p id="node_info_' + subgroup.replace(/ /g,"_") + '" style="width:100%; padding:5px;"></p>' +
+        '</div>' +
+        '<div style="clear:both;"></div>';
     return controlPanelHTML;
 }
 
@@ -61,9 +113,9 @@ function makePlot(div_id, networkData, subgroup) {
             {
                 selector: 'node',
                 style: {
-                    'width': 15,
-                    'height': 15,
-                    'background-color': '#b3d7ff',
+                    'width': 20,
+                    'height': 20,
+                    'background-color': '#b3ccff',
                     'border-color': '#000000',
                     'border-width': 1,
                     'label': 'data(label)',
@@ -125,7 +177,7 @@ function makePlot(div_id, networkData, subgroup) {
     var randomLayout = network.layout({name: 'random'});
     var bounds = network.renderedExtent();
     bounds = {x1: bounds.x1, y1: bounds.y1, w: bounds.w, h: bounds.h};
-    var coseLayout = network.layout({name: 'cose', boundingBox: bounds});
+    var coseLayout = network.layout({name: 'cose', boundingBox: bounds, padding: 5});
     coseLayout.run(); // CoSE as default layout
 
     // Compute information of nodes
@@ -143,7 +195,8 @@ function makePlot(div_id, networkData, subgroup) {
     // Register events to show node info
     for(const node of networkData.get(subgroup).nodes) {
         network.$('#'+subgroup+'_'+node).on('mouseover', function(event) {
-            var message = 'Node: ' + node  + '<br/>Out-degree: ' + nodeMetrices.get(subgroup+'_'+node).out_degree + ', In-degree: ' + nodeMetrices.get(subgroup+'_'+node).in_degree;
+            var message = 'Node: ' + node
+                + '<br/>Out-degree: ' + nodeMetrices.get(subgroup+'_'+node).out_degree + ', In-degree: ' + nodeMetrices.get(subgroup+'_'+node).in_degree;
 //                 + '<br/>Out-degree centrality: ' + nodeMetrices.get(subgroup+'_'+node).out_degree_centrality
 //                 + '<br/>In-degree centrality: ' + nodeMetrices.get(subgroup+'_'+node).in_degree_centrality
 //                 + '<br/>Betweenness centrality: ' + nodeMetrices.get(subgroup+'_'+node).betweenness_centrality;
@@ -169,15 +222,15 @@ function plotNetwork(div_id, response) {
         document.getElementById(div_id).appendChild(clearingNode);
         var labelNode = document.createElement('p');
         labelNode.innerHTML = 'Subgroup: ' + networkData.get(subgroup).label;
-        labelNode.style.cssText += 'margin:10px 0 0 10%; font-size:1.2em; font-weight:bold;';
+        labelNode.style.cssText += 'margin:10px 0 0 0; font-size:1.2em; font-weight:bold;';
         document.getElementById(div_id).appendChild(labelNode);
         var plotNode = document.createElement('div');
         plotNode.id = div_id + '_' + subgroup;
-        plotNode.style.cssText += 'width:60%; height:600px; margin:5px 0 0 10%; border:1px solid black; float:left';
+        plotNode.style.cssText += 'height:400px; margin-top:5px; border:2px solid #004d99;';
         document.getElementById(div_id).appendChild(plotNode);
         makePlot(div_id + '_' + subgroup, networkData, subgroup);
         var controlPanelNode = document.createElement('div')
-        controlPanelNode.style.cssText += 'width:19%; height:600px; margin:5px 10% 0 0; background-color:#eeeeee; border: 1px dashed black; float:right;';
+        controlPanelNode.style.cssText += 'width:100%; margin-top:5px; background-color:#fff9e6; border:1px dashed #004d99; border-radius:10px;';
         controlPanelNode.innerHTML = getControlPanelHTML(subgroup);
         document.getElementById(div_id).appendChild(controlPanelNode);
     }
@@ -263,4 +316,10 @@ function downloadSVG(subgroup) {
     var svgBlob = new Blob([svgContent], {type:"image/svg+xml;charset=utf-8"});
     var link = document.getElementById('svg_download_' + subgroup.replace(/ /g,"_"));
     link.href = URL.createObjectURL(svgBlob);
+}
+
+function downloadJSON(subgroup) {
+    var jsonData = networks.get(subgroup).json();
+    var link = document.getElementById('json_download_' + subgroup.replace(/ /g,"_"));
+    link.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(jsonData));
 }
