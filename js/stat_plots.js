@@ -1,44 +1,47 @@
-var histogramLayout = {
-    plot_bgcolor: 'ffffff', //'#fff0f5',
-    paper_bgcolor: 'ffffff', //'#fff0f5',
-    height: 400,
-    barmode: 'stack',
-    hoverlabel: {
-        bgcolor: 'white',
-        font: {size: 14, color: 'black'}
-    },
-    hovertext: {font: {color: 'black'}},
-    margin: {t: 10},
-    xaxis: {
-        visible : true,
-        automargin: true,
-        color: 'black',
-        linewidth: 2,
-        ticks: 'outside',
-        ticklen: 10,
-        tickwidth: 2,
-        tickfont: {size: 12},
-        title : {
-            text : 'Release Year',
-            font: {size: 14}
-        }
-    },
-    yaxis: {
-        visible : true,
-        automargin: true,
-        color: 'black',
-        linewidth: 2,
-        ticks: 'outside',
-        ticklen: 10,
-        tickwidth: 2,
-        tickfont: {size: 12},
-        title : {
-            text : 'Number of runs',
-            font: {size: 14}
-        }
-    },
-    legend: {font: {size: 12, color: 'black'}, y: 0.5}
-};
+function getHistogramLayout(height, xLabel) {
+    var histogramLayout = {
+        plot_bgcolor: 'ffffff', //'#fff0f5',
+        paper_bgcolor: 'ffffff', //'#fff0f5',
+        height: height,
+        barmode: 'stack',
+        hoverlabel: {
+            bgcolor: 'white',
+            font: {size: 14, color: 'black'}
+        },
+        hovertext: {font: {color: 'black'}},
+        margin: {t: 10},
+        xaxis: {
+            visible : true,
+            automargin: true,
+            color: 'black',
+            linewidth: 2,
+            ticks: 'outside',
+            ticklen: 10,
+            tickwidth: 2,
+            tickfont: {size: 12},
+            title : {
+                text : xLabel,
+                font: {size: 14}
+            }
+        },
+        yaxis: {
+            visible : true,
+            automargin: true,
+            color: 'black',
+            linewidth: 2,
+            ticks: 'outside',
+            ticklen: 10,
+            tickwidth: 2,
+            tickfont: {size: 12},
+            title : {
+                text : 'Number of runs',
+                font: {size: 14}
+            }
+        },
+        legend: {font: {size: 12, color: 'black'}, y: 0.5}
+    };
+    return histogramLayout;
+}
 
 var choroplethLayout = {
     paper_bgcolor: '#ffffff', //'#fff0f5',
@@ -73,49 +76,10 @@ var sunburstLayout = {
 var pieLayout = {
     plot_bgcolor: '#ffffff', //'#fff0f5',
     paper_bgcolor: '#ffffff', //'#fff0f5',
-    height: 300,
-    margin: {l: 0, r: 0, b: 0, t: 0},
+    height: 400,
+    margin: {l: 0, r: 0, b: 10, t: 40},
     showlegend: false
 };
-
-var barlayout = {
-    plot_bgcolor: '#ffffff', //'#fff0f5',
-    paper_bgcolor: '#ffffff', //'#fff0f5',
-    height: 300,
-    margin: {l: 0, r: 0, b: 0, t: 0},
-    hoverlabel: {
-        bgcolor: 'white',
-        font: {size: 14, color: 'black'}
-    },
-    xaxis: {
-        visible : true,
-        automargin: true,
-        color: 'black',
-        linewidth: 1,
-        ticks: 'outside',
-        tickfont: {size: 12},
-        title : {
-            text : 'Diseases',
-            font: {size: 14}
-        }
-    },
-    yaxis: {
-        visible : true,
-        automargin: true,
-        color: 'black',
-        linewidth: 1,
-        ticks: 'outside',
-        tickfont: {size: 12},
-        title : {
-            text : 'Number of runs',
-            font: {size: 14}
-        }
-    },
-    showlegend: false
-};
-
-var colors = ['#e9967a', '#b0c4de'];
-var colors2 = ['#74a45b', '#ebbb60'];
 
 
 
@@ -148,121 +112,120 @@ function plotAssayTypeHistogramData(divId, histogramDataJSON) {
 
     var histogramData = JSON.parse(histogramDataJSON);
     var years = [];
-    var ampliconCounts = [];
+    var amplicon16SCounts = [];
+    var ampliconITSCounts = [];
     var wmsCounts = [];
     for(var i=0; i<histogramData.length; ++i) {
-        years[i] = histogramData[i].ReleaseYear;
-        ampliconCounts[i] = histogramData[i].AmpliconRunCount;
+        years[i] = histogramData[i].Year;
+        amplicon16SCounts[i] = histogramData[i].Amplicon16SRunCount;
+        ampliconITSCounts[i] = histogramData[i].AmpliconITSRunCount;
         wmsCounts[i] = histogramData[i].WMSRunCount;
     }
 
-    var ampliconTrace = {
-            type: 'lines+markers',
-            name: 'Amplicon',
-            x: years,
-            y: ampliconCounts,
-            marker: {
-                color: colors[0],
-                size: 10
-            },
-            line: {width: 3}
-        };
+    var amplicon16STrace = {
+        type: 'lines+markers',
+        name: 'Amplicon-16S',
+        x: years,
+        y: amplicon16SCounts,
+        marker: {size: 10},
+        line: {width: 3}
+    };
+    var ampliconITSTrace = {
+        type: 'lines+markers',
+        name: 'Amplicon-ITS',
+        x: years,
+        y: ampliconITSCounts,
+        marker: {size: 10},
+        line: {width: 3}
+    };
     var wmsTrace = {
-            type: 'lines+markers',
-            name: 'WMS',
-            x: years,
-            y: wmsCounts,
-            marker: {
-                color: colors[1],
-                size: 10
-            },
-            line: {width: 3}
-        };
-//     plotDiv.innerHTML = histogramDataJSON + '<br/><br/>' + years + '<br/><br/>' + ampliconCounts + '<br/><br/>' + wmsCounts;
-    Plotly.plot(plotDiv, [ampliconTrace, wmsTrace], histogramLayout, {showSendToCloud:false});
+        type: 'lines+markers',
+        name: 'WMS',
+        x: years,
+        y: wmsCounts,
+        opacity:0.8,
+        marker: {size: 10},
+        line: {width: 3}
+    };
+    Plotly.plot(plotDiv, [amplicon16STrace, ampliconITSTrace, wmsTrace], getHistogramLayout(300, 'Year'), {showSendToCloud:false});
 }
 
 function plotBiomeHistogramData(divId, histogramDataJSON) {
     var plotDiv = document.getElementById(divId);
-
     var histogramData = JSON.parse(histogramDataJSON);
-    var years = [];
-    var lungCounts = [];
-    var gutCounts = [];
+    var years = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    var names = ['Anus', 'Gut', 'Large Intestine', 'Lower Respiratory Tract', 'Lung', 'Nasal', 'Oral', 'Rectum', 'Stomach', 'Upper Respiratory Tract'];
+
+    var dataMap = new Map();
     for(var i=0; i<histogramData.length; ++i) {
-        years[i] = histogramData[i].ReleaseYear;
-        lungCounts[i] = histogramData[i].LungRunCount;
-        gutCounts[i] = histogramData[i].GutRunCount;
+        if(!dataMap.has(histogramData[i].Biome))
+            dataMap.set(histogramData[i].Biome, new Map());
+        dataMap.get(histogramData[i].Biome).set(histogramData[i].Year, histogramData[i].Counts);
     }
 
-    var lungTrace = {
-            type: 'lines+markers',
-            name: 'Lung',
-            x: years,
-            y: lungCounts,
-            marker: {
-                color: colors2[0],
-                size: 10
-            },
-            line: {width: 3}
-        };
-    var gutTrace = {
-            type: 'lines+markers',
-            name: 'Gut',
-            x: years,
-            y: gutCounts,
-            marker: {
-                color: colors2[1],
-                size: 10
-            },
-            line: {width: 3}
-        };
-    Plotly.plot(plotDiv, [lungTrace, gutTrace], histogramLayout, {showSendToCloud:false});
-}
-
-function plotDiseaseHistogramData(divId, histogramDataJSON) {
-    var plotDiv = document.getElementById(divId);
-
-    var histogramData = JSON.parse(histogramDataJSON);
-    var years = [];
-    var asthmaCounts = [];
-    var copdCounts = [];
-    var covidCounts = [];
-    var cfCounts = [];
-    var lcCounts = [];
-    var pneumoniaCounts = [];
-    var tbCounts = [];
-    var controlCounts = [];
-    var healthyCounts = [];
-    for(var i=0; i<histogramData.length; ++i) {
-        years[i] = histogramData[i].ReleaseYear;
-        asthmaCounts[i] = histogramData[i].AsthmaRunCount;
-        copdCounts[i] = histogramData[i].COPDRunCount;
-        covidCounts[i] = histogramData[i].COVIDRunCount;
-        cfCounts[i] = histogramData[i].CFRunCount;
-        lcCounts[i] = histogramData[i].LCRunCount;
-        pneumoniaCounts[i] = histogramData[i].PneumoniaRunCount;
-        tbCounts[i] = histogramData[i].TBRunCount;
-        controlCounts[i] = histogramData[i].ControlRunCount;
-        healthyCounts[i] = histogramData[i].HealthyRunCount;
-    }
-    var yVectors = [asthmaCounts, copdCounts, covidCounts, cfCounts, lcCounts, pneumoniaCounts, tbCounts, controlCounts, healthyCounts];
-    var names = ['Asthma', 'COPD', 'COVID-19', 'Cystic Fibrosis', 'Lung Cancer', 'Pneumonia', 'Tuberculosis', 'Control', 'Healthy'];
     var data = [];
-
     for (var i=0; i<names.length; ++i) {
+        var yVector = [];
+        for(var j=0; j<years.length; ++j)
+            if(dataMap.has(names[i]) && dataMap.get(names[i]).has(years[j]))
+                yVector.push(dataMap.get(names[i]).get(years[j]));
+            else
+                yVector.push(0);
+
         var trace = {
-            type: 'bar',
+            type: 'lines+markers',
             name: names[i],
             x: years,
-            y: yVectors[i],
+            y: yVector,
+            opacity:0.8,
             marker: {size: 10},
+            line: {width: 3}
         };
         data.push(trace);
     }
 
-//     plotDiv.innerHTML = histogramDataJSON + '<br/><br/>' + years + '<br/><br/>' + ampliconCounts + '<br/><br/>' + wmsCounts;
-    Plotly.plot(plotDiv, data, histogramLayout, {showSendToCloud:false});
+    Plotly.plot(plotDiv, data, getHistogramLayout(300, 'Year'), {showSendToCloud:false});
+}
+
+function plotDiseaseHistogramData(divId, histogramDataJSON) {
+    var plotDiv = document.getElementById(divId);
+    var histogramData = JSON.parse(histogramDataJSON);
+    var years = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    var names = [
+        'Acute Respiratory Distress Syndrome (ARDS)', 'Asthma', 'Asthma-COPD Overlap (ACO)', 'Bronchiectasis', 'Bronchiolitis', 'Bronchitis',
+        'Chronic Obstructive Pulmonary Disease (COPD)', 'COPD-Bronchiectasis Association (CBA)', 'COVID-19', 'Cystic Fibrosis',
+        'Idiopathic Pulmonary Fibrosis (IPF)', 'Interstitial Lung Disease (ILD)', 'Lung Cancer', 'Other Pulmonary Infections', 'Pneumonia',
+        'Pneumonitis', 'Pulmonary Hypertension', 'Sarcoidosis', 'Tuberculosis', 'Control', 'Healthy'
+    ];
+
+    var dataMap = new Map();
+    for(var i=0; i<histogramData.length; ++i) {
+        if(!dataMap.has(histogramData[i].Grp))
+            dataMap.set(histogramData[i].Grp, new Map());
+        dataMap.get(histogramData[i].Grp).set(histogramData[i].Year, histogramData[i].Counts);
+    }
+
+    var data = [];
+    for (var i=0; i<names.length; ++i) {
+        var yVector = [];
+        for(var j=0; j<years.length; ++j)
+            if(dataMap.has(names[i]) && dataMap.get(names[i]).has(years[j]))
+                yVector.push(dataMap.get(names[i]).get(years[j]));
+            else
+                yVector.push(0);
+
+        var trace = {
+            type: 'bar',
+            name: names[i],
+            x: years,
+            y: yVector,
+            opacity:0.8,
+            marker: {size: 10}
+        };
+        data.push(trace);
+    }
+
+    Plotly.plot(plotDiv, data, getHistogramLayout(500, 'Year'), {showSendToCloud:false});
 }
 
 function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDataJSON) {
@@ -273,109 +236,139 @@ function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDat
     var colors = ['#e9967a', '#b0c4de'];
     
     var data = JSON.parse(statDataJSON);
-    
+
+    var biomes = [];
+    var biomeCounts = [];
+    for(var i=0; i<data.biomeResult.length; ++i) {
+        biomes.push(data.biomeResult[i].Biome);
+        biomeCounts.push(data.biomeResult[i].BiomeCount);
+    }
     var biomePieTrace = {
         type: 'pie',
         hole: .4,
-        labels: ['Lung', 'Gut'],
-        values: [data.lungCount, data.gutCount],
-        marker: {colors: colors2},
+        labels: biomes,
+        values: biomeCounts,
+//         marker: {size: 2},
+        sort: false,
         hoverinfo: 'label+percent+value',
-        textinfo: 'label+percent+value'
+        textinfo: 'label+percent'
     };
+
+    var assayTypes = [];
+    var assayTypeCounts = [];
+    for(var i=0; i<data.assayTypeResult.length; ++i) {
+        assayTypes.push(data.assayTypeResult[i].AssayType);
+        assayTypeCounts.push(data.assayTypeResult[i].AssayTypeCount);
+    }
     var assayTypePieTrace = {
         type: 'pie',
-        hole: .4,
-        labels: ['Amplicon', 'WMS'],
-        values: [data.ampCount, data.wmsCount],
-        marker: {colors: colors},
+        hole: 0.4,
+        labels: assayTypes,
+        values: assayTypeCounts,
+//         marker: {colors: colors},
+        sort: false,
         hoverinfo: 'label+percent+value',
-        textinfo: 'label+percent+value'
+        textinfo: 'label+percent'
     };
-    var diseaseBarTrace = {
-        type: 'bar',
-        x: ['Asthma', 'COPD', 'COVID-19', 'Cystic Fibrosis', 'Lung Cancer', 'Pneumonia', 'Tuberculosis', 'Control', 'Healthy'],
-        y: [data.asthmaCount, data.copdCount, data.covidCount, data.cfCount, data.lcCount, data.pneumoniaCount, data.tbCount, data.controlCount, data.healthyCount],
-        hoverinfo: 'label+percent+value',
-        textinfo: 'label+percent+value'
-    };
+
+    var diseases = [
+        'Acute Respiratory Distress Syndrome (ARDS)', 'Asthma', 'Asthma-COPD Overlap (ACO)', 'Bronchiectasis', 'Bronchiolitis', 'Bronchitis',
+        'Chronic Obstructive Pulmonary Disease (COPD)', 'COPD-Bronchiectasis Association (CBA)', 'COVID-19', 'Cystic Fibrosis',
+        'Idiopathic Pulmonary Fibrosis (IPF)', 'Interstitial Lung Disease (ILD)', 'Lung Cancer', 'Other Pulmonary Infections', 'Pneumonia',
+        'Pneumonitis', 'Pulmonary Hypertension', 'Sarcoidosis', 'Tuberculosis', 'Control', 'Healthy'
+    ];
+    var diseasesLabels = [
+        'Acute Respiratory Distress Syndrome (ARDS)', 'Asthma', 'Asthma-COPD Overlap (ACO)', 'Bronchiectasis', 'Bronchiolitis', 'Bronchitis',
+        'Chronic <br>Obstructive <br>Pulmonary <br>Disease <br>(COPD)', 'COPD-Bronchiectasis Association (CBA)', 'COVID-19', 'Cystic <br>Fibrosis',
+        'Idiopathic Pulmonary Fibrosis (IPF)', 'Interstitial Lung Disease (ILD)', 'Lung <br>Cancer', 'Other Pulmonary Infections', 'Pneumonia',
+        'Pneumonitis', 'Pulmonary Hypertension', 'Sarcoidosis', 'Tuberculosis', 'Control', 'Healthy'
+    ];
+    var diseasesShort = [
+        'ARDS', 'Asthma', 'ACO', 'Bronchiectasis', 'Bronchiolitis', 'Bronchitis', 'COPD', 'CBA', 'COVID', 'CF',
+        'IPF', 'ILD', 'LC', 'OPI', 'Pneumonia', 'Pneumonitis', 'PH', 'Sarcoidosis', 'TB', 'Control', 'Healthy'
+    ];
+    var assayTypesShort = ['16S', 'ITS', 'WMS'];
+    var dataMap = new Map();
+    for(var i=0; i<data.diseaseBiomeCountResult.length; ++i) {
+        if(!dataMap.has(data.diseaseBiomeCountResult[i].Biome))
+            dataMap.set(data.diseaseBiomeCountResult[i].Biome, new Map());
+        dataMap.get(data.diseaseBiomeCountResult[i].Biome).set(data.diseaseBiomeCountResult[i].Grp, data.diseaseBiomeCountResult[i].DiseaseCount);
+    }
+    var diseaseBarTrace = [];
+    for (var i=0; i<biomes.length; ++i) {
+        var yVector = [];
+        for(var j=0; j<diseases.length; ++j)
+            if(dataMap.has(biomes[i]) && dataMap.get(biomes[i]).has(diseases[j]))
+                yVector.push(dataMap.get(biomes[i]).get(diseases[j]));
+            else
+                yVector.push(0);
+        diseaseBarTrace.push({
+            type: 'bar',
+            name: biomes[i],
+            x: diseases,
+            y: yVector,
+            opacity: 0.8,
+            marker: {size: 10}
+        });
+    }
+
+    var sunburstIds = ['Total'].concat(diseasesShort);
+//     var sunburstIds = Array.from(diseasesShort);
+    for (var i=0; i<diseasesShort.length; ++i)
+        for (var j=0; j<assayTypesShort.length; ++j)
+            sunburstIds.push(diseasesShort[i] + '_' + assayTypesShort[j]);
+
+    var sunburstLabels = ['Total number of runs'].concat(diseasesLabels);
+//     var sunburstLabels = Array.from(diseasesLabels);
+    for (var i=0; i<diseasesShort.length; ++i)
+        for (var j=0; j<assayTypes.length; ++j)
+            sunburstLabels.push(assayTypes[j]);
+
+    var sunburstParents = [''];
+//     var sunburstParents = [];
+    for (var i=0; i<diseasesShort.length; ++i)
+        sunburstParents.push('Total');
+//         sunburstParents.push('');
+    for (var i=0; i<diseasesShort.length; ++i)
+        for (var j=0; j<assayTypes.length; ++j)
+            sunburstParents.push(diseasesShort[i]);
+
+    var diseaseCountMap = new Map();
+    for(var i=0; i<data.diseaseCountResult.length; ++i)
+        diseaseCountMap.set(data.diseaseCountResult[i].Grp, data.diseaseCountResult[i].C);
+    var diseaseATCountMap = new Map();
+    for(var i=0; i<data.diseaseATCountResult.length; ++i) {
+        if(!diseaseATCountMap.has(data.diseaseATCountResult[i].Grp))
+            diseaseATCountMap.set(data.diseaseATCountResult[i].Grp, new Map());
+        diseaseATCountMap.get(data.diseaseATCountResult[i].Grp).set(data.diseaseATCountResult[i].AssayType, data.diseaseATCountResult[i].C);
+    }
+    var sunburstValues = [data.totalCountResult[0].C];
+//     var sunburstValues = [];
+    for (var i=0; i<diseases.length; ++i)
+        sunburstValues.push((diseaseCountMap.has(diseases[i])) ? diseaseCountMap.get(diseases[i]) : 0);
+    for (var i=0; i<diseases.length; ++i) {
+        if(!diseaseATCountMap.has(diseases[i]))
+            for (var j=0; j<assayTypes.length; ++j)
+                sunburstValues.push(0);
+        else
+            for (var j=0; j<assayTypes.length; ++j)
+                sunburstValues.push((diseaseATCountMap.get(diseases[i]).has(assayTypes[j])) ? diseaseATCountMap.get(diseases[i]).get(assayTypes[j]) : 0);
+    }
+//     alert('' + sunburstIds.length + ' ' + sunburstLabels.length + ' ' + sunburstParents.length + ' ' + sunburstValues.length);
 
     var sunburstTrace = {
-            type: 'sunburst',
-            ids: [
-                'Total', 'Asthma', 'COPD', 'COVID', 'CF', 'LC', 'Pneumonia', 'TB', 'Control', 'Healthy',
-                'Asthma_Lung', 'Asthma_Gut', 'COPD_Lung', 'COPD_Gut', 'COVID_Lung', 'COVID_Gut', 'CF_Lung', 'CF_Gut', 'LC_Lung', 'LC_Gut',
-                'Pneumonia_Lung', 'Pneumonia_Gut', 'TB_Lung', 'TB_Gut', 'Control_Lung', 'Control_Gut', 'Healthy_Lung', 'Healthy_Gut',
-                'Asthma_Lung_Amplicon', 'Asthma_Lung_WMS', 'Asthma_Gut_Amplicon', 'Asthma_Gut_WMS',
-                'COPD_Lung_Amplicon', 'COPD_Lung_WMS', 'COPD_Gut_Amplicon', 'COPD_Gut_WMS',
-                'COVID_Lung_Amplicon', 'COVID_Lung_WMS', 'COVID_Gut_Amplicon', 'COVID_Gut_WMS',
-                'CF_Lung_Amplicon', 'CF_Lung_WMS', 'CF_Gut_Amplicon', 'CF_Gut_WMS',
-                'LC_Lung_Amplicon', 'LC_Lung_WMS', 'LC_Gut_Amplicon', 'LC_Gut_WMS',
-                'Pneumonia_Lung_Amplicon', 'Pneumonia_Lung_WMS', 'Pneumonia_Gut_Amplicon', 'Pneumonia_Gut_WMS',
-                'TB_Lung_Amplicon', 'TB_Lung_WMS', 'TB_Gut_Amplicon', 'TB_Gut_WMS',
-                'Control_Lung_Amplicon', 'Control_Lung_WMS', 'Control_Gut_Amplicon', 'Control_Gut_WMS',
-                'Healthy_Lung_Amplicon', 'Healthy_Lung_WMS', 'Healthy_Gut_Amplicon', 'Healthy_Gut_WMS'
-            ],
-            labels: ['Total number of runs', 'Asthma', 'COPD', 'COVID-19', 'Cystic Fibrosis', 'Lung Cancer', 'Pneumonia', 'TB', 'Control', 'Healthy',
-                'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut',
-                'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut', 'Lung', 'Gut',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS',
-                'Amplicon', 'WMS', 'Amplicon', 'WMS'],
-            parents: ['', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total', 'Total',
-                'Asthma', 'Asthma', 'COPD', 'COPD', 'COVID', 'COVID', 'CF', 'CF', 'LC', 'LC',
-                'Pneumonia', 'Pneumonia', 'TB', 'TB', 'Control', 'Control', 'Healthy', 'Healthy',
-                'Asthma_Lung', 'Asthma_Lung', 'Asthma_Gut', 'Asthma_Gut',
-                'COPD_Lung', 'COPD_Lung', 'COPD_Gut', 'COPD_Gut',
-                'COVID_Lung', 'COVID_Lung', 'COVID_Gut', 'COVID_Gut',
-                'CF_Lung', 'CF_Lung', 'CF_Gut', 'CF_Gut',
-                'LC_Lung', 'LC_Lung', 'LC_Gut', 'LC_Gut',
-                'Pneumonia_Lung', 'Pneumonia_Lung', 'Pneumonia_Gut', 'Pneumonia_Gut',
-                'TB_Lung', 'TB_Lung', 'TB_Gut', 'TB_Gut',
-                'Control_Lung', 'Control_Lung', 'Control_Gut', 'Control_Gut',
-                'Healthy_Lung', 'Healthy_Lung', 'Healthy_Gut', 'Healthy_Gut'],
-            values: [
-                data.totalCount, data.asthmaCount, data.copdCount, data.covidCount, data.cfCount, data.lcCount, data.pneumoniaCount, data.tbCount, data.controlCount, data.healthyCount,
-                data.asthmaLungCount, data.asthmaGutCount, data.copdLungCount, data.copdGutCount, data.covidLungCount, data.covidGutCount, data.cfLungCount, data.cfGutCount, data.lcLungCount, data.lcGutCount,
-                data.pneumoniaLungCount, data.pneumoniaGutCount, data.tbLungCount, data.tbGutCount, data.controlLungCount, data.controlGutCount, data.healthyLungCount, data.healthyGutCount,
-                data.asthmaLungAmpCount, data.asthmaLungWMSCount, data.asthmaGutAmpCount, data.asthmaGutWMSCount,
-                data.copdLungAmpCount, data.copdLungWMSCount, data.copdGutAmpCount, data.copdGutWMSCount,
-                data.covidLungAmpCount, data.covidLungWMSCount, data.covidGutAmpCount, data.covidGutWMSCount,
-                data.cfLungAmpCount, data.cfLungWMSCount, data.cfGutAmpCount, data.cfGutWMSCount,
-                data.lcLungAmpCount, data.lcLungWMSCount, data.lcGutAmpCount, data.lcGutWMSCount,
-                data.pneumoniaLungAmpCount, data.pneumoniaLungWMSCount, data.pneumoniaGutAmpCount, data.pneumoniaGutWMSCount,
-                data.tbLungAmpCount, data.tbLungWMSCount, data.tbGutAmpCount, data.tbGutWMSCount,
-                data.controlLungAmpCount, data.controlLungWMSCount, data.controlGutAmpCount, data.controlGutWMSCount,
-                data.healthyLungAmpCount, data.healthyLungWMSCount, data.healthyGutAmpCount, data.healthyGutWMSCount
-            ]
+        type: 'sunburst',
+        ids: sunburstIds,
+        labels: sunburstLabels,
+        parents: sunburstParents,
+        values: sunburstValues,
+        sort: false,
+        branchvalues: 'total'
     }
-//     var sunburstValues = [
-//         data.totalCount, data.asthmaCount, data.copdCount, data.covidCount, data.cfCount, data.lcCount, data.pneumoniaCount, data.tbCount, data.controlCount, data.healthyCount,
-//         data.asthmaLungCount, data.asthmaGutCount, data.copdLungCount, data.copdGutCount, data.covidLungCount, data.covidGutCount, data.cfLungCount, data.cfGutCount, data.lcLungCount, data.lcGutCount,
-//         data.pneumoniaLungCount, data.pneumoniaGutCount, data.tbLungCount, data.tbGutCount, data.controlLungCount, data.controlGutCount, data.healthyLungCount, data.healthyGutCount,
-//         data.asthmaLungAmpCount, data.asthmaLungWMSCount, data.asthmaGutAmpCount, data.asthmaGutWMSCount,
-//         data.copdLungAmpCount, data.copdLungWMSCount, data.copdGutAmpCount, data.copdGutWMSCount,
-//         data.covidLungAmpCount, data.covidLungWMSCount, data.covidGutAmpCount, data.covidGutWMSCount,
-//         data.cfLungAmpCount, data.cfLungWMSCount, data.cfGutAmpCount, data.cfGutWMSCount,
-//         data.lcLungAmpCount, data.lcLungWMSCount, data.lcGutAmpCount, data.lcGutWMSCount,
-//         data.pneumoniaLungAmpCount, data.pneumoniaLungWMSCount, data.pneumoniaGutAmpCount, data.pneumoniaGutWMSCount,
-//         data.tbLungAmpCount, data.tbLungWMSCount, data.tbGutAmpCount, data.tbGutWMSCount,
-//         data.controlLungAmpCount, data.controlLungWMSCount, data.controlGutAmpCount, data.controlGutWMSCount,
-//         data.healthyLungAmpCount, data.healthyLungWMSCount, data.healthyGutAmpCount, data.healthyGutWMSCount
-//     ];
-//     for (var i=0; i<sunburstTrace.labels.length; ++i)
-//         sunburstTrace.labels[i] = sunburstTrace.labels[i] + " (" + sunburstValues[i] + ")";
 
-    // Plotly.plot(statDiv, [biomePieTrace, assayTypePieTrace, diseasePieTrace], pieLayout, {showSendToCloud:false});
     Plotly.plot(stat1Div, [biomePieTrace], pieLayout, {showSendToCloud:false});
     Plotly.plot(stat2Div, [assayTypePieTrace], pieLayout, {showSendToCloud:false});
-    Plotly.plot(stat3Div, [diseaseBarTrace], barlayout, {showSendToCloud:false});
+    Plotly.plot(stat3Div, diseaseBarTrace, getHistogramLayout(600, 'Group'), {showSendToCloud:false});
     Plotly.plot(sunburstDiv, [sunburstTrace], sunburstLayout, {showSendToCloud:false});
 }
 
