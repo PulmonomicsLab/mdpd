@@ -3,11 +3,11 @@ bioprojectID <- args[1]
 assayType <- args[2]
 isolationSource <- args[3]
 method <- args[4]
-alpha <- args[5]
+alpha <- as.double(args[5])
 p_adjust_method <- args[6]
-filter_thres <- args[7]
+filter_thres <- as.double(args[7])
 taxa_level <- args[8]
-threshold <- args[9]
+threshold <- as.double(args[9])
 
 set.seed(42)
 
