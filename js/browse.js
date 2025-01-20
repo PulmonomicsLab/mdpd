@@ -149,11 +149,11 @@ function filter_diseases(resultDivId) {
         '<input type="radio" style="margin-left:5px;" id="filter_ll_PAIRED" name="filter_ll" value="PAIRED" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_ll_PAIRED"><b>PAIRED</b></label>' +
         '<input type="radio" style="margin-left:5px;" id="filter_ll_SINGLE" name="filter_ll" value="SINGLE" onclick="filter_diseases(\'' + resultDivId + '\')" /><label for="filter_ll_SINGLE"><b>SINGLE</b></label>';
     var filterHTML =
-        '<table style="width:98%; margin:10px 1% 10px 1%; background-color:#ffe799;">' +
+        '<table style="width:96%; margin:10px 2% 10px 2%; background-color:#ffe799; border-collapse:collapse;">' +
             '<tr>' +
-                '<td>' + healthyCheckbox + '</td>' +
-                '<td>Assay Types: ' + assayTypeButtons + '</td>' +
-                '<td>Library Layouts: ' + libLayoutButtons + '</td>' +
+                '<td style="border:1px solid black; padding-left:10px;">Assay Types: ' + assayTypeButtons + '</td>' +
+                '<td style="border:1px solid black; padding-left:10px;">Library Layouts: ' + libLayoutButtons + '</td>' +
+                '<td style="border:1px solid black; padding-left:10px;">' + healthyCheckbox + '</td>' +
             '</tr>' +
         '</table>';
 
