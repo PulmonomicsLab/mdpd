@@ -26,15 +26,16 @@ function getControlPanelHTML(subgroup) {
             '<table>' +
                 '<tr><td colspan="3"><p style="margin:0; font-weight:bold; text-align:center;">Zoom &amp; Layout</p></td></tr>' +
                 '<tr>' +
-                    '<td style="width:34%;"><button style="width:100%;" title="Zoom in" onclick="zoomIn(\''+subgroup+'\')"><i class="fa fa-solid fa-magnifying-glass-plus"></i></button></td>' +
-                    '<td style="width:32%;"><button  title="Reset axes" onclick="resetAxes(\''+subgroup+'\')"><i class="fa fa-solid fa-home"></i></button></td>' +
-                    '<td style="width:34%;"><button style="width:100%;" title="Zoom out" onclick="zoomOut(\''+subgroup+'\')"><i class="fa fa-solid fa-magnifying-glass-minus"></i></button></td>' +
+                    '<td style="width:33%;"><button style="width:100%;" title="Zoom in" onclick="zoomIn(\''+subgroup+'\')"><i class="fa fa-solid fa-magnifying-glass-plus"></i></button></td>' +
+                    '<td style="width:34%;"><button style="width:100%;" title="Reset axes" onclick="resetAxes(\''+subgroup+'\')"><i class="fa fa-solid fa-home"></i></button></td>' +
+                    '<td style="width:33%;"><button style="width:100%;" title="Zoom out" onclick="zoomOut(\''+subgroup+'\')"><i class="fa fa-solid fa-magnifying-glass-minus"></i></button></td>' +
                 '</tr>' +
                 '<tr>' +
                     '<td colspan="3">' +
                         '<select title="Change layout" style="width:100%; background-color:#e6e6ff;" id="layout_' + subgroup.replace(/ /g,"_") + '" name="layout" onchange="changeLayout(\''+subgroup+'\')">' +
-                            '<option value="cose">CoSE</option><option value="circle">Circle</option>' +
-                            '<option value="random">Random</option>' +
+                            '<option value="cose">CoSE Layout</option>' +
+                            '<option value="circle">Circle Layout</option>' +
+                            '<option value="random">Random Layout</option>' +
                         '<select>' +
                     '</td>' +
                 '</tr>' +
@@ -177,7 +178,7 @@ function makePlot(div_id, networkData, subgroup) {
     var randomLayout = network.layout({name: 'random'});
     var bounds = network.renderedExtent();
     bounds = {x1: bounds.x1, y1: bounds.y1, w: bounds.w, h: bounds.h};
-    var coseLayout = network.layout({name: 'cose', boundingBox: bounds, padding: 5});
+    var coseLayout = network.layout({name: 'cose', boundingBox: bounds, padding: 5, animationThreshold: 10});
     coseLayout.run(); // CoSE as default layout
 
     // Compute information of nodes
