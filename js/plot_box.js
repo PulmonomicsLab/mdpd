@@ -139,7 +139,25 @@ function plotBox(div_id, response) {
     var data = JSON.parse(response);
     if (data.taxa.length > 0) {
         var dataMap = getDataMap(data.taxa, data.subgroup, data.abundances);
+        document.getElementById(div_id).innerHTML = '';
         makePlot(div_id, dataMap);
         createDownloadLink(data.sample, data.taxa, data.subgroup, data.abundances);
     }
+}
+
+function getBoxPlotData(div_id, dataJSON) {
+    var data = JSON.parse(dataJSON);
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            plotBox(div_id, this.responseText)
+        }
+    };
+    httpReq.open('POST', 'bioproject_taxonomic_profile_data.php', true);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send(
+        'bioproject=' + encodeURIComponent(data.bioproject) +
+        '&' + 'at=' + encodeURIComponent(data.at) +
+        '&' + 'is=' + encodeURIComponent(data.is)
+    );
 }
