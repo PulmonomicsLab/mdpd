@@ -2,10 +2,8 @@
     include('db.php');
 
     $sgQuery = "select Grp, SubGroup from disease order by Grp, SubGroup;";
-    $isQuery = "select distinct(IsolationSource), Biome from run order by Biome;";
 
     $conn = connect();
-
     $sgStmt = $conn->prepare($sgQuery);
 //     $sgStmt->execute();
 //     $result = $sgStmt->get_result();
@@ -13,15 +11,6 @@
 //     $sgRows = $result->fetch_all(MYSQLI_ASSOC);
     $sgRows = execute_and_fetch_assoc($sgStmt);
     $sgStmt->close();
-
-    $isStmt = $conn->prepare($isQuery);
-//     $isStmt->execute();
-//     $result = $isStmt->get_result();
-//     echo $result->num_rows." ".$result->field_count."<br/><br/>";
-//     $isRows = $result->fetch_all(MYSQLI_ASSOC);
-    $isRows = execute_and_fetch_assoc($isStmt);
-    $isStmt->close();
-
     closeConnection($conn);
 
     $diseaseSubGroupMap = array();
@@ -33,16 +22,6 @@
     }
 //     foreach ($diseaseSubGroupMap as $d=>$sgs)
 //         echo $d."=>[".implode(",", $sgs)."]<br/><br/>";
-
-    $biomeIsolationSourceMap = array();
-    foreach ($isRows as $row) {
-        if(array_key_exists($row["Biome"], $biomeIsolationSourceMap))
-            array_push($biomeIsolationSourceMap[$row["Biome"]], $row["IsolationSource"]);
-        else
-            $biomeIsolationSourceMap[$row["Biome"]] = array($row["IsolationSource"]);
-    }
-//     foreach ($biomeIsolationSourceMap as $b=>$iss)
-//         echo $b."=>[".implode(",", $iss)."]<br/><br/>";
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,7 +54,7 @@
 
         <div class = "section_left" id="section_left">
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-1" class="browse_side_nav">1. Disease wise BioProjects</a></div>
-            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Isolation source wise BioProjects</a></div>
+            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Biome wise BioProjects</a></div>
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">3. Disease subgroup wise BioProjects</a></div>
         </div>
 
@@ -102,29 +81,10 @@
             </div>
             <div class="browse-result" id="disease-wise-results">foo</div>
 
-            <div class="browse-heading" id="sec-2">2. Isolation source wise BioProjects</div>
-            <table class="browse-summary">
-                <tr>
-                    <th>Biome</th>
-                    <th>Isolation source</th>
-                </tr>
-                <?php
-                    $tableRowClass = "odd";
-                    foreach($biomeIsolationSourceMap as $biome=>$isolationSources) {
-                        $tableRowClass = ($tableRowClass == "even") ? "odd" : "even";
-                        echo "<tr>";
-                        echo "<td class=\"row_heading\">".$biome."</td>";
-                        echo "<td class=\"".$tableRowClass."\">";
-                        echo "<div class=\"button-group\">";
-                        foreach($isolationSources as $is)
-                            echo "<button type=\"button\" style=\"width:auto;float:left;\" onclick=\"getIsolationSourceBioProjects('".$is."', 'is-wise-results')\">".$is."</button>";
-                        echo "</div>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                ?>
-            </table>
-            <div class="browse-result" id="is-wise-results">foo</div>
+            <div class="browse-heading" style="margin-bottom:5px;" id="sec-2">2. Biome wise BioProjects</div>
+            <p style="margin:0; font-size:0.9em;"><i>(Please click on the biome names in figure to get details)</i></p>
+            <embed src="resource/home_figures/Bioms.svg" style="width:100%; max-height:600px; max-width:100%;" />
+
 
             <div class="browse-heading" id="sec-2">3. Disease subgroup wise BioProjects</div>
             <table class="browse-summary">
