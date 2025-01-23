@@ -96,6 +96,23 @@ function plotBar(div_id, response) {
     for(var i=0; i<taxa.length; ++i) {
         taxa[i] = '<i>' + taxa[i] + '</i>';
     };
-
+    document.getElementById(div_id).innerHTML = '';
     makePlot(div_id, taxa, abundances);
+}
+
+function getTopTaxaData(div_id, dataJSON) {
+    var data = JSON.parse(dataJSON);
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            plotBar(div_id, this.responseText)
+        }
+    };
+    httpReq.open('POST', 'run_id_data.php', true);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send(
+        'run=' + encodeURIComponent(data.run) +
+        '&' + 'bioproject=' + encodeURIComponent(data.bioproject) +
+        '&' + 'at=' + encodeURIComponent(data.at)
+    );
 }

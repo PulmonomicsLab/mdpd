@@ -18,12 +18,13 @@
     $stmt->close();
     closeConnection($conn);
 
-    $command = "Rscript R/runwise_top_taxa.R \"".$runID."\" \"".$rows[0]["BioProject"]."\" \"".$rows[0]["AssayType"]."\" 2>&1";
-//     echo "<pre>".$command."</pre>\n";
-
-    exec($command, $out, $status);
-//     echo implode("</br/>", $out)."<br/>";  // for checking output with errors, if any
-//     echo $out[0]."<br/>";  // for checking output only
+    $dataJSON = json_encode(
+        array(
+            "run" => $runID,
+            "bioproject" => $rows[0]["BioProject"],
+            "at" => $rows[0]["AssayType"]
+        )
+    );
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +35,6 @@
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_krona.js"></script>
         <script type = "text/javascript" src = "js/plot_top_taxa_bar.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
@@ -93,7 +92,9 @@
             </div>
             <div style="width:45%; margin:10px 2% 10px 2%; float:right;">
                 <p style="margin-top:0; font-weight:bold;">B. Top 10 abundant taxa (Bar plot)</p>
-                <div id="bar_plot_div" style="width:100%;"></div>
+                <div id="bar_plot_div" style="width:100%;">
+                    <center><img style="height:100px;" src="resource/loading.gif" /></center>
+                </div>
             </div>
             <div style="clear:both"></div>
             
@@ -107,6 +108,6 @@
     </body>
     <script>
         <?php echo "getKronaData('".$row['BioProject']."','".$row['AssayType']."','".$row['IsolationSource']."','runwise');"; ?>
-        <?php echo "plotBar('bar_plot_div', '".$out[0]."');"; ?>
+        <?php echo "getTopTaxaData('bar_plot_div', '".$dataJSON."');"; ?>
     </script>
 </html>
