@@ -1,55 +1,25 @@
 <?php
-
-    function get_temp_folder_name() {
-        $t = microtime();
-        $sec = explode(" ", $t)[0];
-        $msec = explode(" ", $t)[1];
-        $timestamp = ($sec*1000000 + $msec * 1000000)% 1000000000;
-        return basename($timestamp);
-    }
-
-    function remove_directory_recursively($dir) {
-        $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
-        $files = new RecursiveIteratorIterator($it,
-                    RecursiveIteratorIterator::CHILD_FIRST);
-        foreach($files as $file) {
-            if ($file->isDir()){
-                rmdir($file->getPathname());
-            } else {
-                unlink($file->getPathname());
-            }
-        }
-        rmdir($dir);
-    }
-
-    $tmp_prefix = "demo_output/";
-
     $bioproject = urldecode($_GET["key"]);
     $at = urldecode($_GET["at"]);
     $is = urldecode($_GET["is"]);
 
     $confounder_json = json_decode(file_get_contents("input/bioproject_confounder_list.json"), true);
-//     echo implode(", ", $confounder_json["bioprojects"]);
-
     if (array_key_exists($bioproject, $confounder_json["confounders"])) {
-        $tmp_path = $tmp_prefix . get_temp_folder_name() . "/";
-        mkdir($tmp_path, 0700);
-
         $confounders = $confounder_json["confounders"][$bioproject];
         $display_text = "Multivariate association analysis - ".$bioproject." | ".$at." | ".$is." | Confounders = [".$confounders."]";
-        $command = "Rscript R/bioproject_covariate_analysis.R \"".$bioproject."\" \"".$at."\" \"".$is."\" \"".$confounders."\" \"".$tmp_path."\" 2>&1";
-//         echo "<pre>".$command."</pre>\n";
-        exec($command, $out, $status);
-        $heatmap = $out[count($out)-1];
-//         echo implode("</br/>", $out)."<br/>";  // for checking output with errors, if any
-//         echo $heatmap."<br/>";  // for checking output only
-
-        remove_directory_recursively($tmp_path);
-
     } else {
-        $out = array("No covariate analysis possible");
-        echo $out[0];
+        $confounders = "";
+        $display_text = "Multivariate association analysis - ".$bioproject." | ".$at." | ".$is." | No confounders";
     }
+
+    $dataJSON = json_encode(
+        array(
+            "bioproject" => $bioproject,
+            "at" => $at,
+            "is" => $is,
+            "confounders" => $confounders
+        )
+    );
 ?>
 
 <!DOCTYPE html>
@@ -59,8 +29,6 @@
         <title>Multivariate association analysis - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_covariate.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
@@ -88,11 +56,13 @@
         <div class = "section_middle">
             <p style="margin:0 0 10px 0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo $display_text; ?></p>
             <div id="download_div" style="width:100%; text-align:center; display:none;">
-                <a id="download_button" download="multivariate_figure_data.csv">
+                <a id="download_button" download="multivariate_figure_data.tsv">
                     <button type="button" style="margin:2px;">Download figure data</button>
                 </a>
             </div>
-            <div id="covariate_plot_div" style="width:70%; margin:0 15% 0 15%;"></div>
+            <div id="covariate_plot_div" style="width:70%; margin:0 15% 0 15%;">
+                <center><img style="height:100px;" src="resource/loading.gif" /></center>
+            </div>
 
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
@@ -103,6 +73,6 @@
         </div>
     </body>
     <script>
-        <?php echo "plotCovariateHeatmap('covariate_plot_div', '".$heatmap."');"; ?>
+        <?php echo "getCovariateData('covariate_plot_div', '".$dataJSON."');"; ?>
     </script>
 </html>

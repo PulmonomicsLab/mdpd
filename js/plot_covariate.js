@@ -232,9 +232,14 @@ function makePlot(div_id, heatmapData) {
 }
 
 function plotCovariateHeatmap(div_id, response) {
+    if(response == 'No covariate analysis possible') {
+        document.getElementById(div_id).innerHTML = '<p>No covariate analysis possible</p>';
+        return;
+    }
     var data = JSON.parse(response);
     if(data.taxa.length > 0) {
         var dataMap = getDataMap(data.taxa, data.name, data.value, data.significance);
+        document.getElementById(div_id).innerHTML = '';
         makePlot(div_id, dataMap);
         createDownloadLink(dataMap);
         document.getElementById('download_div').style.display = 'block';
@@ -243,3 +248,20 @@ function plotCovariateHeatmap(div_id, response) {
     }
 }
 
+function getCovariateData(div_id, dataJSON) {
+    var data = JSON.parse(dataJSON);
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            plotCovariateHeatmap(div_id, this.responseText)
+        }
+    };
+    httpReq.open('POST', 'bioproject_covariate_analysis_data.php', true);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send(
+        'bioproject=' + encodeURIComponent(data.bioproject) +
+        '&' + 'at=' + encodeURIComponent(data.at) +
+        '&' + 'is=' + encodeURIComponent(data.is) +
+        '&' + 'confounders=' + encodeURIComponent(data.confounders)
+    );
+}
