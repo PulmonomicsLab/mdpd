@@ -144,6 +144,7 @@ function plotLDA(div_id, response, method) {
     var data = JSON.parse(response);
     if(data.taxa.length > 0) {
         var dataMap = getDataMap(data.taxa, data.subgroup, data.value);
+        document.getElementById(div_id).innerHTML = '';
         makePlot(div_id, dataMap, method);
         if (data.p_adjust == 'none')
             createDownloadLink(method, data.p_adjust, data.taxa, data.subgroup, data.value, data.pval, data.significance);
@@ -155,3 +156,25 @@ function plotLDA(div_id, response, method) {
     }
 }
 
+function getLDAData(div_id, dataJSON) {
+    var data = JSON.parse(dataJSON);
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            plotLDA(div_id, this.responseText, data.method)
+        }
+    };
+    httpReq.open('POST', 'lda_data.php', true);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send(
+        'bioproject=' + encodeURIComponent(data.bioproject) +
+        '&' + 'at=' + encodeURIComponent(data.at) +
+        '&' + 'is=' + encodeURIComponent(data.is) +
+        '&' + 'method=' + encodeURIComponent(data.method) +
+        '&' + 'alpha=' + encodeURIComponent(data.alpha) +
+        '&' + 'p_adjust_method=' + encodeURIComponent(data.p_adjust_method) +
+        '&' + 'filter_thres=' + encodeURIComponent(data.filter_thres) +
+        '&' + 'taxa_level=' + encodeURIComponent(data.taxa_level) +
+        '&' + 'threshold=' + encodeURIComponent(data.threshold)
+    );
+}
