@@ -16,9 +16,11 @@ function getKronaData(bioproject, assayType, isolationSource, kronaType) {
             frame.contentWindow.document.write(this.responseText);
             frame.contentWindow.document.close();
 
-            document.getElementById('download_div_krona').style.display = 'block';
-            document.getElementById('download_button_krona').href = 'resource/public/krona/' + file;
-            document.getElementById('download_button_krona').download = file;
+            if (document.getElementById('download_div_krona') !== null) {
+                document.getElementById('download_div_krona').style.display = 'block';
+                document.getElementById('download_button_krona').href = 'resource/public/krona/' + file;
+                document.getElementById('download_button_krona').download = file;
+            }
         }
     };
     xmlhttp.open('GET', (prefix + file), true);
