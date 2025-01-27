@@ -61,7 +61,7 @@
                 </a>
             </div>
             <div id="covariate_plot_div" style="width:70%; margin:0 15% 0 15%;">
-                <center><img style="height:100px;" src="resource/loading.gif" /></center>
+                <center><img style="height:300px;" src="resource/loading.gif" /></center>
             </div>
 
             <br/><hr/>

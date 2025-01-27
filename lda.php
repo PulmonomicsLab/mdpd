@@ -142,7 +142,7 @@
                 </a>
             </div>
             <div style="width:100%;" id="lda_plot_div">
-                <center><img style="height:100px;" src="resource/loading.gif" /></center>
+                <center><img style="height:300px;" src="resource/loading.gif" /></center>
             </div>
             <p>
                 <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot

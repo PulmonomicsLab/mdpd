@@ -61,7 +61,7 @@
                 </a>
             </div>
             <div id="box_plot_div" style="width:100%;">
-                <center><img style="height:100px;" src="resource/loading.gif" /></center>
+                <center><img style="height:300px;" src="resource/loading.gif" /></center>
             </div>
 
             <br/><hr/>

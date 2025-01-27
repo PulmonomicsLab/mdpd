@@ -93,7 +93,7 @@
             <div style="width:45%; margin:10px 2% 10px 2%; float:right;">
                 <p style="margin-top:0; font-weight:bold;">B. Top 10 abundant taxa (Bar plot)</p>
                 <div id="bar_plot_div" style="width:100%;">
-                    <center><img style="height:100px;" src="resource/loading.gif" /></center>
+                    <center><img style="height:300px;" src="resource/loading.gif" /></center>
                 </div>
             </div>
             <div style="clear:both"></div>
