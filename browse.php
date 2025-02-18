@@ -1,28 +1,3 @@
-<?php
-    include('db.php');
-
-    $sgQuery = "select Grp, SubGroup from disease order by Grp, SubGroup;";
-
-    $conn = connect();
-    $sgStmt = $conn->prepare($sgQuery);
-//     $sgStmt->execute();
-//     $result = $sgStmt->get_result();
-//     echo $result->num_rows." ".$result->field_count."<br/><br/>";
-//     $sgRows = $result->fetch_all(MYSQLI_ASSOC);
-    $sgRows = execute_and_fetch_assoc($sgStmt);
-    $sgStmt->close();
-    closeConnection($conn);
-
-    $diseaseSubGroupMap = array();
-    foreach ($sgRows as $row) {
-        if(array_key_exists($row["Grp"], $diseaseSubGroupMap))
-            array_push($diseaseSubGroupMap[$row["Grp"]], $row["SubGroup"]);
-        else
-            $diseaseSubGroupMap[$row["Grp"]] = array($row["SubGroup"]);
-    }
-//     foreach ($diseaseSubGroupMap as $d=>$sgs)
-//         echo $d."=>[".implode(",", $sgs)."]<br/><br/>";
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,9 +28,9 @@
         </div>
 
         <div class = "section_left" id="section_left">
-            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-1" class="browse_side_nav">1. Disease wise BioProjects</a></div>
-            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Biome wise BioProjects</a></div>
-            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">3. Disease subgroup wise BioProjects</a></div>
+            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-1" class="browse_side_nav">1. Group-wise BioProjects</a></div>
+            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Biome-wise BioProjects</a></div>
+            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">3. Domain-wise taxa</a></div>
         </div>
 
         <script>
@@ -72,41 +47,18 @@
         </script>
 
         <div class = "section_middle" style="width:72%;">
-            <div class="browse-heading" id="sec-1">1. Disease wise BioProjects</div>
-            <div class="button-group">
-            <?php
-                foreach(array_keys($diseaseSubGroupMap) as $disease)
-                    echo "<button type=\"button\" onclick=\"getBioProjects('".$disease."', 'disease-wise-results')\">".$disease."</button>";
-            ?>
-            </div>
-            <div class="browse-result" id="disease-wise-results">foo</div>
+            <div class="browse-heading" style="margin-bottom:5px;" id="sec-1">1. Group-wise BioProjects</div>
 
-            <div class="browse-heading" style="margin-bottom:5px;" id="sec-2">2. Biome wise BioProjects</div>
+            <p style="margin:0; font-size:0.9em;"><i>(Please click on the group names in figure to get details)</i></p>
+            <center><div id="group_wise_browse"><img style="height:300px;" src="resource/loading.gif" /></div></center>
+
+            <div class="browse-heading" style="margin-bottom:5px;" id="sec-2">2. Biome-wise BioProjects</div>
             <p style="margin:0; font-size:0.9em;"><i>(Please click on the biome names in figure to get details)</i></p>
-            <embed src="resource/home_figures/Bioms.svg" style="width:100%; max-height:600px; max-width:100%;" />
+            <center><div id="biome_wise_browse"><img style="height:300px;" src="resource/loading.gif" /></div></center>
 
-
-            <div class="browse-heading" id="sec-2">3. Disease subgroup wise BioProjects</div>
-            <table class="browse-summary">
-                <?php
-                    $tableRowClass = "odd";
-                    foreach($diseaseSubGroupMap as $disease=>$subgroups) {
-                        $tableRowClass = ($tableRowClass == "even") ? "odd" : "even";
-                        echo "<tr>";
-                        echo "<td class=\"row_heading\" style=\"width:25%;\">".$disease."</td>";
-                        echo "<td class=\"".$tableRowClass."\" style=\"text-align:left;\">";
-                        for($i=0; $i<count($subgroups); ++$i)
-                            if ($i == count($subgroups) - 1)
-                                echo "<a style=\"color:#003325;\" href=\"#\" onclick=\"getSubgroupBioProjects('".$subgroups[$i]."', 'subgroup-wise-results')\">".$subgroups[$i]."</a>";
-                            else
-                                echo "<a style=\"color:#003325;\" href=\"#\" onclick=\"getSubgroupBioProjects('".$subgroups[$i]."', 'subgroup-wise-results')\">".$subgroups[$i]."</a>; ";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                ?>
-            </table>
-            <div class="browse-result" id="subgroup-wise-results">foo</div>
-            <div id="subgroup-wise-results-dummy"></div>
+            <div class="browse-heading" style="margin-bottom:5px;" id="sec-3">3. Domain-wise taxa</div>
+            <p style="margin:0; font-size:0.9em;"><i>(Please click on the taxa domains in figure to get details)</i></p>
+            <center><div id="domain_wise_browse"><img style="height:300px;" src="resource/loading.gif" /></div></center>
 
         </div>
         <div style="clear:both">
@@ -118,4 +70,9 @@
             </p>
         </div>
     </body>
+    <script>
+        showGroups('group_wise_browse');
+        showBiomes('biome_wise_browse')
+        showDomains('domain_wise_browse')
+    </script>
 </html>
