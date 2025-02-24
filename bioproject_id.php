@@ -77,6 +77,7 @@
                 <tr class="nav">
                     <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
+                    <td class="nav"><a href="analysis.php" class="side_nav">Analysis</a></td>
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="about.php" class="side_nav">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
