@@ -2,10 +2,10 @@ function getDataMap(taxa, subgroup, abundances) {
     var dataMap = new Map();
     for(var i=1; i<taxa.length; ++i) {
         if(dataMap.has(subgroup[i])) {
-            dataMap.get(subgroup[i]).taxa.push('<i>' + taxa[i] + '</i>');
+            dataMap.get(subgroup[i]).taxa.push(taxa[i]);
             dataMap.get(subgroup[i]).abundances.push(abundances[i]);
         } else {
-            dataMap.set(subgroup[i], {taxa: ['<i>' + taxa[i] + '</i>'], abundances: [abundances[i]]});
+            dataMap.set(subgroup[i], {taxa: [taxa[i]], abundances: [abundances[i]]});
         }
     }
     return dataMap;
@@ -22,6 +22,14 @@ function createDownloadLink(sample, taxa, subgroup, abundances) {
     var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
     document.getElementById('download_div_taxa_distribution').style.display = 'block';
     document.getElementById('download_button_taxa_distribution').href = URL.createObjectURL(blob);
+}
+
+function createTaxaButtons(taxa) {
+    var s = ''
+    for(var t of taxa.keys())
+        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + t.substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + t + '</button></a></div>'
+    s += '<div style="clear:both;" />'
+    document.getElementById('taxa_button_group').innerHTML = s;
 }
 
 function makePlot(div_id, dataMap) {
@@ -142,6 +150,9 @@ function plotBox(div_id, response) {
         document.getElementById(div_id).innerHTML = '';
         makePlot(div_id, dataMap);
         createDownloadLink(data.sample, data.taxa, data.subgroup, data.abundances);
+        createTaxaButtons(new Set(data.taxa));
+        document.getElementById('taxa_button_group_heading').style.display = 'block';
+        document.getElementById('taxa_button_group').style.display = 'block';
     }
 }
 

@@ -214,6 +214,14 @@ function makePlot(div_id, networkData, subgroup) {
     networkLayouts.set(subgroup, {circle: circleLayout, random: randomLayout, cose: coseLayout})
 }
 
+function createTaxaButtons(networkData, subgroup) {
+    var s = '<p style="margin:3px; font-weight:bold;">Taxa details</p>'
+    for(const node of networkData.get(subgroup).nodes)
+        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + node.substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + node + '</button></a></div>'
+    s += '<div style="clear:both;" />'
+    document.getElementById('taxa_button_group_' + subgroup).innerHTML = s;
+}
+
 function plotNetwork(div_id, response) {
     var csv = $.csv.toArrays(response, {delimiter: '"', separator: '\t'});
     var networkData = extractNetworkData(csv);
@@ -230,10 +238,15 @@ function plotNetwork(div_id, response) {
         plotNode.style.cssText += 'height:400px; margin-top:5px; border:2px solid #004d99;';
         document.getElementById(div_id).appendChild(plotNode);
         makePlot(div_id + '_' + subgroup, networkData, subgroup);
-        var controlPanelNode = document.createElement('div')
+        var controlPanelNode = document.createElement('div');
         controlPanelNode.style.cssText += 'width:100%; margin-top:5px; background-color:#fff9e6; border:1px dashed #004d99; border-radius:10px;';
         controlPanelNode.innerHTML = getControlPanelHTML(subgroup);
         document.getElementById(div_id).appendChild(controlPanelNode);
+        var taxaDetailsNode = document.createElement('div');
+        taxaDetailsNode.id = 'taxa_button_group_' + subgroup;
+        taxaDetailsNode.style.cssText += 'width:100%; margin-top:5px;';
+        document.getElementById(div_id).appendChild(taxaDetailsNode);
+        createTaxaButtons(networkData, subgroup);
     }
 }
 

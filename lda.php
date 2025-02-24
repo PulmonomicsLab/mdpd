@@ -144,6 +144,8 @@
             <div style="width:100%;" id="lda_plot_div">
                 <center><img style="height:300px;" src="resource/loading.gif" /></center>
             </div>
+            <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Differentially abundant taxa details</p>
+            <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
             <p>
                 <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot
                 or download the data using the <i>"Download data"</i> button. located at the top of the page <b>2)</b> A

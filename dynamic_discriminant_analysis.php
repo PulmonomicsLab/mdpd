@@ -243,6 +243,8 @@
                 </a>
             </div>
             <div id="merged_lda_plot_div" style="width:90%; margin:0 5% 0 5%;"></div>
+            <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Taxa details</p>
+            <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
 
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">

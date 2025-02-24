@@ -2,7 +2,7 @@ function getDataMap(taxa, subgroup, value) {
     var dataMap = new Map();
     for(var i=0; i<taxa.length; ++i) {
         if(dataMap.has(subgroup[i])) {
-            dataMap.get(subgroup[i]).taxa.push('<i>' + taxa[i] + '</i>');
+            dataMap.get(subgroup[i]).taxa.push(taxa[i]);
             dataMap.get(subgroup[i]).value.push(Math.abs(value[i]));
         } else {
             dataMap.set(subgroup[i], {taxa: ['<i>' + taxa[i] + '</i>'], value: [Math.abs(value[i])]});
@@ -24,6 +24,14 @@ function createDownloadLink(method, p_adjust_method, taxa, subgroup, value, pval
     }
     var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
     document.getElementById('download_button').href = URL.createObjectURL(blob);
+}
+
+function createTaxaButtons(taxa) {
+    var s = ''
+    for(var i=0; i<taxa.length; ++i)
+        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + taxa[i].substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + taxa[i] + '</button></a></div>'
+    s += '<div style="clear:both;" />'
+    document.getElementById('taxa_button_group').innerHTML = s;
 }
 
 function createPlotData(dataMap) {
@@ -140,7 +148,7 @@ function makePlot(div_id, dataMap, method) {
     Plotly.plot(graphDiv, {data: data, layout: layout, config: config})
 }
 
-function plotLDA(div_id, response, method) {
+function plotLDA(div_id, response, method, taxa_level) {
     var data = JSON.parse(response);
     if(data.taxa.length > 0) {
         var dataMap = getDataMap(data.taxa, data.subgroup, data.value);
@@ -151,6 +159,11 @@ function plotLDA(div_id, response, method) {
         else
             createDownloadLink(method, data.p_adjust, data.taxa, data.subgroup, data.value, data.padj, data.significance);
         document.getElementById('download_div').style.display = 'block';
+        if (taxa_level == 'Species' || taxa_level == 'Genus') {
+            createTaxaButtons(data.taxa);
+            document.getElementById('taxa_button_group_heading').style.display = 'block';
+            document.getElementById('taxa_button_group').style.display = 'block';
+        }
     } else {
         document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
     }
@@ -161,7 +174,7 @@ function getLDAData(div_id, dataJSON) {
     var httpReq = new XMLHttpRequest();
     httpReq.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            plotLDA(div_id, this.responseText, data.method)
+            plotLDA(div_id, this.responseText, data.method, data.taxa_level)
         }
     };
     httpReq.open('POST', 'lda_data.php', true);

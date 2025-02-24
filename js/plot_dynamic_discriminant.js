@@ -73,6 +73,14 @@ function createLDADownloadLink(heatmapData, button_id) {
     document.getElementById(button_id).href = URL.createObjectURL(blob);
 }
 
+function createTaxaButtons(heatmapData) {
+    var s = ''
+    for(var i=0; i<heatmapData.taxa.length; ++i)
+        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + heatmapData.taxa[i].substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + heatmapData.taxa[i] + '</button></a></div>'
+    s += '<div style="clear:both;" />'
+    document.getElementById('taxa_button_group').innerHTML = s;
+}
+
 function makeHeatmapPlot(div_id, heatmapData, colorScaleName) {
     var graphDiv = document.getElementById(div_id);
     var computedHeight = (30*heatmapData.name.length + 250);
@@ -192,6 +200,10 @@ function plotData(lda_div_id, merged_lda_div_id, response) {
         makeHeatmapPlot(merged_lda_div_id, mergedLdaDataMap, 'Purples');
         createLDADownloadLink(mergedLdaDataMap, 'merged_lda_download_button');
         document.getElementById('merged_lda_download_div').style.display = 'block';
+
+        createTaxaButtons(ldaDataMap);
+        document.getElementById('taxa_button_group_heading').style.display = 'block';
+        document.getElementById('taxa_button_group').style.display = 'block';
     } else {
         document.getElementById(lda_div_id).innerHTML = '<p>No significant taxa found</p>';
     }

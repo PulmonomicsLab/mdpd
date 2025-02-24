@@ -89,15 +89,23 @@ function makePlot(div_id, taxa, abundances) {
     Plotly.plot(graphDiv, data, layout, config);
 }
 
+function createTaxaButtons(taxa) {
+    var s = ''
+    for(var i=0; i<taxa.length; ++i)
+        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + taxa[i].substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + taxa[i] + '</button></a></div>'
+    s += '<div style="clear:both;" />'
+    document.getElementById('taxa_button_group').innerHTML = s;
+}
+
 function plotBar(div_id, response) {
     var data = JSON.parse(response);
     var taxa = data.taxa;
     var abundances = data.abundances;
-    for(var i=0; i<taxa.length; ++i) {
-        taxa[i] = '<i>' + taxa[i] + '</i>';
-    };
     document.getElementById(div_id).innerHTML = '';
     makePlot(div_id, taxa, abundances);
+    createTaxaButtons(taxa);
+    document.getElementById('taxa_button_group_heading').style.display = 'block';
+    document.getElementById('taxa_button_group').style.display = 'block';
 }
 
 function getTopTaxaData(div_id, dataJSON) {

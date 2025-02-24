@@ -63,6 +63,8 @@
             <div id="box_plot_div" style="width:100%;">
                 <center><img style="height:300px;" src="resource/loading.gif" /></center>
             </div>
+            <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Top taxa details</p>
+            <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
 
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
