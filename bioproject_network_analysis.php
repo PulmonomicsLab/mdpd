@@ -41,7 +41,7 @@
 
         <div class = "section_middle">
             <p style="margin:0 0 0 5px; font-size:1.2em; font-weight:bold; text-align:center;">
-                <?php echo "Microbial co-occurence analysis - ".$bioproject." | ".$at." | ".$is; ?>
+                <?php echo "Microbial co-occurrence analysis - ".$bioproject." | ".$at." | ".$is; ?>
             </p>
 <!--             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div> -->
             <div id="network_plot_div" style="width:100%;"></div>

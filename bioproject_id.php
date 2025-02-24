@@ -197,7 +197,7 @@
                         echo "</td></tr>";
                     }
 
-                    echo "<tr><th style=\"width:30%;\">Microbial co-occurence analysis</th>";
+                    echo "<tr><th style=\"width:30%;\">Microbial co-occurrence analysis</th>";
                     echo "<td>";
                     $isolationSources = explode(";", $row["IsolationSource"]);
                     foreach($isolationSources as $is) {
