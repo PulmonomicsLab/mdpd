@@ -2,7 +2,7 @@
     $bioproject = urldecode($_GET["key"]);
     $at = urldecode($_GET["at"]);
     $is = urldecode($_GET["is"]);
-    $method_joined = array_key_exists("method", $_GET) ? urldecode($_GET["method"]) : "edgeR_fdr";
+    $method_joined = array_key_exists("method", $_GET) ? urldecode($_GET["method"]) : "lefse_none";
     $alpha = array_key_exists("alpha", $_GET) ? urldecode($_GET["alpha"]) : "0.1";
     $filter_thres = array_key_exists("filter_thres", $_GET) ? urldecode($_GET["filter_thres"]) : "0.0001";
     if ($at == "WMS")
@@ -72,9 +72,9 @@
                             <td style="width:25%;">
                                 <label>Method</label>
                                 <select class="full" id="method" name="method" required>
-                                    <option value="edgeR_fdr" <?php echo ($method_joined == "edgeR_fdr") ? "selected" : ""; ?>>edgeR (with FDR p-value adjustment)</option>
                                     <option value="lefse_none" <?php echo ($method_joined == "lefse_none") ? "selected" : ""; ?>>LEfSe (without FDR p-value adjustment)</option>
                                     <option value="lefse_fdr" <?php echo ($method_joined == "lefse_fdr") ? "selected" : ""; ?>>LEfSe (with FDR p-value adjustment)</option>
+                                    <option value="edgeR_fdr" <?php echo ($method_joined == "edgeR_fdr") ? "selected" : ""; ?>>edgeR (with FDR p-value adjustment)</option>
                                 </select>
                             </td>
                             <td style="width:20%;">
