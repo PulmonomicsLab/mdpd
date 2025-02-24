@@ -333,9 +333,9 @@
                             <td class="row_heading">Filter threshold</td>
                             <td class="even">
                                 <select class="full" id="filter_thres" name="filter_thres" required>
-                                    <option value="0.01">0.01</option>
-                                    <option value="0.001">0.001</option>
-                                    <option value="0.0001" selected>0.0001</option>
+                                    <option value="0.01" selected>0.010</option>
+                                    <option value="0.025">0.025</option>
+                                    <option value="0.05">0.050</option>
                                 </select>
                             </td>
                             <td class="row_heading">Taxa level</td>
