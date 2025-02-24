@@ -83,6 +83,44 @@ Grp varchar(200),
 primary key (SubGroup)
 );
 
+create table taxa(
+Taxa varchar(100),
+NCBITaxaID varchar(20),
+Domain varchar(50),
+TaxaLevel varchar(50),
+BiofilmFormation varchar(500),
+BiofilmFormationEvidence varchar(100),
+GramStain varchar(500),
+GramStainEvidence varchar(100),
+SporeFormation varchar(500),
+SporeFormationEvidence varchar(100),
+Aerophilicity varchar(500),
+AerophilicityEvidence varchar(100),
+GenomeSize varchar(500),
+GenomeSizeEvidence varchar(100),
+CodingGenes varchar(500),
+CodingGenesEvidence varchar(100),
+AntimicrobialResistance varchar(500),
+AntimicrobialResistanceEvidence varchar(100),
+AntimicrobialSensitivity varchar(500),
+AntimicrobialSensitivityEvidence varchar(100),
+Shape varchar(500),
+ShapeEvidence varchar(100),
+primary key (Taxa)
+);
+
+create table abundance (
+Taxa varchar(100),
+Sample varchar(500),
+Abundance double,
+StandardDeviation double,
+StandardError double,
+SubGroup varchar(500),
+BioProject varchar(20),
+constraint fk_abundance_bioproject foreign key (BioProject) references bioproject(BioProject),
+constraint fk_abundance_subgroup foreign key (SubGroup) references disease(SubGroup)
+);
+
 SET GLOBAL local_infile=1;
 quit
 
@@ -94,3 +132,5 @@ load data local infile '/home/sudipto/data/projects/mdpd/input/input.csv' into t
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_disease.csv' into table disease ignore 1 lines;
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_bioproject.csv' into table bioproject ignore 1 lines;
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_run.csv' into table run ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_taxa.csv' into table taxa ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_abundance.csv' into table abundance ignore 1 lines;
