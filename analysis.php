@@ -191,6 +191,7 @@
         <div class = "section_left" id="section_left">
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-1" class="browse_side_nav">1. Taxonomic analysis</a></div>
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Discriminant analysis</a></div>
+            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-3" class="browse_side_nav">3. Taxa search</a></div>
         </div>
 
         <script>
@@ -213,8 +214,8 @@
             <form name="taxonomic_form" method="post" action="dynamic_taxonomic_analysis.php" onsubmit="return validateTaxonomicForm()">
                 <table class="browse-summary">
                     <tr>
-                        <td class="row_heading" style="width:150px">Group</td>
-                        <td class="odd">
+                        <td class="row_heading" style="width:20%;">Group</td>
+                        <td class="odd" style="width:80%;">
                             <?php
                                 foreach($diseaseSubgroupMap as $disease=>$subgroup) {
                                     echo "<div style=\"float:left;\">";
@@ -230,8 +231,8 @@
                 <div id="browse-tp-other-options-div" style="display:none;">
                     <table class="browse-summary" id="browse-tp-other-options">
                         <tr>
-                            <td class="row_heading" style="width:150px;">Assay Type</td>
-                            <td class="even">
+                            <td class="row_heading" style="width:20%;">Assay Type</td>
+                            <td class="even" style="width:80%;">
                                 <input type="radio" style="margin-top:10px;float:left;" id="Amplicon-16S" name="taxonomic_at" value="Amplicon-16S" onclick="getTPBioProjects('tp_bioproject_list')" checked>
                                 <label for="Amplicon-16S" style="margin:5px 10px 5px 0;float:left;">Amplicon-16S</label>
                                 <input type="radio" style="margin-top:10px;float:left;" id="Amplicon-ITS" name="taxonomic_at" value="Amplicon-ITS" onclick="getTPBioProjects('tp_bioproject_list')">
@@ -261,8 +262,8 @@
             <form name="discriminant_form" method="post" action="dynamic_discriminant_analysis.php" onsubmit="return validateDiscriminantForm()">
                 <table class="browse-summary">
                     <tr>
-                        <td class="row_heading" style="width:150px">Group</td>
-                        <td class="odd">
+                        <td class="row_heading" style="width:20%;">Group</td>
+                        <td class="odd" style="width:40%;">
                             Group 1:
                             <select class="full" name="discriminant_ds_1" id="discriminant_ds_1" onchange="updateDAGroupOptions('da_bioproject_list')">
                                 <option value="null">Select Group</option>
@@ -273,7 +274,7 @@
                                 ?>
                             </select>
                         </td>
-                        <td class="odd">
+                        <td class="odd" style="width:40%;">
                             Group 2:
                             <select class="full" name="discriminant_ds_2" id="discriminant_ds_2" onchange="updateDAGroupOptions('da_bioproject_list')">
                                 <option value="null">Select Group</option>
@@ -292,8 +293,8 @@
                 <div id="browse-da-other-options-div" style="display:none;">
                     <table class="browse-summary" id="browse-da-other-options_1">
                         <tr>
-                            <td class="row_heading" style="width:150px;">Assay Type</td>
-                            <td class="even">
+                            <td class="row_heading" style="width:20%;">Assay Type</td>
+                            <td class="even" style="width:80%;">
                                 <input type="radio" style="margin-top:10px;float:left;" id="da_at_Amplicon-16S" name="discriminant_at" value="Amplicon-16S" onclick="getDABioProjects('da_bioproject_list')" checked>
                                 <label for="da_at_Amplicon-16S" style="margin:5px 10px 5px 0;float:left;">Amplicon-16S</label>
                                 <input type="radio" style="margin-top:10px;float:left;" id="da_at_Amplicon-ITS" name="discriminant_at" value="Amplicon-ITS" onclick="getDABioProjects('da_bioproject_list')">
@@ -303,8 +304,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="row_heading" style="width:150px;">Library Layout</td>
-                            <td class="odd">
+                            <td class="row_heading" style="width:20%;">Library Layout</td>
+                            <td class="odd" style="width:80%;">
                                 <input type="checkbox" class="discriminant_lib_class" style="margin-top:10px;float:left;" id="da_lib_PAIRED" name="discriminant_lib[]" value="PAIRED" onclick="getDABioProjects('da_bioproject_list')" checked>
                                 <label for="da_lib_PAIRED" style="margin:5px 10px 5px 0;float:left;">PAIRED</label>
                                 <input type="checkbox" class="discriminant_lib_class" style="margin-top:10px;float:left;" id="da_lib_SINGLE" name="discriminant_lib[]" value="SINGLE" onclick="getDABioProjects('da_bioproject_list')">
@@ -314,7 +315,7 @@
                     </table>
                     <table class="browse-summary" id="browse-da-other-options_2">
                         <tr>
-                            <td class="row_heading" style="width:150px;">Method</td>
+                            <td class="row_heading">Method</td>
                             <td class="even">
                                 <select class="full" id="method" name="method" required>
                                     <option value="lefse_none" selected>LEfSe (without FDR p-value adjustment)</option>
@@ -348,13 +349,29 @@
                             </td>
                             <td class="row_heading">Cut-off value</td>
                             <td class="even">
-                                <input type="number" class="full" id="threshold" name="threshold" min="1" step="0.1" value="2" required />
+                                <input type="number" class="full" id="threshold" name="threshold" min="1" step="0.1" value="2" style="max-width:50px;" required />
                             </td>
                         </tr>
                     </table>
                 </div>
                 <center><input type="submit" style="margin:10px;" name="Submit" value="Submit" /></center>
                 <div class="browse-result" id="da_bioproject_list">foo</div>
+            </form>
+
+            <div class="browse-heading" id="sec-3">
+                3. Taxa search
+            </div>
+            <form name="discriminant_form" method="get" action="taxa.php">
+                <table class="browse-summary">
+                    <tr>
+                        <td class="row_heading" style="width:20%;">Taxa name</td>
+                        <td class="odd" style="width:60%;"><input type="text" class="full" name="key" value="" placeholder="Enter taxa name" required /></td>
+                        <td class="odd" style="width:20%">
+                            <input type="submit" style="width:70px;margin:5px;" value="Submit" />
+                            <button type="reset" style="width:70px;margin:5px;" value="Reset">Reset</button>
+                        </td>
+                    </tr>
+                </table>
             </form>
 
         </div>

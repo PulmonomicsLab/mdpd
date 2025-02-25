@@ -158,7 +158,7 @@ function getDABioProjects(resultDivId) {
 function updateTPGroupOptions(disease, optionTableID, resultDivId) {
     var subGroups = groupSubGroupMap[disease];
     var isolationSources = groupIsolationSourceMap[disease];
-    var s = '<tr><td class="row_heading" style="width:150px;">Sub-group</td><td class="even">';
+    var s = '<tr><td class="row_heading" style="width:20%;">Sub-group</td><td class="even" style="width:80%;">';
     for(var i = 0; i < subGroups.length; ++i) {
         s += '<div style="float:left;">';
         if (i == 0)
@@ -169,7 +169,7 @@ function updateTPGroupOptions(disease, optionTableID, resultDivId) {
         s += '</div>';
     }
     s += '</td></tr>';
-    s += '<tr><td class="row_heading" style="width:150px;">Isolation Source</td><td class="odd">';
+    s += '<tr><td class="row_heading" style="width:20%;">Isolation Source</td><td class="odd" style="width:80%;">';
     for(var i = 0; i < isolationSources.length; ++i) {
         s += '<div style="float:left;">';
         if (checkedIsolationSources.has(isolationSources[i]))
@@ -205,9 +205,9 @@ function updateDAGroupOptions(resultDivId) {
     var s = '';
     if (subGroups1) {
         s += '<tr>';
-        s += '<td class="row_heading" rowspan="2" style="width:150px;">' + disease1 + '</td>';
-        s += '<td class="row_heading" style="max-width:150px;">Sub-group</td>';
-        s += '<td class="even">';
+        s += '<td class="row_heading" rowspan="2" style="width:10%;">' + disease1 + '</td>';
+        s += '<td class="row_heading" style="width:10%;">Sub-group</td>';
+        s += '<td class="even" style="width:80%;">';
         for(var i=0; i<subGroups1.length; ++i) {
             s += '<div style="float:left;">';
             if (i == 0)
@@ -220,8 +220,8 @@ function updateDAGroupOptions(resultDivId) {
         s += '</td>';
         s += '</tr>';
         s += '<tr>';
-        s += '<td class="row_heading" style="max-width:150px;">Isolation Source</td>';
-        s += '<td class="odd">';
+        s += '<td class="row_heading" style="width:10%;">Isolation Source</td>';
+        s += '<td class="odd" style="width:80%;">';
         for(const iss of isolationSources1) {
             s += '<div style="float:left;">';
             if (checkedIsolationSources.has(iss))
