@@ -81,7 +81,7 @@ function createTaxaButtons(heatmapData) {
     document.getElementById('taxa_button_group').innerHTML = s;
 }
 
-function makeHeatmapPlot(div_id, heatmapData, colorScaleName) {
+function makeHeatmapPlot(div_id, heatmapData, method, colorScaleName) {
     var graphDiv = document.getElementById(div_id);
     var computedHeight = (30*heatmapData.name.length + 250);
     var xTitle = 'Taxa';
@@ -101,7 +101,7 @@ function makeHeatmapPlot(div_id, heatmapData, colorScaleName) {
             tickfont: {color: '#000000'},
             ticks: 'inside',
             title: {
-                text: 'LDA score (log<sub>10</sub>)',
+                text: (method == 'lefse') ? 'LDA score (log<sub>10</sub>)' : 'Log<sub>2</sub> fold change',
                 side: 'bottom',
                 font: {
                     size: 14,
@@ -184,20 +184,20 @@ function makeHeatmapPlot(div_id, heatmapData, colorScaleName) {
     Plotly.plot(graphDiv, data, layout, config);
 }
 
-function plotData(lda_div_id, merged_lda_div_id, response) {
+function plotData(lda_div_id, merged_lda_div_id, method, response) {
     var data = JSON.parse(response);
     var ldaData = data.lda;
     var mergedLdaData = data.merged_lda;
     if(ldaData.taxa.length > 0) {
         var ldaDataMap = getLDADataMap(ldaData.taxa, ldaData.subgroup, ldaData.value);
         document.getElementById(lda_div_id).innerHTML = '';
-        makeHeatmapPlot(lda_div_id, ldaDataMap, 'Oranges');
+        makeHeatmapPlot(lda_div_id, ldaDataMap, method, 'Oranges');
         createLDADownloadLink(ldaDataMap, 'lda_download_button');
         document.getElementById('lda_download_div').style.display = 'block';
 
         var mergedLdaDataMap = getLDADataMap(mergedLdaData.taxa, mergedLdaData.subgroup, mergedLdaData.value);
         document.getElementById(merged_lda_div_id).innerHTML = '';
-        makeHeatmapPlot(merged_lda_div_id, mergedLdaDataMap, 'Purples');
+        makeHeatmapPlot(merged_lda_div_id, mergedLdaDataMap, method, 'Purples');
         createLDADownloadLink(mergedLdaDataMap, 'merged_lda_download_button');
         document.getElementById('merged_lda_download_div').style.display = 'block';
 
@@ -214,7 +214,7 @@ function getHeatmapData(lda_div_id, merged_lda_div_id, dataJSON) {
     var httpReq = new XMLHttpRequest();
     httpReq.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            plotData(lda_div_id, merged_lda_div_id, this.responseText)
+            plotData(lda_div_id, merged_lda_div_id, data.method, this.responseText)
         }
     };
     httpReq.open('POST', 'dynamic_discriminant_analysis_data.php', true);
