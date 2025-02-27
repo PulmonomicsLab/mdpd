@@ -5,7 +5,7 @@ function getDataMap(taxa, subgroup, value) {
             dataMap.get(subgroup[i]).taxa.push(taxa[i]);
             dataMap.get(subgroup[i]).value.push(Math.abs(value[i]));
         } else {
-            dataMap.set(subgroup[i], {taxa: ['<i>' + taxa[i] + '</i>'], value: [Math.abs(value[i])]});
+            dataMap.set(subgroup[i], {taxa: [taxa[i]], value: [Math.abs(value[i])]});
         }
     }
     return dataMap;
