@@ -80,7 +80,7 @@
                 if (count($taxaRows) < 1) {
                     echo "<center><p>Error !!! Taxa: ".$taxa." does not exist in the database.</p></center>";
                 } else {
-                    echo "<h3 style=\"margin:0; text-align:center;\">Taxa: ".$taxa."</h3>";
+                    echo "<h3 style=\"margin:0; text-align:center;\">Taxa: ".$taxaRows[0]["Taxa"]."</h3>";
             ?>
                     <table class="details" border="1">
                     <tr><th>Attribute</th><th>Value</th></tr>

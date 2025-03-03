@@ -94,7 +94,7 @@
                 if (count($bioprojectRows) < 1) {
                     echo "<p style=\"text-align:center;\">Error !!! BioProject ID: ".$bioprojectID." does not exist in the database.</p>";
                 } else {
-                    echo "<h3 style=\"margin:0; text-align:center;\">BioProject ID: ".$bioprojectID."</h3>";
+                    echo "<h3 style=\"margin:0; text-align:center;\">BioProject ID: ".$bioprojectRows[0]["BioProject"]."</h3>";
                     echo "<h4 style=\"margin:0 0 5px 0; text-align:center;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID."\">https://www.ncbi.nlm.nih.gov/bioproject/?term=".$bioprojectID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
                     echo "<table class=\"details\" border=\"1\">";
                     echo "<tr><th>Attribute</th><th>Value</th></tr>";

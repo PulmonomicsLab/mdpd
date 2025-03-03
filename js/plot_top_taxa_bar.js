@@ -101,11 +101,15 @@ function plotBar(div_id, response) {
     var data = JSON.parse(response);
     var taxa = data.taxa;
     var abundances = data.abundances;
-    document.getElementById(div_id).innerHTML = '';
-    makePlot(div_id, taxa, abundances);
-    createTaxaButtons(taxa);
-    document.getElementById('taxa_button_group_heading').style.display = 'block';
-    document.getElementById('taxa_button_group').style.display = 'block';
+    if (taxa.length > 0) {
+        document.getElementById(div_id).innerHTML = '';
+        makePlot(div_id, taxa, abundances);
+        createTaxaButtons(taxa);
+        document.getElementById('taxa_button_group_heading').style.display = 'block';
+        document.getElementById('taxa_button_group').style.display = 'block';
+    } else {
+        document.getElementById(div_id).innerHTML = '<p>No taxa found</p>';
+    }
 }
 
 function getTopTaxaData(div_id, dataJSON) {

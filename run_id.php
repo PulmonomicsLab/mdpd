@@ -65,7 +65,7 @@
                 if (count($rows) < 1) {
                     echo "<center><p>Error !!! Run ID: ".$runID." does not exist in the database.</p></center>";
                 } else {
-                    echo "<h3 style=\"margin:0; text-align:center;\">Run ID: ".$runID."</h3>";
+                    echo "<h3 style=\"margin:0; text-align:center;\">Run ID: ".$rows[0]["Run"]."</h3>";
                     echo "<h4 style=\"margin:0 0 5px 0; text-align:center;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/sra/?term=".$runID."\">https://www.ncbi.nlm.nih.gov/sra/?term=".$runID." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></h4>";
 //                     echo "<hr/><br/>";
                     echo "<table class=\"details\" border=\"1\">";
@@ -84,22 +84,23 @@
                         }
                     }
                     echo "</table>";
+            ?>
+                    <div style="width:45%; margin:10px 2% 10px 2%; float:left;">
+                        <p style="margin-top:0; font-weight:bold;">A. Taxonomic composition of the run (Krona plot)</p>
+                        <?php echo "<iframe id=\"krona_frame\" style=\"width:100%; height:600px; border:1px;\" onload=\"selectRun('".$runID."')\"></iframe>"; ?>
+                    </div>
+                    <div style="width:45%; margin:10px 2% 10px 2%; float:right;">
+                        <p style="margin-top:0; font-weight:bold;">B. Top 10 abundant taxa (Bar plot)</p>
+                        <div id="bar_plot_div" style="width:100%;">
+                            <center><img style="height:300px;" src="resource/loading.gif" /></center>
+                        </div>
+                        <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Top taxa details</p>
+                        <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
+                    </div>
+                    <div style="clear:both"></div>
+            <?php
                 }
             ?>
-
-            <div style="width:45%; margin:10px 2% 10px 2%; float:left;">
-                <p style="margin-top:0; font-weight:bold;">A. Taxonomic composition of the run (Krona plot)</p>
-                <?php echo "<iframe id=\"krona_frame\" style=\"width:100%; height:600px; border:1px;\" onload=\"selectRun('".$runID."')\"></iframe>"; ?>
-            </div>
-            <div style="width:45%; margin:10px 2% 10px 2%; float:right;">
-                <p style="margin-top:0; font-weight:bold;">B. Top 10 abundant taxa (Bar plot)</p>
-                <div id="bar_plot_div" style="width:100%;">
-                    <center><img style="height:300px;" src="resource/loading.gif" /></center>
-                </div>
-                <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Top taxa details</p>
-                <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
-            </div>
-            <div style="clear:both"></div>
             
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">

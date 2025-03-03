@@ -21,6 +21,13 @@ function getKronaData(bioproject, assayType, isolationSource, kronaType) {
                 document.getElementById('download_button_krona').href = 'resource/public/krona/' + file;
                 document.getElementById('download_button_krona').download = file;
             }
+        } else if (this.status == 404) {
+            var frame = document.getElementById('krona_frame');
+            frame.contentWindow.document.open();
+            frame.contentWindow.document.write('<p>Error in analysis parameters !!! Krona plot not available.</p>');
+            frame.contentWindow.document.close();
+            frame.style.borderWidth = 0;
+            frame.style.height = 'auto';
         }
     };
     xmlhttp.open('GET', (prefix + file), true);

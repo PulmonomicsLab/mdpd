@@ -8,13 +8,6 @@ filter_thres <- as.double(args[6])
 taxa_level <- args[7]
 threshold <- as.double(args[8])
 
-bioprojects <- read.table(paste0(path, "bioprojects.tsv"), header=FALSE)[, 1]
-runs <- read.table(paste0(path, "runs.tsv"), header=FALSE)[, 1]
-
-# print(assayType)
-# print(bioprojects)
-# print(runs)
-
 inputPath <- "input/biom/"
 libraryPath <- "Rlibs/"
 
@@ -23,82 +16,88 @@ library(phyloseq, quietly=TRUE)
 library(microeco, quietly=TRUE)
 library(file2meco, quietly=TRUE)
 
-# Initialize params
-if (assayType == "WMS") {
-    tax_rank <- "Species"
-    tax_prefix <- "s__"
-    rel_abund <- 0.005
-    freq <- 0.05
-    pollution_filters = "Chordata"
-} else {
-    tax_rank <- "Genus"
-    tax_prefix <- "g__"
-    rel_abund <- 0.0001
-    freq <- 0.05
-    pollution_filters = c("mitochondria", "chloroplast")
-}
-
-# Read biom
-subset_bioms = c()
-for (bioprojectID in bioprojects) {
-    tryCatch(
-        {
-            if (assayType == "WMS") {
-                # Read biom file
-                ps <- import_biom(paste0(inputPath, bioprojectID, "_", assayType, ".biom1"), parseFunction=parse_taxonomy_greengenes)
-                tax_table(ps) <- cbind(ps@tax_table, paste(ps@tax_table[, "Genus"], ps@tax_table[, "Species"], sep="_"))
-                colnames(ps@tax_table)[7] <- "Old_Species"
-                colnames(ps@tax_table)[8] <- "Species"
-
-                # Create phyloseq object to meco object
-                suppressMessages(meco_object <- phyloseq2meco(ps))
-                meco_object$tidy_dataset()
-                meco_object$tax_table <- meco_object$tax_table[, -7] # Remove Old_Species column
-            } else {
-                # Read biom RDS
-                ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
-
-                # Create phyloseq object to meco object
-                ps@sam_data$Run <- rownames(ps@sam_data)
-                suppressMessages(meco_object <- phyloseq2meco(ps))
-                meco_object$tidy_dataset()
-            }
-#             print(ps)
-
-            # Filter pollution
-            suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
-            suppressMessages(meco_object$tidy_dataset())
-
-            # Filter based on abundance and detection
-            suppressMessages(meco_object$filter_taxa(rel_abund = rel_abund, freq = freq))
-            suppressMessages(meco_object$tidy_dataset())
-
-            # meco_object$sample_table <- subset(meco_object$sample_table, (Assay.Type == assayType) & (Isolation.source == isolationSource))
-            suppressMessages(meco_object$sample_table <- subset(meco_object$sample_table, (Run %in% runs)))
-            suppressMessages(meco_object$tidy_dataset())
-
-            # Revert to phyloseq object from meco object
-            ps <- meco2phyloseq(meco_object)
-            # Add ps to subset_bioms
-            subset_bioms <- c(subset_bioms, ps)
-        }, error = function(condition) {
-        }, warning = function(condition) {}
-    )
-}
-
-# Merge bioms to generate total_biom
-total_biom <- do.call(merge_phyloseq, as.list(subset_bioms))
-# Add new column by merging SubGroup, IsolationSource, and BioProject
-total_biom@sam_data$SubGroup_IsolationSource_BioProject <- paste(total_biom@sam_data$SubGroup, total_biom@sam_data$IsolationSource, total_biom@sam_data$BioProject, sep="_")
-# Add new column by merging SubGroup and IsolationSource
-total_biom@sam_data$SubGroup_IsolationSource <- paste(total_biom@sam_data$SubGroup, total_biom@sam_data$IsolationSource, sep="_")
-# Create total_meco_object from total_biom
-suppressMessages(total_meco_object <- phyloseq2meco(total_biom))
-total_meco_object$tidy_dataset()
-
-
-tryCatch(
+tryCatch (
     {
+        bioprojects <- read.table(paste0(path, "bioprojects.tsv"), header=FALSE)[, 1]
+        runs <- read.table(paste0(path, "runs.tsv"), header=FALSE)[, 1]
+
+        # print(assayType)
+        # print(bioprojects)
+        # print(runs)
+
+        # Initialize params
+        if (assayType == "WMS") {
+            tax_rank <- "Species"
+            tax_prefix <- "s__"
+            rel_abund <- 0.005
+            freq <- 0.05
+            pollution_filters = "Chordata"
+        } else {
+            tax_rank <- "Genus"
+            tax_prefix <- "g__"
+            rel_abund <- 0.0001
+            freq <- 0.05
+            pollution_filters = c("mitochondria", "chloroplast")
+        }
+
+        # Read biom
+        subset_bioms = c()
+        for (bioprojectID in bioprojects) {
+            tryCatch(
+                {
+                    if (assayType == "WMS") {
+                        # Read biom file
+                        ps <- import_biom(paste0(inputPath, bioprojectID, "_", assayType, ".biom1"), parseFunction=parse_taxonomy_greengenes)
+                        tax_table(ps) <- cbind(ps@tax_table, paste(ps@tax_table[, "Genus"], ps@tax_table[, "Species"], sep="_"))
+                        colnames(ps@tax_table)[7] <- "Old_Species"
+                        colnames(ps@tax_table)[8] <- "Species"
+
+                        # Create phyloseq object to meco object
+                        suppressMessages(meco_object <- phyloseq2meco(ps))
+                        meco_object$tidy_dataset()
+                        meco_object$tax_table <- meco_object$tax_table[, -7] # Remove Old_Species column
+                    } else {
+                        # Read biom RDS
+                        ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
+
+                        # Create phyloseq object to meco object
+                        ps@sam_data$Run <- rownames(ps@sam_data)
+                        suppressMessages(meco_object <- phyloseq2meco(ps))
+                        meco_object$tidy_dataset()
+                    }
+        #             print(ps)
+
+                    # Filter pollution
+                    suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
+                    suppressMessages(meco_object$tidy_dataset())
+
+                    # Filter based on abundance and detection
+                    suppressMessages(meco_object$filter_taxa(rel_abund = rel_abund, freq = freq))
+                    suppressMessages(meco_object$tidy_dataset())
+
+                    # meco_object$sample_table <- subset(meco_object$sample_table, (Assay.Type == assayType) & (Isolation.source == isolationSource))
+                    suppressMessages(meco_object$sample_table <- subset(meco_object$sample_table, (Run %in% runs)))
+                    suppressMessages(meco_object$tidy_dataset())
+
+                    # Revert to phyloseq object from meco object
+                    ps <- meco2phyloseq(meco_object)
+                    # Add ps to subset_bioms
+                    subset_bioms <- c(subset_bioms, ps)
+                }, error = function(condition) {
+                }, warning = function(condition) {}
+            )
+        }
+
+        # Merge bioms to generate total_biom
+        total_biom <- do.call(merge_phyloseq, as.list(subset_bioms))
+        # Add new column by merging SubGroup, IsolationSource, and BioProject
+        total_biom@sam_data$SubGroup_IsolationSource_BioProject <- paste(total_biom@sam_data$SubGroup, total_biom@sam_data$IsolationSource, total_biom@sam_data$BioProject, sep="_")
+        # Add new column by merging SubGroup and IsolationSource
+        total_biom@sam_data$SubGroup_IsolationSource <- paste(total_biom@sam_data$SubGroup, total_biom@sam_data$IsolationSource, sep="_")
+        # Create total_meco_object from total_biom
+        suppressMessages(total_meco_object <- phyloseq2meco(total_biom))
+        total_meco_object$tidy_dataset()
+
         suppressWarnings(
             suppressMessages(
                 t1 <- trans_diff$new(

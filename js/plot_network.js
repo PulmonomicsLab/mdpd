@@ -259,6 +259,8 @@ function getNetworkData(div_id, bioproject, assayType, isolationSource) {
         if (this.readyState == 4 && this.status == 200) {
 //             alert(this.responseText);
             plotNetwork(div_id, this.responseText);
+        } else if (this.status == 404) {
+            document.getElementById(div_id).innerHTML = '<p>Error in analysis parameters !!! Microbial co-occurrence analysis network(s) not available.</p>';
         }
     };
     xmlhttp.open('GET', prefix + file, true);

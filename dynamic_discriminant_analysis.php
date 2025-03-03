@@ -45,17 +45,18 @@
     $rows2 = array();
     $runs = array();
     $bioprojects = array();
-    $disease1 = $_POST['discriminant_ds_1'];
-    $disease2 = $_POST['discriminant_ds_2'];
-    $at = $_POST['discriminant_at'];
-    $libs = $_POST['discriminant_lib'];
-    $method_joined = urldecode($_POST["method"]);
-    $p_adjust_method = explode("_", $method_joined)[1];
-    $method = explode("_", $method_joined)[0];
-    $alpha = urldecode($_POST["alpha"]);
-    $filter_thres = urldecode($_POST["filter_thres"]);
-    $taxa_level = urldecode($_POST["taxa_level"]);
-    $threshold = urldecode($_POST["threshold"]);
+    $disease1 = (isset($_POST["discriminant_ds_1"])) ? $_POST["discriminant_ds_1"] : "";
+    $disease2 = (isset($_POST["discriminant_ds_2"])) ? $_POST["discriminant_ds_2"] : "";
+    $at = (isset($_POST["discriminant_at"])) ? $_POST["discriminant_at"] : "";
+    $libs = (isset($_POST["discriminant_lib"])) ? $_POST["discriminant_lib"] : array();
+    $method_joined = (isset($_POST["method"])) ? $_POST["method"] : "";
+    $method_split = explode("_", $method_joined);
+    $p_adjust_method = (count($method_split) == 2) ? $method_split[1] : "";
+    $method = (count($method_split) == 2) ? $method_split[0] : "";
+    $alpha = (isset($_POST["alpha"])) ? $_POST["alpha"] : "";
+    $filter_thres = (isset($_POST["filter_thres"])) ? $_POST["filter_thres"] : "";
+    $taxa_level = (isset($_POST["taxa_level"])) ? $_POST["taxa_level"] : "";
+    $threshold = (isset($_POST["threshold"])) ? $_POST["threshold"] : "";
 
     if (isset($_POST["discriminant_sg_1"]) && isset($_POST["discriminant_bp_1"])) {
         $subgroups1 = $_POST['discriminant_sg_1'];

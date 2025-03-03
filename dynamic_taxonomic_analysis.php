@@ -1,12 +1,13 @@
 <?php
     include 'db.php';
 
-    $disease = $_POST['taxonomic_ds'];
-    $subgroups = $_POST['taxonomic_sg'];
-    $isolationSources = $_POST['taxonomic_is'];
-    $at = $_POST['taxonomic_at'];
-    $libs = $_POST['taxonomic_lib'];
-    $bioprojects = $_POST['taxonomic_bp'];
+    $disease = (isset($_POST['taxonomic_ds'])) ? $_POST['taxonomic_ds'] : "";
+    $subgroups = (isset($_POST['taxonomic_sg'])) ? $_POST['taxonomic_sg'] : array();
+    $isolationSources = (isset($_POST['taxonomic_is'])) ? $_POST['taxonomic_is'] : array();
+    $at = (isset($_POST['taxonomic_at'])) ? $_POST['taxonomic_at'] : "";
+    $libs = (isset($_POST['taxonomic_lib'])) ? $_POST['taxonomic_lib'] : array();
+    $bioprojects = (isset($_POST['taxonomic_bp'])) ? $_POST['taxonomic_bp'] : array();
+    $runs = array();
 
 //     echo $disease."<br/>";
 //     echo implode(', ', $subgroups)."<br/>";
@@ -69,28 +70,29 @@
         return $refs;
     }
 
-    $query = "select Run from run inner join disease on run.SubGroup = disease.SubGroup where disease.Grp=? and AssayType=? and run.SubGroup in (".getSGPlaceholder().") and IsolationSource in (".getISPlaceholder().") and LibraryLayout in (".getLibPlaceholder().") and BioProject in (".getBPPlaceholder().");";
-    $paramString = getParamString();
-    $values = getValues();
+    if (isset($_POST['taxonomic_sg']) && isset($_POST['taxonomic_is']) && isset($_POST['taxonomic_lib']) && isset($_POST['taxonomic_bp'])) {
+        $query = "select Run from run inner join disease on run.SubGroup = disease.SubGroup where disease.Grp=? and AssayType=? and run.SubGroup in (".getSGPlaceholder().") and IsolationSource in (".getISPlaceholder().") and LibraryLayout in (".getLibPlaceholder().") and BioProject in (".getBPPlaceholder().");";
+        $paramString = getParamString();
+        $values = getValues();
 
-    $conn = connect();
-    $stmt = $conn->prepare($query);
+        $conn = connect();
+        $stmt = $conn->prepare($query);
 
-    array_unshift($values, $paramString);
-    call_user_func_array(
-        array($stmt, "bind_param"),
-        refValues($values)
-    );
-    $stmt->execute();
-    $rows = execute_and_fetch_assoc($stmt);
-//     echo count($rows)."<br/>";
+        array_unshift($values, $paramString);
+        call_user_func_array(
+            array($stmt, "bind_param"),
+            refValues($values)
+        );
+        $stmt->execute();
+        $rows = execute_and_fetch_assoc($stmt);
+//         echo count($rows)."<br/>";
 
-    $stmt->close();
-    closeConnection($conn);
+        $stmt->close();
+        closeConnection($conn);
 
-    $runs = array();
-    foreach ($rows as $row)
-        array_push($runs, $row["Run"]);
+        foreach ($rows as $row)
+            array_push($runs, $row["Run"]);
+    }
 
     $heading1 = "<b>Group:</b> ".$disease;
     $heading2 = "<b>Assay type:</b> ".$at;
