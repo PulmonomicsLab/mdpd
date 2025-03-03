@@ -86,13 +86,12 @@
                         var rows = JSON.parse(this.responseText);
                         var s = '<center><p>Selected isolation sources: [' + isolationSources.toString() + ']</p></center>';
                         s += '<center><p>Number of BioProjects found in database = <b>' + rows.length + '</b></p></center>';
-                        s += '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Total Runs</th><th>Processed Runs</th><th>Biome</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>';
+                        s += '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Biome</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>';
                         for (var i=0; i<rows.length; ++i) {
                             s += '<tr>';
                             s += '<td><a style="color:#003325;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">' + rows[i].BioProject + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
                             s += '<td>' + rows[i].Grp + '</td>';
                             s += '<td>' + rows[i].SubGroup + '</td>';
-                            s += '<td>' + rows[i].TotalRuns + '</td>';
                             s += '<td>' + rows[i].ProcessedRuns + '</td>';
                             s += '<td>' + rows[i].Biome + '</td>';
                             s += '<td>' + rows[i].IsolationSource + '</td>';
@@ -155,13 +154,12 @@
             <?php
                         echo "<center><p>Selected isolation sources: [".implode(",", $isolationSources)."]</p></center>";
                         echo "<center><p>Number of BioProjects found in database = <b>".count($rows)."</b></p></center>";
-                        echo "<table class=\"browse-result-summary\" border=\"1\"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Total Runs</th><th>Processed Runs</th><th>Biome</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>";
+                        echo "<table class=\"browse-result-summary\" border=\"1\"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Biome</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>";
                         for ($i=0; $i<count($rows); ++$i) {
                             echo "<tr>";
                             echo "<td><a style=\"color:#003325;\" target=\"_blank\" href=\"bioproject_id.php?key=".$rows[$i]["BioProject"]."\">".$rows[$i]["BioProject"]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";
                             echo "<td>".$rows[$i]["Grp"]."</td>";
                             echo "<td>".$rows[$i]["SubGroup"]."</td>";
-                            echo "<td>".$rows[$i]["TotalRuns"]."</td>";
                             echo "<td>".$rows[$i]["ProcessedRuns"]."</td>";
                             echo "<td>".$rows[$i]["Biome"]."</td>";
                             echo "<td>".$rows[$i]["IsolationSource"]."</td>";

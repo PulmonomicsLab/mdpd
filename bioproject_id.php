@@ -224,7 +224,7 @@
                     echo "</table>";
             ?>
                     <h3 style="margin-bottom:0px; text-align:center;">Summary of runs</h3>
-                    <p style="margin-top:2px;margin-bottom:5px;">Total number of runs found in the database for this BioProject ID = <?php echo count($runRows);?></p>
+                    <p style="margin-top:2px;margin-bottom:5px;">Total number of processed runs found in the database for this BioProject ID = <?php echo count($runRows);?></p>
                     <table border="0" style="width:100%; border: 4px solid #392d37;">
                         <tr>
                             <td style="width:25%;">

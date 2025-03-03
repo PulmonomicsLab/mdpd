@@ -23,8 +23,7 @@
         "SmokingStatus"=>"Smoking Status",
         "Therapeutics"=>"Therapeutics",
         "Comorbidity"=>"Comorbidity",
-        "TotalRuns"=>"Total Reads",
-        "ProcessedRuns"=>"Processed Reads",
+        "ProcessedReads"=>"Processed Reads (%)",
     );
     $allBioProjectAttributes = array(
         "BioProject"=>"BioProject ID",
@@ -37,7 +36,6 @@
         "Instrument"=>"Instrument",
         "LibraryLayout"=>"Library Layout",
         "Year"=>"Year",
-        "TotalRuns"=>"Total Runs",
         "ProcessedRuns"=>"Processed Runs",
         "VariableRegion"=>"Variable Region",
         "PMID"=>"PMID",
@@ -77,7 +75,7 @@
         "run.AssayType",
         "run.LibraryLayout",
         "run.VariableRegion",
-        "run.ProcessedRuns",
+        "run.ProcessedReads",
         "run.Country",
         "run.Year",
     );
@@ -85,7 +83,6 @@
         "BioProject",
         "Grp",
         "SubGroup",
-        "TotalRuns",
         "ProcessedRuns",
         "Biome",
         "AssayType",

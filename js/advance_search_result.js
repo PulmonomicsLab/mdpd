@@ -25,7 +25,7 @@ function createDownloadLink() {
         s += rows[i].Instrument + '\t';
         s += rows[i].AssayType + '\t';
         s += rows[i].LibraryLayout + '\t';
-        s += rows[i].ProcessedRuns + '\t';
+        s += rows[i].ProcessedReads + '\t';
         s += rows[i].Country + '\t';
         s += rows[i].Year + '\n';
     }
@@ -42,7 +42,7 @@ function display(divId, pageNo) {
     else
         var rowEnd = rows.length;
     
-    var s = '<table class="summary" border="1"><tr><th>Run ID</th><th>BioProject ID</th><th>Disease</th><th>Disease Sub-group</th><th>Biome</th><th>Instrument</th><th>Assay Type</th><th>Library Layout</th><th>Processed Reads</th><th>Country</th><th>Year</th></tr>';
+    var s = '<table class="summary" border="1"><tr><th>Run ID</th><th>BioProject ID</th><th>Disease</th><th>Disease Sub-group</th><th>Biome</th><th>Instrument</th><th>Assay Type</th><th>Library Layout</th><th>Processed Reads (%)</th><th>Country</th><th>Year</th></tr>';
     
     for(var i=rowStart; i<rowEnd; ++i) {
         s += '<tr>';
@@ -54,7 +54,7 @@ function display(divId, pageNo) {
         s += '<td>' + rows[i].Instrument + '</td>';
         s += '<td>' + rows[i].AssayType + '</td>';
         s += '<td>' + rows[i].LibraryLayout + '</td>';
-        s += '<td>' + rows[i].ProcessedRuns + '</td>';
+        s += '<td>' + rows[i].ProcessedReads + '</td>';
         s += '<td>' + rows[i].Country + '</td>';
         s += '<td>' + rows[i].Year + '</td>';
         s += '</tr>';
