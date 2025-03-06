@@ -1,7 +1,7 @@
 <?php
     include('db.php');
 
-    $disease = urldecode($_GET['key']);
+    $disease = (isset($_GET['key'])) ? urldecode($_GET['key']) : "";
 
     $query = "select ".implode(",", $viewBioProjectAttributes)." from bioproject where BioProject in (select BioProject from run where Grp=?) order by BioProject;";
 

@@ -1,7 +1,7 @@
 <?php
     include('db.php');
 
-    $taxa = $_GET['key'];
+    $taxa = (isset($_GET['key'])) ? $_GET['key'] : "";
 
     $taxaQuery = "select ".implode(",", array_keys($allTaxaAttributes))." from taxa where Taxa=?;";
 //     echo $taxaQuery."<br/>".$taxa."<br/>";

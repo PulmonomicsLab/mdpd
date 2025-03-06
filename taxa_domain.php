@@ -1,7 +1,7 @@
 <?php
     include('db.php');
 
-    $domain = $_GET['key'];
+    $domain = (isset($_GET['key'])) ? $_GET['key'] : "";
 
     $query = "select Taxa, NCBITaxaID, TaxaLevel from taxa where Domain=?;";
 //     echo $query."<br/>".$domain."<br/>";

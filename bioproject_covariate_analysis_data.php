@@ -24,10 +24,10 @@
 
     $tmp_prefix = "demo_output/";
 
-    $bioproject = urldecode($_POST["bioproject"]);
-    $at = urldecode($_POST["at"]);
-    $is = urldecode($_POST["is"]);
-    $confounders = urldecode($_POST["confounders"]);
+    $bioproject = (isset($_POST["bioproject"])) ? urldecode($_POST["bioproject"]) : "";
+    $at = (isset($_POST["at"])) ? urldecode($_POST["at"]) : "";
+    $is = (isset($_POST["is"])) ? urldecode($_POST["is"]) : "";
+    $confounders = (isset($_POST["confounders"])) ? urldecode($_POST["confounders"]) : "";
 
     if ($confounders !== "") {
         $tmp_path = $tmp_prefix . get_temp_folder_name() . "/";

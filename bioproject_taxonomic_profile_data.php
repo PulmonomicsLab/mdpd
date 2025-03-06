@@ -1,7 +1,7 @@
 <?php
-    $bioproject = urldecode($_POST["bioproject"]);
-    $at = urldecode($_POST["at"]);
-    $is = urldecode($_POST["is"]);
+    $bioproject = (isset($_POST["bioproject"])) ? urldecode($_POST["bioproject"]) : "";
+    $at = (isset($_POST["at"])) ? urldecode($_POST["at"]) : "";
+    $is = (isset($_POST["is"])) ? urldecode($_POST["is"]) : "";
 
     $command = "Rscript R/bioproject_taxa_distribution.R \"".$bioproject."\" \"".$at."\" \"".$is."\" 2>&1";
 //     echo "<pre>".$command."</pre>\n";

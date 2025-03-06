@@ -2,10 +2,10 @@
     include('db.php');
 
     $disease = isset($_POST["disease"]) ? urldecode($_POST["disease"]) : "";
-    $assayType = urldecode($_POST["assayType"]);
-    $subGroups = json_decode(urldecode($_POST["subGroups"]));
-    $isolationSources = json_decode(urldecode($_POST["isolationSources"]));
-    $libraryLayouts = json_decode(urldecode($_POST["libraryLayout"]));
+    $assayType = isset($_POST["assayType"]) ? urldecode($_POST["assayType"]) : "";
+    $subGroups = isset($_POST["subGroups"]) ? json_decode(urldecode($_POST["subGroups"])) : array();
+    $isolationSources = isset($_POST["isolationSources"]) ? json_decode(urldecode($_POST["isolationSources"])) : array();
+    $libraryLayouts = isset($_POST["libraryLayout"]) ? json_decode(urldecode($_POST["libraryLayout"])) : array();
 
     function getSubGroupSubquery() {
         global $subGroups;
@@ -21,7 +21,11 @@
         $libraryLayoutPredicates = array();
         for ($i = 0; $i < count($libraryLayouts); ++$i)
             array_push($libraryLayoutPredicates, "LibraryLayout=?");
-        return "(" . $subquery . "(" . implode(" or ", $subGroupPredicates) . ") and (" . implode(" or ", $isolationSourcePredicates) . ") and (" . implode(" or ", $libraryLayoutPredicates) . "))";
+        $subgroupPredicatesString = (count($subGroupPredicates) > 0) ? implode(" or ", $subGroupPredicates) : "1=1";
+        $isolationSourcePredicatesString = (count($isolationSourcePredicates) > 0) ? implode(" or ", $isolationSourcePredicates) : "1=1";
+        $libraryLayoutPredicatesString = (count($libraryLayoutPredicates) > 0) ? implode(" or ", $libraryLayoutPredicates) : "1=1";
+        return "(" . $subquery . "(" . $subgroupPredicatesString . ") and (" . $isolationSourcePredicatesString . ") and (" . $libraryLayoutPredicatesString . "))";
+//         return "(" . $subquery . "(" . implode(" or ", $subGroupPredicates) . ") and (" . implode(" or ", $isolationSourcePredicates) . ") and (" . implode(" or ", $libraryLayoutPredicates) . "))";
     }
 
     function getParamString() {

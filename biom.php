@@ -28,7 +28,7 @@
     $conn = connect();
 
     if(isset($_POST["is"])) {
-        $biom = urldecode($_POST["key"]);
+        $biom = (isset($_POST["key"])) ? urldecode($_POST["key"]) : "";
         $selectedIsolationSources = json_decode($_POST["is"]);
         $bioprojectQuery = "select ".implode(",", $attributes)." from bioproject where BioProject in (select BioProject from run where Biome=? and IsolationSource in (".getISPlaceholder($selectedIsolationSources).") order by BioProject);";
         $paramString = getParamString($selectedIsolationSources);
@@ -47,11 +47,11 @@
         exit();
     }
 
-    $biom = urldecode($_GET["key"]);
-    $bioprojectQuery = "select ".implode(",", $attributes)." from bioproject where Biome like ?;";
+    $biom = (isset($_GET["key"])) ? urldecode($_GET["key"]) : "";
+    $bioprojectQuery = "select ".implode(",", $attributes)." from bioproject where BioProject in (select BioProject from run where Biome=?) order by BioProject;";
     $stmt = $conn->prepare($bioprojectQuery);
-    $param = "%".$biom."%";
-    $stmt->bind_param("s", $param);
+//     $param = "%".$biom."%";
+    $stmt->bind_param("s", $biom);
     $rows = execute_and_fetch_assoc($stmt);
     $stmt->close();
 

@@ -1,7 +1,7 @@
 <?php
     include('db.php');
     
-    $bioprojectID = $_GET['key'];
+    $bioprojectID = (isset($_GET['key'])) ? $_GET['key'] : "";
 
     $confounder_json = json_decode(file_get_contents("input/bioproject_confounder_list.json"), true);
     $covariate_possible = array_key_exists($bioprojectID, $confounder_json["confounders"]);

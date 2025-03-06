@@ -1,7 +1,7 @@
 <?php
-    $bioproject = urldecode($_GET["key"]);
-    $at = urldecode($_GET["at"]);
-    $is = urldecode($_GET["is"]);
+    $bioproject = (isset($_GET["key"])) ? urldecode($_GET["key"]) : "";
+    $at = (isset($_GET["at"])) ? urldecode($_GET["at"]) : "";
+    $is = (isset($_GET["is"])) ? urldecode($_GET["is"]) : "";
 
     $confounder_json = json_decode(file_get_contents("input/bioproject_confounder_list.json"), true);
     if (array_key_exists($bioproject, $confounder_json["confounders"])) {

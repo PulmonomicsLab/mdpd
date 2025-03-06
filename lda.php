@@ -1,15 +1,15 @@
 <?php
-    $bioproject = urldecode($_GET["key"]);
-    $at = urldecode($_GET["at"]);
-    $is = urldecode($_GET["is"]);
-    $method_joined = array_key_exists("method", $_GET) ? urldecode($_GET["method"]) : "lefse_none";
-    $alpha = array_key_exists("alpha", $_GET) ? urldecode($_GET["alpha"]) : "0.1";
-    $filter_thres = array_key_exists("filter_thres", $_GET) ? urldecode($_GET["filter_thres"]) : "0.0001";
+    $bioproject = (isset($_GET["key"])) ? urldecode($_GET["key"]) : "";
+    $at = (isset($_GET["at"])) ? urldecode($_GET["at"]) : "";
+    $is = (isset($_GET["is"])) ? urldecode($_GET["is"]) : "";
+    $method_joined = (isset($_GET["method"])) ? urldecode($_GET["method"]) : "lefse_none";
+    $alpha = (isset($_GET["alpha"])) ? urldecode($_GET["alpha"]) : "0.1";
+    $filter_thres = (isset($_GET["filter_thres"])) ? urldecode($_GET["filter_thres"]) : "0.0001";
     if ($at == "WMS")
-        $taxa_level = array_key_exists("taxa_level", $_GET) ? urldecode($_GET["taxa_level"]) : "Species";
+        $taxa_level = (isset($_GET["taxa_level"])) ? urldecode($_GET["taxa_level"]) : "Species";
     else
-        $taxa_level = array_key_exists("taxa_level", $_GET) ? urldecode($_GET["taxa_level"]) : "Genus";
-    $threshold = array_key_exists("threshold", $_GET) ? urldecode($_GET["threshold"]) : "2";
+        $taxa_level = (isset($_GET["taxa_level"])) ? urldecode($_GET["taxa_level"]) : "Genus";
+    $threshold = (isset($_GET["threshold"])) ? urldecode($_GET["threshold"]) : "2";
 
     $p_adjust_method = explode("_", $method_joined)[1];
     $method = explode("_", $method_joined)[0];

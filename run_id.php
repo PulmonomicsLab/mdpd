@@ -1,7 +1,7 @@
 <?php
     include('db.php');
     
-    $runID = $_GET['key'];
+    $runID = (isset($_GET['key'])) ? $_GET['key'] : "";
     
 //     $query = "select ".implode(",", array_keys($allRunAttributes))." from (run inner join disease on run.SubGroup=disease.SubGroup) where Run=?;";
     $query = "select * from (run inner join disease on run.SubGroup=disease.SubGroup) where Run=?;";

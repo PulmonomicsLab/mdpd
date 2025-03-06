@@ -1,13 +1,13 @@
 <?php
-    $bioproject = urldecode($_POST["bioproject"]);
-    $at = urldecode($_POST["at"]);
-    $is = urldecode($_POST["is"]);
-    $method = urldecode($_POST["method"]);
-    $alpha = urldecode($_POST["alpha"]);
-    $p_adjust_method = urldecode($_POST["p_adjust_method"]);
-    $filter_thres = urldecode($_POST["filter_thres"]);
-    $taxa_level = urldecode($_POST["taxa_level"]);
-    $threshold = urldecode($_POST["threshold"]);
+    $bioproject = (isset($_POST["bioproject"])) ? urldecode($_POST["bioproject"]) : "";
+    $at = (isset($_POST["at"])) ? urldecode($_POST["at"]) : "";
+    $is = (isset($_POST["is"])) ? urldecode($_POST["is"]) : "";
+    $method = (isset($_POST["method"])) ? urldecode($_POST["method"]) : "";
+    $alpha = (isset($_POST["alpha"])) ? urldecode($_POST["alpha"]) : "";
+    $p_adjust_method = (isset($_POST["p_adjust_method"])) ? urldecode($_POST["p_adjust_method"]) : "";
+    $filter_thres = (isset($_POST["filter_thres"])) ? urldecode($_POST["filter_thres"]) : "";
+    $taxa_level = (isset($_POST["taxa_level"])) ? urldecode($_POST["taxa_level"]) : "";
+    $threshold = (isset($_POST["threshold"])) ? urldecode($_POST["threshold"]) : "";
 
     $command = "Rscript R/bioproject_discriminant_analysis.R \"".$bioproject."\" \"".$at."\" \"".$is."\" \"".$method."\" \"".$alpha."\" \"".$p_adjust_method."\" \"".$filter_thres."\" \"".$taxa_level."\" \"".$threshold."\" 2>&1";
 //     echo "<pre>".$command."</pre>\n";
