@@ -65,7 +65,7 @@ tryCatch (
 
         # Bar plot Genus
         suppressMessages(t3 <- trans_abund$new(dataset = meco_object, taxrank = tax_rank, ntaxa = 50))
-        trim_taxa <- t3$data_abund[, c("Taxonomy", "Abundance")]
+        trim_taxa <- t3$data_abund[t3$data_abund$Taxonomy != "unidentified", c("Taxonomy", "Abundance")]
         ordered_taxa <- trim_taxa[order(trim_taxa$Abundance, decreasing=TRUE),]
         # print(ordered_taxa)
 
