@@ -1,6 +1,6 @@
 function getDataMap(subgroup, abundances) {
     var dataMap = new Map();
-    for(var i=1; i<subgroup.length; ++i) {
+    for(var i=0; i<subgroup.length; ++i) {
         if(dataMap.has(subgroup[i])) {
             dataMap.get(subgroup[i]).push(abundances[i]);
         } else {
