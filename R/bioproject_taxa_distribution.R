@@ -17,39 +17,23 @@ tryCatch (
         if (assayType == "WMS") {
             tax_rank <- "Species"
             tax_prefix <- "s__"
-            rel_abund <- 0.005
+            rel_abund <- 0.0001
             freq <- 0.05
             pollution_filters = "Chordata"
-            plot_columns <- c("Taxonomy", "Run", "SubGroup", "Abundance")
         } else {
             tax_rank <- "Genus"
             tax_prefix <- "g__"
             rel_abund <- 0.0001
             freq <- 0.05
             pollution_filters = c("mitochondria", "chloroplast")
-            plot_columns <- c("Taxonomy", "Sample", "SubGroup", "Abundance")
         }
 
         # Read biom
-        if (assayType == "WMS") {
-            # Read biom file
-            ps <- import_biom(paste0(inputPath, bioprojectID, "_", assayType, ".biom1"), parseFunction=parse_taxonomy_greengenes)
-            tax_table(ps) <- cbind(ps@tax_table, paste(ps@tax_table[, "Genus"], ps@tax_table[, "Species"], sep="_"))
-            colnames(ps@tax_table)[7] <- "Old_Species"
-            colnames(ps@tax_table)[8] <- "Species"
+        ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
 
-            # Create phyloseq object to meco object
-            suppressMessages(meco_object <- phyloseq2meco(ps))
-            meco_object$tidy_dataset()
-            meco_object$tax_table <- meco_object$tax_table[, -7] # Remove Old_Species column
-        } else {
-            # Read biom RDS
-            ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
-
-            # Create phyloseq object to meco object
-            suppressMessages(meco_object <- phyloseq2meco(ps))
-            meco_object$tidy_dataset()
-        }
+        # Create phyloseq object to meco object
+        suppressMessages(meco_object <- phyloseq2meco(ps))
+        meco_object$tidy_dataset()
         # print(ps)
 
         # Filter pollution
@@ -67,8 +51,7 @@ tryCatch (
         # Box plot Genus
         suppressMessages(t1 <- trans_abund$new(dataset = meco_object, taxrank = tax_rank, ntaxa = 10))
         p <- t1$plot_box(group = "SubGroup")
-        trim_taxa <- p$data[, plot_columns]
-        colnames(trim_taxa) <- c("Taxonomy", "Sample", "SubGroup", "Abundance")
+        trim_taxa <- p$data[, c("Taxonomy", "Sample", "SubGroup", "Abundance")]
         trim_taxa <- trim_taxa[with(trim_taxa, order(-ave(trim_taxa$Abundance, trim_taxa$Taxonomy, FUN=median))),]
 
         sample_json <- "\"sample\":["
@@ -97,7 +80,7 @@ tryCatch (
         cat(out_json)
     },
     error = function(condition) {
-		out_json <- "{\"sample\":[],\"taxa\":[],\"subgroup\":[],\"abundances\":[]}"
-		cat(out_json)
+        out_json <- "{\"sample\":[],\"taxa\":[],\"subgroup\":[],\"abundances\":[]}"
+        cat(out_json)
 	}
 )

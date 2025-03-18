@@ -23,7 +23,7 @@ tryCatch (
         if (assayType == "WMS") {
             tax_rank <- "Species"
             tax_prefix <- "s__"
-            rel_abund <- 0.005
+            rel_abund <- 0.0001
             freq <- 0.05
             pollution_filters = "Chordata"
         } else {
@@ -39,26 +39,13 @@ tryCatch (
         for (bioprojectID in bioprojects) {
             tryCatch(
                 {
-                    if (assayType == "WMS") {
-                        # Read biom file
-                        ps <- import_biom(paste0(inputPath, bioprojectID, "_", assayType, ".biom1"), parseFunction=parse_taxonomy_greengenes)
-                        tax_table(ps) <- cbind(ps@tax_table, paste(ps@tax_table[, "Genus"], ps@tax_table[, "Species"], sep="_"))
-                        colnames(ps@tax_table)[7] <- "Old_Species"
-                        colnames(ps@tax_table)[8] <- "Species"
+                    # Read biom RDS
+                    ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
 
-                        # Create phyloseq object to meco object
-                        suppressMessages(meco_object <- phyloseq2meco(ps))
-                        meco_object$tidy_dataset()
-                        meco_object$tax_table <- meco_object$tax_table[, -7] # Remove Old_Species column
-                    } else {
-                        # Read biom RDS
-                        ps <- readRDS(paste0(inputPath, bioprojectID, "_", assayType, "_ps_object.rds"))
-
-                        # Create phyloseq object to meco object
-                        ps@sam_data$Run <- rownames(ps@sam_data)
-                        suppressMessages(meco_object <- phyloseq2meco(ps))
-                        meco_object$tidy_dataset()
-                    }
+                    # Create phyloseq object to meco object
+                    ps@sam_data$Run <- rownames(ps@sam_data)
+                    suppressMessages(meco_object <- phyloseq2meco(ps))
+                    meco_object$tidy_dataset()
                     # print(ps)
 
                     # Filter pollution

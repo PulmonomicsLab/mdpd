@@ -216,10 +216,7 @@
                     echo "<tr><th style=\"width:30%;\">Biom file</th><td>";
                     $assayTypes = explode(";", $bioprojectRows[0]["AssayType"]);
                     foreach($assayTypes as $at)
-                        if ($at == "WMS")
-                            echo "<a target=\"_blank\" href=\"resource/public/biom/".$bioprojectID."_".$at.".biom1\" download=\"".$bioprojectID."_".$at.".biom1\"><button type=\"button\" style=\"margin:3px;\">Download - ".$at."</button></a>";
-                        else
-                            echo "<a target=\"_blank\" href=\"resource/public/biom/".$bioprojectID."_".$at."_ps_object.rds\"><button type=\"button\" style=\"margin:3px;\">Download - ".$at."</button></a>";
+                        echo "<a target=\"_blank\" href=\"resource/public/biom/".$bioprojectID."_".$at."_ps_object.rds\"><button type=\"button\" style=\"margin:3px;\">Download - ".$at."</button></a>";
                     echo "</td></tr>";
                     echo "</table>";
             ?>
