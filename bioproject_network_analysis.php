@@ -2,6 +2,14 @@
     $bioproject = (isset($_GET["key"])) ? urldecode($_GET["key"]) : "";
     $at = (isset($_GET["at"])) ? urldecode($_GET["at"]) : "";
     $is = (isset($_GET["is"])) ? urldecode($_GET["is"]) : "";
+
+    $dataJSON = json_encode(
+        array(
+            "bioproject" => $bioproject,
+            "at" => $at,
+            "is" => $is
+        )
+    );
 ?>
 
 <!DOCTYPE html>
@@ -12,10 +20,10 @@
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script type = "text/javascript" src = "js/plot_network.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.4/cytoscape.min.js" integrity="sha512-xpXUCbrkyJCwC5noJXZqec9rSXdRgFfDoL7Q9/pCPe54Y04OlqwPobMcNuA5NPJ7DRR51OIr6xcOH2wUspyKDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://unpkg.com/cytoscape-svg/cytoscape-svg.js"></script>
+        <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script>
+        <script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.4/cytoscape.min.js" integrity="sha512-xpXUCbrkyJCwC5noJXZqec9rSXdRgFfDoL7Q9/pCPe54Y04OlqwPobMcNuA5NPJ7DRR51OIr6xcOH2wUspyKDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type = "text/javascript" src="https://unpkg.com/cytoscape-svg/cytoscape-svg.js"></script>
     </head>
     <body>
         <div class = "section_header">
@@ -45,7 +53,9 @@
                 <?php echo "Microbial co-occurrence analysis - ".$bioproject." | ".$at." | ".$is; ?>
             </p>
 <!--             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div> -->
-            <div id="network_plot_div" style="width:100%;"></div>
+            <div id="network_plot_div" style="width:100%;">
+                <center><img style="height:300px;" src="resource/loading.gif" /></center>
+            </div>
 
             <div style="clear:both">
             <br/><hr/>
@@ -57,6 +67,6 @@
         </div>
     </body>
     <script>
-        <?php echo "getNetworkData('network_plot_div', '".$bioproject."', '".$at."', '".$is."');"; ?>
+        <?php echo "getNetworkData('network_plot_div', '".$dataJSON."');"; ?>
     </script>
 </html>

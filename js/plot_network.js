@@ -4,7 +4,7 @@ networkCurrentLayouts = new Map();
 networkLayouts = new Map();
 nodeMetrices = new Map();
 
-function getControlPanelHTML(subgroup) {
+function getControlPanelHTML(subgroup, assayType) {
     var controlPanelHTML =
 //         '<p style="margin-top:5px; font-weight:bold; font-size:1.05em; text-align:center;"></p>' +
         '<div style="float:left; margin:5px 20px;">' +
@@ -35,8 +35,8 @@ function getControlPanelHTML(subgroup) {
                         '<select title="Change layout" style="width:100%; background-color:#e6e6ff;" id="layout_' + subgroup.replace(/ /g,"_") + '" name="layout" onchange="changeLayout(\''+subgroup+'\')">' +
                             '<option value="cose">CoSE Layout</option>' +
                             '<option value="circle">Circle Layout</option>' +
-                            '<option value="random">Random Layout</option>' +
-                        '<select>' +
+                            ((assayType == 'WMS') ? '<option value="random" selected>Random Layout</option>' : '<option value="random">Random Layout</option>') +
+                        '</select>' +
                     '</td>' +
                 '</tr>' +
             '</table>' +
@@ -77,34 +77,6 @@ function getControlPanelHTML(subgroup) {
     return controlPanelHTML;
 }
 
-function extractNetworkData(csv) {
-    var dataMap = new Map();
-    for(var i=1; i<csv.length; ++i) {
-        var label = csv[i][0];
-        var subgroup = csv[i][0].replace(/ /g,"_").replace(/-/g,"_").replace(/\(/g,"_").replace(/\)/g,"_");//.replace(/\[/g,"_").replace(/\]/g,"_");
-        if (dataMap.has(subgroup)) {
-            dataMap.get(subgroup).label = label;
-            dataMap.get(subgroup).sources.push(csv[i][1]);
-            dataMap.get(subgroup).targets.push(csv[i][2]);
-            dataMap.get(subgroup).weights.push(parseFloat(csv[i][3]));
-            dataMap.get(subgroup).nodes.add(csv[i][1]);
-            dataMap.get(subgroup).nodes.add(csv[i][2]);
-        } else {
-            var nodes = new Set();
-            nodes.add(csv[i][1]);
-            nodes.add(csv[i][2]);
-            dataMap.set(subgroup, {
-                label: label,
-                sources: [csv[i][1]],
-                targets: [csv[i][2]],
-                weights: [parseFloat(csv[i][3])],
-                nodes: nodes
-            });
-        }
-    }
-    return dataMap;
-}
-
 function makePlot(div_id, networkData, subgroup) {
     // Initialize the network
     var network = cytoscape({
@@ -136,24 +108,12 @@ function makePlot(div_id, networkData, subgroup) {
     });
 
     // Add nodes to the network
-    for(const node of networkData.get(subgroup).nodes)
-        network.add({
-            group: 'nodes',
-            data: {id: subgroup+'_'+node, label: node}
-        });
+    for(const node of networkData[subgroup].nodelist)
+        network.add(node);
 
     // Add edges to the network
-    for(var i=0; i<networkData.get(subgroup).sources.length; ++i)
-        network.add({
-            group: 'edges',
-            classes: (networkData.get(subgroup).weights[i] > 0) ? 'positive' : 'negative',
-            data: {
-                id: subgroup+'_'+networkData.get(subgroup).sources[i]+'_'+networkData.get(subgroup).targets[i],
-                source: subgroup+'_'+networkData.get(subgroup).sources[i],
-                target: subgroup+'_'+networkData.get(subgroup).targets[i],
-                weight: networkData.get(subgroup).weights[i]
-            }
-        });
+    for(const edge of networkData[subgroup].edgelist)
+        network.add(edge);
 
     // Add style for positive and negative edges of the network using mappers
     network.style()
@@ -179,22 +139,25 @@ function makePlot(div_id, networkData, subgroup) {
     var bounds = network.renderedExtent();
     bounds = {x1: bounds.x1, y1: bounds.y1, w: bounds.w, h: bounds.h};
     var coseLayout = network.layout({name: 'cose', boundingBox: bounds, padding: 5, animationThreshold: 10});
-    coseLayout.run(); // CoSE as default layout
+    if(networkData[subgroup].at == "WMS")
+        randomLayout.run(); // Random layout as default layout for WMS
+    else
+        coseLayout.run(); // CoSE as default layout otherwise
 
     // Compute information of nodes
-    for(const node of networkData.get(subgroup).nodes) {
+    for(const node of networkData[subgroup].nodenames) {
         var nodeElement = network.nodes('#'+subgroup+'_'+node);
         var degCentrality = network.$().degreeCentrality({root: '#'+subgroup+'_'+node, directed: true});
         nodeMetrices.set(subgroup+'_'+node, {
             out_degree: network.nodes('#'+subgroup+'_'+node).outdegree(),
             in_degree: network.nodes('#'+subgroup+'_'+node).indegree(),
-            out_degree_centrality: degCentrality.outdegree,
-            in_degree_centrality: degCentrality.indegree,
-            betweenness_centrality: network.$().betweennessCentrality({directed: true}).betweennessNormalized('#'+subgroup+'_'+node)
+//             out_degree_centrality: degCentrality.outdegree,
+//             in_degree_centrality: degCentrality.indegree,
+//             betweenness_centrality: network.$().betweennessCentrality({directed: true}).betweennessNormalized('#'+subgroup+'_'+node)
         });
     }
     // Register events to show node info
-    for(const node of networkData.get(subgroup).nodes) {
+    for(const node of networkData[subgroup].nodenames) {
         network.$('#'+subgroup+'_'+node).on('mouseover', function(event) {
             var message = 'Node: ' + node
                 + '<br/>Out-degree: ' + nodeMetrices.get(subgroup+'_'+node).out_degree + ', In-degree: ' + nodeMetrices.get(subgroup+'_'+node).in_degree;
@@ -206,6 +169,9 @@ function makePlot(div_id, networkData, subgroup) {
         network.$('#'+subgroup+'_'+node).on('mouseout', function(event) {
             document.getElementById('node_info_' + subgroup.replace(/ /g,"_")).innerHTML = '';
         });
+        network.$('#'+subgroup+'_'+node).on('dblclick', function(event) {
+            window.open('taxa.php?key=' + node.substr(3).replace(/_/g, " "), '_blank');
+        });
     }
 
     networks.set(subgroup, network);
@@ -214,23 +180,15 @@ function makePlot(div_id, networkData, subgroup) {
     networkLayouts.set(subgroup, {circle: circleLayout, random: randomLayout, cose: coseLayout})
 }
 
-function createTaxaButtons(networkData, subgroup) {
-    var s = '<p style="margin:3px; font-weight:bold;">Taxa details</p>'
-    for(const node of networkData.get(subgroup).nodes)
-        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + node.substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + node + '</button></a></div>'
-    s += '<div style="clear:both;" />'
-    document.getElementById('taxa_button_group_' + subgroup).innerHTML = s;
-}
-
 function plotNetwork(div_id, response) {
-    var csv = $.csv.toArrays(response, {delimiter: '"', separator: '\t'});
-    var networkData = extractNetworkData(csv);
-    for(var subgroup of networkData.keys()) {
+    document.getElementById(div_id).innerHTML = '';
+    var networkData = JSON.parse(response);
+    for(var subgroup of Object.keys(networkData)) {
         var clearingNode = document.createElement('div');
         clearingNode.style.clear = 'both';
         document.getElementById(div_id).appendChild(clearingNode);
         var labelNode = document.createElement('p');
-        labelNode.innerHTML = 'Subgroup: ' + networkData.get(subgroup).label;
+        labelNode.innerHTML = 'Subgroup: ' + networkData[subgroup].label;
         labelNode.style.cssText += 'margin:10px 0 0 0; font-size:1.2em; font-weight:bold;';
         document.getElementById(div_id).appendChild(labelNode);
         var plotNode = document.createElement('div');
@@ -238,34 +196,32 @@ function plotNetwork(div_id, response) {
         plotNode.style.cssText += 'height:400px; margin-top:5px; border:2px solid #004d99;';
         document.getElementById(div_id).appendChild(plotNode);
         makePlot(div_id + '_' + subgroup, networkData, subgroup);
+        var nbNode = document.createElement('p');
+        nbNode.innerHTML = '(Hover the mouse pointer on the nodes to get node information and double-click on the nodes to get taxa details)';
+        nbNode.style.cssText += 'margin:0; font-size:0.9em; font-style:italic;';
+        document.getElementById(div_id).appendChild(nbNode);
         var controlPanelNode = document.createElement('div');
         controlPanelNode.style.cssText += 'width:100%; margin-top:5px; background-color:#fff9e6; border:1px dashed #004d99; border-radius:10px;';
-        controlPanelNode.innerHTML = getControlPanelHTML(subgroup);
+        controlPanelNode.innerHTML = getControlPanelHTML(subgroup, networkData[subgroup].at);
         document.getElementById(div_id).appendChild(controlPanelNode);
-        var taxaDetailsNode = document.createElement('div');
-        taxaDetailsNode.id = 'taxa_button_group_' + subgroup;
-        taxaDetailsNode.style.cssText += 'width:100%; margin-top:5px;';
-        document.getElementById(div_id).appendChild(taxaDetailsNode);
-        createTaxaButtons(networkData, subgroup);
     }
 }
 
-function getNetworkData(div_id, bioproject, assayType, isolationSource) {
-    var prefix = 'input/network/';
-    var file = bioproject.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '.csv';
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
+function getNetworkData(div_id, dataJSON) {
+    var data = JSON.parse(dataJSON);
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-//             alert(this.responseText);
-            plotNetwork(div_id, this.responseText);
-        } else if (this.status == 404) {
-            document.getElementById(div_id).innerHTML = '<p>Error in analysis parameters !!! Microbial co-occurrence analysis network(s) not available.</p>';
+            plotNetwork(div_id, this.responseText)
         }
     };
-    xmlhttp.open('GET', prefix + file, true);
-    xmlhttp.setRequestHeader('Content-type', 'text/csv');
-    xmlhttp.send();
+    httpReq.open('POST', 'bioproject_network_analysis_data.php', true);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send(
+        'bioproject=' + encodeURIComponent(data.bioproject) +
+        '&' + 'at=' + encodeURIComponent(data.at) +
+        '&' + 'is=' + encodeURIComponent(data.is)
+    );
 }
 
 
