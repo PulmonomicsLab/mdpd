@@ -50,9 +50,13 @@ tryCatch (
 
                     # Create phyloseq object to meco object
                     ps@sam_data$Run <- rownames(ps@sam_data)
+                    if(assayType != "WMS") {
+                        ps <- tax_glom(ps, "Genus", NArm=TRUE, bad_empty=c(NA, "", " ", "\t", "g__"))
+                        taxa_names(ps) <- ps@refseq
+                    }
+                    # print(ps)
                     suppressMessages(meco_object <- phyloseq2meco(ps))
                     meco_object$tidy_dataset()
-                    # print(ps)
 
                     # Filter pollution
                     suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
@@ -77,6 +81,8 @@ tryCatch (
 
         # Merge bioms to generate total_biom
         total_biom <- do.call(merge_phyloseq, as.list(subset_bioms))
+        if (assayType != "WMS")
+            total_biom <- tax_glom(total_biom, "Genus", NArm=TRUE, bad_empty=c(NA, "", " ", "\t", "g__"))
         # Add new column by merging SubGroup, IsolationSource, and BioProject
         total_biom@sam_data$SubGroup_IsolationSource_BioProject <- paste(total_biom@sam_data$SubGroup, total_biom@sam_data$IsolationSource, total_biom@sam_data$BioProject, sep="_")
         # Add new column by merging SubGroup and IsolationSource
