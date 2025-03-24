@@ -3,7 +3,7 @@
 
     $taxa = (isset($_GET['key'])) ? $_GET['key'] : "";
 
-    $taxaQuery = "select ".implode(",", array_keys($allTaxaAttributes))." from taxa where Taxa=?;";
+    $taxaQuery = "select * from taxa where Taxa=?;";
 //     echo $taxaQuery."<br/>".$taxa."<br/>";
     $abundanceQuery = "select SubGroup, BioProject, Abundance from abundance where Taxa=? and abundance.SubGroup in (select SubGroup from disease where Grp <> 'Control');";
 //     echo $abundanceQuery."<br/>".$taxa."<br/>";
@@ -80,13 +80,24 @@
                 if (count($taxaRows) < 1) {
                     echo "<center><p>Error !!! Taxa: ".$taxa." does not exist in the database.</p></center>";
                 } else {
+                    if($taxaRows[0]["Domain"] == "Bacteria")
+                        $attributes = $bacteriaTaxaAttributes;
+                    elseif ($taxaRows[0]["Domain"] == "Eukaryota")
+                        $attributes = $eukaryotaTaxaAttributes;
+                    elseif ($taxaRows[0]["Domain"] == "Viruses")
+                        $attributes = $virusTaxaAttributes;
+                    elseif ($taxaRows[0]["Domain"] == "Archaea")
+                        $attributes = $archaeaTaxaAttributes;
+                    else
+                        $attributes = array();
+
                     echo "<h3 style=\"margin:0; text-align:center;\">Taxa: ".$taxaRows[0]["Taxa"]."</h3>";
             ?>
                     <table class="details" border="1">
                     <tr><th>Attribute</th><th>Value</th></tr>
             <?php
                         foreach($taxaRows as $row){
-                            foreach ($allTaxaAttributes as $name=>$fname) {
+                            foreach ($attributes as $name=>$fname) {
                                 if ($name !== "Taxa") {
                                     echo "<tr>";
                                     echo "<td style=\"width:40%;\">".$fname."</td>";

@@ -104,6 +104,15 @@ AntimicrobialSensitivity varchar(500),
 AntimicrobialSensitivityEvidence varchar(100),
 Shape varchar(500),
 ShapeEvidence varchar(100),
+Ploidy varchar(100),
+Mycelium varchar(100),
+InfectsTheLungs varchar(100),
+Pathogenic varchar(100),
+Host varchar(100),
+GeneticMaterial varchar(100),
+Capsid varchar(100),
+Envelop varchar(100),
+Virion varchar(100),
 primary key (Taxa)
 );
 
@@ -111,10 +120,9 @@ create table abundance (
 Taxa varchar(100),
 Sample varchar(500),
 Abundance double,
-StandardDeviation double,
-StandardError double,
 SubGroup varchar(500),
 BioProject varchar(20),
+constraint fk_abundance_taxa foreign key (Taxa) references taxa(Taxa),
 constraint fk_abundance_bioproject foreign key (BioProject) references bioproject(BioProject),
 constraint fk_abundance_subgroup foreign key (SubGroup) references disease(SubGroup)
 );
