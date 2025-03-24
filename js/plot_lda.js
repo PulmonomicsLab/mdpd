@@ -44,10 +44,6 @@ function createPlotData(dataMap) {
             name: subgroup,
             x: dataMap.get(subgroup).value,
             y: dataMap.get(subgroup).taxa,
-            text: dataMap.get(subgroup).taxa,
-            textposition: 'inside',
-            insidetextanchor: 'start',
-            textfont: {color: '#000000'},
             marker: {/*color: colors[i], */opacity: 0.6},
         };
         data.push(barChart);
@@ -55,20 +51,25 @@ function createPlotData(dataMap) {
     return data;
 }
 
+function getTaxaNumber(dataMap) {
+    var nTaxa = 0;
+    for(var subgroup of dataMap.keys())
+        nTaxa += dataMap.get(subgroup).taxa.length;
+    return nTaxa;
+}
+
 function makePlot(div_id, dataMap, method) {
     var graphDiv = document.getElementById(div_id);
-    
-    var cutoffs = Array.from(dataMap.keys());
 
+    var computedHeight = (getTaxaNumber(dataMap) * 15) + 200;
     var xTitle = (method == 'edgeR') ? 'Log<sub>2</sub> fold change' : 'LDA score (log<sub>10</sub>)';
     var yTitle = 'Differentially abundant taxa';
-
     var data = createPlotData(dataMap)
 
     var layout = {
         plot_bgcolor: '#ffffff', //'#fff0f5',
         paper_bgcolor: '#ffffff', //'#fff0f5',
-        height: 600,
+        height: computedHeight,
         dragmode: 'pan',
 //         bargap: 0.1,
         modebar: {
@@ -106,7 +107,10 @@ function makePlot(div_id, dataMap, method) {
             automargin: true,
             color: '#000000',
             linewidth: 1,
-            showticklabels: false,
+            ticks: 'outside',
+            ticklen: 10,
+            tickwidth: 2,
+            tickfont: {size: 11},
             title : {
                 text : yTitle,
                 font: {size: 22}

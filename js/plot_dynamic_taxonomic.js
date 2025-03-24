@@ -83,7 +83,7 @@ function createTaxaButtons(heatmapData) {
 
 function makePlot(div_id, heatmapData) {
     var graphDiv = document.getElementById(div_id);
-    var computedHeight = (20*heatmapData.name.length + 250);
+    var computedHeight = (30*heatmapData.name.length + 250);
     var xTitle = 'Taxa';
 
     var data = [{
