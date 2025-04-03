@@ -5,8 +5,9 @@
 
     $taxaQuery = "select * from taxa where Taxa=?;";
 //     echo $taxaQuery."<br/>".$taxa."<br/>";
-    $abundanceQuery = "select SubGroup, BioProject, Abundance from abundance where Taxa=? and abundance.SubGroup in (select SubGroup from disease where Grp <> 'Control');";
-//     echo $abundanceQuery."<br/>".$taxa."<br/>";
+    $abundanceSubGroupQuery = "select SubGroup, BioProject, Abundance from abundance_subgroup where Taxa=? and abundance_subgroup.SubGroup in (select SubGroup from disease where Grp <> 'Control');";
+    $abundanceBiomeQuery = "select Biome, BioProject, Abundance from abundance_biome where Taxa=? order by Biome;";
+//     echo $abundanceSubGroupQuery."<br/>".$abundanceBiomeQuery."<br/>".$taxa."<br/>";
 
     $conn = connect();
 
@@ -19,26 +20,37 @@
     $taxaRows = execute_and_fetch_assoc($taxaStmt);
     $taxaStmt->close();
 
-    $abundanceStmt = $conn->prepare($abundanceQuery);
-    $abundanceStmt->bind_param("s", $taxa);
-//     $abundanceStmt->execute();
-//     $abundanceResult = $abundanceStmt->get_result();
-//     echo $abundanceResult->num_rows." ".$abundanceResult->field_count."<br/>";
-//     $abundanceRows = $abundanceResult->fetch_all(MYSQLI_ASSOC);
-    $abundanceRows = execute_and_fetch_assoc($abundanceStmt);
-    $abundanceStmt->close();
-
-    $abundanceData = array(
+    $abundanceSubGroupStmt = $conn->prepare($abundanceSubGroupQuery);
+    $abundanceSubGroupStmt->bind_param("s", $taxa);
+    $abundanceSubGroupRows = execute_and_fetch_assoc($abundanceSubGroupStmt);
+    $abundanceSubGroupStmt->close();
+    $abundanceSubGroupData = array(
         "subgroup" => array(),
         "bioproject" => array(),
         "abundances" => array()
     );
-    foreach ($abundanceRows as $row) {
-        array_push($abundanceData["subgroup"], $row["SubGroup"]);
-        array_push($abundanceData["bioproject"], $row["BioProject"]);
-        array_push($abundanceData["abundances"], $row["Abundance"]);
+    foreach ($abundanceSubGroupRows as $row) {
+        array_push($abundanceSubGroupData["subgroup"], $row["SubGroup"]);
+        array_push($abundanceSubGroupData["bioproject"], $row["BioProject"]);
+        array_push($abundanceSubGroupData["abundances"], $row["Abundance"]);
     }
-    $abundanceDataJSON = json_encode($abundanceData);
+    $abundanceSubGroupDataJSON = json_encode($abundanceSubGroupData);
+
+    $abundanceBiomeStmt = $conn->prepare($abundanceBiomeQuery);
+    $abundanceBiomeStmt->bind_param("s", $taxa);
+    $abundanceBiomeRows = execute_and_fetch_assoc($abundanceBiomeStmt);
+    $abundanceBiomeStmt->close();
+    $abundanceBiomeData = array(
+        "biome" => array(),
+        "bioproject" => array(),
+        "abundances" => array()
+    );
+    foreach ($abundanceBiomeRows as $row) {
+        array_push($abundanceBiomeData["biome"], $row["Biome"]);
+        array_push($abundanceBiomeData["bioproject"], $row["BioProject"]);
+        array_push($abundanceBiomeData["abundances"], $row["Abundance"]);
+    }
+    $abundanceBiomeDataJSON = json_encode($abundanceBiomeData);
 
     closeConnection($conn);
 ?>
@@ -111,13 +123,22 @@
                         }
             ?>
                     </table>
-                    <p style="margin-bottom:0; font-weight:bold;">Distribution of taxa across subgroups</p>
-                    <div id="download_div_taxa_distribution" style="width:100%; text-align:center; display:none;">
-                        <a id="download_button_taxa_distribution" download="taxa_distribution_across_subgroup_figure_data.csv">
+
+                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">Distribution of taxa across biomes</p>
+                    <div id="download_div_taxa_distribution_biome" style="width:100%; text-align:center; display:none;">
+                        <a id="download_button_taxa_distribution_biome" download="taxa_distribution_across_biome_figure_data.csv">
                             <button type="button" style="margin:2px;">Download figure data</button>
                         </a>
                     </div>
-                    <div id="box_plot_div" style="width:100%;"></div>
+                    <div id="biome_box_plot_div" style="width:100%;"></div>
+
+                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">Distribution of taxa across subgroups</p>
+                    <div id="download_div_taxa_distribution_subgroup" style="width:100%; text-align:center; display:none;">
+                        <a id="download_button_taxa_distribution_subgroup" download="taxa_distribution_across_subgroup_figure_data.csv">
+                            <button type="button" style="margin:2px;">Download figure data</button>
+                        </a>
+                    </div>
+                    <div id="subgroup_box_plot_div" style="width:100%;"></div>
             <?php
                 }
             ?>
@@ -131,6 +152,7 @@
         </div>
     </body>
     <script>
-        <?php echo "plotBox('box_plot_div', '".$abundanceDataJSON."');"; ?>
+        <?php echo "plotBoxBiome('biome_box_plot_div', '".$abundanceBiomeDataJSON."');"; ?>
+        <?php echo "plotBoxSubGroup('subgroup_box_plot_div', '".$abundanceSubGroupDataJSON."');"; ?>
     </script>
 </html>
