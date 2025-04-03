@@ -48,7 +48,7 @@ function getDataMap(taxa, name, value) {
     dataMap.name = [...new Set(name)].sort();
     var valueMap = new Map();
     for(var i=0; i<taxa.length; ++i)
-        valueMap.set(name[i] + taxa[i], value[i]);
+        valueMap.set(name[i] + taxa[i], ((parseFloat(value[i]) > 0) ? parseFloat(value[i]) : Number.NaN));
     for(var i=0; i < dataMap.name.length; ++i) {
         var valueRow = [];
         for(var j=0; j < dataMap.taxa.length; ++j)
@@ -66,7 +66,7 @@ function createDownloadLink(heatmapData) {
     for(var i=0; i<heatmapData.name.length; ++i) {
         s += heatmapData.name[i];
         for(var j=0; j<heatmapData.taxa.length; ++j)
-            s += '\t' + heatmapData.values[i][j];
+            s += (isNaN(heatmapData.values[i][j])) ? ('\t0') : ('\t' + heatmapData.values[i][j]);
         s += '\n';
     }
     var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
