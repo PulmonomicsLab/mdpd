@@ -361,7 +361,7 @@
             <div class="browse-heading" id="sec-3">
                 3. Taxa search
             </div>
-            <form name="discriminant_form" method="get" action="taxa.php">
+            <form name="discriminant_form" method="post" action="taxa_search_result.php">
                 <table class="browse-summary">
                     <tr>
                         <td class="row_heading" style="width:20%;">Taxa name</td>
