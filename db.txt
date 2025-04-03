@@ -116,15 +116,25 @@ Virion varchar(100),
 primary key (Taxa)
 );
 
-create table abundance (
+create table abundance_subgroup (
 Taxa varchar(100),
 Sample varchar(500),
 Abundance double,
 SubGroup varchar(500),
 BioProject varchar(20),
-constraint fk_abundance_taxa foreign key (Taxa) references taxa(Taxa),
-constraint fk_abundance_bioproject foreign key (BioProject) references bioproject(BioProject),
-constraint fk_abundance_subgroup foreign key (SubGroup) references disease(SubGroup)
+constraint fk_sg_abundance_taxa foreign key (Taxa) references taxa(Taxa),
+constraint fk_sg_abundance_bioproject foreign key (BioProject) references bioproject(BioProject),
+constraint fk_sg_abundance_subgroup foreign key (SubGroup) references disease(SubGroup)
+);
+
+create table abundance_biome (
+Taxa varchar(100),
+Sample varchar(500),
+Abundance double,
+Biome varchar(500),
+BioProject varchar(20),
+constraint fk_bm_abundance_taxa foreign key (Taxa) references taxa(Taxa),
+constraint fk_bm_abundance_bioproject foreign key (BioProject) references bioproject(BioProject)
 );
 
 SET GLOBAL local_infile=1;
@@ -139,4 +149,5 @@ load data local infile '/home/sudipto/data/projects/mdpd/input/input_disease.csv
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_bioproject.csv' into table bioproject ignore 1 lines;
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_run.csv' into table run ignore 1 lines;
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_taxa.csv' into table taxa ignore 1 lines;
-load data local infile '/home/sudipto/data/projects/mdpd/input/input_abundance.csv' into table abundance ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_abundance_subgroup.csv' into table abundance_subgroup ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_abundance_biome.csv' into table abundance_biome ignore 1 lines;
