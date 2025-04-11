@@ -23,7 +23,7 @@ function createDownloadLinkSubGroup(subgroup, bioproject, abundances) {
 }
 
 function createDownloadLinkBiome(biome, bioproject, abundances) {
-    var s = 'Biome\tBioProject\tAbundance\n';
+    var s = 'Body site\tBioProject\tAbundance\n';
     for(var i=0; i<biome.length; ++i) {
         s += biome[i] + '\t';
         s += bioproject[i] + '\t';
@@ -173,7 +173,7 @@ function makePlotBiome(div_id, dataMap) {
             tickwidth: 2,
             tickfont: {size: 16},
             title : {
-                text : 'Biome',
+                text : 'Body site',
                 font: {size: 22}
             }
         },

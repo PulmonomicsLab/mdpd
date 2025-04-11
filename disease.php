@@ -64,7 +64,7 @@
             }
             
             function getDiseaseWiseResultHTML(filterRows) {
-                var s = '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Biome</th><th>Assay Type</th><th>Library Layout</th></tr>';
+                var s = '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Body site</th><th>Assay Type</th><th>Library Layout</th></tr>';
                 for(i of filterRows.values()) {
                     s += '<tr>';
                     s += '<td><a style="color:#003325;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">' + rows[i].BioProject + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';

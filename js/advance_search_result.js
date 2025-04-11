@@ -15,7 +15,7 @@ function createDownloadLink() {
         var rowEnd = rowStart + numPrintRows;
     else
         var rowEnd = rows.length;
-    var s = 'Run ID\tBioProject ID\tDisease\tDisease Sub-group\tBiome\tInstrument\tAssay Type\tLibrary Layout\tProcessed Reads\tCountry\tYear\n';
+    var s = 'Run ID\tBioProject ID\tDisease\tDisease Sub-group\Body site\tInstrument\tAssay Type\tLibrary Layout\tProcessed Reads\tCountry\tYear\n';
     for(var i=rowStart; i<rowEnd; ++i) {
         s += rows[i].Run + '\t';
         s += rows[i].BioProject + '\t';
@@ -42,7 +42,7 @@ function display(divId, pageNo) {
     else
         var rowEnd = rows.length;
     
-    var s = '<table class="summary" border="1"><tr><th>Run ID</th><th>BioProject ID</th><th>Disease</th><th>Disease Sub-group</th><th>Biome</th><th>Instrument</th><th>Assay Type</th><th>Library Layout</th><th>Processed Reads (%)</th><th>Country</th><th>Year</th></tr>';
+    var s = '<table class="summary" border="1"><tr><th>Run ID</th><th>BioProject ID</th><th>Disease</th><th>Disease Sub-group</th><th>Body site</th><th>Instrument</th><th>Assay Type</th><th>Library Layout</th><th>Processed Reads (%)</th><th>Country</th><th>Year</th></tr>';
     
     for(var i=rowStart; i<rowEnd; ++i) {
         s += '<tr>';

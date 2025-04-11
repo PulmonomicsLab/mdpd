@@ -36,7 +36,7 @@ function getTPBioProjects(resultDivId) {
             var hideButton = '<center><button type="button" class="round" onclick="hideDiv(\'' + resultDivId + '\')">&#10005;</button></center>';
             var resultCountString = '<p style="margin:2px;text-align:center;">Total number of BioProjects found in the database: ' + bioprojects.length + '</p>';
 
-            var s = '<table class="browse-result-summary" border="1"><tr><th>Select</th><th>BioProject ID</th><th>Group</th><th>Sub-group</th><th>Isolation Source</th><th>Biome</th><th>Assay Type</th><th>Library Layout</th></tr>';
+            var s = '<table class="browse-result-summary" border="1"><tr><th>Select</th><th>BioProject ID</th><th>Group</th><th>Sub-group</th><th>Isolation Source</th><th>Body site</th><th>Assay Type</th><th>Library Layout</th></tr>';
             for(var i=0; i<bioprojects.length; ++i) {
                 s += '<tr>';
                 s += '<td><input type="checkbox" class="taxonomic_bp_class" id="tp_bp_' + bioprojects[i].BioProject + '" name="taxonomic_bp[]" value="' + bioprojects[i].BioProject + '" checked></td>';
@@ -109,7 +109,7 @@ function getDABioProjects(resultDivId) {
 
     var s = '';
     if (disease1 != "null") {
-        s += '<p style="margin:5px 0 0 20px;"><b>'+disease1+':</b></p><table class="browse-result-summary" border="1"><tr><th>Select</th><th>BioProject ID</th><th>Group</th><th>Sub-group</th><th>Isolation Source</th><th>Biome</th><th>Assay Type</th><th>Library Layout</th></tr>';
+        s += '<p style="margin:5px 0 0 20px;"><b>'+disease1+':</b></p><table class="browse-result-summary" border="1"><tr><th>Select</th><th>BioProject ID</th><th>Group</th><th>Sub-group</th><th>Isolation Source</th><th>Body site</th><th>Assay Type</th><th>Library Layout</th></tr>';
         for(var i=0; i<bioprojects1.length; ++i) {
             s += '<tr>';
             s += '<td><input type="checkbox" class="discriminant_bp_1_class" id="da_bp_' + bioprojects1[i].BioProject + '" name="discriminant_bp_1[]" value="' + bioprojects1[i].BioProject + '" checked></td>';
@@ -125,7 +125,7 @@ function getDABioProjects(resultDivId) {
         s += '</table>';
     }
     if (disease2 != "null") {
-        s += '<p style="margin:5px 0 0 20px;"><b>'+disease2+':</b></p><table class="browse-result-summary" border="1"><tr><th>Select</th><th>BioProject ID</th><th>Group</th><th>Sub-group</th><th>Isolation Source</th><th>Biome</th><th>Assay Type</th><th>Library Layout</th></tr>';
+        s += '<p style="margin:5px 0 0 20px;"><b>'+disease2+':</b></p><table class="browse-result-summary" border="1"><tr><th>Select</th><th>BioProject ID</th><th>Group</th><th>Sub-group</th><th>Isolation Source</th><th>Body site</th><th>Assay Type</th><th>Library Layout</th></tr>';
         for(var i=0; i<bioprojects2.length; ++i) {
             s += '<tr>';
             s += '<td><input type="checkbox" class="discriminant_bp_2_class" id="da_bp_' + bioprojects2[i].BioProject + '" name="discriminant_bp_2[]" value="' + bioprojects2[i].BioProject + '" checked></td>';

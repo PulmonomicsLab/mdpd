@@ -86,7 +86,7 @@
                         var rows = JSON.parse(this.responseText);
                         var s = '<center><p>Selected isolation sources: [' + isolationSources.toString() + ']</p></center>';
                         s += '<center><p>Number of BioProjects found in database = <b>' + rows.length + '</b></p></center>';
-                        s += '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Biome</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>';
+                        s += '<table class="browse-result-summary" border="1"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Body site</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>';
                         for (var i=0; i<rows.length; ++i) {
                             s += '<tr>';
                             s += '<td><a style="color:#003325;" target="_blank" href="bioproject_id.php?key=' + rows[i].BioProject + '">' + rows[i].BioProject + ' <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>';
@@ -138,9 +138,9 @@
         <div class = "section_middle">
             <?php
                 if (count($rows) < 1)
-                    echo "<br/><center>No entries found in the database for Biome = \"".$biom."\".</center>";
+                    echo "<br/><center>No entries found in the database for Body site = \"".$biom."\".</center>";
                 else {
-                    echo "<center><h3>Biome - ".$biom."</h3></center>";
+                    echo "<center><h3>Body site - ".$biom."</h3></center>";
                     echo "<div style=\"width:100%;\">";
                     echo "<table style=\"width:94%; margin:10px 3% 10px 3%; background-color:#ffe799; text-align:center; border-collapse:collapse;\"><tr><td style=\"border:1px solid black;\">";
                     foreach($isolationSources as $is) {
@@ -154,7 +154,7 @@
             <?php
                         echo "<center><p>Selected isolation sources: [".implode(",", $isolationSources)."]</p></center>";
                         echo "<center><p>Number of BioProjects found in database = <b>".count($rows)."</b></p></center>";
-                        echo "<table class=\"browse-result-summary\" border=\"1\"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Biome</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>";
+                        echo "<table class=\"browse-result-summary\" border=\"1\"><tr><th>BioProject ID</th><th>Disease</th><th>Sub-group</th><th>Processed Runs</th><th>Body site</th><th>Isolation Source</th><th>Assay Type</th><th>Library Layout</th></tr>";
                         for ($i=0; $i<count($rows); ++$i) {
                             echo "<tr>";
                             echo "<td><a style=\"color:#003325;\" target=\"_blank\" href=\"bioproject_id.php?key=".$rows[$i]["BioProject"]."\">".$rows[$i]["BioProject"]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";

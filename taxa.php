@@ -124,7 +124,7 @@
             ?>
                     </table>
 
-                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">Distribution of taxa across biomes</p>
+                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">Distribution of taxa across body sites</p>
                     <div id="download_div_taxa_distribution_biome" style="width:100%; text-align:center; display:none;">
                         <a id="download_button_taxa_distribution_biome" download="taxa_distribution_across_biome_figure_data.csv">
                             <button type="button" style="margin:2px;">Download figure data</button>
