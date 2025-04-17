@@ -6,8 +6,6 @@
         <title>Statistics - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/stat_plots.js"></script>
-<!--         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
-<!--         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script> -->
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
         <style>
             .intro{
@@ -33,14 +31,14 @@
                 width : 48%;
             }
             #stat-plot-wrapper_1 {
-                width : 32%;
+                width : 48%;
             }
             #stat-plot-wrapper_2 {
-                width : 32%;
+                width : 48%;
             }
-            #stat-plot-wrapper_3 {
+            /*#stat-plot-wrapper_3 {
                 width : 32%;
-            }
+            }*/
         </style>
     </head>
     <body>
@@ -54,6 +52,7 @@
                 <tr class="nav">
                     <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
+                    <td class="nav"><a href="analysis.php" class="side_nav">Analysis</a></td>
                     <td class="nav"><a href="#" class="active">Statistics</a></td>
                     <td class="nav"><a href="about.php" class="side_nav">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
@@ -68,20 +67,18 @@
         <div class = "section_middle">
             <br/>
             <div class="intro">
-                <hr/><h2>1. Data distribution on the basis of biome, assay type and group</h2><hr/>
+                <hr/><h2>1. Data distribution on the basis of group, assay type, and biom</h2><hr/>
                 <div id="sunburst-plot-container" class="plot"></div>
-                <div class="plot caption">Fig. 1A - Interactive sunburst plot showing the total distibution of runs on the basis of group, biome and assay type.</div>
+                <div class="plot caption">Fig. 1A - Interactive sunburst plot showing the total distibution of runs across different groups and assay types.</div>
+                <div id="stat-plot-container_3" style="width:100%;"></div>
+                <div class="caption">Fig. 1B - Group-wise distribution of the runs across different biomes.</div>
                 <div id="stat-plot-wrapper_1" class="plot" style="margin:10px 1% 10px 0; float:left;">
                     <div id="stat-plot-container_1" style="width:100%;"></div>
-                    <div class="caption">Fig. 1B - Distribution of runs among gut and lung biome.</div>
+                    <div class="caption">Fig. 1C - Distribution of runs across different biomes.</div>
                 </div>
                 <div id="stat-plot-wrapper_2" class="plot" style="margin:10px 1% 10px 1%; float:left;">
                     <div id="stat-plot-container_2" style="width:100%;"></div>
-                    <div class="caption">Fig. 1C - Distribution of runs on the basis of assay types.</div>
-                </div>
-                <div id="stat-plot-wrapper_3" class="plot" style="margin:10px 0 10px 1%; float:left;">
-                    <div id="stat-plot-container_3" style="width:100%;"></div>
-                    <div class="caption">Fig. 1D - Group-wise distribution of the runs.</div>
+                    <div class="caption">Fig. 1D - Distribution of runs across different assay types.</div>
                 </div>
                 <div style="clear:both;"></div>
             </div>
@@ -90,15 +87,10 @@
                 <hr/><h2>2. Year-wise data distribution</h2><hr/>
                 <div id="bar-plot-container_3" class="plot" style="margin:10px 0% 0 0%;"></div>
                 <div class="caption">Fig. 2A - Year-wise distribution of the data for each group.</div>
-                <div id="bar-plot-wrapper_2" class="plot" style="margin:10px 2% 10px 0; float:left;">
-                    <div id="bar-plot-container_2" style="width:100%;"></div>
-                    <div class="caption">Fig. 2B - Year-wise distribution of lung and gut microbiome data.</div>
-                </div>
-                <div id="bar-plot-wrapper_1" class="plot" style="margin:10px 0 10px 2%; float:left;">
-                    <div id="bar-plot-container_1" style="width:100%;"></div>
-                    <div class="caption">Fig. 2C - Year-wise distribution of amplicon and WMS data.</div>
-                </div>
-                <div style="clear:both;"></div>
+                <div id="bar-plot-container_2" style="width:100%;"></div>
+                <div class="caption">Fig. 2B - Year-wise distribution of the data for each biome.</div>
+                <div id="bar-plot-container_1" style="width:100%;"></div>
+                <div class="caption">Fig. 2C - Year-wise distribution of the data for each assay type.</div>
             </div>
             <br/>
             <div class="intro"><hr/><h2>3. Country-wise data distribution</h2><hr/></div>
@@ -109,7 +101,7 @@
         <div style="clear:both">
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
-                &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
+                &#169; 2025 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
                 (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,
                 <a style="color:#003325;" href="mailto:ssaha4@gmail.com">ssaha4@gmail.com</a>).
             </p>

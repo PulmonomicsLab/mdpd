@@ -1,82 +1,116 @@
-function getDataMap(csv) {
+function getDataMap(taxa, subgroup, value) {
     var dataMap = new Map();
-    for(var i=1; i<csv.length; ++i) {
-        var group = csv[i][2];
-        var name = '<i>' + csv[i][1] + '</i>';
-        var score = parseFloat(csv[i][3]);
-        if(dataMap.has(group)) {
-            dataMap.get(group).names.push(name);
-            dataMap.get(group).scores.push(score);
+    for(var i=0; i<taxa.length; ++i) {
+        if(dataMap.has(subgroup[i])) {
+            dataMap.get(subgroup[i]).taxa.push(taxa[i]);
+            dataMap.get(subgroup[i]).value.push(Math.abs(value[i]));
         } else {
-            dataMap.set(group, {names: [name], scores: [score]});
+            dataMap.set(subgroup[i], {taxa: [taxa[i]], value: [Math.abs(value[i])]});
         }
     }
     return dataMap;
 }
 
-function makePlot(div_id, dataMap, disease_pair, assayType, biome, isolation_scource) {
-    var graphDiv = document.getElementById(div_id);
-    
-    var data = [];
-    var colors = ['#e9967a', '#b0c4de', '#f1ce8e', '#9ec08c'];
-    var i = 0;
-    var yTitle = (assayType == 'Amplicon') ? 'Differentially abundant genus' : 'Differentially abundant species';
+function createDownloadLink(method, p_adjust_method, taxa, subgroup, value, pval, significance) {
+    var scoreLabel = (method == 'edgeR') ? 'Log2FC' : 'LDA score (log10)';
+    var pvalLabel = (p_adjust_method == 'none') ? 'P-value' : 'FDR-adjusted p-value';
+    var s = 'Taxa\tSubGroup\t' + scoreLabel + '\t' + pvalLabel + '\tSignificance\n';
+    for(var i=0; i<taxa.length; ++i) {
+        s += taxa[i] + '\t';
+        s += subgroup[i] + '\t';
+        s += value[i] + '\t';
+        s += pval[i] + '\t';
+        s += significance[i] + '\n';
+    }
+    var blob = new Blob([s], {type: 'text/csv;charset=utf-8;'});
+    document.getElementById('download_button').href = URL.createObjectURL(blob);
+}
 
-    for(var x of dataMap.keys()){
+function createTaxaButtons(taxa) {
+    var s = ''
+    for(var i=0; i<taxa.length; ++i)
+        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + taxa[i].substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + taxa[i] + '</button></a></div>'
+    s += '<div style="clear:both;" />'
+    document.getElementById('taxa_button_group').innerHTML = s;
+}
+
+function createPlotData(dataMap) {
+//     var colors = ['#e9967a', '#b0c4de', '#f1ce8e', '#9ec08c'];
+    var data = [];
+    for(var subgroup of dataMap.keys()){
         var barChart = {
             type: 'bar',
-            name: x,
-            x: dataMap.get(x).scores,
-            y: dataMap.get(x).names,
             orientation: 'h',
-            marker: {color: colors[i]}
+            name: subgroup,
+            x: dataMap.get(subgroup).value,
+            y: dataMap.get(subgroup).taxa,
+            marker: {/*color: colors[i], */opacity: 0.6},
         };
-        i++;
         data.push(barChart);
     }
+    return data;
+}
+
+function getTaxaNumber(dataMap) {
+    var nTaxa = 0;
+    for(var subgroup of dataMap.keys())
+        nTaxa += dataMap.get(subgroup).taxa.length;
+    return nTaxa;
+}
+
+function makePlot(div_id, dataMap, method) {
+    var graphDiv = document.getElementById(div_id);
+
+    var computedHeight = (getTaxaNumber(dataMap) * 15) + 200;
+    var xTitle = (method == 'edgeR') ? 'Log<sub>2</sub> fold change' : 'LDA score (log<sub>10</sub>)';
+    var yTitle = 'Differentially abundant taxa';
+    var data = createPlotData(dataMap)
 
     var layout = {
         plot_bgcolor: '#ffffff', //'#fff0f5',
         paper_bgcolor: '#ffffff', //'#fff0f5',
-        height: 800,
-        bargap: 0.2,
+        height: computedHeight,
+        dragmode: 'pan',
+//         bargap: 0.1,
         modebar: {
             color: '#262626',
             activecolor: '#262626'
         },
         hoverlabel: {
             bgcolor: 'white',
-            font: {size: 18, color: 'black'}
+            font: {size: 18, color: '#000000'}
         },
         hovertext: {
-            font: {color: 'black'}
+            font: {color: '#000000'}
         },
         margin: {
-            t: 30
+            t: 30,
+            l: 300,
+            r: 300
         },
         xaxis: {
             visible : true,
             automargin: true,
-            color: 'black',
+            color: '#000000',
             linewidth: 2,
             ticks: 'outside',
             ticklen: 10,
             tickwidth: 2,
             tickfont: {size: 16},
             title : {
-                text : 'LDA score (log<sub>10</sub>)',
+                text : xTitle,
                 font: {size: 22}
             }
         },
         yaxis: {
             visible : true,
             automargin: true,
-            color: 'black',
-            linewidth: 2,
+            color: '#000000',
+            linewidth: 1,
             ticks: 'outside',
             ticklen: 10,
             tickwidth: 2,
-            tickfont: {size: 10},
+            tickfont: {size: 11},
             title : {
                 text : yTitle,
                 font: {size: 22}
@@ -84,12 +118,9 @@ function makePlot(div_id, dataMap, disease_pair, assayType, biome, isolation_sco
         },
         showlegend: true,
         legend: {
-            font: {
-                size: 16,
-                color: 'black'
-            },
+            font: {size: 16, color: '#000000'},
             borderwidth: 2,
-            bordercolor: 'black',
+            bordercolor: '#000000',
             y: 0.5
         }
     };
@@ -109,7 +140,7 @@ function makePlot(div_id, dataMap, disease_pair, assayType, biome, isolation_sco
                 Plotly.downloadImage(
                     img,
                     {
-                        filename: 'lda_plot_' + disease_pair + '_' + assayType + '_' + biome + '_' + isolation_scource,
+                        filename: 'lda_plot_',
                         format: 'svg'
                     }
                 );
@@ -117,18 +148,50 @@ function makePlot(div_id, dataMap, disease_pair, assayType, biome, isolation_sco
         }]
     }
 
-    Plotly.plot(graphDiv, data, layout, config);
+//     Plotly.plot(graphDiv, {data: data, layout: layout, config: config, frames: frames})
+    Plotly.plot(graphDiv, {data: data, layout: layout, config: config})
 }
 
-function plotLDA(div_id, response, disease_pair, assayType, biome, isolation_scource, score) {
-    var csv = $.csv.toArrays(response);
-    var dataMap = getDataMap(csv);
-    
-//     var msg = dataMap.size + '<br/>';
-//     for(var x of dataMap.keys())
-//         msg += x + ' => ' + JSON.stringify(dataMap.get(x)) + '<br/>';
-//     document.getElementById(div_id).innerHTML = msg;
-    
-    makePlot(div_id, dataMap, disease_pair, assayType, biome, isolation_scource);
+function plotLDA(div_id, response, method, taxa_level) {
+    var data = JSON.parse(response);
+    if(data.taxa.length > 0) {
+        var dataMap = getDataMap(data.taxa, data.subgroup, data.value);
+        document.getElementById(div_id).innerHTML = '';
+        makePlot(div_id, dataMap, method);
+        if (data.p_adjust == 'none')
+            createDownloadLink(method, data.p_adjust, data.taxa, data.subgroup, data.value, data.pval, data.significance);
+        else
+            createDownloadLink(method, data.p_adjust, data.taxa, data.subgroup, data.value, data.padj, data.significance);
+        document.getElementById('download_div').style.display = 'block';
+        if (taxa_level == 'Species' || taxa_level == 'Genus') {
+            createTaxaButtons(data.taxa);
+            document.getElementById('taxa_button_group_heading').style.display = 'block';
+            document.getElementById('taxa_button_group').style.display = 'block';
+        }
+    } else {
+        document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
+    }
 }
 
+function getLDAData(div_id, dataJSON) {
+    var data = JSON.parse(dataJSON);
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            plotLDA(div_id, this.responseText, data.method, data.taxa_level)
+        }
+    };
+    httpReq.open('POST', 'lda_data.php', true);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send(
+        'bioproject=' + encodeURIComponent(data.bioproject) +
+        '&' + 'at=' + encodeURIComponent(data.at) +
+        '&' + 'is=' + encodeURIComponent(data.is) +
+        '&' + 'method=' + encodeURIComponent(data.method) +
+        '&' + 'alpha=' + encodeURIComponent(data.alpha) +
+        '&' + 'p_adjust_method=' + encodeURIComponent(data.p_adjust_method) +
+        '&' + 'filter_thres=' + encodeURIComponent(data.filter_thres) +
+        '&' + 'taxa_level=' + encodeURIComponent(data.taxa_level) +
+        '&' + 'threshold=' + encodeURIComponent(data.threshold)
+    );
+}

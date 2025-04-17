@@ -1,11 +1,32 @@
 <?php
-    $type = urldecode($_GET["type"]);
-    $bioproject = urldecode($_GET["bioproject"]);
-    $dp = urldecode($_GET["dp"]);
-    $at = urldecode($_GET["at"]);
-    $biome = urldecode($_GET["biome"]);
-    $is = urldecode($_GET["is"]);
-//     echo $type."<br/>".$bioproject."<br/>".$dp."<br/>".$at."<br/>".$is."<br/>".$biome."<br/>";
+    $bioproject = (isset($_GET["key"])) ? urldecode($_GET["key"]) : "";
+    $at = (isset($_GET["at"])) ? urldecode($_GET["at"]) : "";
+    $is = (isset($_GET["is"])) ? urldecode($_GET["is"]) : "";
+    $method_joined = (isset($_GET["method"])) ? urldecode($_GET["method"]) : "lefse_none";
+    $alpha = (isset($_GET["alpha"])) ? urldecode($_GET["alpha"]) : "0.1";
+    $filter_thres = (isset($_GET["filter_thres"])) ? urldecode($_GET["filter_thres"]) : "0.0001";
+    if ($at == "WMS")
+        $taxa_level = (isset($_GET["taxa_level"])) ? urldecode($_GET["taxa_level"]) : "Species";
+    else
+        $taxa_level = (isset($_GET["taxa_level"])) ? urldecode($_GET["taxa_level"]) : "Genus";
+    $threshold = (isset($_GET["threshold"])) ? urldecode($_GET["threshold"]) : "2";
+
+    $p_adjust_method = explode("_", $method_joined)[1];
+    $method = explode("_", $method_joined)[0];
+
+    $dataJSON = json_encode(
+        array(
+            "bioproject" => $bioproject,
+            "at" => $at,
+            "is" => $is,
+            "method" => $method,
+            "alpha" => $alpha,
+            "p_adjust_method" => $p_adjust_method,
+            "filter_thres" => $filter_thres,
+            "taxa_level" => $taxa_level,
+            "threshold" => $threshold
+        )
+    );
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +36,6 @@
         <title>LDA - MDPD</title>
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_lda.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
@@ -30,6 +49,7 @@
                 <tr class="nav">
                     <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
+                    <td class="nav"><a href="analysis.php" class="side_nav">Analysis</a></td>
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="about.php" class="side_nav">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
@@ -42,9 +62,91 @@
         <!--<div class = "section_left"></div>-->
         
         <div class = "section_middle">
-            <center><p id="display_text"></p></center>
-            <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div>
-            <div style="width:100%" id="plot_container">
+            <p style="margin:0 0 10px 0; font-size:1.2em; font-weight:bold; text-align:center;"><?php echo "Discriminant analysis - ".$bioproject." | ".$at." | ".$is; ?></p>
+            <div style="width:100%;" id="lda_form_div">
+                <form method="get" action="lda.php">
+                    <input type="hidden" name="key" value="<?php echo $bioproject; ?>" />
+                    <input type="hidden" name="at" value="<?php echo $at; ?>" />
+                    <input type="hidden" name="is" value="<?php echo $is; ?>" />
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:25%;">
+                                <label>Method</label>
+                                <select class="full" id="method" name="method" required>
+                                    <option value="lefse_none" <?php echo ($method_joined == "lefse_none") ? "selected" : ""; ?>>LEfSe (without FDR p-value adjustment)</option>
+                                    <option value="lefse_fdr" <?php echo ($method_joined == "lefse_fdr") ? "selected" : ""; ?>>LEfSe (with FDR p-value adjustment)</option>
+                                    <option value="edgeR_fdr" <?php echo ($method_joined == "edgeR_fdr") ? "selected" : ""; ?>>edgeR (with FDR p-value adjustment)</option>
+                                </select>
+                            </td>
+                            <td style="width:20%;">
+                                <label>P-value (only for <i>LEfSe</i>)</label>
+                                <select class="full" id="alpha" name="alpha" required>
+                                    <option value="0.1" <?php echo ($alpha == "0.1") ? "selected" : ""; ?>>0.1</option>
+                                    <option value="0.05" <?php echo ($alpha == "0.05") ? "selected" : ""; ?>>0.05</option>
+                                    <option value="0.01" <?php echo ($alpha == "0.01") ? "selected" : ""; ?>>0.01</option>
+                                </select>
+                            </td>
+                            <td style="width:15%;">
+                                <label>Filter threshold</label>
+                                <select class="full" id="filter_thres" name="filter_thres" required>
+                                    <option value="0.01" <?php echo ($filter_thres == "0.01") ? "selected" : ""; ?>>0.01</option>
+                                    <option value="0.001" <?php echo ($filter_thres == "0.001") ? "selected" : ""; ?>>0.001</option>
+                                    <option value="0.0001" <?php echo ($filter_thres == "0.0001") ? "selected" : ""; ?>>0.0001</option>
+                                </select>
+                            </td>
+                            <td style="width:15%;">
+                                <label>Taxa level</label>
+                                <select class="full" id="taxa_level" name="taxa_level" required>
+                                    <?php if($at == "WMS") echo "<option value=\"Species\"".(($taxa_level == "Species") ? "selected>" : ">")."Species</option>"; ?>
+                                    <option value="Genus" <?php echo ($taxa_level == "Genus") ? "selected" : ""; ?>>Genus</option>
+                                    <option value="Family" <?php echo ($taxa_level == "Family") ? "selected" : ""; ?>>Family</option>
+                                    <option value="Order" <?php echo ($taxa_level == "Order") ? "selected" : ""; ?>>Order</option>
+                                </select>
+                            </td>
+                            <td style="width:15%;">
+                                <label>Cut-off value</label><br/>
+                                <input type="number" class="full" id="threshold" name="threshold" min="1" step="0.1" value="<?php echo $threshold; ?>" required />
+                                <!--<input type="range" style="width:100%;" id="threshold" name="threshold" min="1" max="4" step="1" value="<?php //echo $threshold; ?>">
+                                <svg role="presentation" width="100%" height="10" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="range__tick" x="1%" y="1" width="1" height="5"></rect>
+                                    <rect class="range__tick" x="34%" y="1" width="1" height="5"></rect>
+                                    <rect class="range__tick" x="65%" y="1" width="1" height="5"></rect>
+                                    <rect class="range__tick" x="99%" y="1" width="1" height="5"></rect>
+                                </svg>
+                                <svg role="presentation" width="100%" height="14" xmlns="http://www.w3.org/2000/svg">
+                                    <text class="range__point" x="1%" y="14" text-anchor="start">1</text>
+                                    <text class="range__point" x="34%" y="14" text-anchor="middle">2</text>
+                                    <text class="range__point" x="65%" y="14" text-anchor="middle">3</text>
+                                    <text class="range__point" x="99%" y="14" text-anchor="middle">4</text>
+                                </svg>-->
+                            </td>
+                            <td valign="bottom" style="width:10%; padding:5px;">
+                                <input type="submit" style="width:100px;border-radius:10px;" value="Submit" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <p style="margin-top:5px; font-weight:bold;">
+                <?php
+                    if ($method_joined == "edgeR_fdr")
+                        echo "Analysis parameters: Method = \"edgeR (with FDR p-value adjustment)\" | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    else if ($method_joined == "lefse_none")
+                        echo "Analysis parameters: Method = \"LEfSe (without FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    else if ($method_joined == "lefse_fdr")
+                        echo "Analysis parameters: Method = \"LEfSe (with FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                ?>
+            </p>
+            <div id="download_div" style="width:100%; text-align:center; display:none;">
+                <a id="download_button" download="discriminant_figure_data.csv">
+                    <button type="button" style="margin:2px;">Download figure data</button>
+                </a>
+            </div>
+            <div style="width:100%;" id="lda_plot_div">
+                <center><img style="height:300px;" src="resource/loading.gif" /></center>
+            </div>
+            <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Differentially abundant taxa details</p>
+            <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
             <p>
                 <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot
                 or download the data using the <i>"Download data"</i> button. located at the top of the page <b>2)</b> A
@@ -59,43 +161,15 @@
                 </svg>
                 button in the menubar located at the top right corner of the plot.
             </p>
-            </div>
-            
-            <script>
-                function getLDAData(queryType, bioproject, diseasePair, assayType, biome, isolationSource, score) {
-                    var prefix = 'input/LDA/';
-                    if(queryType == 'DISEASE') {
-                        var folder = prefix + assayType + '/';
-                        var file = folder + 'LDA_' + diseasePair.replace(/ /g,"_") + '_' + isolationSource.replace(/ /g,"_") + '.csv';
-                        var display = diseasePair.replace(/_/g," - ") + ' | ' + assayType + ' | ' + biome + ' | ' + isolationSource;
-                    } else if(queryType == 'BIOPROJECT') {
-                        var folder = prefix + 'Bioproject/' ;
-                        var file = folder + 'LDA_' + bioproject + '_' + isolationSource.replace(/ /g,"_") + '_' + assayType.replace(/ /g,"_") + '.csv';
-                        var display = 'BioProject ID: ' + bioproject + ' | ' + assayType + ' | ' + isolationSource;
-                    }                
-//                     alert(queryType+'<br/>'+bioproject+'<br/>'+diseasePair+'<br/>'+assayType+'<br/>'+isolationSource+'<br/>'+'\n'+file);
-                    
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            document.getElementById('display_text').innerHTML = '<h3>' + display + '</h3>';
-                            document.getElementById('download_div').innerHTML = '<a href="' + file + '"><button type="button" style="margin:2px;">Download data</button></a>';
-                            plotLDA('plot_container', this.responseText, diseasePair.replace(/_/g,"-"), assayType, biome, isolationSource.replace(/ /g,"_"), score);
-                        }
-                    };
-                    xmlhttp.open('GET', file, true);
-                    xmlhttp.setRequestHeader("Content-type", "text/csv");
-                    xmlhttp.send();
-                }
-                
-                <?php echo "getLDAData('".$type."','".$bioproject."','".$dp."','".$at."','".$biome."','".$is."',0);"; ?>
-            </script>
-            <br/><hr/>
+            <hr/>
             <p style="font-size:0.9em;text-align:center;">
-                &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
+                &#169; 2025 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
                 (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,
                 <a style="color:#003325;" href="mailto:ssaha4@gmail.com">ssaha4@gmail.com</a>).
             </p>
         </div>
     </body>
+    <script>
+        <?php echo "getLDAData('lda_plot_div', '".$dataJSON."');"; ?>
+    </script>
 </html>

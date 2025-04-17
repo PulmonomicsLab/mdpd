@@ -43,6 +43,7 @@
                 <tr class="nav">
                     <td class="nav"><a href="index.php" class="side_nav">Home</a></td>
                     <td class="nav"><a href="browse.php" class="side_nav">Browse</a></td>
+                    <td class="nav"><a href="analysis.php" class="side_nav">Analysis</a></td>
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="#" class="active">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
@@ -99,7 +100,7 @@
             </div>
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
-                &#169; 2023 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
+                &#169; 2025 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
                 (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,
                 <a style="color:#003325;" href="mailto:ssaha4@gmail.com">ssaha4@gmail.com</a>).
             </p>

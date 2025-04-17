@@ -37,10 +37,13 @@ SubGroup varchar(5000),
 IsolationSource varchar(100),
 Biome varchar(60),
 AssayType varchar(60),
-ReleaseYear varchar(20),
-RunCount integer,
-PMID varchar(20),
-DiseaseStudied varchar(100),
+Instrument varchar(200),
+LibraryLayout varchar(20),
+Year varchar(50),
+ProcessedRuns integer,
+VariableRegion varchar(50),
+Country varchar(200),
+PMID varchar(50),
 primary key (BioProject)
 );
 
@@ -49,29 +52,89 @@ Run varchar(20),
 Experiment varchar(20),
 BioSample varchar(20),
 BioProject varchar(20),
-AvgSpotLen integer,
 Bases bigint,
 Bytes bigint,
-CenterName varchar(1000),
 Country varchar(60),
+AssayType varchar(20),
 Biome varchar(30),
 IsolationSource varchar(100),
-AssayType varchar(20),
-Grp varchar(100),
-SubGroup varchar(100),
+LibraryLayout varchar(20),
+VariableRegion varchar(50),
 Instrument varchar(100),
-ReleaseDate varchar(30),
-ReleaseYear integer,
+Year integer,
+Grp varchar(200),
+SubGroup varchar(500),
+Gender varchar(30),
+Age varchar(30),
+SmokingStatus varchar(30),
 Therapeutics varchar(1000),
+Comorbidity varchar(1000),
+ProcessedReads float,
 primary key (Run),
 constraint fk_bioproject foreign key (BioProject) references bioproject(BioProject),
 constraint fk_subgroup foreign key (SubGroup) references disease(SubGroup)
 );
 
 create table disease(
-SubGroup varchar(100),
-Grp varchar(100),
+SubGroup varchar(500),
+Grp varchar(200),
 primary key (SubGroup)
+);
+
+create table taxa(
+Taxa varchar(100),
+NCBITaxaID varchar(20),
+Domain varchar(50),
+TaxaLevel varchar(50),
+BiofilmFormation varchar(500),
+BiofilmFormationEvidence varchar(100),
+GramStain varchar(500),
+GramStainEvidence varchar(100),
+SporeFormation varchar(500),
+SporeFormationEvidence varchar(100),
+Aerophilicity varchar(500),
+AerophilicityEvidence varchar(100),
+GenomeSize varchar(500),
+GenomeSizeEvidence varchar(100),
+CodingGenes varchar(500),
+CodingGenesEvidence varchar(100),
+AntimicrobialResistance varchar(500),
+AntimicrobialResistanceEvidence varchar(100),
+AntimicrobialSensitivity varchar(500),
+AntimicrobialSensitivityEvidence varchar(100),
+Shape varchar(500),
+ShapeEvidence varchar(100),
+Ploidy varchar(100),
+Mycelium varchar(100),
+InfectsTheLungs varchar(100),
+Pathogenic varchar(100),
+Host varchar(100),
+GeneticMaterial varchar(100),
+Capsid varchar(100),
+Envelop varchar(100),
+Virion varchar(100),
+primary key (Taxa)
+);
+
+create table abundance_subgroup (
+Taxa varchar(100),
+Sample varchar(500),
+Abundance double,
+SubGroup varchar(500),
+BioProject varchar(20),
+constraint fk_sg_abundance_taxa foreign key (Taxa) references taxa(Taxa),
+constraint fk_sg_abundance_bioproject foreign key (BioProject) references bioproject(BioProject),
+constraint fk_sg_abundance_subgroup foreign key (SubGroup) references disease(SubGroup)
+);
+
+create table abundance_biome (
+Taxa varchar(100),
+Sample varchar(500),
+Abundance double,
+Biome varchar(500),
+BioProject varchar(20),
+constraint fk_bm_abundance_taxa foreign key (Taxa) references taxa(Taxa),
+constraint fk_bm_abundance_bioproject foreign key (BioProject) references bioproject(BioProject)
 );
 
 SET GLOBAL local_infile=1;
@@ -85,3 +148,6 @@ load data local infile '/home/sudipto/data/projects/mdpd/input/input.csv' into t
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_disease.csv' into table disease ignore 1 lines;
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_bioproject.csv' into table bioproject ignore 1 lines;
 load data local infile '/home/sudipto/data/projects/mdpd/input/input_run.csv' into table run ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_taxa.csv' into table taxa ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_abundance_subgroup.csv' into table abundance_subgroup ignore 1 lines;
+load data local infile '/home/sudipto/data/projects/mdpd/input/input_abundance_biome.csv' into table abundance_biome ignore 1 lines;
