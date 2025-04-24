@@ -191,7 +191,7 @@
         <div class = "section_left" id="section_left">
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-1" class="browse_side_nav">1. Taxonomic analysis</a></div>
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Discriminant analysis</a></div>
-            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-3" class="browse_side_nav">3. Taxa search</a></div>
+            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-3" class="browse_side_nav">3. Microbe search</a></div>
         </div>
 
         <script>
@@ -359,19 +359,26 @@
             </form>
 
             <div class="browse-heading" id="sec-3">
-                3. Taxa search
+                3. Microbe search
             </div>
             <form name="discriminant_form" method="post" action="taxa_search_result.php">
                 <table class="browse-summary">
                     <tr>
-                        <td class="row_heading" style="width:20%;">Taxa name</td>
-                        <td class="odd" style="width:60%;"><input type="text" class="full" name="key" value="" placeholder="Enter taxa name" required /></td>
+                        <td class="row_heading" style="width:20%;">Microbe name</td>
+                        <td class="odd" style="width:60%;"><input type="text" id="taxa_name_input" class="full" name="key" value="" placeholder="Enter microbe name" required /></td>
                         <td class="odd" style="width:20%">
                             <input type="submit" style="width:70px;margin:5px;" value="Submit" />
                             <button type="reset" style="width:70px;margin:5px;" value="Reset">Reset</button>
                         </td>
                     </tr>
                 </table>
+                <p style="font-size:0.9em; margin-top:5px;">
+                    Example: <a style="color:#003325;" href="#taxa_name_input" onclick="load_taxa_name('taxa_name_input', 'Staphylococcus')">Staphylococcus</a>,
+                    <a style="color:#003325;" href="#taxa_name_input" onclick="load_taxa_name('taxa_name_input', 'Staphylococcus aureus')">Staphylococcus aureus</a>,
+                    <a style="color:#003325;" href="#taxa_name_input" onclick="load_taxa_name('taxa_name_input', 'Staph')">Staph</a>,
+                    <a style="color:#003325;" href="#taxa_name_input" onclick="load_taxa_name('taxa_name_input', 'influenza')">influenza</a>,
+                    <a style="color:#003325;" href="#taxa_name_input" onclick="load_taxa_name('taxa_name_input', 'aspergillus')">aspergillus</a>.
+                </p>
             </form>
 
         </div>

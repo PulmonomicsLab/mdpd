@@ -11,6 +11,10 @@ function hideDiv(divId){
     document.getElementById(divId).style.display = 'none';
 }
 
+function load_taxa_name(divId, name) {
+    document.getElementById(divId).value = name;
+}
+
 function getTPBioProjects(resultDivId) {
     var disease = document.querySelectorAll('input[name=taxonomic_ds]:checked')[0].value;
     var assayType = document.querySelectorAll('input[name=taxonomic_at]:checked')[0].value;
