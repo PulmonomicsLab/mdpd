@@ -37,19 +37,19 @@ tryCatch(
 
         # Create phyloseq object to meco object
         suppressMessages(meco_object <- phyloseq2meco(ps))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
         # print(ps)
 
         # Filter pollution
         suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         # Filter based on abundance and detection
         suppressMessages(meco_object$filter_taxa(rel_abund = rel_abund, freq = freq))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         meco_object$sample_table <- subset(meco_object$sample_table, (IsolationSource == isolationSource))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         # LDA plot Genus
         suppressWarnings(suppressMessages(t1 <- trans_diff$new(dataset = meco_object, method = method, alpha = alpha, lefse_subgroup = NULL, group = "SubGroup", filter_thres = filter_thres, taxa_level = taxa_level, p_adjust_method = p_adjust_method)))

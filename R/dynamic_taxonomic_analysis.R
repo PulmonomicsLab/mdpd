@@ -50,7 +50,7 @@ tryCatch (
                     }
                     # print(ps)
                     suppressMessages(meco_object <- phyloseq2meco(ps))
-                    meco_object$tidy_dataset()
+                    suppressMessages(meco_object$tidy_dataset())
 
                     # Filter pollution
                     suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
@@ -81,7 +81,7 @@ tryCatch (
         total_biom@sam_data$SubGroup_IsolationSource_BioProject <- paste(total_biom@sam_data$SubGroup, total_biom@sam_data$IsolationSource, total_biom@sam_data$BioProject, sep="_")
         # Create total_meco_object from total_biom
         suppressMessages(total_meco_object <- phyloseq2meco(total_biom))
-        total_meco_object$tidy_dataset()
+        suppressMessages(total_meco_object$tidy_dataset())
 
         # Perform trans_abund on total_meco_object
         suppressMessages(t1 <- trans_abund$new(dataset = total_meco_object, taxrank = tax_rank, ntaxa = 25, groupmean="SubGroup_IsolationSource_BioProject"))
@@ -93,7 +93,7 @@ tryCatch (
         taxa_json <- "\"taxa\":["
         name_json <- "\"name\":["
         abundance_json <- "\"abundance\":["
-        for (i in (1:nrow(trim_taxa))) {
+        for (i in seq_len(nrow(trim_taxa))) {
             if (i == nrow(trim_taxa)) {
                 taxa_json <- paste0(taxa_json, "\"", tax_prefix, trim_taxa[i, "Taxonomy"], "\"")
                 name_json <- paste0(name_json, "\"", trim_taxa[i, "Sample"], "\"")

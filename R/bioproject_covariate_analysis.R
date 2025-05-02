@@ -36,30 +36,31 @@ tryCatch(
 
         # Create phyloseq object to meco object
         suppressMessages(meco_object <- phyloseq2meco(ps))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
         # print(ps)
 
 
         # Filter pollution
         suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         # Filter based on abundance and detection
         suppressMessages(meco_object$filter_taxa(rel_abund = rel_abund, freq = freq))
 
         meco_object$sample_table <- subset(meco_object$sample_table, (IsolationSource == isolationSource))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         subgroups <- unique(meco_object$sample_table$SubGroup)
 
         effects <- c()
 
         if ("Gender" %in% confounders) {
+            meco_object$sample_table <- subset(meco_object$sample_table, Gender != "\\N")
             for(sg in subgroups) {
                 genders <- unique(meco_object$sample_table[meco_object$sample_table$SubGroup == sg, "Gender"])
                 for(gender in genders) {
                     new_col <- c()
-                    for(i in 1:nrow(meco_object$sample_table)) {
+                    for(i in seq_len(nrow(meco_object$sample_table))) {
                         if (meco_object$sample_table[i, "SubGroup"] == sg & meco_object$sample_table[i, "Gender"] == gender)
                             new_col <- c(new_col, "Yes")
                         else
@@ -80,20 +81,21 @@ tryCatch(
         }
 
         if ("AgeGroup" %in% confounders) {
-            meco_object$sample_table$Age <- as.numeric(meco_object$sample_table$Age)
+            suppressWarnings(meco_object$sample_table$Age <- as.numeric(meco_object$sample_table$Age))
+            meco_object$sample_table <- subset(meco_object$sample_table, !is.na(Age))
             meco_object$sample_table <- meco_object$sample_table %>% mutate(AgeGroup = cut(Age, breaks=c(0,1,11,21,31,41,51,61,71,81,91,101,111)))
             for(sg in subgroups) {
                 agegroups <- unique(meco_object$sample_table[meco_object$sample_table$SubGroup == sg, "AgeGroup"])
                 for(ag in agegroups) {
                     new_col <- c()
-                    for(i in 1:nrow(meco_object$sample_table)) {
+                    for(i in seq_len(nrow(meco_object$sample_table))) {
                         if (meco_object$sample_table[i, "SubGroup"] == sg & meco_object$sample_table[i, "AgeGroup"] == ag)
                             new_col <- c(new_col, "Yes")
                         else
                             new_col <- c(new_col, "No")
                     }
                     meco_object$sample_table[, ncol(meco_object$sample_table) + 1] <- new_col
-                    new_col_name <- paste0(sg, "_", ag)
+                    new_col_name <- paste0(sg, "_AgeGroup_", ag)
                     new_col_name <- gsub(" ", "_", new_col_name)
                     new_col_name <- gsub("-", "_", new_col_name)
                     new_col_name <- gsub("\\(", "", new_col_name)
@@ -108,11 +110,12 @@ tryCatch(
         }
 
         if ("SmokingStatus" %in% confounders) {
+            meco_object$sample_table <- subset(meco_object$sample_table, SmokingStatus != "\\N")
             for(sg in subgroups) {
                 smokinggroups <- unique(meco_object$sample_table[meco_object$sample_table$SubGroup == sg, "SmokingStatus"])
                 for(smoking in smokinggroups) {
                     new_col <- c()
-                    for(i in 1:nrow(meco_object$sample_table)) {
+                    for(i in seq_len(nrow(meco_object$sample_table))) {
                         if (meco_object$sample_table[i, "SubGroup"] == sg & meco_object$sample_table[i, "SmokingStatus"] == smoking)
                             new_col <- c(new_col, "Yes")
                         else
@@ -166,7 +169,7 @@ tryCatch(
             heatmap <- t4$res_cor[, c("Taxa", "Env", "coef", "Pvalue", "AdjPvalue", "Significance")]
             colnames(heatmap) <- c("Taxa", "Name", "Value", "Pvalue", "AdjPvalue", "Significance")
             heatmap$Name <- lapply(heatmap$Name, as.character)
-            for (i in 1:nrow(heatmap)) {
+            for (i in seq_len(nrow(heatmap))) {
                 taxa_splits <- strsplit(heatmap[i, "Taxa"], "\\.")[[1]]
                 heatmap[i, "Taxa"] <- taxa_splits[length(taxa_splits)]
                 heatmap[i, "Name"] <- paste0(heatmap[i, "Name"][1], "Yes")
@@ -213,6 +216,10 @@ tryCatch(
         out_json <- paste0("{", taxa_json, ",", name_json, ",", value_json, ",", p_value_json, ",", adj_p_value_json, ",", significance_json, "}")
         cat(out_json)
     },
+#     warning = function(condition) {
+#         out_json <- "{\"taxa\":[],\"name\":[],\"value\":[],\"p_value\":[],\"adj_p_value\":[],\"significance\":[]}"
+#         cat(out_json)
+#     },
     error = function(condition) {
         out_json <- "{\"taxa\":[],\"name\":[],\"value\":[],\"p_value\":[],\"adj_p_value\":[],\"significance\":[]}"
         cat(out_json)
