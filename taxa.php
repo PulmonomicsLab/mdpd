@@ -90,7 +90,7 @@
         <div class = "section_middle">
             <?php
                 if (count($taxaRows) < 1) {
-                    echo "<center><p>Error !!! Taxa: ".$taxa." does not exist in the database.</p></center>";
+                    echo "<center><p>Error !!! Taxon: ".$taxa." does not exist in the database.</p></center>";
                 } else {
                     if($taxaRows[0]["Domain"] == "Bacteria")
                         $attributes = $bacteriaTaxaAttributes;
@@ -103,7 +103,7 @@
                     else
                         $attributes = array();
 
-                    echo "<h3 style=\"margin:0; text-align:center;\">Taxa: ".$taxaRows[0]["Taxa"]."</h3>";
+                    echo "<h3 style=\"margin:0; text-align:center;\">Taxon: ".$taxaRows[0]["Taxa"]."</h3>";
             ?>
                     <table class="details" border="1">
                     <tr><th>Attribute</th><th>Value</th></tr>
@@ -122,23 +122,60 @@
                             }
                         }
             ?>
+                    <tr>
+                    <td colspan="2" style="font-size:0.8em; text-align:left; background-color:#ffffff;">
+                        <b>Abbreviations of evidences:</b>
+                        <i>exp</i> - Experiment,
+                        <i>igc</i> - Inferred from genomic context,
+                        <i>tas</i> - Traceable author statement,
+                        <i>nas</i> - Non-traceable author statement,
+                        <i>ibd</i> - Inferred from biological aspect of descendant,
+                        <i>asr</i> - Ancestral state reconstruction.
+                    </td>
+                    </tr>
                     </table>
 
-                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">Distribution of taxa across body sites</p>
+                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">A. Distribution of taxon across body sites</p>
                     <div id="download_div_taxa_distribution_biome" style="width:100%; text-align:center; display:none;">
                         <a id="download_button_taxa_distribution_biome" download="taxa_distribution_across_biome_figure_data.csv">
                             <button type="button" style="margin:2px;">Download figure data</button>
                         </a>
                     </div>
                     <div id="biome_box_plot_div" style="width:100%;"></div>
+                    <p style="font-size: 0.9em; margin-top:5px;">
+                        Interactive <b>box plot</b> shows the abundance distribution
+                        of the taxon across 10 human body sites. <b>Hover mouse</b>
+                        on a box to highlight the mean, median, maximum, minimum and
+                        inter quartile range. The plot can be downloaded as SVG by
+                        clicking on the <b>"
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                            <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                        </svg>
+                        "</b> button in the figure menu bar at the top right corner.
+                        The data can be downloaded using the <b>"Download figure data"</b>
+                        button.
+                    </p>
 
-                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">Distribution of taxa across subgroups</p>
+                    <p style="margin-bottom:0; font-size:1.2em; font-weight:bold;">B. Distribution of taxon across subgroups</p>
                     <div id="download_div_taxa_distribution_subgroup" style="width:100%; text-align:center; display:none;">
                         <a id="download_button_taxa_distribution_subgroup" download="taxa_distribution_across_subgroup_figure_data.csv">
                             <button type="button" style="margin:2px;">Download figure data</button>
                         </a>
                     </div>
                     <div id="subgroup_box_plot_div" style="width:100%;"></div>
+                    <p style="font-size: 0.9em; margin-top:5px;">
+                        Interactive <b>box plot</b> shows the abundance distribution
+                        of the taxon across different subgroups. <b>Hover mouse</b>
+                        on a box to highlight the mean, median, maximum, minimum and
+                        inter quartile range. The plot can be downloaded as SVG by
+                        clicking on the <b>"
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                            <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                        </svg>
+                        "</b> button in the figure menu bar at the top right corner.
+                        The data can be downloaded using the <b>"Download figure data"</b>
+                        button.
+                    </p>
             <?php
                 }
             ?>

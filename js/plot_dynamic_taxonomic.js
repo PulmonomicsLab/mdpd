@@ -195,6 +195,7 @@ function plotHeatmap(div_id, response) {
         createTaxaButtons(dataMap);
         document.getElementById('taxa_button_group_heading').style.display = 'block';
         document.getElementById('taxa_button_group').style.display = 'block';
+        document.getElementById('heatmap_legend').style.display = 'block';
     } else {
         document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
     }

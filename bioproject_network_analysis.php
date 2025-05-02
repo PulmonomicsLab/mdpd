@@ -53,9 +53,26 @@
                 <?php echo "Microbial co-occurrence analysis - ".$bioproject." | ".$at." | ".$is; ?>
             </p>
 <!--             <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;"></div> -->
+
             <div id="network_plot_div" style="width:100%;">
                 <center><img style="height:300px;" src="resource/loading.gif" /></center>
             </div>
+            <p style="font-size: 0.9em; margin-top:5px;">
+                Network(s) show the co-occurrence of the microbes across the
+                subgroup(s). The <b>nodes</b> represent the microbes (bacteria,
+                virus, eukaryota, and/or archaea). The <b>edges</b> indicate
+                relationships between microbes. The colors denote positive
+                <font style="color:green;">(green)</font> or negative
+                <font style="color:red;">(red)</font> interactions while the
+                color intensity is proportional to <b>edge weights</b>. <b>Hover
+                mouse on a node</b> to highlight the taxa name, out-degree, and
+                in-degree. <b>Double click on a node</b> to get the taxa information.
+                Users can <i>pan</i>, <i>zoom</i>, <i>reset</i> the network, and
+                <i>modify the layout</i> using the respective buttons in the control
+                panel. The network can be downloaded in <i>PNG</i>, <i>SVG</i>,
+                <i>JPEG</i>, and <i>JSON</i> format using the availbale buttons on
+                the control panel. The JSON format can be easily exported to Cytoscape.
+            </p>
 
             <div style="clear:both">
             <br/><hr/>

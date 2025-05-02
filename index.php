@@ -175,7 +175,7 @@
             <div class="intro">
                 <center>
                     <div id="interactive_plot_div" style="width:100%;"></div>
-                    <p style="margin:0;">Interactive plot showing the different groups, biomes, and taxa domains in MDPD.</p>
+                    <p style="margin:0;">Interactive plot showing the different groups, body sites, and taxa domains in MDPD.</p>
                     <p style="margin:0; font-size:0.9em;"><i>(Please click on the text in plot to get details)</i></p>
                 </center>
             </div>

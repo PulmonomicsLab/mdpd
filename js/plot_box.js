@@ -153,6 +153,7 @@ function plotBox(div_id, response) {
         createTaxaButtons(new Set(data.taxa));
         document.getElementById('taxa_button_group_heading').style.display = 'block';
         document.getElementById('taxa_button_group').style.display = 'block';
+        document.getElementById('box_legend').style.display = 'block';
     } else {
         document.getElementById(div_id).innerHTML = '<p>No significant taxa found.</p>';
     }

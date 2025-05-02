@@ -194,12 +194,16 @@ function plotData(lda_div_id, merged_lda_div_id, method, response) {
         makeHeatmapPlot(lda_div_id, ldaDataMap, method, 'Oranges');
         createLDADownloadLink(ldaDataMap, 'lda_download_button');
         document.getElementById('lda_download_div').style.display = 'block';
+        document.getElementById('plot_1_heading').style.display = 'block';
+        document.getElementById('plot_1_legend').style.display = 'block';
 
         var mergedLdaDataMap = getLDADataMap(mergedLdaData.taxa, mergedLdaData.subgroup, mergedLdaData.value);
         document.getElementById(merged_lda_div_id).innerHTML = '';
         makeHeatmapPlot(merged_lda_div_id, mergedLdaDataMap, method, 'Purples');
         createLDADownloadLink(mergedLdaDataMap, 'merged_lda_download_button');
         document.getElementById('merged_lda_download_div').style.display = 'block';
+        document.getElementById('plot_2_heading').style.display = 'block';
+        document.getElementById('plot_2_legend').style.display = 'block';
 
         createTaxaButtons(ldaDataMap);
         document.getElementById('taxa_button_group_heading').style.display = 'block';

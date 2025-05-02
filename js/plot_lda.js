@@ -167,6 +167,7 @@ function plotLDA(div_id, response, method, taxa_level) {
             createTaxaButtons(data.taxa);
             document.getElementById('taxa_button_group_heading').style.display = 'block';
             document.getElementById('taxa_button_group').style.display = 'block';
+            document.getElementById('bar_legend').style.display = 'block';
         }
     } else {
         document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
