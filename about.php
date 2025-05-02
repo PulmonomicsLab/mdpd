@@ -1,21 +1,3 @@
-<?php
-    include('db.php');
-
-    $bioprojectQuery = "select ".implode(",", $viewBioProjectAttributes)." from bioproject order by Grp, Biome desc, AssayType, IsolationSource, BioProject;";
-//     echo $bioprojectQuery." ".$disease;
-
-    $conn = connect();
-
-    $bioprojectStmt = $conn->prepare($bioprojectQuery);
-//     $bioprojectStmt->execute();
-//     $bioprojectResult = $bioprojectStmt->get_result();
-//     echo $bioprojectResult->num_rows." ".$bioprojectResult->field_count."<br/><br/>";
-//     $rows = $bioprojectResult->fetch_all(MYSQLI_ASSOC);
-    $rows = execute_and_fetch_assoc($bioprojectStmt);
-    $bioprojectStmt->close();
-    closeConnection($conn);
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,7 +10,7 @@
                 width:80%;
                 height:auto;
                 margin:0 10% 0 10%;
-                font-size: 1.2em;
+/*                 font-size: 1.2em; */
             }
         </style>
     </head>
@@ -57,47 +39,189 @@
 
         <div class = "section_middle">
             <br/>
-            <div class="intro" style="font-size:1.5em;" id="sec-1"><b>1. Data</b></div><br/>
-            <p class="intro">
-                Microbiome Database of Pulmonary Diseases (MDPD) contains a total of
-                5970 runs compiled from 64 BioProjects. The <b><i>R script</i></b> for
-                performing the <b><i>computational analysis pipeline</i></b> is available
-                <a style="color:#003325;" href="#sec-2"><b>here</b></a>. A brief summary
-                of the BioProjects along with their external <b><i>hyperlinks to the NCBI
-                BioProject</i></b> is given as follows:
-            </p><br/>
+            <!--<p class="intro">
+                MDPD is a manually curated comprehensive database of human microbiomes of
+                pulmonary diseases.
+            </p><br/>-->
 
-            <?php
-                echo "<table class=\"details\" border=\"1\">";
-                echo "<tr><th>BioProject ID</th><th>Run Count</th><th>Group</th><th>Isolation Source</th><th>Biome</th><th>Assay Type</th><th>NCBI BioProject hyperlinks</th></tr>";
-                foreach($rows as $row){
-                    echo "<tr>";
-                    echo "<td><a style=\"color:#003325;\" target=\"_blank\" href=\"bioproject_id.php?key=".$row["BioProject"]."\">".$row["BioProject"]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";
-                    echo "<td>".$row["RunCount"]."</td>";
-                    echo "<td>".str_replace(";", "; ", $row["Grp"])."</td>";
-                    echo "<td>".str_replace(";", "; ", $row["IsolationSource"])."</td>";
-                    echo "<td>".str_replace(";", "; ", $row["Biome"])."</td>";
-                    echo "<td>".str_replace(";", "; ", $row["AssayType"])."</td>";
-                    echo "<td><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/bioproject/?term=".$row["BioProject"]."\">https://www.ncbi.nlm.nih.gov/bioproject/?term=".$row["BioProject"]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            ?>
+            <div class="intro" style="font-size:1.2em;" id="sec-1"><b>1. Data Summary</b></div>
+            <ul class="intro">
+                <li><b>Amplicon-16S</b>, <b>Amplicon-ITS</b>, and <b>whole metagenome sequencing</b>.</li>
+                <li><b>430</b> BioProjects and <b>59,362</b> runs/samples.</li>
+                <li><b>19</b> different pulmonary diseases and a <b>healthy</b> group.</li>
+                <li><b>286 subgroups</b> different diseases and healthy.</li>
+                <li><b>10</b> <b>human</b> microbiome <b>body sites</b>.</li>
+                <li>
+                    Microbial information of <b>Bacteria</b> <i>(n = 2296)</i>, <b>Eukaryota</b>
+                    <i>(n = 219)</i>, <b>Virus</b> <i>(n = 193)</i>, and <b>Archaea</b> <i>(n = 13)</i>.
+                </li>
+            </ul>
+
             <br/>
-            <div class="intro" style="font-size:1.5em;" id="sec-2"><b>2. R codes of computational analysis pipeline</b></div><br/>
-            <div id="download_div" style="width:100%; text-align:center; margin-bottom:20px;">
-                <a href="R/computational_analysis_pipeline.R"><button type="button" style="margin:2px;">Download R script</button></a>
-            </div>
-            <div class="intro" style="overflow:auto;border:3px dashed black;background-color:#ecf8ec;padding:10px;">
-                <pre>
-                    <?php
-                        $fname = "R/computational_analysis_pipeline.R";
-                        $f = fopen($fname, "r");
-                        echo fread($f, filesize($fname));
-                        fclose($f);
-                    ?>
-                </pre>
-            </div>
+            <div class="intro" style="font-size:1.2em;" id="sec-2"><b>2. Features of MDPD</b></div>
+            <p class="intro">
+                MDPD captures the dynamics of the microbes in different human body sites,
+                including their,
+                <ul class="intro">
+                    <li><b>Composition</b> and <b>abundance</b>,</li>
+                    <li><b>Association</b> of the <b>microbes</b> with various <b>covariates</b> (age, gender, smoking status),</li>
+                    <li><b>Microbial markers</b> for different groups (<b>diseases/healthy</b>) and their <b>subgroups</b>,</li>
+                    <li>Cross-disease or healthy <b>subgroup comparisons</b>, and</li>
+                    <li><b>Microbial community</b> structure.</li>
+                </ul>
+            </p>
+
+            <br/>
+            <div class="intro" style="font-size:1.2em;" id="sec-3"><b>3. Enhancing data quality</b></div>
+            <ul class="intro">
+                <li>
+                    Systematically extracted and curated relevant metadata of the groups from public
+                    databases (NCBI, ENA, PubMed) and related research articles.
+                </li>
+                <li>
+                    <b>Re-analyses of the raw data</b> using state-of-the-art methods.
+                </li>
+                <li>
+                    Implemented <b>rigorous quality control (QC)</b> methods and <b>stringent criteria</b> to ensure
+                    only <b>high-quality data</b> was included.
+                </li>
+            </ul>
+
+            <br/>
+            <div class="intro" style="font-size:1.2em;" id="sec-4"><b>4. Ensuring re-usability</b></div>
+            <ul class="intro">
+                <li><b><i>.biom</i> files</b> stored in the database.</li>
+                <li>Curated <b>metadata</b> stored in the database.</li>
+                <li>
+                    Users can also <b>further analyze</b> the data, e.g., according to <b>country</b>,
+                    <b>gender</b>, <b>age</b>, <b>smoking status</b>, and many other available metadata.
+                </li>
+            </ul>
+
+            <br/>
+            <div class="intro" style="font-size:1.2em;" id="sec-5"><b>5. Tools, libraries, and packages used</b></div>
+            <table class="details">
+                <tr>
+                    <th>Name</th>
+                    <th>Tool/Package/Library</th>
+                    <th>Version</th>
+                    <th>Usage</th>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://github.com/FelixKrueger/TrimGalore">Trim galore <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>Perl wrapper</td>
+                    <td>0.6.7</td>
+                    <td style="text-align:left; padding-left:5px;">Quality trimming of the raw FastQ reads.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://www.bioconductor.org/packages/release/bioc/html/dada2.html">dada2 <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.26</td>
+                    <td style="text-align:left; padding-left:5px;">Taxonomic inference from Amplicon-16S and Amplicon-ITS sequencing data.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://toolshed.g2.bx.psu.edu/view/iuc/kraken2/cdee7158adf3">Kraken2 <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>Tool</td>
+                    <td>2.1.3</td>
+                    <td style="text-align:left; padding-left:5px;">Taxonomic inference from Whole Metagenome Sequencing data.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0">Bracken <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>Tool</td>
+                    <td>3.1</td>
+                    <td style="text-align:left; padding-left:5px;">Re-estimating species' relative abundance at the level using kmer information from the Kraken2 report file.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://github.com/fbreitwieser/pavian">Pavian <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>Web application</td>
+                    <td>1.0</td>
+                    <td style="text-align:left; padding-left:5px;">To explore the classified taxonomic reads (%) from Whole Metagenome Sequencing data.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html">phyloseq <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.42.0</td>
+                    <td style="text-align:left; padding-left:5px;">Manipulation of the .biom files.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://github.com/cpauvert/psadd">psadd <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>0.1.3</td>
+                    <td style="text-align:left; padding-left:5px;">Generate interactive Krona plots using the Kronatools.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://cran.r-project.org/web/packages/file2meco/index.html">file2meco <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>0.7.1</td>
+                    <td style="text-align:left; padding-left:5px;">Conversion of the Phyloseq object to a microtable object</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://cran.r-project.org/web/packages/microeco/index.html">microeco <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.8.0</td>
+                    <td style="text-align:left; padding-left:5px;">
+                        Detecting taxonomic abundance at the genus/species level. Microbial marker
+                        identification using LEfSe (Kruskal-Wallis’ test and Wilcoxon rank-sum tests)
+                        and edgeR (generalized linear models) with Benjamini-Hochberg (BH) method for
+                        FDR correction.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://www.bioconductor.org/packages/release/bioc/html/Maaslin2.html">Maaslin2 <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.12.0</td>
+                    <td style="text-align:left; padding-left:5px;">Finding the association of the microbes with the covariates, such as age groups and gender, using linear mixed models.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://bioconductor.org/packages/release/data/experiment/html/bugphyzz.html">bugphyzz <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.0</td>
+                    <td style="text-align:left; padding-left:5px;">Functional annotation of the identified microbes.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://cran.r-project.org/web/packages/taxonomizr/index.html">taxonomizr <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>0.11.1</td>
+                    <td style="text-align:left; padding-left:5px;">Fetch the NCBI taxonomy information, such as taxonomy IDs.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://cran.r-project.org/web/packages/mboost/index.html">mboost <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>2.9.11</td>
+                    <td style="text-align:left; padding-left:5px;">Model-based gradient boosting for generating co-occurrence networks.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://cran.r-project.org/web/packages/boot/index.html">boot <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.3.30</td>
+                    <td style="text-align:left; padding-left:5px;">Bootstrap Resampling for making the co-occurrence networks.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://github.com/plotly/plotly.js">Plotly.js <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>JavaScript library</td>
+                    <td>3.0.1</td>
+                    <td style="text-align:left; padding-left:5px;">Creating interactive plots.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://github.com/cytoscape/cytoscape.js">Cytoscape.js <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>JavaScript library</td>
+                    <td>3.31.2</td>
+                    <td style="text-align:left; padding-left:5px;">Building microbial co-occurrence networks.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://github.com/NiklasKnaack/jquery-svg3dtagcloud-plugin">SVG 3D Tag Cloud jQuery plugin <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>JavaScript library</td>
+                    <td>-</td>
+                    <td style="text-align:left; padding-left:5px;">Drawing the 3D interactive plot on the home page</td>
+                </tr>
+            </table>
+
+            <br/>
+            <p class="intro">
+                The source code of MDPD is available in a GitHub repository -
+                <a style="color:#003325;" target="_blank" href="https://github.com/PulmonomicsLab/mdpd">https://github.com/PulmonomicsLab/mdpd <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a>
+            </p>
+
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
                 &#169; 2025 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
