@@ -2,21 +2,45 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="generator" content="DokuWiki">
+        <meta name="theme-color" content="#008800">
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="keywords" content="start">
         <title>Help - MDPD</title>
+        <link rel="stylesheet" href="css/dokuwiki.css">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
-        <link rel = "stylesheet" type = "text/css" href = "css/browse.css" />
-        <script type = "text/javascript" src = "js/browse.js"></script>
-
+<!--         <link rel = "stylesheet" type = "text/css" href = "css/browse.css" /> -->
+<!--         <script type = "text/javascript" src = "js/browse.js"></script> -->
+        <script>/*<![CDATA[*/var NS='';var JSINFO = {"id":"start","namespace":"","ACT":"export_xhtml","useHeadingNavigation":0,"useHeadingContent":0};
+        /*!]]>*/</script>
+        <script src="js/dokuwiki/jquery.php" defer="defer">/*<![CDATA[*/
+        /*!]]>*/</script>
+        <script src="js/dokuwiki/js.php" defer="defer">/*<![CDATA[*/
+        /*!]]>*/</script>
         <style>
-            body{
-                background-color: #ffffff;
+            html, body {
+                color: black;
+                background: white;
             }
-            p{
-                font-size: 1.2em;
+            table {
+                margin: 0;
+                border: 0 solid black;
             }
-            img{
-                max-width: 100%;
-                width: auto;
+            td {
+                border: 0 solid black;
+            }
+            img {
+                border:1px solid #cccccc;
+            }
+            #section_middle {
+                width:72%;
+            }
+            #dw__toc {
+                width: 96%;
+                height: 600px;
+                margin-top: 10px;
+                overflow: auto;
+                border: 1px solid #cccccc;
             }
         </style>
     </head>
@@ -41,140 +65,992 @@
             </center>
         </div>
 
-        <div class = "section_middle">
-            <ol type="1">
-                <li>
-                    <p>The <b>Search Option</b> on the home page allows users to query the database with specific
-                    keywords for <i>Disease</i>, <i>Assay type</i>, <i>Country</i>, <i>Isolation source</i>,
-                    <i>Instrument</i> and <i>Year</i>.</p>
-                    <center><img src="resource/search.jpg" height="300px" /></center>
-                    <ol type="A">
-                        <li>
-                            <p>The <b>search result page</b> provides information about the Run ID, BioProject ID,
-                            SRA Study ID, Disease, Disease Sub-group, Isolation Source, Instrument, Assay Type,
-                            Country, and Year. The table displayed in the search result can be downloaded in CSV
-                            format by clicking on the <i>"Download table"</i> button located at the top of the
-                            page.</p>
-                            <center><img src="resource/search_result.jpg" height="400px" /></center>
-                        </li>
-                        <li>
-                            <p>The <b>Run page</b> gives the information of the Experiment ID, BioSample ID, Average
-                            Spot Length, Number of Bases, Center Name, Biome, and Therapeutics. The link beneath
-                            the title leads to NCBI SRA page and BioProject ID links to <b>BioProject page</b> in MDPD.</p>
-                            <center><img src="resource/run_page.jpg" height="400px" /></center>
-                        </li>
-                        <li>
-                            <p>The <b>BioProject page</b> shows the information related to the study and the total number of
-                            runs of the BioProject. If subgroups are present for the study, then a plot of differential
-                            taxa can be visualized as LDA plot. Taxonomic profiles can be visualized with Krona plots for
-                            group or subgroup. The Run ID(s) link to the <b>Run page</b> and the link just beneath the title
-                            leads to the NCBI BioProject page.</p>
-                            <center><img src="resource/bioproject_page.jpg" height="500px" /></center>
-                        </li>
-                        <li>
-                            <p>The <b>LDA (Linear Discriminant Analysis) plot</b> provides information about the
-                            differential biomarkers (genus for amplicon; and species for WMS). The horizontal
-                            bars represent the genus/species and the length of the bar denotes the LDA score
-                            (log<sub>10</sub>). LDA score signifies the effect size of each differentially
-                            abundant microbe. A cut-off of <i>log<sub>10</sub> LDA &ge; 2</i> was chosen for
-                            making the plot. The Kruskal-Wallis cutoff <i>p-value &lt; 0.01</i> was chosen. The
-                            LDA plot can be downloaded as a SVG image by clicking on the <i>"Export as SVG"</i>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                                <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
-                            </svg>
-                            button in the menubar located at the top right corner of the plot.
-                            <center><img src="resource/lda.jpg" height="650px" /></center>
-                        </li>
-                        <li>
-                            <p>The taxonomic composition of microbiome data of different isolation sources of lung
-                            conditions can be visualized by Krona plots. Two types of Krona plots are present in the
-                            database, (i) for merged sequence runs and (ii) for each sequence runs. The hierarchical
-                            taxonomic classification can be visualized with this plot with genus/species at the outer
-                            ring and the inner ring denoting the domains. The color gradient shows the abundant taxa
-                            (red) and green denotes the least abundant taxa.<br/>
-                            For a better view, see the plot at <i>"max depth = 6"</i> for amplicon (genus) and
-                            <i>"max depth = 7"</i> for WGS (species). The Krona plot can be downloaded as a SVG image
-                            using the <i>"Snapshot"</i> button located at the upper left corner of the plot.
-                            <table style="width:100%;">
-                                <tr>
-                                    <td style="width:48%; margin:0 1% 0 1%;">(a)</td>
-                                    <td style="width:48%; margin:0 1% 0 1%;">(b)</td>
-                                </tr>
-                            </table>
-                            <table>
-                                <tr>
-                                    <td style="width:48%; margin:0 1% 0 1%;"><center><img src="resource/krona_merged.jpg" width="100%" /></center></td>
-                                    <td style="width:48%; margin:0 1% 0 1%;"><center><img src="resource/krona_runwise.jpg" width="100%" /></center></td>
-                                </tr>
-                            </table>
-                        </li>
-                    </ol>
-                </li>
+        <div class = "section_left" id="section_left">
+            <!-- TOC START -->
+            <div id="dw__toc" class="dw__toc">
+                <h4 class="toggle open" style="margin:5px;">Table of Contents</h4>
+                <div style="" aria-expanded="true">
 
-                <li>
-                    <p>The browse page of MDPD has five sections.</p>
-                    <ol type="A">
-                        <li>
-                            <p>The first section provides information about the <b>Disease-wise BioProjects</b>.</p>
-                            <center><img src="resource/disease_wise_bioprojects.jpg" height="300px" /></center>
-                            <p>Click any one of the diseases to view the list of BioProjects associated with the study.
-                            Click one BioProject to go to the <b>BioProject page</b>.</p>
-                            <center><img src="resource/disease_wise_bioprojects_1.jpg" height="400px" /></center>
-                            <p>Click the checkbox to show only BioProjects with Healthy/Control.</p>
-                            <center><img src="resource/disease_wise_bioprojects_2.jpg" height="400px" /></center>
-                        </li>
-                        <li>
-                            <p>The second section provides information about the <b>Disease subgroup-wise BioProjects</b>.</p>
-                            <center><img src="resource/subgroup_wise_bioprojects_1.jpg" height="300px" /></center>
-                            <p>Click any one of the disease subgroups to view the list of BioProjects associated with
-                            the study. Click one BioProject to go to the BioProject page.</p>
-                            <center><img src="resource/subgroup_wise_bioprojects_2.jpg" height="300px" /></center>
-                        </li>
-                        <li>
-                            <p>The third section provides the facility of <b>visualizing the taxonomic profile</b> of
-                            the microbiome across different isolation sources of the lung conditions using a <b>Krona
-                            plot</b>.</p>
-                            <center><img src="resource/krona_table.jpg" height="500px" /></center>
-                        </li>
-                        <li>
-                            <p>The fourth section enables the users to obtain the list of <b>shared prevalent taxa
-                            between lung and gut microbiomes</b> of different lung conditions. The isolation sources
-                            with the highest number of runs for lung and gut were taken for this analysis. Click
-                            <b>"Get result"</b> to view the shared microbes plot.
-                            <center><img src="resource/similarity_table.jpg" height="400px" /></center>
-                            <p>The <b>UpSet plot</b> shows the number of organisms that are found in the lungs, gut,
-                            and microbiomes. The <b>Likert plot</b> (diverging bar plot) depicts the prevalence of
-                            the organisms that are found in both lung and gut microbiomes. A <i>prevalence cut-off</i>
-                            of 50% at a <i>detection level &ge; 0.0001</i> was taken to get the prevalent taxa. The
-                            UpSet plot can be downloaded as a SVG image by clicking on the <i>"Download UpSet plot"</i>
-                            button located at the top of the page. The Likert plot can be downloaded as a SVG image by
-                            clicking on the <i>"Download Likert plot"</i> button located at the top of the page.</p>
-                            <center><img src="resource/similarity_figure.jpg" height="500px" /></center>
-                        </li>
-                        <li>
-                            <p>The fifth section provides the facility to obtain the set of <b>differentially abundant
-                            taxa between a pair of lung conditions </b>. The analyses were done on the isolation sources
-                            where the data is available for both conditions. Click any button <b>"Show"</b> to view the
-                            associated pair.</p>
-                            <center><img src="resource/lda_disease_pair_table.jpg" height="500px" /></center>
-                            <p>Users can obtain the LDA plot (horizontal bar plot) by clicking the <b>"Get LDA plot"</b>
-                            to see the differentially abundant taxa for the pair of lung conditions/groups (cut-off
-                            <i>log<sub>10</sub> LDA &ge; 2</i>). With the <b>"Get heatmap"</b> option users can get the
-                            most abundant taxa (cut-off <i>log<sub>10</sub> LDA &ge; 3</i>) for the disease pair and the
-                            BioProjects as the source of marker taxa.</p>
-                            <center><img src="resource/heatmap.jpg" height="450px" /></center>
-                            <p>There are few buttons to modify the plot.</p>
-                            <center><img src="resource/symbols.jpg" height="250px" /></center>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-            <br/><hr/>
-            <p style="font-size:0.9em;text-align:center;">
-                &#169; 2025 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
-                (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,
-                <a style="color:#003325;" href="mailto:ssaha4@gmail.com">ssaha4@gmail.com</a>).
-            </p>
+                    <ul class="toc">
+                    <li class="level1"><div class="li"><a href="#mdpd_website_navigation_map">MDPD website navigation map</a></div>
+                    <li class="level1"><div class="li"><a href="#home_page">Home page</a></div>
+                    <ul class="toc">
+                    <li class="level2"><div class="li"><a href="#search_mdpd">Search MDPD</a></div></li>
+                    <li class="level2"><div class="li"><a href="#result_of_search_queries">Result of search queries</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level1"><div class="li"><a href="#browse_page">Browse page</a></div>
+                    <ul class="toc">
+                    <li class="level2"><div class="li"><a href="#group-wise_bioprojects">Group-wise BioProjects</a></div></li>
+                    <li class="level2"><div class="li"><a href="#body-site-wise_bioprojects">Body-site-wise BioProjects</a></div></li>
+                    <li class="level2"><div class="li"><a href="#domain-wise_taxa">Domain-wise taxa</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level1"><div class="li"><a href="#run_page">Run page</a></div>
+                    <ul class="toc">
+                    <li class="level2"><div class="li"><a href="#basic_information_of_a_run">Basic information of a run</a></div></li>
+                    <li class="level2"><div class="li"><a href="#microbial_composition_of_the_run">Microbial composition of the run</a></div></li>
+                    <li class="level2"><div class="li"><a href="#top_10_abundant_taxa_in_the_run">Top 10 abundant taxa in the run</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level1"><div class="li"><a href="#bioproject_page">BioProject page</a></div>
+                    <ul class="toc">
+                    <li class="level2"><div class="li"><a href="#basic_information_of_a_bioproject">Basic information of a BioProject</a></div></li>
+                    <li class="level2"><div class="li"><a href="#metadata_of_runs_in_the_bioproject">Metadata of runs in the BioProject</a></div></li>
+                    <li class="level2"><div class="li"><a href="#analyses_of_runs_in_the_bioproject">Analyses of runs in the BioProject</a></div></li>
+                    <li class="level2"><div class="li"><a href="#download_biom_file_of_the_bioproject">Download .biom file of the BioProject</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level1"><div class="li"><a href="#microbial_taxonomic_profile_of_runs_in_a_bioproject">Microbial taxonomic profile of runs in a BioProject</a></div>
+                    <ul class="toc">
+                    <li class="level2"><div class="li"><a href="#taxonomic_composition">Taxonomic composition</a></div></li>
+                    <li class="level2"><div class="li"><a href="#top_10_abundant_taxa_in_each_subgroup_of_the_bioproject">Top 10 abundant taxa in each subgroup of the BioProject</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level1"><div class="li"><a href="#discriminant_analysis_of_runs_in_a_bioproject">Discriminant analysis of runs in a BioProject</a></div></li>
+                    <li class="level1"><div class="li"><a href="#multivariate_association_analysis_of_runs_in_a_bioproject">Multivariate association analysis of runs in a BioProject</a></div></li>
+                    <li class="level1"><div class="li"><a href="#microbial_co-occurrence_analysis_of_runs_in_a_bioproject">Microbial co-occurrence analysis of runs in a BioProject</a></div></li>
+                    <li class="level1"><div class="li"><a href="#taxa_page">Taxa page</a></div>
+                    <ul class="toc">
+                    <li class="level2"><div class="li"><a href="#basic_information_of_the_taxon">Basic information of the taxon</a></div></li>
+                    <li class="level2"><div class="li"><a href="#relative_abundances_of_the_taxon_across_body_sites">Relative abundances of the taxon across body sites</a></div></li>
+                    <li class="level2"><div class="li"><a href="#relative_abundances_of_the_taxon_across_subgroups">Relative abundances of the taxon across subgroups</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level1"><div class="li"><a href="#analysis_page">Analysis page</a></div>
+                    <ul class="toc">
+                    <li class="level2"><div class="li"><a href="#user-defined_taxonomic_analysis">User-defined taxonomic analysis</a></div>
+                    <ul class="toc">
+                    <li class="level3"><div class="li"><a href="#input">Input</a></div></li>
+                    <li class="level3"><div class="li"><a href="#output">Output</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level2"><div class="li"><a href="#user-defined_discriminant_analysis">User-defined discriminant analysis</a></div>
+                    <ul class="toc">
+                    <li class="level3"><div class="li"><a href="#input1">Input</a></div></li>
+                    <li class="level3"><div class="li"><a href="#output1">Output</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level2"><div class="li"><a href="#microbe_search">Microbe Search</a></div></li>
+                    </ul>
+                    </li>
+                    <li class="level1"><div class="li"><a href="#figure_buttons">Figure buttons</a></div></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- TOC END -->
         </div>
+
+        <script>
+            window.onscroll = function() {makeSticky()};
+            var header = document.getElementById("section_left");
+            var sticky = header.offsetTop;
+            function makeSticky() {
+                if (window.pageYOffset > sticky) {
+                    header.classList.add("sticky");
+                } else {
+                    header.classList.remove("sticky");
+                }
+            }
+        </script>
+
+        <div class = "section_middle" id="section_middle">
+<!--             <iframe src="dokuwiki.html" style="width:80%; margin:0 10% 0 10%; height:700px; border:0;"></iframe> -->
+            <div class="dokuwiki export" style="width:70%; margin: 10px 20% 0 10%;">
+
+                <h1 class="sectionedit1" id="mdpd_website_navigation_map">MDPD website navigation map</h1>
+                <div class="level1">
+
+                    <p>
+                    <img src="resource/help_figures/flow_chart.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+
+                <h1 class="sectionedit1" id="home_page">Home page</h1>
+                <div class="level1">
+
+                    <p>
+                    The home page provides a brief introduction of MDPD and a
+                    <a href="#search_mdpd" class="wikilink1" title="start" data-wiki-id="start">Search option</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/home_page.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Home Page&quot;,&quot;hid&quot;:&quot;home_page&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:1,&quot;range&quot;:&quot;1-56&quot;} -->
+                <h2 class="sectionedit2" id="search_mdpd">Search MDPD</h2>
+                <div class="level2">
+
+                    <p>
+                    MDPD is equipped with a <strong>"Search Section"</strong>
+                    that allows users to generate extensive and customizable queries with
+                    just a few clicks. Users can search runs/samples using relevant
+                    technical metadata, including <strong>Group</strong> (diseases, healthy),
+                    <strong>Assay type</strong> (Amplicon-16S, Amplicon-ITS, WMS),
+                    <strong>Body site</strong> (Lung, Gut),
+                    <strong>Library layout</strong> (Single, Paired),
+                    <strong>Country</strong>, and <strong>Year</strong>.
+                    </p>
+
+                    <p>
+                    For example, the screenshot below shows a user query to search for runs/samples that were
+                    from <em>COPD</em> individuals, sequenced by <em>Amplicon-16S</em>, and obtained from the
+                    <em>Lower Respiratory Tract</em>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/search_MDPD.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:400px">
+                    </p>
+
+                    <p>
+                    Users can also make some complex inquiries.
+                    </p>
+                    <ul>
+                    <li class="level1"><div class="li"> Choose <code>=/≠/&lt;/&gt;/&lt;=/&gt;=</code> for predicates, and choose <code>AND/OR</code> to combine predicates.</div>
+                    </li>
+                    <li class="level1"><div class="li"> <em>Add</em> or <em>delete</em> search predicates.</div>
+                    </li>
+                    <li class="level1"><div class="li"> <em>Reset</em> all the search predicates.</div>
+                    </li>
+                    </ul>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Search MDPD&quot;,&quot;hid&quot;:&quot;search_mdpd&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:2,&quot;range&quot;:&quot;57-952&quot;} -->
+                <h2 class="sectionedit3" id="result_of_search_queries">Result of search queries</h2>
+                <div class="level2">
+
+                    <p>
+                    Search result page provides information of the runs matching the input
+                    query in a <strong>tabular format</strong>. It contains different attributes -
+                    Run ID, BioProject ID, SRA Study ID, Disease, Disease Subgroup, Body site,
+                    Instrument, Assay Type, Library Layout, Processed reads (%), Country,
+                    and Year. The table displayed in the search result <strong>can be downloaded in
+                    CSV format</strong> by clicking on the <strong>"Download table"</strong> button
+                    located at the top of the page. An example search result is shown below.
+                    </p>
+
+                    <ul>
+                    <li class="level1"><div class="li"> Click on each <strong>Run ID</strong> to view the details of the run in the
+                    <a href="#run_page" class="wikilink1" title="start" data-wiki-id="start">Run page</a>.</div>
+                    </li>
+                    <li class="level1"><div class="li"> Click on <strong>BioProject ID</strong> to view the details of the BioProject in the
+                    <a href="#bioproject_page" class="wikilink1" title="start" data-wiki-id="start">BioProject page</a>.</div>
+                    </li>
+                    </ul>
+
+                    <p>
+                    <img src="resource/help_figures/result_of_search_queries.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Result of search queries&quot;,&quot;hid&quot;:&quot;result_of_search_queries&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:3,&quot;range&quot;:&quot;953-1723&quot;} -->
+                <h1 class="sectionedit4" id="browse_page">Browse page</h1>
+                <div class="level1">
+
+                    <p>
+                    The browse page can be accessed from the menubar present at the top of
+                    every page. It has three sections to find the BioProjects and the microbes.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/browse_page.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:50px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Browse Page&quot;,&quot;hid&quot;:&quot;browse_page&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:4,&quot;range&quot;:&quot;1724-1928&quot;} -->
+                <h2 class="sectionedit5" id="group-wise_bioprojects">Group-wise BioProjects</h2>
+                <div class="level2">
+
+                    <p>
+                    This allows users to browse BioProjects on the basis of the 19 pulmonary diseases (categorized into five classes) and the healthy group.
+                    </p>
+                    <ol>
+                    <li class="level1"><div class="li"> <strong>Obstructive -</strong> Asthma, Asthma-COPD Overlap (ACO), Bronchiectasis, Bronchitis, COPD and COPD- Bronchiectasis Association (CBA).</div>
+                    </li>
+                    <li class="level1"><div class="li"> <strong>Restrictive –</strong> Acute Respiratory
+                    Distress Syndrome (ARDS), Cystic Fibrosis, Interstitial Lung Disease
+                    (ILD), Idiopathic Pulmonary Fibrosis (IPF), Sarcoidosis and Pneumonitis.</div>
+                    </li>
+                    <li class="level1"><div class="li"> <strong>Infectious –</strong> Bronchiolitis, COVID-19, Pneumonia, Tuberculosis, Other Pulmonary Infections (OPI).</div>
+                    </li>
+                    <li class="level1"><div class="li"> <strong>Vascular –</strong> Pulmonary Hypertension.</div>
+                    </li>
+                    <li class="level1"><div class="li"> <strong>Malignancy –</strong> Lung Cancer.</div>
+                    </li>
+                    <li class="level1"><div class="li"> <strong>Healthy –</strong> Healthy.</div>
+                    </li>
+                    </ol>
+
+                    <p>
+                    <img src="resource/help_figures/group_wise_bioprojects.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    The <em>'n'</em> represents the number of runs/samples in the respective group.
+                    Click on the <strong>group names</strong> to get the details as shown in the following
+                    figure.
+                    </p>
+
+                    <ul>
+                    <li class="level1"><div class="li"> Shows the basic information about the BioProjects in tabular format.</div>
+                    </li>
+                    <li class="level1"><div class="li"> Click on the BioProject ID to view details in the
+                    <a href="#bioproject_page" class="wikilink1" title="start" data-wiki-id="start">BioProject page</a>.</div>
+                    </li>
+                    <li class="level1"><div class="li"> Customize the list using the filter buttons.</div>
+                    </li>
+
+
+                    </ul>
+
+                    <p>
+                    <img src="resource/help_figures/group_COPD.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Group-wise BioProjects&quot;,&quot;hid&quot;:&quot;group-wise_bioprojects&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:5,&quot;range&quot;:&quot;1929-3085&quot;} -->
+                <h2 class="sectionedit6" id="body-site-wise_bioprojects">Body-site-wise BioProjects</h2>
+                <div class="level2">
+
+                    <p>
+                    This allows the users to browse BioProjects across the 10 body sites - (i) Nasal,
+                    (ii) Oral, (iii) Upper Respiratory Tract, (iv) Lower Respiratory Tract,
+                    (v) Lung, (vi) Stomach, (vii) Large Intestine, (viii) Gut, (ix) Rectum
+                    and (x) Anus. <!--To view the mapping between the isolation sources and body sites,
+                    please check the supplementary files.-->
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/body_site_wise_bioprojects.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    The <em>'n'</em> represents the number of runs/samples in the respective body
+                    site. Click on the <strong>body sites</strong> to get the details as shown in the
+                    following figure.
+                    </p>
+
+                    <ul>
+                    <li class="level1"><div class="li"> Shows the basic information about the BioProjects in tabular format.</div>
+                    </li>
+                    <li class="level1"><div class="li"> Click on the BioProject ID to view details in the
+                    <a href="#bioproject_page" class="wikilink1" title="start" data-wiki-id="start">BioProject page</a>.</div>
+                    </li>
+                    <li class="level1"><div class="li"> Customize the list using the filter buttons.</div>
+                    </li>
+                    </ul>
+
+                    <p>
+                    <img src="resource/help_figures/lower_respiratory_tract.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Body-site-wise BioProjects&quot;,&quot;hid&quot;:&quot;body-site-wise_bioprojects&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:6,&quot;range&quot;:&quot;3086-4085&quot;} -->
+                <h2 class="sectionedit7" id="domain-wise_taxa">Domain-wise taxa</h2>
+                <div class="level2">
+
+                    <p>
+                    This allows the users to browse microbes and their abundances across
+                    subgroups and body sites across the four domains - (i) Bacteria,
+                    (ii) Viruses, (iii) Eukaryota, and (iv) Archaea.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/domain_wise_taxa.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:200px">
+                    </p>
+
+                    <p>
+                    Click on any domain to get a list of microbes as shown in the following figure.
+                    Click on the microbe names to view taxa information and their abundances across
+                    subgroups and body sites in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/microbe_list.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    The taxon information were retrieved from "bugphyzz: A harmonized data
+                    resource and software for enrichment analysis of microbial physiologies"
+                    accessed on 19th January, 2025.
+                    </p>
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Domain-wise taxa&quot;,&quot;hid&quot;:&quot;domain-wise_taxa&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:7,&quot;range&quot;:&quot;4086-4604&quot;} -->
+                <h1 class="sectionedit8" id="run_page">Run page</h1>
+                <div class="level1">
+                    <p>
+                    The Run page provides:
+                    </p>
+                    <ul>
+                    <li class="level1"><div class="li">
+                    <a href="#basic_information_of_a_run" class="wikilink1" title="start" data-wiki-id="start">Basic information of the run/sample</a>,</div>
+                    </li>
+                    <li class="level1"><div class="li">
+                    <a href="#microbial_composition_of_the_run" class="wikilink1" title="start" data-wiki-id="start">Microbial composition of the run/sample</a>, and</div>
+                    </li>
+                    <li class="level1"><div class="li">
+                    <a href="#top_10_abundant_taxa_in_the_run" class="wikilink1" title="start" data-wiki-id="start">Top 10 most abundant taxa in tha run/sample</a>.</div>
+                    </li>
+                    </ul>
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Run page&quot;,&quot;hid&quot;:&quot;run_page&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:8,&quot;range&quot;:&quot;4605-4628&quot;} -->
+                <h2 class="sectionedit9" id="basic_information_of_a_run">Basic information of a run</h2>
+                <div class="level2">
+
+                    <p>
+                    It includes different attributes associated with the run/sample -
+                    Run ID, Experiment ID, BioSample ID, Number of Bases, Number of Bytes,
+                    Country, Assay Type, Body site, Isolation Source, Library Layout,
+                    Variable Region, Instrument, Year, Disease, Disease Subgroup, Gender,
+                    Age, Smoking Status, Therapeutics, Comorbidity, and Processed Reads (%).
+                    A link is available that leads to the NCBI SRA page. Click on the
+                    BioProject ID to view the BioProject details in the
+                    <a href="#bioproject_page" class="wikilink1" title="start" data-wiki-id="start">BioProject page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/run_page.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Basic information of a run&quot;,&quot;hid&quot;:&quot;basic_information_of_a_run&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:9,&quot;range&quot;:&quot;4629-5305&quot;} -->
+                <h2 class="sectionedit10" id="microbial_composition_of_the_run">Microbial composition of the run</h2>
+                <div class="level2">
+
+                    <p>
+                        The microbial composition of the run is visualized as an interactive
+                        Krona plot. The colors denote the abundance of the microbes, where
+                        red color represents the abundant ones. Interact with the Krona plot
+                        using the buttons available in the upper left corner to change the
+                        depth, font, and chart size. Click on the "Snapshot" button to
+                        download the plot in SVG format.
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Microbial composition of the run&quot;,&quot;hid&quot;:&quot;microbial_composition_of_the_run&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:10,&quot;range&quot;:&quot;5306-5685&quot;} -->
+                <h2 class="sectionedit11" id="top_10_abundant_taxa_in_the_run">Top 10 abundant taxa in the run</h2>
+                <div class="level2">
+
+                    <p>
+                        The top 10 taxa of the run are visualized as a bar plot. Hover on
+                        the bar to view the relative abundance value of a particular taxon.
+                        Click on "↓" button at the top right corner of the plot to download
+                        the Krona plot in SVG format. Click on the microbe buttons below
+                        the plot to view detailed information in the
+                        <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/taxonomic_composition_run.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Top 10 abundant taxa in the run&quot;,&quot;hid&quot;:&quot;top_10_abundant_taxa_in_the_run&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:11,&quot;range&quot;:&quot;5686-6100&quot;} -->
+                <h1 class="sectionedit12" id="bioproject_page">BioProject page</h1>
+                <div class="level1">
+                    <p>
+                    The BioProject page provides:
+                    </p>
+                    <ul>
+                    <li class="level1"><div class="li">
+                    <a href="#basic_information_of_a_bioproject" class="wikilink1" title="start" data-wiki-id="start">Basic information of the BioProject</a>,</div>
+                    </li>
+                    <li class="level1"><div class="li">
+                    <a href="#metadata_of_runs_in_the_bioproject" class="wikilink1" title="start" data-wiki-id="start">Metadata of runs in the BioProject</a>,</div>
+                    </li>
+                    <li class="level1"><div class="li">
+                    <a href="#analyses_of_runs_in_the_bioproject" class="wikilink1" title="start" data-wiki-id="start">Analyses of runs in the BioProject</a>, and</div>
+                    </li>
+                    <li class="level1"><div class="li">
+                    <a href="#download_biom_file_of_the_bioproject" class="wikilink1" title="start" data-wiki-id="start">Downloading of .biom files of the BioProject</a>.</div>
+                    </li>
+                    </ul>
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;BioProject page&quot;,&quot;hid&quot;:&quot;bioproject_page&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:12,&quot;range&quot;:&quot;6101-6131&quot;} -->
+                <h2 class="sectionedit13" id="basic_information_of_a_bioproject">Basic information of a BioProject</h2>
+                <div class="level2">
+
+                    <p>
+                    It includes different attributes associated with the BioProject -
+                    BioProject ID, SRA ID, Disease subgroup(s), Isolation Source,
+                    Body Site, Assay Type, Instrument, Library Layout, Year,
+                    Processed Runs, Variable Region, PMID and Country.
+                    A link is available that leads to the NCBI BioProject page.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/bioproject_page.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Basic information of a BioProject&quot;,&quot;hid&quot;:&quot;basic_information_of_a_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:13,&quot;range&quot;:&quot;6132-6452&quot;} -->
+                <h2 class="sectionedit14" id="metadata_of_runs_in_the_bioproject">Metadata of runs in the BioProject</h2>
+                <div class="level2">
+
+                    <p>
+                    BioProject page shows the metadata of available runs in the BioProject. Click
+                    on the Run ID to view the details of the run in the
+                    <a href="#run_page" class="wikilink1" title="start" data-wiki-id="start">Run page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/runs_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Metadata of runs in the BioProject&quot;,&quot;hid&quot;:&quot;metadata_of_runs_in_the_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:14,&quot;range&quot;:&quot;6453-6611&quot;} -->
+                <h2 class="sectionedit15" id="analyses_of_runs_in_the_bioproject">Analyses of runs in the BioProject</h2>
+                <div class="level2">
+
+                    <p>
+                    Users can perform different types of analyses of runs in the BioProject.
+                    </p>
+                    <ol>
+                    <li class="level1"><div class="li"> <a href="#microbial_taxonomic_profile_of_runs_in_a_bioproject" class="wikilink1" title="start" data-wiki-id="start">Microbial taxonomic profile analysis</a></div>
+                    </li>
+                    <li class="level1"><div class="li"> <a href="#discriminant_analysis_of_runs_in_a_bioproject" class="wikilink1" title="start" data-wiki-id="start">Discriminant analysis</a></div>
+                    </li>
+                    <li class="level1"><div class="li"> <a href="#multivariate_association_analysis_of_runs_in_a_bioproject" class="wikilink1" title="start" data-wiki-id="start">Multivariate association analysis</a></div>
+                    </li>
+                    <li class="level1"><div class="li"> <a href="#microbial_co-occurrence_analysis_of_runs_in_a_bioproject" class="wikilink1" title="start" data-wiki-id="start">Microbial co-occurrence network analysis</a></div>
+                    </li>
+                    </ol>
+
+                    <p>
+                    <img src="resource/help_figures/analyses_in_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:200px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Analyses of runs in the BioProject&quot;,&quot;hid&quot;:&quot;analyses_of_runs_in_the_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:15,&quot;range&quot;:&quot;6612-6990&quot;} -->
+                <h2 class="sectionedit16" id="download_biom_file_of_the_bioproject">Download .biom file of the BioProject</h2>
+                <div class="level2">
+
+                    <p>
+                    Users can download the .biom file of the respective BioProject.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/biom_file_download.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:90px">
+                    </p>
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Download .biom file of the BioProject&quot;,&quot;hid&quot;:&quot;download_biom_file_of_the_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:16,&quot;range&quot;:&quot;6991-7153&quot;} -->
+                <h1 class="sectionedit17" id="microbial_taxonomic_profile_of_runs_in_a_bioproject">Microbial taxonomic profile of runs in a BioProject</h1>
+                <div class="level1">
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Microbial taxonomic profile of runs in a BioProject&quot;,&quot;hid&quot;:&quot;microbial_taxonomic_profile_of_runs_in_a_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:17,&quot;range&quot;:&quot;7154-7220&quot;} -->
+                <h2 class="sectionedit18" id="taxonomic_composition">Taxonomic composition</h2>
+                <div class="level2">
+
+                    <p>
+                    The taxonomic composition of the all runs of each subgroup and isolation
+                    sources in the BioProject is visualized as an interactive Krona plot.
+                    The hierarchical taxonomic classification can be seen with this plot with
+                    genus/species at the outer ring and the inner ring denoting the domains.
+                    The color gradient shows the abundance of microbes where red color
+                    indicating more abundant taxa. Select the subgroups and modify the krona
+                    plot by changing the depth, font, and chart size using the buttons available
+                    in the upper left corner. Click on the "Snapshot" button to download the
+                    plot in SVG format. Click on the "Download krona data" to download the plot
+                    in <abbr title="HyperText Markup Language">HTML</abbr> format.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/krona_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Taxonomic composition&quot;,&quot;hid&quot;:&quot;taxonomic_composition&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:18,&quot;range&quot;:&quot;7221-7936&quot;} -->
+                <h2 class="sectionedit19" id="top_10_abundant_taxa_in_each_subgroup_of_the_bioproject">Top 10 abundant taxa in each subgroup of the BioProject</h2>
+                <div class="level2">
+
+                    <p>
+                    The top 10 abundant taxa in each subgroup of the BioProject are visualized
+                    as a box plot. Each box shows the distribution of relative abundance of a
+                    microbe across the runs in the BioProject. Hover on a particular box to
+                    view the min, median, max values of that taxon. Click on "↓" button at the
+                    top right corner of the plot to download the plot in SVG format. Click on
+                    "Download figure data" button to download the data used to plot the figure.
+                    Click on the microbe buttons below the plot to view detailed information in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/box_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Top 10 abundant taxa in each subgroup of the BioProject&quot;,&quot;hid&quot;:&quot;top_10_abundant_taxa_in_each_subgroup_of_the_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:19,&quot;range&quot;:&quot;7937-8501&quot;} -->
+                <h1 class="sectionedit20" id="discriminant_analysis_of_runs_in_a_bioproject">Discriminant analysis of runs in a BioProject</h1>
+                <div class="level1">
+
+                    <p>
+                    It allows users to find the differential microbial signatures between
+                    the subgroups of the BioProject. The differential taxa are visualized
+                    as a bar plot. The length of the bar denotes the LDA score
+                    (log<sub>10</sub>) or log<sub>2</sub> fold change depending on the
+                    chosen method. LDA score signifies the effect size of each
+                    differentially abundant microbe. Click on "↓" button at the top right
+                    corner of the plot to download the plot in SVG format. Click on
+                    "Download figure data" button to download the data used to plot the
+                    figure. Click on the microbe buttons below the plot to view detailed
+                    information in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/lda_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/buttons_lda_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:135px">
+                    </p>
+
+                    <p>
+                    Users can modify different parameters of the analysis:
+                    </p>
+                    <ol>
+                    <li class="level1"><div class="li"> Statistical "Method"</div>
+                    </li>
+                    <li class="level1"><div class="li"> P-Value (Only for LEfSe)</div>
+                    </li>
+                    <li class="level1"><div class="li"> Filter threshold</div>
+                    </li>
+                    <li class="level1 node"><div class="li"> Taxa level (Order through Genus in Amplicon-16S/Amplicon-ITS and Order through species in WMS) </div>
+                    </li>
+                    <li class="level1"><div class="li">Cut-off value</div>
+                    </li>
+                    </ol>
+                    <p>
+                    Click on the "Submit" button to perform the analysis with the updated
+                    parameters. Users can also see the selected parameters for the current
+                    analysis.
+                    </p>
+
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Discriminant analysis of runs in a BioProject&quot;,&quot;hid&quot;:&quot;discriminant_analysis_of_runs_in_a_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:20,&quot;range&quot;:&quot;8502-9715&quot;} -->
+                <h1 class="sectionedit21" id="multivariate_association_analysis_of_runs_in_a_bioproject">Multivariate association analysis of runs in a BioProject</h1>
+                <div class="level1">
+
+                    <p>
+                    It allows users to find associations of the microbes with the
+                    covariates such as age groups, gender, and smoking status.
+                    MaAsLin2 is used to find the associations. Each cell of the
+                    heatmap is annotated with asterisks denoting the significance
+                    based on FDR-adjusted <em>p</em>-values (<code>***</code> denotes
+                    <code>p-value &lt; 0.001</code>, <code>**</code> denotes
+                    <code>p-value &lt; 0.01</code>, <code>*</code> denotes
+                    <code>p-value &lt; 0.05</code>, no asterisks denote
+                    <code>p-value &gt; 0.05</code>). Positive MaAsLin2 coefficient
+                    indicates a positive correlation between microbe and the covariates
+                    while negative coefficient denotes inverse associations. Hover
+                    mouse on each cell to highlight the taxa name, covariate and
+                    the MaAsLin2 coefficient. Click on "↓" button at the top right
+                    corner of the plot to download the plot in SVG format. Click on
+                    "Download figure data" button to download the  data used to plot
+                    the figure. Click on the microbe buttons below the plot to view
+                    detailed information in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/multivariate_association_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Multivariate association analysis of runs in a BioProject&quot;,&quot;hid&quot;:&quot;multivariate_association_analysis_of_runs_in_a_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:21,&quot;range&quot;:&quot;9716-10722&quot;} -->
+                <h1 class="sectionedit22" id="microbial_co-occurrence_analysis_of_runs_in_a_bioproject">Microbial co-occurrence analysis of runs in a BioProject</h1>
+                <div class="level1">
+
+                    <p>
+                    It allows the users to visualize the dynamics of microbial community with
+                    co-occurrence networks. Gradient Boosted Linear Model (GBLM) method was
+                    applied to build the networks. The nodes represent the microbes (bacteria,
+                    virus, eukaryota, and/or archaea). The edges indicate relationships between
+                    microbes. The colours denote <font color="green">positive</font> (in
+                    <font color="green">green</font>) or <font color="red">negative</font>
+                    (in <font color="red">red</font>) interactions while the color intensity
+                    is proportional to edge weights. Change the layout of network using the
+                    drop-down menu. Click on "JPEG", "PNG", "SVG", and "JSON" buttons to download
+                    the network in the respective formats. Double click on a node to view detailed
+                    information of the taxa in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/network_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:700px">
+                    </p>
+
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Microbial co-occurrence analysis of runs in a BioProject&quot;,&quot;hid&quot;:&quot;microbial_co-occurrence_analysis_of_runs_in_a_bioproject&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:22,&quot;range&quot;:&quot;10723-11519&quot;} -->
+                <h1 class="sectionedit23" id="taxa_page">Taxa page</h1>
+                <div class="level1">
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Taxa page&quot;,&quot;hid&quot;:&quot;taxa_page&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:23,&quot;range&quot;:&quot;11520-11544&quot;} -->
+                <h2 class="sectionedit24" id="basic_information_of_the_taxon">Basic information of the taxon</h2>
+                <div class="level2">
+
+                    <p>
+                    <img src="resource/help_figures/taxa_page.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                    <p>
+                    Users get information about (i) Biofilm formation, (ii) Gram staining,
+                    (iii) Spore formation, (iv) Aerophilicity, (v) Genome size, (vi) Coding
+                    genes, (vii) Antimicrobial resistance, (viii) Antimicrobial sensitivity,
+                    (ix) shape, and (x) Pathogenicity.
+                    </p>
+
+                    <p>
+                    The abbreviations of the evidences supporting an annotation are as follows:
+                    </p>
+                    <ul>
+                    <li class="level1"><div class="li"> EXP: Experiment</div>
+                    </li>
+                    <li class="level1"><div class="li"> IGC: Inferred from genomic context</div>
+                    </li>
+                    <li class="level1"><div class="li"> TAS: Traceable author statement</div>
+                    </li>
+                    <li class="level1"><div class="li"> NAS: Non-traceable author statement</div>
+                    </li>
+                    <li class="level1"><div class="li"> IBD: Inferred from biological aspect of descendant</div>
+                    </li>
+                    <li class="level1"><div class="li"> ASR: Ancestral state reconstruction</div>
+                    </li>
+                    </ul>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Basic information of the taxon&quot;,&quot;hid&quot;:&quot;basic_information_of_the_taxon&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:24,&quot;range&quot;:&quot;11545-12179&quot;} -->
+                <h2 class="sectionedit25" id="relative_abundances_of_the_taxon_across_body_sites">Relative abundances of the taxon across body sites</h2>
+                <div class="level2">
+
+                    <p>
+                    <img src="resource/help_figures/taxa_body_site_wise.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    The plot can be downloaded as a SVG image by clicking on the "↓" button
+                    in the menu bar located at the top right corner of the plot.
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Relative abundances of the taxon across body sites&quot;,&quot;hid&quot;:&quot;relative_abundances_of_the_taxon_across_body_sites&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:25,&quot;range&quot;:&quot;12180-12421&quot;} -->
+                <h2 class="sectionedit26" id="relative_abundances_of_the_taxon_across_subgroups">Relative abundances of the taxon across subgroups</h2>
+                <div class="level2">
+
+                    <p>
+                    <img src="resource/help_figures/taxa_subgroup_wise.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    The plot can be downloaded as a SVG image by clicking on the "↓" button
+                    in the menu bar located at the top right corner of the plot.
+                    </p>
+                    <hr>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Relative abundances of the taxon across subgroups&quot;,&quot;hid&quot;:&quot;relative_abundances_of_the_taxon_across_subgroups&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:26,&quot;range&quot;:&quot;12422-12667&quot;} -->
+                <h1 class="sectionedit27" id="analysis_page">Analysis page</h1>
+                <div class="level1">
+
+                    <p>
+                    The Analysis page can be accessed from the menubar present at the top of
+                    every page. It provides three analyses for user-defined queries. It
+                    allows to find the microbial signatures of different subgroups, BioProjects,
+                    and isolation sources within a group. It allows to identify microbial
+                    markers across different subgroups, BioProjects, and isolation sources
+                    of one or more groups. It also allows users to search taxon details.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/analysis_page.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:50px">
+                    </p>
+
+                    </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Analysis page&quot;,&quot;hid&quot;:&quot;analysis_page&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:27,&quot;range&quot;:&quot;12668-13076&quot;} -->
+                <h2 class="sectionedit28" id="user-defined_taxonomic_analysis">User-defined taxonomic analysis</h2>
+                <div class="level2">
+
+                    <p>
+                    It helps researchers to understand if a microbe has the similar trend
+                    across subgroups or in BioProjects or different or no trend. For
+                    simplicity, the subgroups with highest number of runs/samples were
+                    taken for the analysis. However, users can use other subgroups as they
+                    can download the <em>.biom files</em> of respective BioProject(s).
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;User-defined taxonomic analysis&quot;,&quot;hid&quot;:&quot;user-defined_taxonomic_analysis&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:28,&quot;range&quot;:&quot;13077-13457&quot;} -->
+                <h3 class="sectionedit29" id="input">Input</h3>
+                <div class="level3">
+
+                    <p>
+                    Users can select the Groups, which will open a dialog box where they can
+                    select/deselect options such as Subgroups, Isolation Source, Assay Type
+                    and Library Layouts. For example, Group – Healthy is shown here and the
+                    selected parameters are:
+                    </p>
+                    <ul>
+                    <li class="level1"><div class="li"> Subgroup – Healthy Smoker and Healthy Non Smoker</div>
+                    </li>
+                    <li class="level1"><div class="li"> Isolation Source – BALF, Sputum, and Stool</div>
+                    </li>
+                    <li class="level1"><div class="li"> Assay Type – Amplicon-16S</div>
+                    </li>
+                    <li class="level1"><div class="li"> Library Layout – PAIRED and SINGLE</div>
+                    </li>
+                    </ul>
+
+                    <p>
+                    <img src="resource/help_figures/query_taxonomic_analysis.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    Users can also customize the BioProjects selection. Among the selected
+                    BioProjects, only the runs that satisfy the selection criteria above
+                    are used for the analysis.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/bps_taxonomic_analysis.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Input&quot;,&quot;hid&quot;:&quot;input&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:29,&quot;range&quot;:&quot;13458-14032&quot;} -->
+                <h3 class="sectionedit30" id="output">Output</h3>
+                <div class="level3">
+
+                    <p>
+                    This heatmap shows the relative abundances (%) of the microbes across the
+                    queried Subgroups, Isolation Sources, and BioProjects. It shows the top 25
+                    abundant taxa. The blank cells indicate the absence of the taxa. Hover mouse
+                    on each cell to highlight the taxa name, subgroup, isolation source, BioProject
+                    and the relative abundance. Click on "↓" button at the top right corner of
+                    the plot to download the plot in SVG format. Click on "Download figure data"
+                    button to download the data used to plot the figure. Click on the microbe
+                    buttons below the plot to view detailed information in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/result_taxonomic_analysis.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Output&quot;,&quot;hid&quot;:&quot;output&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:30,&quot;range&quot;:&quot;14033-14534&quot;} -->
+                <h2 class="sectionedit31" id="user-defined_discriminant_analysis">User-defined discriminant analysis</h2>
+                <div class="level2">
+
+                    <p>
+                    It helps researchers to understand if a microbial marker is unique
+                    to a subgroup, or shared by different subgroups. For simplicity, the
+                    subgroups with highest number of runs/samples were taken for the
+                    comparison. However, users can use other subgroups as they can download
+                    the <em>.biom files</em> of respective BioProject(s).
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;User-defined discriminant analysis&quot;,&quot;hid&quot;:&quot;user-defined_discriminant_analysis&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:31,&quot;range&quot;:&quot;14535-14906&quot;} -->
+                <h3 class="sectionedit32" id="input1">Input</h3>
+                <div class="level3">
+
+                    <p>
+                    Users can select the Groups (1 and/or 2) to compare. For each selection a
+                    dialog box gets opened where they can select the subgroups and isolation
+                    sources, and it also allows the selection of assay type and library layouts.
+                    For example, comparison between "Bronchiectasis and Cystic Fibrosis" is
+                    shown here and the selected parameters are:
+                    </p>
+                    <ul>
+                    <li class="level1"><div class="li"> Subgroups – Bronchiectasis and Cystic Fibrosis Exacerbation</div>
+                    </li>
+                    <li class="level1"><div class="li"> Isolation Source – Sputum</div>
+                    </li>
+                    <li class="level1"><div class="li"> Assay Type – WMS</div>
+                    </li>
+                    <li class="level1"><div class="li"> Library Layout – PAIRED</div>
+                    </li>
+                    </ul>
+
+                    <p>
+                    <img src="resource/help_figures/discriminant_analysis.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    <img src="resource/help_figures/query_discriminant_analysis.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                    <p>
+                    Users have several options to modify the analysis.
+                    </p>
+                    <ol>
+                    <li class="level1"><div class="li"> Users can change the statistical "Method"</div>
+                    </li>
+                    <li class="level1"><div class="li"> Users can set different "P-Value" (Only for LEfSe)</div>
+                    </li>
+                    <li class="level1"><div class="li"> Users can set different "Filter threshold"</div>
+                    </li>
+                    <li class="level1"><div class="li"> Users can change the "Taxa level"</div>
+                    </li>
+                    <li class="level1"><div class="li"> Users can modify the "Cut-off value"</div>
+                    </li>
+                    <li class="level1"><div class="li"> Click to "Submit"</div>
+                    </li>
+                    </ol>
+
+                    <p>
+                    <img src="resource/help_figures/buttons_discriminant_analysis.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:120px">
+                    </p>
+
+                    <p>
+                    Users can also customize the BioProjects selection. Among the selected
+                    BioProjects, only the runs that satisfy the selection criteria above
+                    are used for the analysis.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/bps_discriminant_analysis.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Input&quot;,&quot;hid&quot;:&quot;input1&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:32,&quot;range&quot;:&quot;14907-15977&quot;} -->
+                <h3 class="sectionedit33" id="output1">Output</h3>
+                <div class="level3">
+
+                </div>
+
+                <h4 id="individual_bioproject_wise">Individual BioProject wise</h4>
+                <div class="level4">
+
+                    <p>
+                    This heatmap shows the microbial markers in individual BioProjects
+                    of the respective subgroups. Here, LEfSe method was chosen to find
+                    the differential markers. The blank cells indicate absence of the
+                    taxa. The colour intensity denotes the LDA score (log<sub>10</sub>).
+                    LDA score signifies the effect size of each differentially abundant
+                    microbe. Hover mouse on each cell to highlight the taxa name, subgroup,
+                    isolation  source, BioProject and the LDA score. Click on "↓" button
+                    at the top  right corner of the plot to download the plot in SVG format.
+                    Click on  "Download figure data" button to download the data used to
+                    plot the figure. Click on the microbe buttons below the plot to view
+                    detailed information in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/result_individual_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:600px">
+                    </p>
+
+                </div>
+
+                <h4 id="merged_bioproject_wise">Merged BioProject wise</h4>
+                <div class="level4">
+
+                    <p>
+                    This heatmap shows microbial markers in the respective subgroups by
+                    merging the Bioprojects. Here, LEfSe method was chosen to find the
+                    differential markers. The blank cells indicate absence of the
+                    taxa. The colour intensity denotes the LDA score (log<sub>10</sub>).
+                    LDA score signifies the effect size of each differentially abundant
+                    microbe. Hover mouse on each cell to highlight the taxa name, subgroup,
+                    isolation  source, BioProject and the LDA score. Click on "↓" button
+                    at the top  right corner of the plot to download the plot in SVG format.
+                    Click on  "Download figure data" button to download the data used to
+                    plot the figure. Click on the microbe buttons below the plot to view
+                    detailed information in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/result_merged_bioproject.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Output&quot;,&quot;hid&quot;:&quot;output1&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:33,&quot;range&quot;:&quot;15978-17497&quot;} -->
+                <h2 class="sectionedit34" id="microbe_search">Microbe Search</h2>
+                <div class="level2">
+
+                    <p>
+                    Users can search for specific microbial taxa (Genus or Species) of
+                    Domain Bacteria, Eukaryota (e.g. Fungi and Protozoa), Virus and Archaea
+                    with their scientific name as valid search term. For example, genus
+                    Aspergillus is shown here. Submitting the query will open a table of
+                    taxa with the name Aspergillus including the species as shown below.
+                    The result of the taxa search shows a list of microbes matching the
+                    query. Click on a specific taxon to view detailed information of the
+                    microbe in the
+                    <a href="#taxa_page" class="wikilink1" title="start" data-wiki-id="start">Taxa page</a>.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/microbe_search.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:500px">
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Microbe Search&quot;,&quot;hid&quot;:&quot;microbe_search&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:34,&quot;range&quot;:&quot;17498-17995&quot;} -->
+                <h1 class="sectionedit35" id="figure_buttons">Figure buttons</h1>
+                <div class="level1">
+
+                    <p>
+                    Users can modify each figures in MDPD with the following buttons.
+                    </p>
+
+                    <p>
+                    <img src="resource/help_figures/figure_buttons.PNG" class="media" loading="lazy" alt="" style="max-width:100%; max-height:250px">
+                    </p>
+
+                    <p>
+                    Disclaimer: This page is created using DokuWiki.
+                    </p>
+
+                </div>
+                <!-- EDIT{&quot;target&quot;:&quot;section&quot;,&quot;name&quot;:&quot;Figure buttons&quot;,&quot;hid&quot;:&quot;figure_buttons&quot;,&quot;codeblockOffset&quot;:0,&quot;secid&quot;:35,&quot;range&quot;:&quot;17996-&quot;} -->
+            </div>
+
+        </div>
+        <div style="clear:both;"></div>
+
+        <br/><hr style="border:1px solid black; margin:8px;"/>
+        <p style="font-size:0.9em;text-align:center;">
+            &#169; 2025 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
+            (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,
+            <a style="color:#003325;" href="mailto:ssaha4@gmail.com">ssaha4@gmail.com</a>).
+        </p>
     </body>
+    <style>
+        @media screen and (max-width: 900px) {
+            #section_left {
+                float : left;
+                width : 96%;
+                margin : 20px 2% 0 2%;
+                position : static;
+            }
+            #dw__toc {
+                width : 96%;
+                margin : 10px 2% 0 2%;
+                height : 400px;
+            }
+            #section_middle {
+                float : left;
+                width : 96%;
+                margin : 0 2% 0 2%;
+            }
+        }
+    </style>
 </html>
