@@ -181,6 +181,10 @@ function makePlot(div_id, networkData, subgroup) {
 }
 
 function plotNetwork(div_id, response) {
+    if (response.length <= 2) {
+        document.getElementById(div_id).innerHTML = 'No significant taxa co-occurrence found !!';
+        return;
+    }
     document.getElementById(div_id).innerHTML = '';
     var networkData = JSON.parse(response);
     for(var subgroup of Object.keys(networkData)) {
@@ -204,6 +208,7 @@ function plotNetwork(div_id, response) {
         controlPanelNode.style.cssText += 'width:100%; margin-top:5px; background-color:#fff9e6; border:1px dashed #004d99; border-radius:10px;';
         controlPanelNode.innerHTML = getControlPanelHTML(subgroup, networkData[subgroup].at);
         document.getElementById(div_id).appendChild(controlPanelNode);
+        document.getElementById('network_note').style.display = 'block';
     }
 }
 

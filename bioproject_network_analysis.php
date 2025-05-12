@@ -57,7 +57,7 @@
             <div id="network_plot_div" style="width:100%;">
                 <center><img style="height:300px;" src="resource/loading.gif" /></center>
             </div>
-            <p style="font-size: 0.9em; margin-top:5px;">
+            <p id="network_note" style="font-size: 0.9em; margin-top:5px; display:none;">
                 Network(s) show the co-occurrence of the microbes across the
                 subgroup(s). The <b>nodes</b> represent the microbes (bacteria,
                 virus, eukaryota, and/or archaea). The <b>edges</b> indicate
