@@ -1,3 +1,5 @@
+colorMap = new Map();
+
 function getDataMap(taxa, subgroup, abundances) {
     var dataMap = new Map();
     for(var i=0; i<taxa.length; ++i) {
@@ -35,20 +37,18 @@ function createTaxaButtons(taxa) {
 function makePlot(div_id, dataMap) {
     var graphDiv = document.getElementById(div_id);
 
-//     var colors = ['#e9967a', '#b0c4de', '#f1ce8e', '#9ec08c'];
-//     var i = 0;
     var xTitle = 'Top 10 taxa';
 
     var data = [];
     for(var subgroup of dataMap.keys()){
+        var color = colorMap.get(subgroup);
         var box = {
             type: 'box',
             name: subgroup,
             x: dataMap.get(subgroup).taxa,
             y: dataMap.get(subgroup).abundances,
-//             marker: {color: colors[i]}
+            marker: {color: 'rgb(' + color.R + ',' + color.G + ',' + color.B + ')'},
         };
-//         i++;
         data.push(box);
     }
 
@@ -160,6 +160,20 @@ function plotBox(div_id, response) {
 }
 
 function getBoxPlotData(div_id, dataJSON) {
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const rows = this.responseText.split('\n');
+            for (var i=1; i<rows.length; ++i) {
+                var elements = rows[i].split('\t');
+                colorMap.set(elements[0], {R: elements[1], G: elements[2], B: elements[3]});
+            }
+        }
+    };
+    httpReq.open('POST', 'input/color_codes.tsv', false);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send();
+
     var data = JSON.parse(dataJSON);
     var httpReq = new XMLHttpRequest();
     httpReq.onreadystatechange = function() {
