@@ -65,11 +65,13 @@ var choroplethLayout = {
     },
     geo: {
         bgcolor: '#ffffff', //'#fff0f5',
-        oceancolor: 'skyblue',
+        oceancolor: '#e6f2ff',// 'lightblue',
         showocean: true,
+        showcountries: true,
+        countrycolor: 'grey',
         coastlinewidth: 1,
         coastlinecolor: '#000000',
-        projection: {type: 'robinson'}
+        // projection: {type: 'robinson'}
     }
 };
 
@@ -107,7 +109,7 @@ function plotChoropleth(divId, choroplethDataJSON) {
     
     var data = [{
         type: 'choropleth',
-        colorscale: 'YlOrRd',
+        colorscale: 'Viridis',// 'YlOrRd',
         colorbar: {
             title: {
                 text: 'Number of runs',
@@ -115,7 +117,7 @@ function plotChoropleth(divId, choroplethDataJSON) {
                 color: '#000000',
             }
         },
-        reversescale: true,
+        reversescale: false,
         locationmode: 'country names',
         locations: countries,
         z: noOfRuns,
