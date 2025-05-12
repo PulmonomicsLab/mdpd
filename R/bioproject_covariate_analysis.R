@@ -24,11 +24,13 @@ tryCatch(
             rel_abund <- 0.0001
             freq <- 0.05
             pollution_filters = "Chordata"
+            name_prefix <- "s__"
         } else {
             use_data <- "Genus"
             rel_abund <- 0.0001
             freq <- 0.05
             pollution_filters = c("mitochondria", "chloroplast")
+            name_prefix <- "g__"
         }
 
         # Read biom
@@ -49,6 +51,11 @@ tryCatch(
 
         meco_object$sample_table <- subset(meco_object$sample_table, (IsolationSource == isolationSource))
         suppressMessages(meco_object$tidy_dataset())
+
+        if (assayType == "WMS")
+            meco_object$tax_table$Species <- gsub(" ", "_", meco_object$tax_table$Species)
+        else
+            meco_object$tax_table$Genus <- gsub(" ", "_", meco_object$tax_table$Genus)
 
         subgroups <- unique(meco_object$sample_table$SubGroup)
 
@@ -170,8 +177,8 @@ tryCatch(
             colnames(heatmap) <- c("Taxa", "Name", "Value", "Pvalue", "AdjPvalue", "Significance")
             heatmap$Name <- lapply(heatmap$Name, as.character)
             for (i in seq_len(nrow(heatmap))) {
-                taxa_splits <- strsplit(heatmap[i, "Taxa"], "\\.")[[1]]
-                heatmap[i, "Taxa"] <- taxa_splits[length(taxa_splits)]
+                taxa_splits <- strsplit(heatmap[i, "Taxa"], "\\__")[[1]]
+                heatmap[i, "Taxa"] <- paste0(name_prefix, taxa_splits[length(taxa_splits)])
                 heatmap[i, "Name"] <- paste0(heatmap[i, "Name"][1], "Yes")
             }
         } else {
@@ -179,7 +186,6 @@ tryCatch(
             heatmap <- p$data[, c("Taxa", "name", "coef", "Pvalue", "AdjPvalue", "Significance")]
             colnames(heatmap) <- c("Taxa", "Name", "Value", "Pvalue", "AdjPvalue", "Significance")
         }
-        # print(heatmap)
 
         taxa_json <- "\"taxa\":["
         name_json <- "\"name\":["
