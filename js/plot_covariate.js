@@ -256,7 +256,7 @@ function plotCovariateHeatmap(div_id, response) {
         document.getElementById('taxa_button_group').style.display = 'block';
         document.getElementById('covariate_legend').style.display = 'block';
     } else {
-        document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
+        document.getElementById(div_id).innerHTML = '<p>No associated taxa found</p>';
     }
 }
 
