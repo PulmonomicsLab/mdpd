@@ -64,6 +64,7 @@
         "AntimicrobialSensitivityEvidence" => "Antimicrobial Sensitivity Evidence",
         "Shape" => "Shape",
         "ShapeEvidence" => "Shape Evidence",
+        "Pathogenic" => "Pathogenic",
     );
     $virusTaxaAttributes = array(
         "Taxa" => "Taxa",
