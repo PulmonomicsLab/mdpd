@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Statistics - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/stat_plots.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>

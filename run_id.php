@@ -32,6 +32,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Run - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_krona.js"></script>
         <script type = "text/javascript" src = "js/plot_top_taxa_bar.js"></script>

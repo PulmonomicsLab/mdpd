@@ -162,6 +162,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Discriminant analysis - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <link rel = "stylesheet" type = "text/css" href = "css/browse.css" />
         <script type = "text/javascript" src = "js/plot_dynamic_discriminant.js"></script>

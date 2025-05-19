@@ -72,6 +72,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Biom - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <link rel = "stylesheet" type = "text/css" href = "css/browse.css" />
         <script type = "text/javascript" src = "js/browse.js"></script>

@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Home - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
         <script type = "text/javascript"  src='js/jquery-svg3dtagcloud-plugin/jquery.svg3dtagcloud.min.js'></script>
