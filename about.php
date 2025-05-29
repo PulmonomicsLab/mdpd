@@ -99,7 +99,17 @@
             </ul>
 
             <br/>
-            <div class="intro" id="sec-5"><h3 style="margin:10px 0 5px 0;">5. Tools, libraries, and packages used</h3></div>
+            <div class="intro" id="sec-5"><h3 style="margin:10px 0 5px 0;">5. Data availability</h3></div>
+            <ul class="intro">
+                <li>A summary of BioProjects is available <a style="color:#003325;" href="resource/public/bioproject.csv">here</a>.</li>
+                <li>
+                    The source code of MDPD is available in a GitHub repository -
+                    <a style="color:#003325;" target="_blank" href="https://github.com/PulmonomicsLab/mdpd">https://github.com/PulmonomicsLab/mdpd <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a>
+                </li>
+            </ul>
+
+            <br/>
+            <div class="intro" id="sec-6"><h3 style="margin:10px 0 5px 0;">6. Tools, libraries, and packages used</h3></div>
             <table class="details">
                 <tr>
                     <th>Name</th>
@@ -215,12 +225,6 @@
                     <td style="text-align:left; padding-left:5px;">Drawing the 3D interactive plot on the home page</td>
                 </tr>
             </table>
-
-            <br/>
-            <p class="intro">
-                The source code of MDPD is available in a GitHub repository -
-                <a style="color:#003325;" target="_blank" href="https://github.com/PulmonomicsLab/mdpd">https://github.com/PulmonomicsLab/mdpd <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a>
-            </p>
 
             <br/><hr/>
             <p style="font-size:0.9em;text-align:center;">
