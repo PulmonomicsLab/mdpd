@@ -39,18 +39,17 @@
         <!--<div class = "section_left"></div>-->
 
         <div class = "section_middle">
-            <br/>
             <!--<p class="intro">
                 MDPD is a manually curated comprehensive database of human microbiomes of
                 pulmonary diseases.
             </p><br/>-->
 
-            <div class="intro" style="font-size:1.2em;" id="sec-1"><b>1. Data Summary</b></div>
+            <div class="intro" id="sec-1"><h3 style="margin:10px 0 5px 0;">1. Data Summary</h3></div>
             <ul class="intro">
                 <li><b>Amplicon-16S</b>, <b>Amplicon-ITS</b>, and <b>whole metagenome sequencing</b>.</li>
                 <li><b>430</b> BioProjects and <b>59,362</b> runs/samples.</li>
                 <li><b>19</b> different pulmonary diseases and a <b>healthy</b> group.</li>
-                <li><b>286 subgroups</b> different diseases and healthy.</li>
+                <li><b>278 subgroups</b> different diseases and healthy.</li>
                 <li><b>10</b> <b>human</b> microbiome <b>body sites</b>.</li>
                 <li>
                     Microbial information of <b>Bacteria</b> <i>(n = 2296)</i>, <b>Eukaryota</b>
@@ -59,21 +58,21 @@
             </ul>
 
             <br/>
-            <div class="intro" style="font-size:1.2em;" id="sec-2"><b>2. Features of MDPD</b></div>
-            <p class="intro">
+            <div class="intro" id="sec-2"><h3 style="margin:10px 0 5px 0;">2. Features of MDPD</h3></div>
+            <p class="intro" style="margin-bottom:0;">
                 MDPD captures the dynamics of the microbes in different human body sites,
                 including their,
-                <ul class="intro">
-                    <li><b>Composition</b> and <b>abundance</b>,</li>
-                    <li><b>Association</b> of the <b>microbes</b> with various <b>covariates</b> (age, gender, smoking status),</li>
-                    <li><b>Microbial markers</b> for different groups (<b>diseases/healthy</b>) and their <b>subgroups</b>,</li>
-                    <li>Cross-disease or healthy <b>subgroup comparisons</b>, and</li>
-                    <li><b>Microbial community</b> structure.</li>
-                </ul>
             </p>
+            <ul class="intro">
+                <li><b>Composition</b> and <b>abundance</b>,</li>
+                <li><b>Association</b> of the <b>microbes</b> with various <b>covariates</b> (age, gender, smoking status),</li>
+                <li><b>Microbial markers</b> for different groups (<b>diseases/healthy</b>) and their <b>subgroups</b>,</li>
+                <li>Cross-disease or healthy <b>subgroup comparisons</b>, and</li>
+                <li><b>Microbial community</b> structure.</li>
+            </ul>
 
             <br/>
-            <div class="intro" style="font-size:1.2em;" id="sec-3"><b>3. Enhancing data quality</b></div>
+            <div class="intro" id="sec-3"><h3 style="margin:10px 0 5px 0;">3. Enhancing data quality</h3></div>
             <ul class="intro">
                 <li>
                     Systematically extracted and curated relevant metadata of the groups from public
@@ -89,9 +88,9 @@
             </ul>
 
             <br/>
-            <div class="intro" style="font-size:1.2em;" id="sec-4"><b>4. Ensuring re-usability</b></div>
+            <div class="intro" id="sec-4"><h3 style="margin:10px 0 5px 0;">4. Ensuring re-usability</h3></div>
             <ul class="intro">
-                <li><b><i>.biom</i> files</b> stored in the database.</li>
+                <li><b>BIOM files</b> (<code>.rds</code>) stored in the database.</li>
                 <li>Curated <b>metadata</b> stored in the database.</li>
                 <li>
                     Users can also <b>further analyze</b> the data, e.g., according to <b>country</b>,
@@ -100,7 +99,7 @@
             </ul>
 
             <br/>
-            <div class="intro" style="font-size:1.2em;" id="sec-5"><b>5. Tools, libraries, and packages used</b></div>
+            <div class="intro" id="sec-5"><h3 style="margin:10px 0 5px 0;">5. Tools, libraries, and packages used</h3></div>
             <table class="details">
                 <tr>
                     <th>Name</th>
