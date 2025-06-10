@@ -56,7 +56,7 @@ tryCatch (
                     }
                     # print(ps)
                     suppressMessages(meco_object <- phyloseq2meco(ps))
-                    meco_object$tidy_dataset()
+                    suppressMessages(meco_object$tidy_dataset())
 
                     # Filter pollution
                     suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
@@ -89,7 +89,7 @@ tryCatch (
         total_biom@sam_data$SubGroup_IsolationSource <- paste(total_biom@sam_data$SubGroup, total_biom@sam_data$IsolationSource, sep="_")
         # Create total_meco_object from total_biom
         suppressMessages(total_meco_object <- phyloseq2meco(total_biom))
-        total_meco_object$tidy_dataset()
+        suppressMessages(total_meco_object$tidy_dataset())
 
         suppressWarnings(
             suppressMessages(

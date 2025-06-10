@@ -32,6 +32,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Run - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_krona.js"></script>
         <script type = "text/javascript" src = "js/plot_top_taxa_bar.js"></script>
@@ -86,23 +87,41 @@
                     echo "</table>";
             ?>
                     <div style="width:45%; margin:10px 2% 10px 2%; float:left;">
-                        <p style="margin-top:0; font-weight:bold;">A. Taxonomic composition of the run (Krona plot)</p>
+                        <p style="margin-top:0; font-weight:bold;">A. Taxonomic composition of the run</p>
                         <?php echo "<iframe id=\"krona_frame\" style=\"width:100%; height:600px; border:1px;\" onload=\"selectRun('".$runID."')\"></iframe>"; ?>
+                        <p style="font-size:0.9em; margin-top:0;">
+                            Interactive <b>Krona plot</b> shows the hierarchical distribution
+                            of microbes, where the colors denote the abundances (for example
+                            the most abundant taxa is red). The depth can be modified using
+                            the <b>"Max depth"</b> button on the upper left corner. The
+                            current view of the Krona plot can be downloaded as SVG by clicking
+                            on the <b>"Snapshot"</b> button at the upper left corner. The data
+                            can be downloaded using the <b>"Download Krona data"</b> button.
+                        <p>
                     </div>
                     <div style="width:45%; margin:10px 2% 10px 2%; float:right;">
-                        <p style="margin-top:0; font-weight:bold;">B. Top 10 abundant taxa (Bar plot)</p>
+                        <p style="margin-top:0; font-weight:bold;">B. Top 10 abundant taxa of the run</p>
                         <div id="bar_plot_div" style="width:100%;">
                             <center><img style="height:300px;" src="resource/loading.gif" /></center>
                         </div>
                         <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Top taxa details</p>
                         <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
+                        <p id="bar_legend" style="font-size:0.9em; margin-top:0; display:none;">
+                            Top 10 abundant taxa of the run. <b>Click on the buttons</b> below
+                            the plot to get the information of the respective taxa. The plot
+                            can be downloaded as SVG by clicking on the <b>"
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                            </svg>
+                            "</b> button in the figure menu bar at the top right corner.
+                        <p>
                     </div>
                     <div style="clear:both"></div>
             <?php
                 }
             ?>
             
-            <br/><hr/>
+            <hr/>
             <p style="font-size:0.9em;text-align:center;">
                 &#169; 2025 Bose Institute. All rights reserved. For queries, please contact Dr. Sudipto Saha
                 (<a style="color:#003325;" href="mailto:ssaha4@jcbose.ac.in">ssaha4@jcbose.ac.in</a>,

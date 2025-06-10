@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Home - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
         <script type = "text/javascript"  src='js/jquery-svg3dtagcloud-plugin/jquery.svg3dtagcloud.min.js'></script>
@@ -116,12 +117,12 @@
                     diseases. MDPD is developed using thorough <b>manual curation of sample
                     metadata</b><!-- from <b>461 BioProjects</b> to obtain <b>74,737 runs</b>-->. MDPD
                     contains data of <b>19 diseases and a healthy group</b> from <b>10 human
-                    microbiome sites</b>. MDPD includes - (i) Microbial <b>taxonomic profile</b>
+                    body sites</b>. MDPD includes - (i) Microbial <b>taxonomic profile</b>
                     analysis, (ii) <b>Discriminant</b> analysis, (iii) <b>Multivariate association</b>
                     analysis, (iv) <b>Microbial co-occurrence</b> network analysis, (v) Disease
                     <b>subtypes comparison</b> or between <b>disease subtype vs healthy groups</b>,
                     and (vi) Graphical representation of <b>each taxa profile across disease
-                    subtypes</b>.
+                    subtypes and human body sites</b>.
                 </p>
 
                 <center><h3 style="margin-bottom:5px;">Search MDPD</h3></center>
@@ -134,7 +135,7 @@
                                 <select class="full" id="k0" name="k0" onchange="updateKeyChoice(this)">
                                     <option value="Disease" selected>Disease</option>
                                     <option value="AssayType">Assay Type</option>
-                                    <option value="Biome">Biome</option>
+                                    <option value="Biome">Body site</option>
                                     <option value="LibraryLayout">Library Layout</option>
                                     <option value="Country">Country</option>
                                     <option value="Year">Year</option>
@@ -170,12 +171,12 @@
                 </form>
 
                 <center><h3 style="margin-bottom:5px;">Data summary</h3></center>
-                <img src="resource/home_figures/Icons_1.svg" style="width:100%; max-height:120px; max-width:100%;" />
+                <img src="resource/home_figures/home_icons.svg" style="width:100%; max-height:120px; max-width:100%;" />
             </div>
             <div class="intro">
                 <center>
                     <div id="interactive_plot_div" style="width:100%;"></div>
-                    <p style="margin:0;">Interactive plot showing the different groups, biomes, and taxa domains in MDPD.</p>
+                    <p style="margin:0;">Interactive plot showing the different groups, body sites, and taxa domains in MDPD.</p>
                     <p style="margin:0; font-size:0.9em;"><i>(Please click on the text in plot to get details)</i></p>
                 </center>
             </div>

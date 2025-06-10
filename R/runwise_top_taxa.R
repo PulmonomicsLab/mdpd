@@ -33,20 +33,20 @@ tryCatch (
 
         # Create phyloseq object to meco object
         suppressMessages(meco_object <- phyloseq2meco(ps))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
         # print(ps)
 
         # Filter pollution
         suppressMessages(meco_object$filter_pollution(taxa = pollution_filters))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         # Filter based on abundance and detection
         suppressMessages(meco_object$filter_taxa(rel_abund = rel_abund, freq = freq))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         meco_object$sample_table$Run <- rownames(meco_object$sample_table)
         suppressMessages(meco_object$sample_table <- subset(meco_object$sample_table, Run == runID))
-        meco_object$tidy_dataset()
+        suppressMessages(meco_object$tidy_dataset())
 
         # Bar plot Genus
         suppressMessages(t3 <- trans_abund$new(dataset = meco_object, taxrank = tax_rank, ntaxa = 50))
@@ -61,7 +61,7 @@ tryCatch (
         } else {
             end <- 10
         }
-        for (i in (1:end)) {
+        for (i in seq_len(end)) {
             if (i == end) {
                 taxa_json <- paste0(taxa_json, "\"", tax_prefix, ordered_taxa[i, "Taxonomy"], "\"")
                 abundance_json <- paste0(abundance_json, ordered_taxa[i, "Abundance"])

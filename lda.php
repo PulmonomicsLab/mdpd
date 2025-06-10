@@ -34,6 +34,7 @@
     <head>
         <meta charset="UTF-8">
         <title>LDA - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_lda.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -147,19 +148,26 @@
             </div>
             <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Differentially abundant taxa details</p>
             <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
-            <p>
-                <b><i>N.B.</i></b> - <b>1)</b> To view all the differential markers, please hover on the bars of the plot
-                or download the data using the <i>"Download data"</i> button. located at the top of the page <b>2)</b> A
-                cutoff of <i>log<sub>10</sub> (LDA score) &ge; 2</i> was used to determine the differential markers.
-                <b>3)</b> All differential markers in the LDA plot were found to be statistically significant. <b>4)</b>
-                The statistical significance cutoff used was: <i>p-value &lt; 0.01</i> (Kruskal-Wallis test). <b>5)</b>
-                To check the p-values for each differential marker, please download the data using the "Download data"
-                button. <b>6)</b> The downloaded data shows Kruskal-Wallis <i>p</i>-value. <b>7)</b> The LDA plot can be
-                downloaded as a SVG image by clicking on the <i>"Export as SVG"</i>
+            <p id="bar_legend" style="font-size: 0.9em; margin-top:5px; display:none;">
+                Interactive <b>bar plot</b> shows the differential microbial
+                signatures between the subgroups. <b>Hover mouse</b> on a bar
+                to highlight the taxa name and the LDA score (log<sub>10</sub>)
+                or Log<sub>2</sub> fold change. <b>Click on each subgroup on
+                the legend</b> to select or deselect the subgroup(s). <b>Click
+                on the buttons</b> below the plot to get the information of
+                the respective taxa. The plot can be downloaded as SVG by
+                clicking on the <b>"
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
                 </svg>
-                button in the menubar located at the top right corner of the plot.
+                "</b> button in the figure menu bar at the top right corner. The
+                data can be downloaded using the <b>"Download figure data"</b>
+                button.
+                <br/>
+                Users can modify the discriminant analysis parameters, by changing
+                the <i>"Method"</i>, <i>"P-value"</i>, <i>"Filter threshold"</i>,
+                <i>"Taxa level"</i>, and <i>"Cut-off value"</i> using the respective
+                drop-down buttons.
             </p>
             <hr/>
             <p style="font-size:0.9em;text-align:center;">

@@ -2,27 +2,6 @@
     include('db.php');
     
     $bioprojectID = (isset($_GET['key'])) ? $_GET['key'] : "";
-
-    $confounder_json = json_decode(file_get_contents("input/bioproject_confounder_list.json"), true);
-    $covariate_possible = array_key_exists($bioprojectID, $confounder_json["confounders"]);
-
-//     $kronaMappings = json_decode(file_get_contents("input/Krona/bioproject_metadata.json"), true);
-//     echo implode("<br/>", $kronaMappings);
-
-//     $ldaAdHocMessages = array("PRJNA434133" => "No markers found for Amplicon-Stool.");
-//     $ldaMappings = json_decode(file_get_contents("input/LDA/bioproject_metadata.json"), true);
-//     echo implode("<br/>", $ldaMappings);
-//     $analysisErrorTexts = json_decode(file_get_contents("input/bioproject_plot_error.json"), true);
-//     echo implode("<br/>", array_keys($analysisErrorTexts));
-//     $kronaErrorText = "";
-//     $ldaErrorText = "";
-//     if (array_key_exists($bioprojectID, $analysisErrorTexts)){
-//         if (array_key_exists("Krona", $analysisErrorTexts[$bioprojectID]))
-//             $kronaErrorText = $analysisErrorTexts[$bioprojectID]["Krona"];
-//         if (array_key_exists("LDA", $analysisErrorTexts[$bioprojectID]))
-//             $ldaErrorText = $analysisErrorTexts[$bioprojectID]["LDA"];
-//     }
-    
     
     $bioprojectQuery = "select ".implode(",", array_keys($allBioProjectAttributes))." from bioproject where BioProject=?";
 //     echo $bioprojectQuery."<br/>".$bioprojectID."<br/><br/>";
@@ -52,6 +31,40 @@
     $runStmt->close();
     
     closeConnection($conn);
+
+    $file = fopen("input/bioproject_page_buttons.tsv","r");
+    $taxonomicButtons = array();
+    $discriminantButtons = array();
+    $multivariateButtons = array();
+    $networkButtons = array();
+    $analysesErrorMessages = array();
+    while (($row = fgetcsv($file, 500, "\t")) !== FALSE) {
+        if($row[0] == $bioprojectID) {
+            if($row[3] == "Yes")
+                array_push($taxonomicButtons, array($row[2], $row[1], ""));
+            else
+                array_push($taxonomicButtons, array($row[2], $row[1], "disabled"));
+            if($row[4] == "Yes")
+                array_push($discriminantButtons, array($row[2], $row[1], ""));
+            else
+                array_push($discriminantButtons, array($row[2], $row[1], "disabled"));
+            if($row[5] == "Yes")
+                array_push($multivariateButtons, array($row[2], $row[1], ""));
+            else
+                array_push($multivariateButtons, array($row[2], $row[1], "disabled"));
+            if($row[6] == "Yes")
+                array_push($networkButtons, array($row[2], $row[1], ""));
+            else
+                array_push($networkButtons, array($row[2], $row[1], "disabled"));
+            if($row[7] != "")
+                array_push($analysesErrorMessages, $row[7]);
+        }
+    }
+//     echo implode(",", $taxonomicButtons)."<br/>";
+//     echo implode(",", $discriminantButtons)."<br/>";
+    fclose($file);
+    $confounder_json = json_decode(file_get_contents("input/bioproject_confounder_list.json"), true);
+    $covariate_possible = array_key_exists($bioprojectID, $confounder_json["confounders"]);
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +72,7 @@
     <head>
         <meta charset="UTF-8">
         <title>BioProject - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/advance_search_result.js"></script>
         <script>
@@ -143,73 +157,61 @@
 
                     echo "<tr><th style=\"width:30%;\">Taxonomic profile</th>";
                     echo "<td>";
-//                     if (count($kronaMappings[$bioprojectID]) === 0) {
-//                         echo $kronaErrorText;
-//                     } else {
-//                         $diseaseGroups = array_keys($kronaMappings[$bioprojectID]);
-//                         foreach($diseaseGroups as $sg) {
-//                             $assayTypes = $kronaMappings[$bioprojectID][$sg];
-//                             foreach($assayTypes as $at)
-//                                 echo "<a target=\"_blank\" href=\"krona.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&ds=".urlencode($sg)."&at=".urlencode($at)."\"><button type=\"button\" style=\"margin:3px;\">".$sg."-".$at."</button></a>";
-//                         }
-//                     }
-                    $isolationSources = explode(";", $row["IsolationSource"]);
-                    foreach($isolationSources as $is) {
-                        $assayTypes = explode(";", $row["AssayType"]);
-                        foreach($assayTypes as $at)
-                            echo "<a target=\"_blank\" href=\"bioproject_taxonomic_profile.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
+                    foreach($taxonomicButtons as $button){
+                        $is = $button[0];
+                        $at = $button[1];
+                        $disable = $button[2];
+                        if($disable == "disabled")
+                            echo "<button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button>";
+                        else
+                            echo "<a target=\"_blank\" href=\"bioproject_taxonomic_profile.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button></a>";
                     }
                     echo "</td></tr>";
 
                     echo "<tr><th style=\"width:30%;\">Discriminant analysis</th>";
                     echo "<td>";
-//                     if (count($ldaMappings[$bioprojectID]) === 0) {
-//                         echo $ldaErrorText;
-//                     } else {
-//                         $isolationSources = array_keys($ldaMappings[$bioprojectID]);
-//                         foreach($isolationSources as $is) {
-//                             $assayTypes = $ldaMappings[$bioprojectID][$is];
-//                             foreach($assayTypes as $at) {
-//                                 echo "<a target=\"_blank\" href=\"lda.php?type=BIOPROJECT&bioproject=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$at."-".$is."</button></a>";
-//                             }
-//                         }
-//                         if (array_key_exists($bioprojectID, $ldaAdHocMessages))
-//                             echo "&nbsp;".$ldaAdHocMessages[$bioprojectID];
-//                     }
-                    $isolationSources = explode(";", $row["IsolationSource"]);
-                    foreach($isolationSources as $is) {
-                        $assayTypes = explode(";", $row["AssayType"]);
-                        foreach($assayTypes as $at) {
-                            echo "<a target=\"_blank\" href=\"lda.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
-                        }
+                    foreach($discriminantButtons as $button){
+                        $is = $button[0];
+                        $at = $button[1];
+                        $disable = $button[2];
+                        if($disable == "disabled")
+                            echo "<button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button>";
+                        else
+                            echo "<a target=\"_blank\" href=\"lda.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button></a>";
                     }
                     echo "</td></tr>";
 
                     if($covariate_possible) {
                         echo "<tr><th style=\"width:30%;\">Multivariate association analysis</th>";
                         echo "<td>";
-                        $isolationSources = explode(";", $row["IsolationSource"]);
-                        foreach($isolationSources as $is) {
-                            $assayTypes = explode(";", $row["AssayType"]);
-                            foreach($assayTypes as $at) {
-                                echo "<a target=\"_blank\" href=\"bioproject_covariate_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
-                            }
+                        foreach($multivariateButtons as $button){
+                            $is = $button[0];
+                            $at = $button[1];
+                            $disable = $button[2];
+                            if($disable == "disabled")
+                                echo "<button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button>";
+                            else
+                                echo "<a target=\"_blank\" href=\"bioproject_covariate_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button></a>";
                         }
                         echo "</td></tr>";
                     }
 
                     echo "<tr><th style=\"width:30%;\">Microbial co-occurrence analysis</th>";
                     echo "<td>";
-                    $isolationSources = explode(";", $row["IsolationSource"]);
-                    foreach($isolationSources as $is) {
-                        $assayTypes = explode(";", $row["AssayType"]);
-                        foreach($assayTypes as $at) {
-                            echo "<a target=\"_blank\" href=\"bioproject_network_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\">".$is." - ".$at."</button></a>";
-                        }
+                    foreach($networkButtons as $button){
+                        $is = $button[0];
+                        $at = $button[1];
+                        $disable = $button[2];
+                        if($disable == "disabled")
+                            echo "<button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button>";
+                        else
+                            echo "<a target=\"_blank\" href=\"bioproject_network_analysis.php?key=".urlencode($bioprojectID)."&at=".urlencode($at)."&is=".urlencode($is)."\"><button type=\"button\" style=\"margin:3px;\" ".$disable.">".$is." - ".$at."</button></a>";
                     }
                     echo "</td></tr>";
 
                     echo "</table>";
+
+                    echo "<div style=\"width:80%; margin:0 10% 0 10%; font-size:0.9em;\">".(count($analysesErrorMessages)>0 ? "N.B.- " : "").implode(" ", $analysesErrorMessages)."</div>";
 
                     echo "<h3 style=\"margin-bottom:5px; text-align:center;\">Download</h3>";
                     echo "<table class=\"details\" border=\"1\">";

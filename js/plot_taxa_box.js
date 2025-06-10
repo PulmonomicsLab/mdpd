@@ -1,3 +1,5 @@
+colorMap = new Map();
+
 function getDataMap(subgroup, abundances) {
     var dataMap = new Map();
     for(var i=0; i<subgroup.length; ++i) {
@@ -23,7 +25,7 @@ function createDownloadLinkSubGroup(subgroup, bioproject, abundances) {
 }
 
 function createDownloadLinkBiome(biome, bioproject, abundances) {
-    var s = 'Biome\tBioProject\tAbundance\n';
+    var s = 'Body site\tBioProject\tAbundance\n';
     for(var i=0; i<biome.length; ++i) {
         s += biome[i] + '\t';
         s += bioproject[i] + '\t';
@@ -39,10 +41,12 @@ function makePlotSubGroup(div_id, dataMap) {
 
     var data = [];
     for(var subgroup of dataMap.keys()){
+        var color = colorMap.get(subgroup);
         var box = {
             type: 'box',
             name: subgroup,
             x: dataMap.get(subgroup),
+            marker: {color: 'rgb(' + color.R + ',' + color.G + ',' + color.B + ')'},
         };
         data.push(box);
     }
@@ -173,7 +177,7 @@ function makePlotBiome(div_id, dataMap) {
             tickwidth: 2,
             tickfont: {size: 16},
             title : {
-                text : 'Biome',
+                text : 'Body site',
                 font: {size: 22}
             }
         },
@@ -223,6 +227,20 @@ function makePlotBiome(div_id, dataMap) {
 
 
 function plotBoxSubGroup(div_id, response) {
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const rows = this.responseText.split('\n');
+            for (var i=1; i<rows.length; ++i) {
+                var elements = rows[i].split('\t');
+                colorMap.set(elements[0], {R: elements[1], G: elements[2], B: elements[3]});
+            }
+        }
+    };
+    httpReq.open('POST', 'input/color_codes.tsv', false);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send();
+
     var data = JSON.parse(response);
     if (data.subgroup.length > 0) {
         var dataMap = getDataMap(data.subgroup, data.abundances);

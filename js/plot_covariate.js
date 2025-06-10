@@ -143,7 +143,7 @@ function makePlot(div_id, heatmapData) {
             tickfont: {color: '#000000'},
             ticks: 'inside',
             title: {
-                text: 'Maaslin2 coefficient',
+                text: 'MaAsLin2 coefficient',
                 side: 'right',
                 font: {
                     size: 18,
@@ -254,8 +254,9 @@ function plotCovariateHeatmap(div_id, response) {
         createTaxaButtons(dataMap);
         document.getElementById('taxa_button_group_heading').style.display = 'block';
         document.getElementById('taxa_button_group').style.display = 'block';
+        document.getElementById('covariate_legend').style.display = 'block';
     } else {
-        document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
+        document.getElementById(div_id).innerHTML = '<p>No associated taxa found</p>';
     }
 }
 

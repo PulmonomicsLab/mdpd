@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Browse - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <link rel = "stylesheet" type = "text/css" href = "css/browse.css" />
         <script type = "text/javascript" src = "js/browse.js"></script>
@@ -30,7 +31,7 @@
 
         <div class = "section_left" id="section_left">
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-1" class="browse_side_nav">1. Group-wise BioProjects</a></div>
-            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Biome-wise BioProjects</a></div>
+            <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">2. Body site-wise BioProjects</a></div>
             <div style="width:100%; margin: 20px 0 20px 0;"><a href="#sec-2" class="browse_side_nav">3. Domain-wise taxa</a></div>
         </div>
 
@@ -53,8 +54,8 @@
             <p style="margin:0; font-size:0.9em;"><i>(Please click on the group names in figure to get details)</i></p>
             <center><div id="group_wise_browse"><img style="height:300px;" src="resource/loading.gif" /></div></center>
 
-            <div class="browse-heading" style="margin-bottom:5px;" id="sec-2">2. Biome-wise BioProjects</div>
-            <p style="margin:0; font-size:0.9em;"><i>(Please click on the biome names in figure to get details)</i></p>
+            <div class="browse-heading" style="margin-bottom:5px;" id="sec-2">2. Body site-wise BioProjects</div>
+            <p style="margin:0; font-size:0.9em;"><i>(Please click on the body site names in figure to get details)</i></p>
             <center><div id="biome_wise_browse"><img style="height:300px;" src="resource/loading.gif" /></div></center>
 
             <div class="browse-heading" style="margin-bottom:5px;" id="sec-3">3. Domain-wise taxa</div>

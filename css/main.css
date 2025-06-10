@@ -69,6 +69,7 @@ a.side_nav{
 }
 a.side_nav:hover{
     background-color : #b3b3ff;
+    text-decoration : none;
     color: #000000;
 }
 a.active {
@@ -83,6 +84,9 @@ a.active {
 /*     border-style : solid; */
 /*     border-color : #808080; */
 /*     border-width : 0px 6px 0px 6px; */
+}
+a.active:hover {
+    text-decoration : none;
 }
 table.form{
     border-collapse : collapse;
@@ -153,6 +157,22 @@ button{
     font-family: 'Nunito', sans-serif;
     box-shadow: 0px 0px 2px grey;
     cursor: pointer;
+}
+button:disabled{
+    background-color : #e6e6ff;
+    border: 1px solid grey;
+    color : grey;
+    padding : 5px 10px 5px 10px;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+}
+button:disabled:hover{
+    background-color : #e6e6ff;
+    border: 1px solid grey;
+    color : grey;
+    padding : 5px 10px 5px 10px;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
 }
 button.round{
     border-radius:50%;

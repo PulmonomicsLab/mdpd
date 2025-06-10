@@ -65,11 +65,13 @@ var choroplethLayout = {
     },
     geo: {
         bgcolor: '#ffffff', //'#fff0f5',
-        oceancolor: 'skyblue',
+        oceancolor: '#e6f2ff',// 'lightblue',
         showocean: true,
+        showcountries: true,
+        countrycolor: 'grey',
         coastlinewidth: 1,
         coastlinecolor: '#000000',
-        projection: {type: 'robinson'}
+        // projection: {type: 'robinson'}
     }
 };
 
@@ -107,15 +109,23 @@ function plotChoropleth(divId, choroplethDataJSON) {
     
     var data = [{
         type: 'choropleth',
-        colorscale: 'YlOrRd',
+        colorscale: 'Viridis',// 'YlOrRd',
         colorbar: {
+            tickval: [0, 3000, 6000, 9000, 12000, 15000, 18000],
+            tick0: 0,
+            dtick: 3000,
+            len: 0.6,
+            lenmode: 'fraction',
+            outlinewidth: 0,
+            tickfont: {color: '#000000'},
+            ticks: 'outside',
             title: {
                 text: 'Number of runs',
                 size: 14,
                 color: '#000000',
             }
         },
-        reversescale: true,
+        reversescale: false,
         locationmode: 'country names',
         locations: countries,
         z: noOfRuns,
@@ -202,7 +212,7 @@ function plotBiomeHistogramData(divId, histogramDataJSON) {
         data.push(trace);
     }
 
-    Plotly.plot(plotDiv, data, getHistogramLayout(350, 'Year', 'Biome'), {showSendToCloud:false});
+    Plotly.plot(plotDiv, data, getHistogramLayout(350, 'Year', 'Body site'), {showSendToCloud:false});
 }
 
 function plotDiseaseHistogramData(divId, histogramDataJSON) {
@@ -386,7 +396,7 @@ function plotStatData(stat1DivId, stat2DivId, stat3DivId, sunburstDivId, statDat
 
     Plotly.plot(stat1Div, [biomePieTrace], pieLayout, {showSendToCloud:false});
     Plotly.plot(stat2Div, [assayTypePieTrace], pieLayout, {showSendToCloud:false});
-    Plotly.plot(stat3Div, diseaseBarTrace, getHistogramLayout(600, 'Group', 'Biome'), {showSendToCloud:false});
+    Plotly.plot(stat3Div, diseaseBarTrace, getHistogramLayout(600, 'Group', 'Body site'), {showSendToCloud:false});
     Plotly.plot(sunburstDiv, [sunburstTrace], sunburstLayout, {showSendToCloud:false});
 }
 

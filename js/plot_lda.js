@@ -1,3 +1,5 @@
+colorMap = new Map();
+
 function getDataMap(taxa, subgroup, value) {
     var dataMap = new Map();
     for(var i=0; i<taxa.length; ++i) {
@@ -35,16 +37,19 @@ function createTaxaButtons(taxa) {
 }
 
 function createPlotData(dataMap) {
-//     var colors = ['#e9967a', '#b0c4de', '#f1ce8e', '#9ec08c'];
     var data = [];
     for(var subgroup of dataMap.keys()){
+        var color = colorMap.get(subgroup);
         var barChart = {
             type: 'bar',
             orientation: 'h',
             name: subgroup,
             x: dataMap.get(subgroup).value,
             y: dataMap.get(subgroup).taxa,
-            marker: {/*color: colors[i], */opacity: 0.6},
+            marker: {
+                color: 'rgb(' + color.R + ',' + color.G + ',' + color.B + ')',
+                opacity: 0.6
+            },
         };
         data.push(barChart);
     }
@@ -167,6 +172,7 @@ function plotLDA(div_id, response, method, taxa_level) {
             createTaxaButtons(data.taxa);
             document.getElementById('taxa_button_group_heading').style.display = 'block';
             document.getElementById('taxa_button_group').style.display = 'block';
+            document.getElementById('bar_legend').style.display = 'block';
         }
     } else {
         document.getElementById(div_id).innerHTML = '<p>No significant taxa found</p>';
@@ -174,6 +180,20 @@ function plotLDA(div_id, response, method, taxa_level) {
 }
 
 function getLDAData(div_id, dataJSON) {
+    var httpReq = new XMLHttpRequest();
+    httpReq.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const rows = this.responseText.split('\n');
+            for (var i=1; i<rows.length; ++i) {
+                var elements = rows[i].split('\t');
+                colorMap.set(elements[0], {R: elements[1], G: elements[2], B: elements[3]});
+            }
+        }
+    };
+    httpReq.open('POST', 'input/color_codes.tsv', false);
+    httpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpReq.send();
+
     var data = JSON.parse(dataJSON);
     var httpReq = new XMLHttpRequest();
     httpReq.onreadystatechange = function() {

@@ -107,6 +107,7 @@ function plotBar(div_id, response) {
         createTaxaButtons(taxa);
         document.getElementById('taxa_button_group_heading').style.display = 'block';
         document.getElementById('taxa_button_group').style.display = 'block';
+        document.getElementById('bar_legend').style.display = 'block';
     } else {
         document.getElementById(div_id).innerHTML = '<p>No taxa found</p>';
     }

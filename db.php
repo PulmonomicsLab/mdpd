@@ -10,7 +10,7 @@
         "Bytes"=>"Number of Bytes",
         "Country"=>"Country",
         "AssayType"=>"Assay Type",
-        "Biome"=>"Biome",
+        "Biome"=>"Body site",
         "IsolationSource"=>"Isolation Source",
         "LibraryLayout"=>"Library Layout",
         "VariableRegion"=>"Variable Region",
@@ -31,7 +31,7 @@
 //         "Grp"=>"Disease",
         "SubGroup"=>"Disease(s)",
         "IsolationSource"=>"Isolation Source",
-        "Biome"=>"Biome",
+        "Biome"=>"Body site",
         "AssayType"=>"Assay Type",
         "Instrument"=>"Instrument",
         "LibraryLayout"=>"Library Layout",
@@ -64,6 +64,7 @@
         "AntimicrobialSensitivityEvidence" => "Antimicrobial Sensitivity Evidence",
         "Shape" => "Shape",
         "ShapeEvidence" => "Shape Evidence",
+        "Pathogenic" => "Pathogenic",
     );
     $virusTaxaAttributes = array(
         "Taxa" => "Taxa",

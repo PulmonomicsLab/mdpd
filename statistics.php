@@ -2,8 +2,9 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--         <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
         <title>Statistics - MDPD</title>
+        <link rel="icon" href="resource/pulmonomics_lab_logo.png" type="image/x-icon">
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/stat_plots.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -67,14 +68,14 @@
         <div class = "section_middle">
             <br/>
             <div class="intro">
-                <hr/><h2>1. Data distribution on the basis of group, assay type, and biom</h2><hr/>
+                <hr/><h2>1. Data distribution on the basis of group, assay type, and body site</h2><hr/>
                 <div id="sunburst-plot-container" class="plot"></div>
                 <div class="plot caption">Fig. 1A - Interactive sunburst plot showing the total distibution of runs across different groups and assay types.</div>
                 <div id="stat-plot-container_3" style="width:100%;"></div>
-                <div class="caption">Fig. 1B - Group-wise distribution of the runs across different biomes.</div>
+                <div class="caption">Fig. 1B - Group-wise distribution of the runs across different body sites.</div>
                 <div id="stat-plot-wrapper_1" class="plot" style="margin:10px 1% 10px 0; float:left;">
                     <div id="stat-plot-container_1" style="width:100%;"></div>
-                    <div class="caption">Fig. 1C - Distribution of runs across different biomes.</div>
+                    <div class="caption">Fig. 1C - Distribution of runs across different body sites.</div>
                 </div>
                 <div id="stat-plot-wrapper_2" class="plot" style="margin:10px 1% 10px 1%; float:left;">
                     <div id="stat-plot-container_2" style="width:100%;"></div>
@@ -88,7 +89,7 @@
                 <div id="bar-plot-container_3" class="plot" style="margin:10px 0% 0 0%;"></div>
                 <div class="caption">Fig. 2A - Year-wise distribution of the data for each group.</div>
                 <div id="bar-plot-container_2" style="width:100%;"></div>
-                <div class="caption">Fig. 2B - Year-wise distribution of the data for each biome.</div>
+                <div class="caption">Fig. 2B - Year-wise distribution of the data for each body site.</div>
                 <div id="bar-plot-container_1" style="width:100%;"></div>
                 <div class="caption">Fig. 2C - Year-wise distribution of the data for each assay type.</div>
             </div>
@@ -125,7 +126,7 @@
     </script>
     
     <style>
-        @media screen and (max-width: 900px) {
+        @media screen and (max-width: 1250px) {
             #bar-plot-wrapper_1 {
                 width : 100%;
             }

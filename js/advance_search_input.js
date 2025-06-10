@@ -83,7 +83,7 @@ function getHTML() {
             '<select class="full"  onchange="updateKeyChoice(this)">' +
                 '<option value="Disease" selected>Disease</option>' + 
                 '<option value="AssayType">Assay Type</option>' + 
-                '<option value="Biome">Biome</option>' +
+                '<option value="Biome">Body site</option>' +
                 '<option value="LibraryLayout">Library Layout</option>' +
                 '<option value="Country">Country</option>' + 
                 '<option value="Year">Year</option>' + 
