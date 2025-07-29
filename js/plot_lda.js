@@ -68,7 +68,7 @@ function makePlot(div_id, dataMap, method) {
 
     var computedHeight = (getTaxaNumber(dataMap) * 15) + 200;
     var xTitle = (method == 'edgeR') ? 'Log<sub>2</sub> fold change' : 'LDA score (log<sub>10</sub>)';
-    var yTitle = 'Differentially abundant taxa';
+    var yTitle = 'Differentially<br> abundant<br> taxa';
     var data = createPlotData(dataMap)
 
     var layout = {
