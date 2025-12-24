@@ -106,6 +106,36 @@
                     The source code of MDPD is available in a GitHub repository -
                     <a style="color:#003325;" target="_blank" href="https://github.com/PulmonomicsLab/mdpd">https://github.com/PulmonomicsLab/mdpd <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a>
                 </li>
+                <li>
+                    <p style="margin:0;">Batch download of the BIOM files:</p>
+                    <ul>
+                        <li>
+                            Obstructive (ZIP, 59MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Obstructive.zip">Download</a>
+                        </li>
+                        <li>
+                            Restrictive (ZIP, 48MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Restrictive.zip">Download</a>
+                        </li>
+                        <li>
+                            Infectious (ZIP, 100MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Infectious.zip">Download</a>
+                        </li>
+                        <li>
+                            Malignancy (ZIP, 36MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Malignancy.zip">Download</a>
+                        </li>
+                        <li>
+                            Vascular  (ZIP, 1.5MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Vascular.zip">Download</a>
+                        </li>
+                        <li>
+                            Healthy (ZIP, 56MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Healthy.zip">Download</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>For dataset usage, please cite the <a style="color:#003325;" href="https://doi.org/10.5281/zenodo.17607443" target="_blank">Zenodo link <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a>.</p>
             </ul>
 
             <br/>
