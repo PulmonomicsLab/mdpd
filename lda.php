@@ -1,4 +1,11 @@
 <?php
+    $method_map = array(
+        "lefse" => "lefse",
+        "aldex" => "ALDEx2_t",
+        "linda" => "linda",
+        "ancombc" => "ancombc2",
+    );
+
     $bioproject = (isset($_GET["key"])) ? urldecode($_GET["key"]) : "";
     $at = (isset($_GET["at"])) ? urldecode($_GET["at"]) : "";
     $is = (isset($_GET["is"])) ? urldecode($_GET["is"]) : "";
@@ -12,7 +19,7 @@
     $threshold = (isset($_GET["threshold"])) ? urldecode($_GET["threshold"]) : "2";
 
     $p_adjust_method = explode("_", $method_joined)[1];
-    $method = explode("_", $method_joined)[0];
+    $method = $method_map[explode("_", $method_joined)[0]];
 
     $dataJSON = json_encode(
         array(
@@ -38,6 +45,23 @@
         <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
         <script type = "text/javascript" src = "js/plot_lda.js"></script>
         <script type = "text/javascript" src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script>
+            function update_value() {
+                var method = document.getElementById('method').value;
+                if (method === 'lefse_none')
+                    document.getElementById('threshold').value = '2';
+                else if (method === 'lefse_fdr')
+                    document.getElementById('threshold').value = '2';
+                else if (method === 'aldex_fdr')
+                    document.getElementById('threshold').value = '1';
+                else if (method === 'linda_fdr')
+                    document.getElementById('threshold').value = '1';
+                else if (method === 'ancombc_fdr')
+                    document.getElementById('threshold').value = '0.5';
+                else
+                    document.getElementById('threshold').value = '';
+            }
+        </script>
     </head>
     <body>
         <div class = "section_header">
@@ -73,14 +97,21 @@
                         <tr>
                             <td style="width:25%;">
                                 <label>Method</label>
-                                <select class="full" id="method" name="method" required>
+                                <select class="full" id="method" name="method" onchange="update_value()" required>
                                     <option value="lefse_none" <?php echo ($method_joined == "lefse_none") ? "selected" : ""; ?>>LEfSe (without FDR p-value adjustment)</option>
                                     <option value="lefse_fdr" <?php echo ($method_joined == "lefse_fdr") ? "selected" : ""; ?>>LEfSe (with FDR p-value adjustment)</option>
-                                    <option value="edgeR_fdr" <?php echo ($method_joined == "edgeR_fdr") ? "selected" : ""; ?>>edgeR (with FDR p-value adjustment)</option>
+                                    <option value="aldex_fdr" <?php echo ($method_joined == "aldex_fdr") ? "selected" : ""; ?>>ALDEx2_t (with FDR p-value adjustment)</option>
+                                    <option value="linda_fdr" <?php echo ($method_joined == "linda_fdr") ? "selected" : ""; ?>>LinDA (with FDR p-value adjustment)</option>
+                                    <option value="ancombc_fdr" <?php echo ($method_joined == "ancombc_fdr") ? "selected" : ""; ?>>ANCOM-BC2 (with FDR p-value adjustment)</option>
                                 </select>
+                                <!--<select class="full" id="method" name="method" required>
+                                    <option value="lefse_none" <?php //echo ($method_joined == "lefse_none") ? "selected" : ""; ?>>LEfSe (without FDR p-value adjustment)</option>
+                                    <option value="lefse_fdr" <?php //echo ($method_joined == "lefse_fdr") ? "selected" : ""; ?>>LEfSe (with FDR p-value adjustment)</option>
+                                    <option value="edgeR_fdr" <?php //echo ($method_joined == "edgeR_fdr") ? "selected" : ""; ?>>edgeR (with FDR p-value adjustment)</option>
+                                </select>-->
                             </td>
                             <td style="width:20%;">
-                                <label>P-value (only for <i>LEfSe</i>)</label>
+                                <label>P-value</label>
                                 <select class="full" id="alpha" name="alpha" required>
                                     <option value="0.1" <?php echo ($alpha == "0.1") ? "selected" : ""; ?>>0.1</option>
                                     <option value="0.05" <?php echo ($alpha == "0.05") ? "selected" : ""; ?>>0.05</option>
@@ -106,7 +137,7 @@
                             </td>
                             <td style="width:15%;">
                                 <label>Cut-off value</label><br/>
-                                <input type="number" class="full" id="threshold" name="threshold" min="1" step="0.1" value="<?php echo $threshold; ?>" required />
+                                <input type="number" class="full" id="threshold" name="threshold" min="0.1" step="0.1" value="<?php echo $threshold; ?>" required />
                                 <!--<input type="range" style="width:100%;" id="threshold" name="threshold" min="1" max="4" step="1" value="<?php //echo $threshold; ?>">
                                 <svg role="presentation" width="100%" height="10" xmlns="http://www.w3.org/2000/svg">
                                     <rect class="range__tick" x="1%" y="1" width="1" height="5"></rect>
@@ -126,16 +157,24 @@
                             </td>
                         </tr>
                     </table>
+                    <p style="margin-top:0">N.B.- Method = ANCOM-BC2 may take longer time !!</p>
                 </form>
             </div>
             <p style="margin-top:5px; font-weight:bold;">
                 <?php
-                    if ($method_joined == "edgeR_fdr")
-                        echo "Analysis parameters: Method = \"edgeR (with FDR p-value adjustment)\" | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
-                    else if ($method_joined == "lefse_none")
+                    // if ($method_joined == "edgeR_fdr")
+                        // echo "Analysis parameters: Method = \"edgeR (with FDR p-value adjustment)\" | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    // else if ($method_joined == "lefse_none")
+                    if ($method_joined == "lefse_none")
                         echo "Analysis parameters: Method = \"LEfSe (without FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
                     else if ($method_joined == "lefse_fdr")
                         echo "Analysis parameters: Method = \"LEfSe (with FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    else if ($method_joined == "aldex_fdr")
+                        echo "Analysis parameters: Method = \"ALDEx2_t (with FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    else if ($method_joined == "linda_fdr")
+                        echo "Analysis parameters: Method = \"LinDA (with FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
+                    else if ($method_joined == "ancombc_fdr")
+                        echo "Analysis parameters: Method = \"ANCOM-BC2 (with FDR p-value adjustment)\" | P-value = ".$alpha." | Filter threshold = ".$filter_thres." | Taxa level = \"".$taxa_level."\" | Cut-off value = ".$threshold;
                 ?>
             </p>
             <div id="download_div" style="width:100%; text-align:center; display:none;">
@@ -149,14 +188,17 @@
             <p id="taxa_button_group_heading" style="margin:3px; font-weight:bold; display:none;">Differentially abundant taxa details</p>
             <div id="taxa_button_group" style="width:100%; background-color:#fff9e6; border:1px dashed #004d99; display:none;"></div>
             <p id="bar_legend" style="font-size: 0.9em; margin-top:5px; display:none;">
-                Interactive <b>bar plot</b> shows the differential microbial
-                signatures between the subgroups. <b>Hover mouse</b> on a bar
-                to highlight the taxa name and the LDA score (log<sub>10</sub>)
-                or Log<sub>2</sub> fold change. <b>Click on each subgroup on
-                the legend</b> to select or deselect the subgroup(s). <b>Click
-                on the buttons</b> below the plot to get the information of
-                the respective taxa. The plot can be downloaded as SVG by
-                clicking on the <b>"
+                Interactive <b>bar plot</b>/<b>heat map</b> shows the differential
+                microbial signatures between the subgroups. <b>Hover mouse</b> on
+                a bar/cell to highlight the taxa name and the LDA score
+                (log<sub>10</sub>) or Log<sub>2</sub> fold change. For heat maps,
+                positive and negative values denote first and second entity of the
+                pair as a marker, respectively. The blank cells denote the absence
+                of the marker. <b>Click on each subgroup or subgroup-pair on the
+                legend</b> to select or deselect the subgroup (pairs). <b>Click on
+                the buttons</b> below the plot to get the information of the
+                respective taxa. The plot can be downloaded as SVG by clicking on
+                the <b>"
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
                 </svg>
