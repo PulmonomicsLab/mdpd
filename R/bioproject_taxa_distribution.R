@@ -50,7 +50,7 @@ tryCatch (
 
         # Box plot Genus
         suppressMessages(t1 <- trans_abund$new(dataset = meco_object, taxrank = tax_rank, ntaxa = 10))
-        suppressMessages(p <- t1$plot_box(group = "SubGroup"))
+        suppressWarnings(suppressMessages(p <- t1$plot_box(group = "SubGroup")))
         trim_taxa <- p$data[, c("Taxonomy", "Sample", "SubGroup", "Abundance")]
         trim_taxa <- trim_taxa[with(trim_taxa, order(-ave(trim_taxa$Abundance, trim_taxa$Taxonomy, FUN=median))),]
 
