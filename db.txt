@@ -138,6 +138,17 @@ constraint fk_bm_abundance_taxa foreign key (Taxa) references taxa(Taxa),
 constraint fk_bm_abundance_bioproject foreign key (BioProject) references bioproject(BioProject)
 );
 
+create table data_submission (
+TKey varchar(100) primary key,
+BioProject varchar(20),
+Grp varchar(500),
+PMID varchar(100),
+Country varchar(100),
+Email varchar(100),
+IsolationSourceBiome varchar(200),
+Link varchar(100)
+);
+
 SET GLOBAL local_infile=1;
 quit
 

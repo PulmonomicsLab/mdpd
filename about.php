@@ -30,6 +30,7 @@
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="#" class="active">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
+                    <td class="nav"><a href="submission.php" class="side_nav">Submit data</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
