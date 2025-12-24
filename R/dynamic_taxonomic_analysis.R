@@ -85,7 +85,7 @@ tryCatch (
 
         # Perform trans_abund on total_meco_object
         suppressMessages(t1 <- trans_abund$new(dataset = total_meco_object, taxrank = tax_rank, ntaxa = 25, groupmean="SubGroup_IsolationSource_BioProject"))
-        p <- t1$plot_heatmap()
+        suppressWarnings(p <- t1$plot_heatmap())
         trim_taxa <- p$data[, c("Taxonomy", "Sample", "Abundance")]
         trim_taxa <- trim_taxa[with(trim_taxa, order(-ave(trim_taxa$Abundance, trim_taxa$Taxonomy, FUN=median))),]
         # print(trim_taxa)
