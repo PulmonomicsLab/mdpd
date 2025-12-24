@@ -201,8 +201,8 @@
                     <td>1.8.0</td>
                     <td style="text-align:left; padding-left:5px;">
                         Detecting taxonomic abundance at the genus/species level. Microbial marker
-                        identification using LEfSe (Kruskal-Wallis’ test and Wilcoxon rank-sum tests)
-                        and edgeR (generalized linear models) with Benjamini-Hochberg (BH) method for
+                        identification using LEfSe (Kruskal-Wallis’ test and Wilcoxon rank-sum tests),
+                        ALDEx2 (t-test), LinDA, and ANCOM-BC2 with Benjamini-Hochberg (BH) method for
                         FDR correction.
                     </td>
                 </tr>
@@ -211,6 +211,12 @@
                     <td>R package</td>
                     <td>1.12.0</td>
                     <td style="text-align:left; padding-left:5px;">Finding the association of the microbes with the covariates, such as age groups and gender, using linear mixed models.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://www.bioconductor.org/packages/release/bioc/html/MMUPHin.html">MMUPHin <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.12.1</td>
+                    <td style="text-align:left; padding-left:5px;">Batch correction for microbiome data.</td>
                 </tr>
                 <tr>
                     <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://bioconductor.org/packages/release/data/experiment/html/bugphyzz.html">bugphyzz <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
