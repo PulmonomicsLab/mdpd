@@ -139,6 +139,7 @@
                                     <option value="LibraryLayout">Library Layout</option>
                                     <option value="Country">Country</option>
                                     <option value="Year">Year</option>
+                                    <option value="BioProject">BioProject</option>
                                 </select>
                             </td>
                             <td style="width:10%;">

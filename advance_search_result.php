@@ -3,10 +3,11 @@
 
     $operatorMap = array("eq"=>"=", "ne"=>"<>", "lt"=>"<", "lte"=>"<=", "gt"=>">", "gte"=>">=");
     $keyTypes = array("Disease"=>"C", "AssayType"=>"C", "Biome"=>"C", "LibraryLayout"=>"C",
-                      "Country"=>"C", "Year"=>"Y");
+                      "Country"=>"C", "Year"=>"Y", "BioProject"=>"S");
     $dbAttributeNameMap = array(
         "Disease"=>"disease.Grp", "AssayType"=>"run.AssayType", "Biome"=>"run.Biome",
-        "LibraryLayout"=>"run.LibraryLayout", "Country"=>"run.Country", "Year"=>"run.Year"
+        "LibraryLayout"=>"run.LibraryLayout", "Country"=>"run.Country", "Year"=>"run.Year",
+        "BioProject"=>"run.BioProject"
     );
     $possibleValues = array(
         "Disease"=> array(

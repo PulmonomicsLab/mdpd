@@ -4,7 +4,8 @@ var keyToTypeMap = {
     'Biome': 'C',
     'LibraryLayout': 'C',
     'Country': 'C',
-    'Year': 'Y'
+    'Year': 'Y',
+    'BioProject': 'S'
 };
 var keyToValueMap = {
     'Disease': [['0', 'Acute Respiratory Distress Syndrome (ARDS)'], ['1', 'Asthma'], ['2', 'Asthma-COPD Overlap (ACO)'],
@@ -51,7 +52,7 @@ function getOperatorHTML(keyType) {
 
 function getValueHTML(keyType, keyValue) {
     if (keyType == 'S')
-        valueHTML = '<input type="text" class="full" placeholder="Enter text">';
+        valueHTML = '<input type="text" class="full" placeholder="Enter BioProject ID (e.g., PRJNA377739)">';
     else if (keyType == 'N')
         valueHTML = '<input type="number" step="0.01" class="full" placeholder="Enter number">';
     else if (keyType == 'Y') {
@@ -87,6 +88,7 @@ function getHTML() {
                 '<option value="LibraryLayout">Library Layout</option>' +
                 '<option value="Country">Country</option>' + 
                 '<option value="Year">Year</option>' + 
+                '<option value="BioProject">BioProject</option>' +
             '</select>' +
         '</td>';
     var operatorHTML =
