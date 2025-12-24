@@ -196,6 +196,22 @@
         </div>
 
         <script>
+            function update_value() {
+                var method = document.getElementById('method').value;
+                if (method === 'lefse_none')
+                    document.getElementById('threshold').value = '2';
+                else if (method === 'lefse_fdr')
+                    document.getElementById('threshold').value = '2';
+                else if (method === 'aldex_fdr')
+                    document.getElementById('threshold').value = '1';
+                else if (method === 'linda_fdr')
+                    document.getElementById('threshold').value = '1';
+                else if (method === 'ancombc_fdr')
+                    document.getElementById('threshold').value = '0.5';
+                else
+                    document.getElementById('threshold').value = '';
+            }
+
             window.onscroll = function() {makeSticky()};
             var header = document.getElementById("section_left");
             var sticky = header.offsetTop;
@@ -318,13 +334,16 @@
                         <tr>
                             <td class="row_heading">Method</td>
                             <td class="even">
-                                <select class="full" id="method" name="method" required>
+                                <select class="full" id="method" name="method" onchange="update_value()" required>
                                     <option value="lefse_none" selected>LEfSe (without FDR p-value adjustment)</option>
                                     <option value="lefse_fdr">LEfSe (with FDR p-value adjustment)</option>
-                                    <option value="edgeR_fdr">edgeR (with FDR p-value adjustment)</option>
+<!--                                     <option value="edgeR_fdr">edgeR (with FDR p-value adjustment)</option> -->
+                                    <option value="aldex_fdr">ALDEx2_t (with FDR p-value adjustment)</option>
+                                    <option value="linda_fdr">LinDA (with FDR p-value adjustment)</option>
+                                    <option value="ancombc_fdr">ANCOM-BC2 (with FDR p-value adjustment)</option>
                                 </select>
                             </td>
-                            <td class="row_heading">P-value <br/><font style="font-size:0.75em;">(only for <i>LEfSe</i>)</font></td>
+                            <td class="row_heading">P-value</td>
                             <td class="even">
                                 <select class="full" id="alpha" name="alpha" required>
                                     <option value="0.1" selected>0.1</option>
@@ -350,10 +369,11 @@
                             </td>
                             <td class="row_heading">Cut-off value</td>
                             <td class="even">
-                                <input type="number" class="full" id="threshold" name="threshold" min="1" step="0.1" value="2" style="max-width:50px;" required />
+                                <input type="number" class="full" id="threshold" name="threshold" min="0.1" step="0.1" value="2" style="max-width:50px;" required />
                             </td>
                         </tr>
                     </table>
+                    <p style="margin-top:0">N.B.- Method = ANCOM-BC2 may take longer time !!</p>
                 </div>
                 <center><input type="submit" style="margin:10px;" name="Submit" value="Submit" /></center>
                 <div class="browse-result" id="da_bioproject_list">foo</div>

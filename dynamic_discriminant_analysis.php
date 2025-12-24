@@ -1,6 +1,13 @@
 <?php
     include 'db.php';
 
+    $method_map = array(
+        "lefse" => "lefse",
+        "aldex" => "ALDEx2_t",
+        "linda" => "linda",
+        "ancombc" => "ancombc2",
+    );
+
     function getSGPlaceholder($subgroups) {
         return str_repeat("?,", count($subgroups) - 1) . "?";
     }
@@ -52,7 +59,7 @@
     $method_joined = (isset($_POST["method"])) ? $_POST["method"] : "";
     $method_split = explode("_", $method_joined);
     $p_adjust_method = (count($method_split) == 2) ? $method_split[1] : "";
-    $method = (count($method_split) == 2) ? $method_split[0] : "";
+    $method = (count($method_split) == 2) ? $method_map[$method_split[0]] : "";
     $alpha = (isset($_POST["alpha"])) ? $_POST["alpha"] : "";
     $filter_thres = (isset($_POST["filter_thres"])) ? $_POST["filter_thres"] : "";
     $taxa_level = (isset($_POST["taxa_level"])) ? $_POST["taxa_level"] : "";
@@ -243,12 +250,14 @@
                 <b>Heatmap</b> shows the differential microbial markers across
                 <b>different BioProjects</b>. Each cell of the heatmap indicates
                 the taxa name and the LDA score (log<sub>10</sub>) or Log<sub>2</sub>
-                fold change. The blank cells denote the absence of the marker.
-                <b>Click</b> on the <b>"Show query"</b> option to get the
-                query parameters. <b>Hover mouse</b> on each cell to highlight
-                the taxa name and the relative abundance values. <b>Click on the
-                buttons</b> at the bottom of the page to get the respective taxa
-                information. The plot can be downloaded as SVG by clicking on the <b>"
+                fold change. Positive and negative values denote first and second
+                entity of the pair as a marker, respectively  (except LEfSe). The
+                blank cells denote the absence of the marker. <b>Click</b> on the
+                <b>"Show query"</b> option to get the query parameters.
+                <b>Hover mouse</b> on each cell to highlight the taxa name and
+                the values. <b>Click on the buttons</b> at the bottom of the page
+                to get the respective taxa information. The plot can be downloaded
+                as SVG by clicking on the <b>"
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
                 </svg>
@@ -256,7 +265,7 @@
                 data can be downloaded using the "Download figure data" button.
             </p>
 
-            <p id="plot_2_heading" style="margin-bottom:0; font-weight:bold; display:none;">B. Disciriminant analysis across Subgroups</p>
+            <p id="plot_2_heading" style="margin-bottom:0; font-weight:bold; display:none;">B. Disciriminant analysis across Subgroups (with batch-effect correction)</p>
             <div id="merged_lda_download_div" style="width:100%; text-align:center; display:none;">
                 <a id="merged_lda_download_button" download="discriminant_analysis_figure_2_data.csv">
                     <button type="button" style="margin:2px;">Download figure data</button>
@@ -267,13 +276,14 @@
                 <b>Heatmap</b> shows the differential microbial markers across
                 <b>different subgroups</b> (with merged BioProjects). Each cell
                 of the heatmap indicates the taxa name and the LDA score
-                (log<sub>10</sub>) or Log<sub>2</sub> fold change. The blank
-                cells denote the absence of the marker. <b>Click</b> on the
-                <b>"Show query"</b> option to get the query parameters. <b>Hover
-                mouse</b> on each cell to highlight the taxa name and the relative
-                abundance values. <b>Click on the buttons</b> at the bottom of the
-                page to get the respective taxa information. The plot can be
-                downloaded as SVG by clicking on the <b>"
+                (log<sub>10</sub>) or Log<sub>2</sub> fold change. Positive and
+                negative values denote first and second entity of the pair as a
+                marker, respectively (except LEfSe). The blank cells denote the
+                absence of the marker. <b>Click</b> on the <b>"Show query"</b>
+                option to get the query parameters. <b>Hover mouse</b> on each
+                cell to highlight the taxa name and the values. <b>Click on the
+                buttons</b> at the bottom of the page to get the respective taxa
+                information. The plot can be downloaded as SVG by clicking on the <b>"
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                     <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
                 </svg>

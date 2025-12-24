@@ -26,6 +26,54 @@ function getColorScale(colorScaleName) {
             ['0.888888888889', 'rgb(199,233,192)'],
             ['1.0', 'rgb(229,245,224)']
         ];
+    } else if (colorScaleName == 'PRGn') {
+        return [
+            ['0.0', 'rgb(64,0,75)'],
+            ['0.111111111111', 'rgb(118,42,131)'],
+            ['0.222222222222', 'rgb(153,112,171)'],
+            ['0.333333333333', 'rgb(194,165,207)'],
+            ['0.444444444444', 'rgb(231,212,232)'],
+            ['0.555555555556', 'rgb(217,240,211)'],
+            ['0.666666666667', 'rgb(166,219,160)'],
+            ['0.777777777778', 'rgb(90,174,97)'],
+            ['0.888888888889', 'rgb(27,120,55)'],
+            ['1.0', 'rgb(0,68,27)']
+        ];
+    } else if (colorScaleName == 'PrOr') {
+        return [
+            ['0.0', 'rgb(127,59,8)'],
+            ['0.111111111111', 'rgb(179,88,6)'],
+            ['0.222222222222', 'rgb(224,130,20)'],
+            ['0.333333333333', 'rgb(253,184,99)'],
+            ['0.444444444444', 'rgb(254,224,182)'],
+            ['0.555555555556', 'rgb(216,218,235)'],
+            ['0.666666666667', 'rgb(178,171,210)'],
+            ['0.777777777778', 'rgb(128,115,172)'],
+            ['0.888888888889', 'rgb(84,39,136)'],
+            ['1.0', 'rgb(45,0,75)']
+        ];
+    } else if (colorScaleName == 'RdYlBu') {
+        return [
+            ['0.0', 'rgb(165,0,38)'],
+            ['0.111111111111', 'rgb(215,48,39)'],
+            ['0.222222222222', 'rgb(244,109,67)'],
+            ['0.333333333333', 'rgb(253,174,97)'],
+            ['0.444444444444', 'rgb(254,224,144)'],
+            ['0.555555555556', 'rgb(224,243,248)'],
+            ['0.666666666667', 'rgb(171,217,233)'],
+            ['0.777777777778', 'rgb(116,173,209)'],
+            ['0.888888888889', 'rgb(69,117,180)'],
+            ['1.0', 'rgb(49,54,149)']
+        ];
+    } else if (colorScaleName == 'RdYlBu_truncated') {
+        return [
+            ['0.0', 'rgb(244,109,67)'],
+            ['0.2', 'rgb(253,174,97)'],
+            ['0.4', 'rgb(254,224,144)'],
+            ['0.6', 'rgb(224,243,248)'],
+            ['0.8', 'rgb(171,217,233)'],
+            ['1.0', 'rgb(116,173,209)'],
+        ];
     } else {
         return 'Greys';
     }
@@ -48,7 +96,8 @@ function getLDADataMap(taxa, name, value) {
     dataMap.name = [...new Set(name)].sort();
     var valueMap = new Map();
     for(var i=0; i<taxa.length; ++i)
-        valueMap.set(name[i] + taxa[i], Math.abs(value[i]));
+        // valueMap.set(name[i] + taxa[i], Math.abs(value[i]));
+        valueMap.set(name[i] + taxa[i], value[i]);
     for(var i=0; i < dataMap.name.length; ++i) {
         var valueRow = [];
         for(var j=0; j < dataMap.taxa.length; ++j)
@@ -73,11 +122,12 @@ function createLDADownloadLink(heatmapData, button_id) {
     document.getElementById(button_id).href = URL.createObjectURL(blob);
 }
 
-function createTaxaButtons(heatmapData) {
-    var s = ''
-    for(var i=0; i<heatmapData.taxa.length; ++i)
-        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + heatmapData.taxa[i].substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + heatmapData.taxa[i] + '</button></a></div>'
-    s += '<div style="clear:both;" />'
+function createTaxaButtons(heatmapData, mergedHeatmapData) {
+    var s = '';
+    var all_taxa = [...new Set([...heatmapData.taxa, ...mergedHeatmapData.taxa])];
+    for(var i=0; i<all_taxa.length; ++i)
+        s += '<div style="float:left; margin:5px;"><a href="taxa.php?key=' + all_taxa[i].substr(3).replace(/_/g, " ") + '" target="_blank"><button style="padding:2px 5px;">' + all_taxa[i] + '</button></a></div>';
+    s += '<div style="clear:both;" />';
     document.getElementById('taxa_button_group').innerHTML = s;
 }
 
@@ -85,11 +135,21 @@ function makeHeatmapPlot(div_id, heatmapData, method, colorScaleName) {
     var graphDiv = document.getElementById(div_id);
     var computedHeight = (30*heatmapData.name.length + 250);
     var xTitle = 'Taxa';
+    var scoreLabel = '';
+    if (method === 'lefse')
+        scoreLabel = 'LDA score (log10)';
+    if (method === 'ALDEx2_t')
+        scoreLabel = 'diff.btw';
+    if (method === 'linda')
+        scoreLabel = 'Log2FC';
+    if (method === 'ancombc2')
+        scoreLabel = 'Log2FC';
 
     var data = [{
         x: heatmapData.taxa,
         y: heatmapData.name,
         z: heatmapData.values,
+        zmid: 0,
         xgap: 2,
         ygap: 2,
         colorscale: getColorScale(colorScaleName),
@@ -101,7 +161,7 @@ function makeHeatmapPlot(div_id, heatmapData, method, colorScaleName) {
             tickfont: {color: '#000000'},
             ticks: 'inside',
             title: {
-                text: (method == 'lefse') ? 'LDA score (log<sub>10</sub>)' : 'Log<sub>2</sub> fold change',
+                text: scoreLabel,
                 side: 'bottom',
                 font: {
                     size: 14,
@@ -191,25 +251,33 @@ function plotData(lda_div_id, merged_lda_div_id, method, response) {
     if(ldaData.taxa.length > 0) {
         var ldaDataMap = getLDADataMap(ldaData.taxa, ldaData.subgroup, ldaData.value);
         document.getElementById(lda_div_id).innerHTML = '';
-        makeHeatmapPlot(lda_div_id, ldaDataMap, method, 'Oranges');
+        makeHeatmapPlot(lda_div_id, ldaDataMap, method, 'RdYlBu_truncated');
         createLDADownloadLink(ldaDataMap, 'lda_download_button');
         document.getElementById('lda_download_div').style.display = 'block';
         document.getElementById('plot_1_heading').style.display = 'block';
         document.getElementById('plot_1_legend').style.display = 'block';
+    } else {
+        document.getElementById(lda_div_id).innerHTML = '<p id="plot_1_heading" style="margin-bottom:0; font-weight:bold; display:none;">A. Discriminant analysis across BioProjects</p><p>No significant taxa found</p>';
+        document.getElementById('plot_1_heading').style.display = 'block';
+    }
 
+    if(mergedLdaData.taxa.length > 0) {
         var mergedLdaDataMap = getLDADataMap(mergedLdaData.taxa, mergedLdaData.subgroup, mergedLdaData.value);
         document.getElementById(merged_lda_div_id).innerHTML = '';
-        makeHeatmapPlot(merged_lda_div_id, mergedLdaDataMap, method, 'Purples');
+        makeHeatmapPlot(merged_lda_div_id, mergedLdaDataMap, method, 'PRGn');
         createLDADownloadLink(mergedLdaDataMap, 'merged_lda_download_button');
         document.getElementById('merged_lda_download_div').style.display = 'block';
         document.getElementById('plot_2_heading').style.display = 'block';
         document.getElementById('plot_2_legend').style.display = 'block';
+    } else {
+        document.getElementById(merged_lda_div_id).innerHTML = '<p id="plot_2_heading" style="margin-bottom:0; font-weight:bold; display:none;">B. Disciriminant analysis across Subgroups (with batch-effect correction)</p><p>No significant taxa found</p>';
+        document.getElementById('plot_2_heading').style.display = 'block';
+    }
 
-        createTaxaButtons(ldaDataMap);
+    if (ldaData.taxa.length > 0 || mergedLdaData.taxa.length > 0) {
+        createTaxaButtons(ldaDataMap, mergedLdaData);
         document.getElementById('taxa_button_group_heading').style.display = 'block';
         document.getElementById('taxa_button_group').style.display = 'block';
-    } else {
-        document.getElementById(lda_div_id).innerHTML = '<p>No significant taxa found</p>';
     }
 }
 
