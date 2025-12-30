@@ -65,6 +65,8 @@
         "Shape" => "Shape",
         "ShapeEvidence" => "Shape Evidence",
         "Pathogenic" => "Pathogenic",
+        "InfectsTheLungs" => "Pulmonary Disease Association",
+        "InfectsTheLungsEvidence" => "Disease Association Evidence",
     );
     $virusTaxaAttributes = array(
         "Taxa" => "Taxa",
@@ -78,6 +80,7 @@
         "Host" => "Host",
         "Pathogenic" => "Pathogenic",
         "InfectsTheLungs" => "Infects the lungs",
+        // "InfectsTheLungsEvidence" => "Infects the lungs Evidence",
     );
     $eukaryotaTaxaAttributes = array(
         "Taxa" => "Taxa",
@@ -93,6 +96,7 @@
         "Host" => "Host",
         "Pathogenic" => "Pathogenic",
         "InfectsTheLungs" => "Infects the lungs",
+        // "InfectsTheLungsEvidence" => "Infects the lungs Evidence",
     );
     $archaeaTaxaAttributes = array(
         "Taxa" => "Taxa",
@@ -113,6 +117,8 @@
         "AntimicrobialSensitivityEvidence" => "Antimicrobial Sensitivity Evidence",
         "Shape" => "Shape",
         "ShapeEvidence" => "Shape Evidence",
+        "InfectsTheLungs" => "Infects the lungs",
+        // "InfectsTheLungsEvidence" => "Infects the lungs Evidence",
     );
     $viewAttributes = array(
         "run.Run",

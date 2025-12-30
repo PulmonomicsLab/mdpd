@@ -80,6 +80,7 @@
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="about.php" class="side_nav">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
+                    <td class="nav"><a href="submission.php" class="side_nav">Submit data</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
@@ -116,6 +117,13 @@
                                     echo "<td style=\"width:40%;\">".$fname."</td>";
                                     if ($name === "NCBITaxaID" && $row[$name] != "NA")
                                         echo "<td style=\"width:60%;\"><a style=\"color:#003325;\" target=\"_blank\" href=\"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=".$row[$name]."\">".$row[$name]." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a></td>";
+                                    elseif ($name === "InfectsTheLungsEvidence" && strlen($row[$name]) > 0) {
+                                        $pmids = explode(";", $row[$name]);
+                                        $pmid_links = array();
+                                        foreach($pmids as $pmid)
+                                            array_push($pmid_links, "<a style=\"color:#003325;\" target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/32497191/".$pmid."\">".$pmid." <img src=\"resource/redirect-icon.png\" height=\"14pt\" width=\"auto\" /></a>");
+                                        echo "<td style=\"width:60%;\">".implode("; ", $pmid_links)."</td>";
+                                    }
                                     else
                                         echo "<td style=\"width:60%;\">".$row[$name]."</td>";
                                     echo "</tr>";

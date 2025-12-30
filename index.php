@@ -100,6 +100,7 @@
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="about.php" class="side_nav">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
+                    <td class="nav"><a href="submission.php" class="side_nav">Submit data</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
@@ -139,6 +140,7 @@
                                     <option value="LibraryLayout">Library Layout</option>
                                     <option value="Country">Country</option>
                                     <option value="Year">Year</option>
+                                    <option value="BioProject">BioProject</option>
                                 </select>
                             </td>
                             <td style="width:10%;">

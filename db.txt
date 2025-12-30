@@ -106,7 +106,8 @@ Shape varchar(500),
 ShapeEvidence varchar(100),
 Ploidy varchar(100),
 Mycelium varchar(100),
-InfectsTheLungs varchar(100),
+InfectsTheLungs varchar(1000),
+InfectsTheLungsEvidence varchar(500),
 Pathogenic varchar(100),
 Host varchar(100),
 GeneticMaterial varchar(100),
@@ -135,6 +136,17 @@ Biome varchar(500),
 BioProject varchar(20),
 constraint fk_bm_abundance_taxa foreign key (Taxa) references taxa(Taxa),
 constraint fk_bm_abundance_bioproject foreign key (BioProject) references bioproject(BioProject)
+);
+
+create table data_submission (
+TKey varchar(100) primary key,
+BioProject varchar(20),
+Grp varchar(500),
+PMID varchar(100),
+Country varchar(100),
+Email varchar(100),
+IsolationSourceBiome varchar(200),
+Link varchar(100)
 );
 
 SET GLOBAL local_infile=1;

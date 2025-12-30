@@ -30,6 +30,7 @@
                     <td class="nav"><a href="statistics.php" class="side_nav">Statistics</a></td>
                     <td class="nav"><a href="#" class="active">About</a></td>
                     <td class="nav"><a href="help.html" class="side_nav">Help</a></td>
+                    <td class="nav"><a href="submission.php" class="side_nav">Submit data</a></td>
                     <td class="nav"><a href="team.html" class="side_nav">Team</a></td>
                 </tr>
             </table>
@@ -106,6 +107,36 @@
                     The source code of MDPD is available in a GitHub repository -
                     <a style="color:#003325;" target="_blank" href="https://github.com/PulmonomicsLab/mdpd">https://github.com/PulmonomicsLab/mdpd <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a>
                 </li>
+                <li>
+                    <p style="margin:0;">Batch download of the BIOM files:</p>
+                    <ul>
+                        <li>
+                            Obstructive (ZIP, 59MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Obstructive.zip">Download</a>
+                        </li>
+                        <li>
+                            Restrictive (ZIP, 48MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Restrictive.zip">Download</a>
+                        </li>
+                        <li>
+                            Infectious (ZIP, 100MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Infectious.zip">Download</a>
+                        </li>
+                        <li>
+                            Malignancy (ZIP, 36MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Malignancy.zip">Download</a>
+                        </li>
+                        <li>
+                            Vascular  (ZIP, 1.5MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Vascular.zip">Download</a>
+                        </li>
+                        <li>
+                            Healthy (ZIP, 56MB) -
+                            <a style="color:#003325;" href="resource/public/batch_bioms/Healthy.zip">Download</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>For dataset usage, please cite the <a style="color:#003325;" href="https://doi.org/10.5281/zenodo.17607443" target="_blank">Zenodo link <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a>.</p>
             </ul>
 
             <br/>
@@ -171,8 +202,8 @@
                     <td>1.8.0</td>
                     <td style="text-align:left; padding-left:5px;">
                         Detecting taxonomic abundance at the genus/species level. Microbial marker
-                        identification using LEfSe (Kruskal-Wallis’ test and Wilcoxon rank-sum tests)
-                        and edgeR (generalized linear models) with Benjamini-Hochberg (BH) method for
+                        identification using LEfSe (Kruskal-Wallis’ test and Wilcoxon rank-sum tests),
+                        ALDEx2 (t-test), LinDA, and ANCOM-BC2 with Benjamini-Hochberg (BH) method for
                         FDR correction.
                     </td>
                 </tr>
@@ -181,6 +212,12 @@
                     <td>R package</td>
                     <td>1.12.0</td>
                     <td style="text-align:left; padding-left:5px;">Finding the association of the microbes with the covariates, such as age groups and gender, using linear mixed models.</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://www.bioconductor.org/packages/release/bioc/html/MMUPHin.html">MMUPHin <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
+                    <td>R package</td>
+                    <td>1.12.1</td>
+                    <td style="text-align:left; padding-left:5px;">Batch correction for microbiome data.</td>
                 </tr>
                 <tr>
                     <td style="text-align:left; padding-left:5px;"><a style="color:#003325;" target="_blank" href="https://bioconductor.org/packages/release/data/experiment/html/bugphyzz.html">bugphyzz <img src="resource/redirect-icon.png" height="14pt" width="auto" /></a></td>
