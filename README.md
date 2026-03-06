@@ -2,6 +2,10 @@
 MDPD unveils diverse microbial patterns across wide range of human body sites highlighting variations in different subtypes of pulmonary diseases. It contains a total of **59,362** runs compiled from **430** BioProjects. 
 It is a manually curated microbiome database of 19 lung diseases and healthy categorized broadly into six groups namely _Obstructive_, _Restrictive_, _Vascular_, _Infectious_, _Malignancy_ and _Healthy_. 
 
+**Cite as:**
+
+>Roy, P., Roy, D., Bhattacharjee, S., Ghosh, A., & Saha, S. (2026). MDPD reveals specific microbial signatures in human pulmonary diseases. <i>Briefings in Bioinformatics</i>, 27(2), bbag017. [https://doi.org/10.1093/bib/bbag017](https://doi.org/10.1093/bib/bbag017).
+
 ## Accessing the database
 MDPD is available at: [http://bicresources.jcbose.ac.in/ssaha4/mdpd](http://bicresources.jcbose.ac.in/ssaha4/mdpd). The data statistics of MDPD is available in the [Statistics](http://bicresources.jcbose.ac.in/ssaha4/mdpd/statistics.php)
 page. Please refer to the [Help](http://bicresources.jcbose.ac.in/ssaha4/mdpd/help.html) page for understanding how to use the database.
