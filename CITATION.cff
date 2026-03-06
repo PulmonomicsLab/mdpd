@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use this database, please cite it as below."
+authors:
+- family-names: "Roy"
+  given-names: "Paramita"
+  orcid: "https://orcid.org/0009-0003-5335-841X"
+- family-names: "Roy"
+  given-names: "Dibakar"
+  orcid: "https://orcid.org/0009-0005-6360-3129"
+- family-names: "Bhattacharjee"
+  given-names: "Sudipto"
+  orcid: "https://orcid.org/0000-0002-3578-7013"
+- family-names: "Ghosh"
+  given-names: "Abhirupa"
+  orcid: "https://orcid.org/0000-0002-3980-4749"
+- family-names: "Saha"
+  given-names: "Sudipto"
+  orcid: "https://orcid.org/0000-0001-9433-8894"
+title: "Microbiome Database of Pulmonary Diseases (MDPD)"
+doi: 10.5281/zenodo.17607444
+url: "https://github.com/PulmonomicsLab/mdpd"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Roy"
+    given-names: "Paramita"
+    orcid: "https://orcid.org/0009-0003-5335-841X"
+  - family-names: "Roy"
+    given-names: "Dibakar"
+    orcid: "https://orcid.org/0009-0005-6360-3129"
+  - family-names: "Bhattacharjee"
+    given-names: "Sudipto"
+    orcid: "https://orcid.org/0000-0002-3578-7013"
+  - family-names: "Ghosh"
+    given-names: "Abhirupa"
+    orcid: "https://orcid.org/0000-0002-3980-4749"
+  - family-names: "Saha"
+    given-names: "Sudipto"
+    orcid: "https://orcid.org/0000-0001-9433-8894"
+  doi: "10.1093/bib/bbag017"
+  journal: "Briefings in Bioinformatics"
+  month: 3
+  start: bbag017 # First page number
+  # end: bbag017
+  title: "MDPD reveals specific microbial signatures in human pulmonary diseases"
+  issue: 2
+  volume: 27
+  year: 2026
